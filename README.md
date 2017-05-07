@@ -5,7 +5,7 @@
 
 1. Open project as Gradle Project. (auto-import enable)
 
-2. Create database name 'docsea'
+2. Create database name 'docsea'  (edit application.properties file's password)
 				
 3. Run server
 
