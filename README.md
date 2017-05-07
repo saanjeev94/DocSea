@@ -1,4 +1,4 @@
-# README  SERVER#
+### DocSea #### README  SERVER#
 
 ### How do I get set up? ###
 
@@ -13,6 +13,10 @@
 
 Folder Structure :
 
+
+```
+#!java
+
 org.itglance.docsea
 ├── src                               
 	├── │java                         
@@ -22,6 +26,4 @@ org.itglance.docsea
 				├──dto		(DTO)
 			├──web
 				├──rest   (Controller)
-	
-
-
+```
