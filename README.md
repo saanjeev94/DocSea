@@ -9,6 +9,8 @@
 				
 3. Run server
 
+
+
         > change directory to server
 
 	> gradle bootRun
