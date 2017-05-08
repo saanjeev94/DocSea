@@ -17,7 +17,7 @@ public class Doctor {
     private String photo;
 
     @ManyToOne
-    private Long speciaityId;
+    private Long specialityId;
 
     @OneToOne
     private Long contactId;
@@ -63,12 +63,12 @@ public class Doctor {
         this.photo = photo;
     }
 
-    public Long getSpeciaityId() {
-        return speciaityId;
+    public Long getSpecialityId() {
+        return specialityId;
     }
 
-    public void setSpeciaityId(Long speciaityId) {
-        this.speciaityId = speciaityId;
+    public void setSpecialityId(Long specialityId) {
+        this.specialityId = specialityId;
     }
 
     public Long getContactId() {
@@ -94,7 +94,7 @@ public class Doctor {
                 ", name='" + name + '\'' +
                 ", qualification='" + qualification + '\'' +
                 ", photo='" + photo + '\'' +
-                ", speciaityId=" + speciaityId +
+                ", specialityId=" + specialityId +
                 ", contactId=" + contactId +
                 ", details='" + details + '\'' +
                 '}';
