@@ -9,6 +9,8 @@
 				
 3. Run server
 
+        > cd /server  
+
 	> gradle bootRun
 
 Folder Structure :
