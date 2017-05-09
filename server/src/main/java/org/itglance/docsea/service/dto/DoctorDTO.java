@@ -10,26 +10,26 @@ public class DoctorDTO {
     private String name;
     private String qualification;
     private String photo;
-    private Long specialityId;
-    private Long contactId;
+    private Long speciality;
+    private Long contact;
     private String details;
 
     public DoctorDTO(){
 
     }
 
-    public DoctorDTO(Long id, String name, String qualification, String photo, Long specialityId, Long contactId, String details) {
+    public DoctorDTO(Long id, String name, String qualification, String photo, Long speciality, Long contact, String details) {
         this.id = id;
         this.name = name;
         this.qualification = qualification;
         this.photo = photo;
-        this.specialityId = specialityId;
-        this.contactId = contactId;
+        this.speciality = speciality;
+        this.contact = contact;
         this.details = details;
     }
 
     public DoctorDTO(Doctor doctor){
-        this(doctor.getId(),doctor.getName(),doctor.getQualification(),doctor.getPhoto(),doctor.getSpecialityId(),doctor.getContactId(),doctor.getDetails());
+        this(doctor.getId(),doctor.getName(),doctor.getQualification(),doctor.getPhoto(),doctor.getSpeciality(),doctor.getContact(),doctor.getDetails());
 
     }
 
@@ -49,12 +49,12 @@ public class DoctorDTO {
         return photo;
     }
 
-    public Long getSpecialityId() {
-        return specialityId;
+    public Long getSpeciality() {
+        return speciality;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public Long getContact() {
+        return contact;
     }
 
     public String getDetails() {
@@ -68,8 +68,8 @@ public class DoctorDTO {
                 ", name='" + name + '\'' +
                 ", qualification='" + qualification + '\'' +
                 ", photo='" + photo + '\'' +
-                ", specialityId=" + specialityId +
-                ", contactId=" + contactId +
+                ", specialityId=" + speciality +
+                ", contactId=" + contact +
                 ", details='" + details + '\'' +
                 '}';
     }

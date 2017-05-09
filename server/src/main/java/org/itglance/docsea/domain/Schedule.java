@@ -17,13 +17,15 @@ public class Schedule {
     private Time startTime;
     private Time endTime;
     
-    private Long dayId;
+    private Long day;
 
     public Long getId() {
         return id;
     }
 
-
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Time getStartTime() {
         return startTime;
@@ -41,9 +43,21 @@ public class Schedule {
         this.endTime = endTime;
     }
 
-    public Long getDayId() {
-        return dayId;
+    public Long getDay() {
+        return day;
     }
 
+    public void setDay(Long day) {
+        this.day = day;
+    }
 
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", day=" + day +
+                '}';
+    }
 }

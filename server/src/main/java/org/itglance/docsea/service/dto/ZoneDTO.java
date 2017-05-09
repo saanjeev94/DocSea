@@ -1,4 +1,4 @@
-package org.itglance.docsea.service.DTO;
+package org.itglance.docsea.service.dto;
 
 import org.itglance.docsea.domain.Country;
 import org.itglance.docsea.domain.Zone;

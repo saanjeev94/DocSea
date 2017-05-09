@@ -33,7 +33,7 @@ public class HospitalDTO {
     }
 
     public HospitalDTO(Hospital hospital) {
-        this(hospital.getId(), hospital.getName(), hospital.getLisenceNo(), hospital.getRegistrationNo(), hospital.getContactId(), hospital.getAddressId());
+        this(hospital.getId(), hospital.getName(), hospital.getLisenceNo(), hospital.getRegistrationNo(), hospital.getContact(), hospital.getAddress());
     }
 
 

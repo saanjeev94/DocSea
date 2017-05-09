@@ -12,20 +12,20 @@ public class ScheduleDTO {
     private Long id;
     private Time startTime;
     private Time endTime;
-    private Long dayId;
+    private Long day;
 
     public ScheduleDTO() {
     }
 
     public ScheduleDTO(Schedule schedule) {
-        this(schedule.getId(), schedule.getStartTime(), schedule.getEndTime(),schedule.getDayId());
+        this(schedule.getId(), schedule.getStartTime(), schedule.getEndTime(),schedule.getDay());
     }
 
-    public ScheduleDTO(Long id, Time startTime, Time endTime, Long dayId) {
+    public ScheduleDTO(Long id, Time startTime, Time endTime, Long day) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.dayId = dayId;
+        this.day = day;
     }
 
     public Long getId() {
@@ -40,8 +40,8 @@ public class ScheduleDTO {
         return endTime;
     }
 
-    public Long getDayId() {
-        return dayId;
+    public Long getDay() {
+        return day;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ScheduleDTO {
                 "id=" + id +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", dayId=" + dayId +
+                ", day=" + day +
                 '}';
     }
 }

@@ -21,11 +21,15 @@ public class Hospital {
 
     @OneToOne
     private String registrationNo;
-    private Long contactId;
-    private Long addressId;
+    private Long contact;
+    private Long address;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -52,24 +56,31 @@ public class Hospital {
         this.registrationNo = registrationNo;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public Long getContact() {
+        return contact;
     }
 
+    public void setContact(Long contact) {
+        this.contact = contact;
+    }
 
-    public Long getAddressId() {
-        return addressId;
+    public Long getAddress() {
+        return address;
+    }
+
+    public void setAddress(Long address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
-        return "HospitalDTO{" +
+        return "Hospital{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lisenceNo='" + lisenceNo + '\'' +
                 ", registrationNo='" + registrationNo + '\'' +
-                ", contactId=" + contactId +
-                ", addressId=" + addressId +
+                ", contact=" + contact +
+                ", address=" + address +
                 '}';
     }
 }

@@ -17,14 +17,18 @@ public class Doctor {
     private String photo;
 
     @ManyToOne
-    private Long specialityId;
+    private Long speciality;
 
     @OneToOne
-    private Long contactId;
+    private Long contact;
     private String details;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -51,20 +55,20 @@ public class Doctor {
         this.photo = photo;
     }
 
-    public Long getSpecialityId() {
-        return specialityId;
+    public Long getSpeciality() {
+        return speciality;
     }
 
-    public void setSpecialityId(Long specialityId) {
-        this.specialityId = specialityId;
+    public void setSpeciality(Long speciality) {
+        this.speciality = speciality;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public Long getContact() {
+        return contact;
     }
 
-    public void setContactId(Long contactId) {
-        this.contactId = contactId;
+    public void setContact(Long contact) {
+        this.contact = contact;
     }
 
     public String getDetails() {
@@ -77,13 +81,13 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "DoctorDTO{" +
+        return "Doctor{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", qualification='" + qualification + '\'' +
                 ", photo='" + photo + '\'' +
-                ", specialityId=" + specialityId +
-                ", contactId=" + contactId +
+                ", speciality=" + speciality +
+                ", contact=" + contact +
                 ", details='" + details + '\'' +
                 '}';
     }
