@@ -10,20 +10,18 @@ import javax.persistence.Id;
  */
 @Entity
 public class Status {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String status;
 
-    public Status() {
-    }
-
-    public Status(String status) {
-        this.status = status;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStatus() {
@@ -32,5 +30,13 @@ public class Status {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
