@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 /**
  * Created by sanj__000 on 5/8/2017.
  */
-public class HospitalDto {
+public class HospitalDTO {
     private Long id;
     private String name;
     private String lisenceNo;
@@ -18,19 +18,12 @@ public class HospitalDto {
     private Long contactId;
     private Long addressId;
 
-    public HospitalDto() {
+    public HospitalDTO() {
     }
 
-    public HospitalDto(Hospital hospital) {
-        this.id = hospital.getId();
-        this.name = hospital.getName();
-        this.lisenceNo = hospital.getLisenceNo();
-        this.registrationNo = hospital.getRegistrationNo();
-        this.contactId = hospital.getContactId();
-        this.addressId = hospital.getAddressId();
-    }
 
-    public HospitalDto(Long id, String name, String lisenceNo, String registrationNo, Long contactId, Long addressId) {
+
+    public HospitalDTO(Long id, String name, String lisenceNo, String registrationNo, Long contactId, Long addressId) {
         this.id = id;
         this.name = name;
         this.lisenceNo = lisenceNo;
@@ -39,6 +32,9 @@ public class HospitalDto {
         this.addressId = addressId;
     }
 
+    public HospitalDTO(Hospital hospital) {
+        this(hospital.getId(), hospital.getName(), hospital.getLisenceNo(), hospital.getRegistrationNo(), hospital.getContactId(), hospital.getAddressId());
+    }
 
 
     public Long getId() {
@@ -65,4 +61,15 @@ public class HospitalDto {
         return addressId;
     }
 
+    @Override
+    public String toString() {
+        return "HospitalDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lisenceNo='" + lisenceNo + '\'' +
+                ", registrationNo='" + registrationNo + '\'' +
+                ", contactId=" + contactId +
+                ", addressId=" + addressId +
+                '}';
+    }
 }

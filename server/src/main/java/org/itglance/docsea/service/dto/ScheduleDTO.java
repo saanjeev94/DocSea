@@ -7,23 +7,21 @@ import java.sql.Time;
 /**
  * Created by sanj__000 on 5/8/2017.
  */
-public class ScheduleDto {
+
+public class ScheduleDTO {
     private Long id;
     private Time startTime;
     private Time endTime;
     private Long dayId;
 
-    public ScheduleDto() {
+    public ScheduleDTO() {
     }
 
-    public ScheduleDto(Schedule schedule) {
-        this.id = schedule.getId();
-        this.startTime = schedule.getStartTime();
-        this.endTime = schedule.getEndTime();
-        this.dayId = schedule.getDayId();
+    public ScheduleDTO(Schedule schedule) {
+        this(schedule.getId(), schedule.getStartTime(), schedule.getEndTime(),schedule.getDayId());
     }
 
-    public ScheduleDto(Long id, Time startTime, Time endTime, Long dayId) {
+    public ScheduleDTO(Long id, Time startTime, Time endTime, Long dayId) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -44,5 +42,15 @@ public class ScheduleDto {
 
     public Long getDayId() {
         return dayId;
+    }
+
+    @Override
+    public String toString() {
+        return "ScheduleDTO{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", dayId=" + dayId +
+                '}';
     }
 }
