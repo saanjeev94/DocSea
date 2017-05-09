@@ -1,9 +1,11 @@
 package org.itglance.docsea.service.dto;
 
+import org.itglance.docsea.domain.Contact;
+
 /**
  * Created by sriyanka on 5/8/2017.
  */
-public class Contact {
+public class ContactDTO {
     private Long id;
     private String contactNumber1;
     private String contactNumber2;
@@ -11,11 +13,11 @@ public class Contact {
     private String website;
     private String fax;
 
-    public Contact(){
+    public ContactDTO(){
 
     }
 
-    public Contact(Long id, String contactNumber1, String contactNumber2, String emailId, String website, String fax) {
+    public ContactDTO(Long id, String contactNumber1, String contactNumber2, String emailId, String website, String fax) {
         this.id = id;
         this.contactNumber1 = contactNumber1;
         this.contactNumber2 = contactNumber2;
@@ -24,13 +26,8 @@ public class Contact {
         this.fax = fax;
     }
 
-    public Contact(Contact contact){
-        this.id = contact.id;
-        this.contactNumber1 = contact.contactNumber1;
-        this.contactNumber2 = contact.contactNumber2;
-        this.emailId = contact.emailId;
-        this.website = contact.website;
-        this.fax = contact.fax;
+    public ContactDTO(Contact contact){
+        this(contact.getId(),contact.getContactNumber1(),contact.getContactNumber2(),contact.getEmailId(),contact.getWebsite(),contact.getFax());
     }
 
 
@@ -57,5 +54,17 @@ public class Contact {
 
     public String getFax() {
         return fax;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactDTO{" +
+                "id=" + id +
+                ", contactNumber1='" + contactNumber1 + '\'' +
+                ", contactNumber2='" + contactNumber2 + '\'' +
+                ", emailId='" + emailId + '\'' +
+                ", website='" + website + '\'' +
+                ", fax='" + fax + '\'' +
+                '}';
     }
 }

@@ -1,22 +1,26 @@
-package org.itglance.docsea.domain;
+package org.itglance.docsea.service.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.itglance.docsea.domain.Speciality;
 
 /**
  * Created by sriyanka on 5/8/2017.
  */
-
-@Entity
-public class Speciality {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+public class SpecialityDTO {
     private Long id;
     private String name;
 
+    public SpecialityDTO(){
+
+    }
+
+    public SpecialityDTO(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public SpecialityDTO(Speciality speciality){
+        this(speciality.getId(),speciality.getName());
+    }
 
     public Long getId() {
         return id;
@@ -24,10 +28,6 @@ public class Speciality {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

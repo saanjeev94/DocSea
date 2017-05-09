@@ -71,7 +71,7 @@ public class Contact {
 
    @Override
    public String toString() {
-      return "Contact{" +
+      return "ContactDTO{" +
               "id=" + id +
               ", contactnumber1='" + contactNumber1 + '\'' +
               ", contactnumber2='" + contactNumber2 + '\'' +
