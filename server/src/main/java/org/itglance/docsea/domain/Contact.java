@@ -24,17 +24,6 @@ public class Contact {
    private String website;
    private String fax;
 
-   public Contact(){
-
-   }
-
-   public Contact(String contactNumber1, String contactNumber2, String emailId, String website, String fax) {
-      this.contactNumber1 = contactNumber1;
-      this.contactNumber2 = contactNumber2;
-      this.emailId = emailId;
-      this.website = website;
-      this.fax = fax;
-   }
 
    public Long getId() {
       return id;

@@ -17,13 +17,6 @@ public class Speciality {
     private Long id;
     private String name;
 
-    Speciality(){
-
-    }
-
-    public Speciality(String name) {
-        this.id=id;
-    }
 
     public Long getId() {
         return id;

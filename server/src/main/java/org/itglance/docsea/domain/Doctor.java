@@ -23,21 +23,9 @@ public class Doctor {
     private Long contactId;
     private String details;
 
-
-    public Doctor(){
-
-    }
-    public Doctor(String name, String qualification, String photo, String details) {
-        this.name = name;
-        this.qualification = qualification;
-        this.photo = photo;
-        this.details = details;
-    }
-
     public Long getId() {
         return id;
     }
-
 
     public String getName() {
         return name;
