@@ -1,6 +1,8 @@
 package org.itglance.docsea.service.dto;
 
+import org.itglance.docsea.domain.Contact;
 import org.itglance.docsea.domain.Doctor;
+import org.itglance.docsea.domain.Speciality;
 
 /**
  * Created by sriyanka on 5/8/2017.
@@ -10,15 +12,15 @@ public class DoctorDTO {
     private String name;
     private String qualification;
     private String photo;
-    private Long speciality;
-    private Long contact;
+    private Speciality speciality;
+    private Contact contact;
     private String details;
 
     public DoctorDTO(){
 
     }
 
-    public DoctorDTO(Long id, String name, String qualification, String photo, Long speciality, Long contact, String details) {
+    public DoctorDTO(Long id, String name, String qualification, String photo, Speciality speciality, Contact contact, String details) {
         this.id = id;
         this.name = name;
         this.qualification = qualification;
@@ -49,11 +51,11 @@ public class DoctorDTO {
         return photo;
     }
 
-    public Long getSpeciality() {
+    public Speciality getSpeciality() {
         return speciality;
     }
 
-    public Long getContact() {
+    public Contact getContact() {
         return contact;
     }
 

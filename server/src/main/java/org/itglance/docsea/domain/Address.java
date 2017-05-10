@@ -13,17 +13,22 @@ import javax.persistence.CascadeType;
 
 @Entity
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String streetAddress;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     private City city;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     private District district;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     private Zone zone;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     private Country country;
 
     public Long getId() {

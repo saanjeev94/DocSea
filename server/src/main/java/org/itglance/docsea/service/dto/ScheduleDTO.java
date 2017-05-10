@@ -1,5 +1,6 @@
 package org.itglance.docsea.service.dto;
 
+import org.itglance.docsea.domain.Day;
 import org.itglance.docsea.domain.Schedule;
 
 import java.sql.Time;
@@ -12,7 +13,7 @@ public class ScheduleDTO {
     private Long id;
     private Time startTime;
     private Time endTime;
-    private Long day;
+    private Day day;
 
     public ScheduleDTO() {
     }
@@ -21,7 +22,7 @@ public class ScheduleDTO {
         this(schedule.getId(), schedule.getStartTime(), schedule.getEndTime(),schedule.getDay());
     }
 
-    public ScheduleDTO(Long id, Time startTime, Time endTime, Long day) {
+    public ScheduleDTO(Long id, Time startTime, Time endTime, Day day) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -40,7 +41,7 @@ public class ScheduleDTO {
         return endTime;
     }
 
-    public Long getDay() {
+    public Day getDay() {
         return day;
     }
 

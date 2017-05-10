@@ -1,16 +1,26 @@
 package org.itglance.docsea.domain;
 
+import javax.persistence.*;
+import java.util.List;
+
 /**
  * Created by Mahesh on 5/9/2017.
  */
+@Entity
 public class Event {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String eventName;
-    private Long hospital;
     private String description;
     private String date;
     private String time;
     private String photo;
+
+    @ManyToOne
+    private Hospital hospital;
+
 
     public Long getId() {
         return id;
@@ -28,11 +38,11 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public Long getHospital() {
+    public Hospital getHospital() {
         return hospital;
     }
 
-    public void setHospital(Long hospital) {
+    public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }
 

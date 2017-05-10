@@ -1,5 +1,7 @@
 package org.itglance.docsea.service.dto;
 
+import org.itglance.docsea.domain.Address;
+import org.itglance.docsea.domain.Contact;
 import org.itglance.docsea.domain.Hospital;
 
 import javax.persistence.GeneratedValue;
@@ -15,21 +17,19 @@ public class HospitalDTO {
     private String name;
     private String lisenceNo;
     private String registrationNo;
-    private Long contactId;
-    private Long addressId;
+    private Contact contact;
+    private Address address;
 
     public HospitalDTO() {
     }
 
-
-
-    public HospitalDTO(Long id, String name, String lisenceNo, String registrationNo, Long contactId, Long addressId) {
+    public HospitalDTO(Long id, String name, String lisenceNo, String registrationNo, Contact contact, Address address) {
         this.id = id;
         this.name = name;
         this.lisenceNo = lisenceNo;
         this.registrationNo = registrationNo;
-        this.contactId = contactId;
-        this.addressId = addressId;
+        this.contact = contact;
+        this.address = address;
     }
 
     public HospitalDTO(Hospital hospital) {
@@ -53,12 +53,12 @@ public class HospitalDTO {
         return registrationNo;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public Contact getContact() {
+        return contact;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
     @Override
@@ -68,8 +68,8 @@ public class HospitalDTO {
                 ", name='" + name + '\'' +
                 ", lisenceNo='" + lisenceNo + '\'' +
                 ", registrationNo='" + registrationNo + '\'' +
-                ", contactId=" + contactId +
-                ", addressId=" + addressId +
+                ", contact=" + contact +
+                ", address=" + address +
                 '}';
     }
 }

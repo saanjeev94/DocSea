@@ -1,6 +1,8 @@
 package org.itglance.docsea.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sriyanka on 5/8/2017.
@@ -17,10 +19,14 @@ public class Doctor {
     private String photo;
 
     @ManyToOne
-    private Long speciality;
+    private Speciality speciality;
 
     @OneToOne
-    private Long contact;
+    private Contact contact;
+
+    @ManyToMany
+    private List<Schedule> schedules=new ArrayList<>();
+
     private String details;
 
     public Long getId() {
@@ -55,19 +61,19 @@ public class Doctor {
         this.photo = photo;
     }
 
-    public Long getSpeciality() {
+    public Speciality getSpeciality() {
         return speciality;
     }
 
-    public void setSpeciality(Long speciality) {
+    public void setSpeciality(Speciality speciality) {
         this.speciality = speciality;
     }
 
-    public Long getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Long contact) {
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
 
@@ -79,6 +85,14 @@ public class Doctor {
         this.details = details;
     }
 
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -88,6 +102,7 @@ public class Doctor {
                 ", photo='" + photo + '\'' +
                 ", speciality=" + speciality +
                 ", contact=" + contact +
+                ", schedules=" + schedules +
                 ", details='" + details + '\'' +
                 '}';
     }

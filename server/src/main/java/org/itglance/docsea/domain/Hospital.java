@@ -1,6 +1,8 @@
 package org.itglance.docsea.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sanj__000 on 5/8/2017.
@@ -13,16 +15,21 @@ public class Hospital {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String name;
-
-    @OneToOne
     private String lisenceNo;
+    private String registrationNo;
+
+    @OneToMany
+    private List<Event> events=new ArrayList<>();
 
     @OneToOne
-    private String registrationNo;
-    private Long contact;
-    private Long address;
+    private Contact contact;
+
+    @OneToOne
+    private Address address;
+
+    @ManyToMany
+    private List<Schedule> schedules=new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -56,20 +63,36 @@ public class Hospital {
         this.registrationNo = registrationNo;
     }
 
-    public Long getContact() {
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Long contact) {
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
 
-    public Long getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Long address) {
+    public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     @Override
@@ -79,8 +102,10 @@ public class Hospital {
                 ", name='" + name + '\'' +
                 ", lisenceNo='" + lisenceNo + '\'' +
                 ", registrationNo='" + registrationNo + '\'' +
+                ", events=" + events +
                 ", contact=" + contact +
                 ", address=" + address +
+                ", schedules=" + schedules +
                 '}';
     }
 }

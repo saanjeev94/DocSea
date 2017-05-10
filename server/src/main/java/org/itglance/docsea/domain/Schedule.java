@@ -16,8 +16,9 @@ public class Schedule {
 
     private Time startTime;
     private Time endTime;
-    
-    private Long day;
+
+    @ManyToOne
+    private Day day;
 
     public Long getId() {
         return id;
@@ -43,11 +44,11 @@ public class Schedule {
         this.endTime = endTime;
     }
 
-    public Long getDay() {
+    public Day getDay() {
         return day;
     }
 
-    public void setDay(Long day) {
+    public void setDay(Day day) {
         this.day = day;
     }
 
