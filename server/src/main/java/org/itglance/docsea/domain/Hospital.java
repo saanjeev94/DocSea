@@ -1,5 +1,6 @@
 package org.itglance.docsea.domain;
 
+
 import javax.persistence.*;
 
 /**
