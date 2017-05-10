@@ -19,6 +19,7 @@ public class Event {
     private String photo;
 
     @ManyToOne
+    @JoinColumn
     private Hospital hospital;
 
 

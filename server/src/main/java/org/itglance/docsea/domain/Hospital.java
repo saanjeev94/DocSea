@@ -19,9 +19,6 @@ public class Hospital {
     private String lisenceNo;
     private String registrationNo;
 
-    @OneToMany
-    private List<Event> events=new ArrayList<>();
-
     @OneToOne
     private Contact contact;
 
@@ -63,14 +60,6 @@ public class Hospital {
         this.registrationNo = registrationNo;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
     public Contact getContact() {
         return contact;
     }
@@ -102,7 +91,6 @@ public class Hospital {
                 ", name='" + name + '\'' +
                 ", lisenceNo='" + lisenceNo + '\'' +
                 ", registrationNo='" + registrationNo + '\'' +
-                ", events=" + events +
                 ", contact=" + contact +
                 ", address=" + address +
                 ", schedules=" + schedules +
