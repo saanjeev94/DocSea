@@ -18,8 +18,8 @@ public class Event {
     private String time;
     private String photo;
 
+    @JoinColumn(name="hospital_id")
     @ManyToOne
-    @JoinColumn
     private Hospital hospital;
 
 
