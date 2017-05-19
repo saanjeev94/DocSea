@@ -1,6 +1,6 @@
 package org.itglance.docsea.service.dto;
 
-import org.itglance.docsea.domain.Day;
+import org.itglance.docsea.domain.Days;
 
 /**
  * Created by sanj__000 on 5/8/2017.
@@ -17,8 +17,8 @@ public class DayDTO {
         this.day = day;
     }
 
-    public DayDTO(Day day) {
-        this(day.getId(), day.getDay());
+    public DayDTO(Days days) {
+        this(days.getId(), days.getDay());
     }
 
     public Long getId() {

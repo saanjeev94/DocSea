@@ -16,10 +16,10 @@ public class Hospital {
 
     private String name;
 
-    @OneToOne
+    //@OneToOne
     private String lisenceNo;
 
-    @OneToOne
+    //@OneToOne
     private String registrationNo;
     private Long contact;
     private Long address;

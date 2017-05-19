@@ -1,5 +1,6 @@
 package org.itglance.docsea.domain;
 
+
 import javax.persistence.*;
 
 /**
@@ -10,16 +11,20 @@ import javax.persistence.*;
 public class Doctor {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(unique = true)
+    private int nmcNumber;
     private String name;
     private String qualification;
     private String photo;
+    private String gender;
 
-    @ManyToOne
+    // @ManyToOne
     private Long speciality;
 
-    @OneToOne
+    //@OneToOne
     private Long contact;
     private String details;
 
@@ -29,6 +34,14 @@ public class Doctor {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getNmcNumber() {
+        return nmcNumber;
+    }
+
+    public void setNmcNumber(int nmcNumber) {
+        this.nmcNumber = nmcNumber;
     }
 
     public String getName() {
@@ -53,6 +66,14 @@ public class Doctor {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Long getSpeciality() {
@@ -83,12 +104,19 @@ public class Doctor {
     public String toString() {
         return "Doctor{" +
                 "id=" + id +
+                ", nmcNumber=" + nmcNumber +
                 ", name='" + name + '\'' +
                 ", qualification='" + qualification + '\'' +
                 ", photo='" + photo + '\'' +
+                ", gender='" + gender + '\'' +
                 ", speciality=" + speciality +
                 ", contact=" + contact +
                 ", details='" + details + '\'' +
                 '}';
     }
+
 }
+
+
+
+
