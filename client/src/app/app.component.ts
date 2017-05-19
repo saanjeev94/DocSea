@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  ngAfterViewInit(){
+    $('#navbar ul li').on('click' , function() {
+      $('#navbar ul li.active').removeClass('active');
+      $(this).addClass('active');
+    });
+  }
 }

@@ -2,7 +2,7 @@
  * Created by soni on 5/16/2017.
  */
 import {Component, OnInit} from '@angular/core';
-import {Doctor} from "./doctor.model";
+import {Doctor} from "../model/doctor.model";
 
 @Component({
   selector: 'update-doctor',

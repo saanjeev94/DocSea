@@ -1,0 +1,13 @@
+.top-margin{
+  margin-top: 15%;
+}
+
+.no-padding{
+  padding: 0 !important;
+}
+
+#doctor-search input[type="text"]{
+  border-radius: 17px;
+  width: 90%;
+  display: inline-block;
+}
