@@ -45,7 +45,6 @@ public class Schedule {
         this.endTime = endTime;
     }
 
-
     public Days getDays() {
         return days;
     }

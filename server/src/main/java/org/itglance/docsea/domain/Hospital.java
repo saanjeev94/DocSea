@@ -2,6 +2,11 @@ package org.itglance.docsea.domain;
 
 import javax.persistence.*;
 
+import javax.validation.constraints.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sanj__000 on 5/8/2017.
  */
@@ -14,22 +19,29 @@ public class Hospital {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull(message = "Hospital name shouldn't be null")
     private String name;
-
-    //@OneToOne
+    
+    @NotNull(message = "Hospital Lisence no. shouldn't be null")
     private String lisenceNo;
-
-    //@OneToOne
+    
+    @NotNull(message = "Hospital registration no. shouldn't be null")
     private String registrationNo;
-    private Long contact;
-    private Long address;
+
+    @NotNull(message = "Hospital's contact should not be null (foreign key)")
+    @OneToOne
+    private Contact contact;
+    
+    @NotNull(message = "Hospital's address should not be null (foreign key)")
+    @OneToOne
+    private Address address;
+
+    @ManyToMany
+    private List<Schedule> schedules=new ArrayList<>();
+
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -56,20 +68,28 @@ public class Hospital {
         this.registrationNo = registrationNo;
     }
 
-    public Long getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Long contact) {
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
 
-    public Long getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Long address) {
+    public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     @Override
@@ -81,6 +101,7 @@ public class Hospital {
                 ", registrationNo='" + registrationNo + '\'' +
                 ", contact=" + contact +
                 ", address=" + address +
+                ", schedules=" + schedules +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package org.itglance.docsea.repository;
 
 import org.itglance.docsea.domain.Role;
+import org.itglance.docsea.service.dto.RoleDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RoleRepository extends JpaRepository<Role,Long> {
 
+    public Role findByRole(String roleStr);
 }
