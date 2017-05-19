@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.CascadeType;
 
 /**
@@ -17,17 +20,20 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @NotNull(message = "Hospital street address should not be null")
     private String streetAddress;
 
+    @NotNull(message = "Address's cityId should not be null (foreign key)")
     @ManyToOne
     private City city;
-
+    @NotNull(message = "Address's districtId should not be null (foreign key)")
     @ManyToOne
     private District district;
-
+    @NotNull(message = "Address's ZoneId should not be null (foreign key)")
     @ManyToOne
     private Zone zone;
-
+    @NotNull(message = "Address's countryId should not be null (foreign key)")
     @ManyToOne
     private Country country;
 

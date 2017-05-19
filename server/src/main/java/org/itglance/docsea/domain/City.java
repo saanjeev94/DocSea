@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.CascadeType;
 
 /**
@@ -16,7 +19,9 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull(message = "City name should not be null.")
     private String name;
+    @NotNull(message = "(ForeignKeyNullException) City name should point to its district.")
     @ManyToOne(cascade = CascadeType.ALL)
     private District district;
 

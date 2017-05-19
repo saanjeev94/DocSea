@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.CascadeType;
 
 /**
@@ -17,7 +20,11 @@ public class Zone {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @NotNull(message = "Zone name should not be null.")
     private String name;
+    
+    @NotNull(message = "(ForeignKeyNullException) Zone name should point to its Country.")
     @ManyToOne(cascade = CascadeType.ALL)
     private Country country;
 

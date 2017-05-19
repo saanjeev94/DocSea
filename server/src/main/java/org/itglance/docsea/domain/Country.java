@@ -5,6 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import javax.validation.constraints.NotNull;
+
+
+
+
+
 /**
  * Created by Mahesh on 5/8/2017.
  */
@@ -14,6 +20,8 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @NotNull(message = "Country name should not be null.")
     private String name;
 
     public Long getId() {

@@ -1,6 +1,9 @@
 package org.itglance.docsea.domain;
 
 import javax.persistence.*;
+
+import javax.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +18,21 @@ public class Hospital {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull(message = "Hospital name shouldn't be null")
     private String name;
+    
+    @NotNull(message = "Hospital Lisence no. shouldn't be null")
     private String lisenceNo;
+    
+    @NotNull(message = "Hospital registration no. shouldn't be null")
     private String registrationNo;
 
+    @NotNull(message = "Hospital's contact should not be null (foreign key)")
     @OneToOne
     private Contact contact;
-
+    
+    @NotNull(message = "Hospital's address should not be null (foreign key)")
     @OneToOne
     private Address address;
 
@@ -30,10 +41,6 @@ public class Hospital {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

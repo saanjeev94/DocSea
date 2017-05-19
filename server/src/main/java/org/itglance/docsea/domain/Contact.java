@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
+
 import static ch.qos.logback.classic.db.names.ColumnName.I;
 
 /**
@@ -18,12 +21,18 @@ public class Contact {
    @Id
    @GeneratedValue(strategy=GenerationType.AUTO)
    private Long id;
+   
+   @NotNull(message = "contact no.1 should not be null.")
    private String contactNumber1;
    private String contactNumber2;
+   
+   @Email
+   @NotNull(message = "email Id should be not be null.")
    private String emailId;
    private String website;
+   
+   @NotNull(message = "fax field should be not be null.")
    private String fax;
-
 
    public Long getId() {
       return id;

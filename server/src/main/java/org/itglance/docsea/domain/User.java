@@ -1,6 +1,9 @@
 package org.itglance.docsea.domain;
 
 import javax.persistence.*;
+
+import javax.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +16,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @NotNull(message = "Username should not be null.")
     private String username;
+    
+    @NotNull(message = "Password should not be null.")
     private String password;
 
+    
+    @NotNull(message = "User's status should not be null (foreign key).")
     @OneToOne
     private Status status;
 

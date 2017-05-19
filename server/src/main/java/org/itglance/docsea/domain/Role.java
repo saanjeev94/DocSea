@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by soni on 5/8/2017.
  */
@@ -13,6 +15,8 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @NotNull(message = "Role should not be null.")
     private String role;
 
     public Long getId() {
