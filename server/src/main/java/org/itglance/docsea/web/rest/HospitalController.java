@@ -45,10 +45,12 @@ public class HospitalController {
         logger.info("Creating Hospital : {}", hospitalDTO);
 
 
-        /*if(){
+        if(hospitalDTO.getAddress().getCity().getName() == null){
+        	 logger.error(" City name should not be null");
+             return new ResponseEntity(("Unable to register Hospital, City name should,nt be null"), HttpStatus.CONFLICT);
 
         }
-        else */if(hospitalService.isHospitalExist(hospitalDTO, userDTO)){
+        else if(hospitalService.isHospitalExist(hospitalDTO, userDTO)){
             logger.error(" Hospital already exist");
             return new ResponseEntity(("Unable to register Hospital. A hospital with registration no. or hospital name" +
                     " or lisence no. or usernme is already exist."), HttpStatus.CONFLICT);
