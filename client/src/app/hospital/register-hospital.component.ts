@@ -18,9 +18,9 @@ export class RegisterHospitalComponent{
     this.hospital = new Hospital();
   }
 
-  onRegister(form: FormGroup){
-    // console.log(form);
-    this.hosiptalService.addHospital(this.hospital);
+  onRegister(){
+    // console.log(this.hospital);
+    this.hosiptalService.addHospital(this.hospital).subscribe((result) => console.log(result));
   }
 
 }

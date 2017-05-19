@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/api/hospital")
+@RequestMapping(value = "/api")
 public class HospitalController {
 
 
@@ -37,7 +37,7 @@ public class HospitalController {
 
 
     //------------------------hospital resitration-------//
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/hospital", method = RequestMethod.POST)
     public ResponseEntity<?> register(@Valid @RequestBody HospitalUserDTO hospitalUser)
     {
         HospitalDTO hospitalDTO = new HospitalDTO(hospitalUser.getHospitall());
