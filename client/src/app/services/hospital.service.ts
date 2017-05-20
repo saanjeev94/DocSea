@@ -1,14 +1,17 @@
 import {Injectable} from "@angular/core";
-import { Http } from "@angular/http";
+import { Http, Headers } from "@angular/http";
 import {Hospital} from "../model/hospital.model";
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HospitalService{
-  private hospitalUrl = 'api/hospital'
+  private hospitalUrl = 'http://localhost:8080/api/hospital';
+
+  private headers: Headers;
   constructor(private http: Http){}
 
   addHospital(hospital: Hospital){
-    this.http.post(this.hospitalUrl, hospital);
+    return this.http.post(this.hospitalUrl,hospital).map(res => res.json());
   }
 
 
