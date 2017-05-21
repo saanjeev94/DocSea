@@ -25,7 +25,7 @@
             <!-- Country -->
             <div class="col-md-2">
               <select class="form-control" name="country"
-                      [(ngModel)]="hospitalUser.hospital.address.city.district.zone.country.name" #country="ngModel"
+                      [(ngModel)]="hospitalUser.hospital.address.country.name" #country="ngModel"
                       required>
                 <option value="Nepal">Nepal</option>
               </select>
@@ -38,7 +38,7 @@
             <!-- Zone -->
             <div class="col-md-2">
               <select class="form-control" name="zone"
-                      [(ngModel)]="hospitalUser.hospital.address.city.district.zone.name" #zone="ngModel"
+                      [(ngModel)]="hospitalUser.hospital.address.zone.name" #zone="ngModel"
                       required [disabled]="!country.valid">
                 <option value="Bagmati">Bagmati</option>
                 <option value="gandaki">Gandaki</option>
@@ -52,7 +52,7 @@
             <!-- District -->
             <div class="col-md-2">
               <select class="form-control" name="district"
-                      [(ngModel)]="hospitalUser.hospital.address.city.district.name" #district="ngModel"
+                      [(ngModel)]="hospitalUser.hospital.address.district.name" #district="ngModel"
                       required [disabled]="!zone.valid">
                 <option value="Kathmandu">Kathmandu</option>
                 <option value="lalitpur">Lalitpur</option>

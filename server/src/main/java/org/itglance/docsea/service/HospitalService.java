@@ -87,22 +87,22 @@ public class HospitalService {
         contactRepository.save(contact);
         hospital.setContact(contact);
 
-        address.setStreetAddress(hospitalDTO.getAddress().getStreetAddress());
-        address.setCity(hospitalDTO.getAddress().getCity());
-        address.setDistrict(hospitalDTO.getAddress().getCity().getDistrict());
-        address.setZone(hospitalDTO.getAddress().getCity().getDistrict().getZone());
-        address.setCountry(hospitalDTO.getAddress().getCity().getDistrict().getZone().getCountry());
-        addressRepository.save(address);
-
-        hospital.setAddress(address);
-
 //        address.setStreetAddress(hospitalDTO.getAddress().getStreetAddress());
-//        address.setCity(cityRepository.findByName( hospitalDTO.getAddress().getCity().getName() ) );
-//        address.setDistrict(districtRepository.findAllByName(hospitalDTO.getAddress().getDistrict().getName()));
-//        address.setZone(zoneRepository.findByName(hospitalDTO.getAddress().getZone().getName()));
-//        address.setCountry(countryRepository.findByName(hospitalDTO.getAddress().getCountry().getName()));
+//        address.setCity(hospitalDTO.getAddress().getCity());
+//        address.setDistrict(hospitalDTO.getAddress().getCity().getDistrict());
+//        address.setZone(hospitalDTO.getAddress().getCity().getDistrict().getZone());
+//        address.setCountry(hospitalDTO.getAddress().getCity().getDistrict().getZone().getCountry());
 //        addressRepository.save(address);
+//
 //        hospital.setAddress(address);
+
+        address.setStreetAddress(hospitalDTO.getAddress().getStreetAddress());
+        address.setCity(cityRepository.findByName( hospitalDTO.getAddress().getCity().getName() ) );
+        address.setDistrict(districtRepository.findAllByName(hospitalDTO.getAddress().getDistrict().getName()));
+        address.setZone(zoneRepository.findByName(hospitalDTO.getAddress().getZone().getName()));
+        address.setCountry(countryRepository.findByName(hospitalDTO.getAddress().getCountry().getName()));
+        addressRepository.save(address);
+        hospital.setAddress(address);
         hospitalRepository.save(hospital);
 
         user.setPassword(userDTO.getPassword());
