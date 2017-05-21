@@ -3,6 +3,7 @@ package org.itglance.docsea.domain;
 import javax.persistence.*;
 import java.sql.Time;
 
+
 /**
  * Created by sanj__000 on 5/8/2017.
  */
@@ -18,7 +19,7 @@ public class Schedule {
     private Time endTime;
 
     @ManyToOne
-    private Day day;
+    private Days days;
 
     public Long getId() {
         return id;
@@ -44,12 +45,12 @@ public class Schedule {
         this.endTime = endTime;
     }
 
-    public Day getDay() {
-        return day;
+    public Days getDays() {
+        return days;
     }
 
-    public void setDay(Day day) {
-        this.day = day;
+    public void setDays(Days days) {
+        this.days = days;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class Schedule {
                 "id=" + id +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", day=" + day +
+                ", days=" + days +
                 '}';
     }
 }

@@ -1,6 +1,8 @@
 package org.itglance.docsea.domain;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +14,30 @@ import java.util.List;
 public class Doctor {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull( message = "NMC number cannot be null")
+    @Column(unique = true)
+    private int nmcNumber;
+
+    @NotNull( message = "Name cannot be null")
     private String name;
+
+    @NotNull( message = "Qualification cannot be null")
     private String qualification;
+
+    @NotNull( message = "Photo cannot be null")
     private String photo;
 
+    @NotNull( message = "Gender cannot be null")
+    private String gender;
+
+    @NotNull( message = "Speciality cannot be null")
     @ManyToOne
     private Speciality speciality;
 
+    @NotNull( message = "Contact cannot be null")
     @OneToOne
     private Contact contact;
 
@@ -35,6 +52,14 @@ public class Doctor {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getNmcNumber() {
+        return nmcNumber;
+    }
+
+    public void setNmcNumber(int nmcNumber) {
+        this.nmcNumber = nmcNumber;
     }
 
     public String getName() {
@@ -60,6 +85,15 @@ public class Doctor {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
 
     public Speciality getSpeciality() {
         return speciality;
@@ -97,13 +131,20 @@ public class Doctor {
     public String toString() {
         return "Doctor{" +
                 "id=" + id +
+                ", nmcNumber=" + nmcNumber +
                 ", name='" + name + '\'' +
                 ", qualification='" + qualification + '\'' +
                 ", photo='" + photo + '\'' +
+                ", gender='" + gender + '\'' +
                 ", speciality=" + speciality +
                 ", contact=" + contact +
                 ", schedules=" + schedules +
                 ", details='" + details + '\'' +
                 '}';
     }
+
 }
+
+
+
+
