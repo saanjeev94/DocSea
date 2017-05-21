@@ -67,14 +67,14 @@ public class ScheduleController {
         //Display
 
         @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Schedule>> listAllSchedules() {
+         public ResponseEntity<List<Schedule>> listAllSchedules() {
             List<Schedule> schedules= scheduleRepository.findAll();
-        if (schedules.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            if (schedules.isEmpty()) {
+             return new ResponseEntity(HttpStatus.NO_CONTENT);
 
-        }
-        return new ResponseEntity<List<Schedule>>(schedules, HttpStatus.OK);
-    }
+            }
+            return new ResponseEntity<List<Schedule>>(schedules, HttpStatus.OK);
+         }
 
 
 

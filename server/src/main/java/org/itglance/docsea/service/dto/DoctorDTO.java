@@ -2,7 +2,11 @@ package org.itglance.docsea.service.dto;
 
 import org.itglance.docsea.domain.Contact;
 import org.itglance.docsea.domain.Doctor;
+import org.itglance.docsea.domain.Schedule;
 import org.itglance.docsea.domain.Speciality;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sriyanka on 5/8/2017.
@@ -14,25 +18,15 @@ public class DoctorDTO {
     private String name;
     private String qualification;
     private String photo;
-<<<<<<< HEAD
     private String gender;
-    private Long speciality;
-    private Long contact;
-=======
     private Speciality speciality;
     private Contact contact;
->>>>>>> frontBackHospital
+    private List<Schedule> schedules=new ArrayList<>();
     private String details;
 
-    public DoctorDTO(){
+    public DoctorDTO(){}
 
-    }
-
-<<<<<<< HEAD
-    public DoctorDTO(Long id, int nmcNumber, String name, String qualification, String photo, String gender, Long speciality, Long contact, String details) {
-=======
-    public DoctorDTO(Long id, String name, String qualification, String photo, Speciality speciality, Contact contact, String details) {
->>>>>>> frontBackHospital
+    public DoctorDTO(Long id, int nmcNumber, String name, String qualification, String photo, String gender, Speciality speciality, Contact contact, List<Schedule> schedules, String details) {
         this.id = id;
         this.nmcNumber = nmcNumber;
         this.name = name;
@@ -41,13 +35,12 @@ public class DoctorDTO {
         this.gender = gender;
         this.speciality = speciality;
         this.contact = contact;
+        this.schedules = schedules;
         this.details = details;
     }
 
-
-
     public DoctorDTO(Doctor doctor){
-        this(doctor.getId(),doctor.getNmcNumber(),doctor.getName(),doctor.getQualification(),doctor.getPhoto(),doctor.getGender(),doctor.getSpeciality(),doctor.getContact(),doctor.getDetails());
+        this(doctor.getId(),doctor.getNmcNumber(),doctor.getName(),doctor.getQualification(),doctor.getPhoto(),doctor.getGender(),doctor.getSpeciality(),doctor.getContact(), doctor.getSchedules(),doctor.getDetails());
 
     }
 
@@ -55,14 +48,11 @@ public class DoctorDTO {
         return id;
     }
 
-<<<<<<< HEAD
+
     public int getNmcNumber(){ return nmcNumber;}
 
     public String getName() { return name;}
-=======
-    public String getName() {
-        return name;
-    }
+
 
     public String getQualification() {
         return qualification;
@@ -71,6 +61,8 @@ public class DoctorDTO {
     public String getPhoto() {
         return photo;
     }
+
+    public String getGender(){ return gender; }
 
     public Speciality getSpeciality() {
         return speciality;
@@ -83,7 +75,7 @@ public class DoctorDTO {
     public String getDetails() {
         return details;
     }
->>>>>>> frontBackHospital
+
 
     @Override
     public String toString() {

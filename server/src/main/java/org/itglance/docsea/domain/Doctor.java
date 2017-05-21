@@ -2,6 +2,7 @@ package org.itglance.docsea.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +17,27 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull( message = "NMC number cannot be null")
     @Column(unique = true)
     private int nmcNumber;
+
+    @NotNull( message = "Name cannot be null")
     private String name;
+
+    @NotNull( message = "Qualification cannot be null")
     private String qualification;
+
+    @NotNull( message = "Photo cannot be null")
     private String photo;
+
+    @NotNull( message = "Gender cannot be null")
     private String gender;
 
-
+    @NotNull( message = "Speciality cannot be null")
     @ManyToOne
     private Speciality speciality;
 
+    @NotNull( message = "Contact cannot be null")
     @OneToOne
     private Contact contact;
 
