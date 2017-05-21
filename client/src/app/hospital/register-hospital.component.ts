@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
-import {FormGroup} from "@angular/forms";
 import {Hospital} from "../model/hospital.model";
 import {HospitalService} from "../services/hospital.service";
+import {User} from "../model/user.model";
+import {HospitalUser} from "../model/hosptial-user.model";
 
 
 
@@ -12,15 +13,19 @@ import {HospitalService} from "../services/hospital.service";
 })
 
 export class RegisterHospitalComponent{
-  hospital: Hospital;
+  hospitalUser: HospitalUser;
+  // hospital: Hospital;
+  // user: User;
 
   constructor(private hosiptalService: HospitalService){
-    this.hospital = new Hospital();
+    this.hospitalUser = new HospitalUser();
+    // this.hospital = new Hospital();
+    // this.user = new User();
   }
 
   onRegister(){
-    // console.log(this.hospital);
-    this.hosiptalService.addHospital(this.hospital).subscribe((result) => console.log(result));
+    console.log(this.hospitalUser);
+    this.hosiptalService.addHospital(this.hospitalUser).subscribe((result) => console.log(result));
   }
 
 }

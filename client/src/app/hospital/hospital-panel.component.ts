@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+declare var $ : any;
 
 @Component({
   selector: 'docsea-hospital-panel',
@@ -12,4 +13,7 @@ export class HospitalPanelComponent implements OnInit{
 
   }
 
+  ngAfterViewInit(){
+    $('#hospital-panel-table').dataTable();
+  }
 }

@@ -12,10 +12,10 @@ export class Contact{
 
   constructor(id?:number,contactNumber1?: string,contactNumber2?: string,emailId?: string,website?: string,fax?: string){
     this.id=id?id:null;
-    this.contactNumber1=contactNumber1?contactNumber1:null;
-    this.contactNumber2=contactNumber2?contactNumber2:null;
-    this.emailId=emailId?emailId:null;
-    this.website=website?website:null;
-    this.fax=fax?fax:null;
+    this.contactNumber1 = contactNumber1 ? contactNumber1 : null;
+    this.contactNumber2 = contactNumber2 ? contactNumber2 : null;
+    this.emailId = emailId ? emailId : null;
+    this.website = website ? website : null;
+    this.fax = fax ? fax : null;
   }
 }

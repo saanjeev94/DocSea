@@ -10,21 +10,21 @@ import org.itglance.docsea.domain.User;
 public class HospitalUserDTO {
 
     private Long id;
-    private Hospital hospitall;
+    private Hospital hospital;
     private User user;
 
     public HospitalUserDTO() {
     }
 
-    public HospitalUserDTO(Long id, Hospital hospitall, User user) {
+    public HospitalUserDTO(Long id, Hospital hospital, User user) {
         this.id = id;
-        this.hospitall = hospitall;
+        this.hospital = hospital;
         this.user = user;
     }
 
     public HospitalUserDTO(HospitalUser hospitalUser) {
         this.id = hospitalUser.getId();
-        this.hospitall = hospitalUser.getHospitall();
+        this.hospital = hospitalUser.getHospital();
         this.user = hospitalUser.getUser();
     }
 
@@ -32,8 +32,8 @@ public class HospitalUserDTO {
         return id;
     }
 
-    public Hospital getHospitall() {
-        return hospitall;
+    public Hospital gethospital() {
+        return hospital;
     }
 
     public User getUser() {
@@ -44,7 +44,7 @@ public class HospitalUserDTO {
     public String toString() {
         return "HospitalUserDTO{" +
                 "id=" + id +
-                ", hospitall=" + hospitall +
+                ", hospital=" + hospital +
                 ", user=" + user +
                 '}';
     }

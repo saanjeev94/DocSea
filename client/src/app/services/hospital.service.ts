@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import {Hospital} from "../model/hospital.model";
 import 'rxjs/add/operator/map';
+import {User} from "../model/user.model";
+import {HospitalUser} from "../model/hosptial-user.model";
 
 @Injectable()
 export class HospitalService{
@@ -11,11 +13,10 @@ export class HospitalService{
     // this.headers.append('Content-Type', 'application/json');
   }
 
-  addHospital(hospital: Hospital){
-    // console.log("yo hoo the ");
+  addHospital(hospitalUser: HospitalUser){
     // console.log(hospital);
-    return this.http.post(this.hospitalUrl,hospital).map(res => res.json());
     // this.http.post(this.hospitalUrl, hospital);
+    return this.http.post(this.hospitalUrl,hospitalUser).map(res => res.json());
   }
 
 

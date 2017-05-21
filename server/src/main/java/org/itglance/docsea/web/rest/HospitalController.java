@@ -5,6 +5,7 @@ package org.itglance.docsea.web.rest;
 
 
 
+import org.itglance.docsea.domain.HospitalUser;
 import org.itglance.docsea.repository.HospitalUserRepository;
 import org.itglance.docsea.service.HospitalService;
 import org.itglance.docsea.service.dto.HospitalDTO;
@@ -24,7 +25,8 @@ import java.util.List;
 /**
  * Created by sanj__000 on 5/10/2017.
  */
-
+//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api")
 public class HospitalController {
@@ -33,6 +35,9 @@ public class HospitalController {
     @Autowired
     HospitalService hospitalService;
 
+    @Autowired
+    HospitalUserRepository hospitalUserRepository;
+
     public static final Logger logger = LoggerFactory.getLogger(HospitalController.class);
 
 
@@ -40,19 +45,21 @@ public class HospitalController {
     @RequestMapping(value = "/hospital", method = RequestMethod.POST)
     public ResponseEntity<?> register(@Valid @RequestBody HospitalUserDTO hospitalUser)
     {
-        HospitalDTO hospitalDTO = new HospitalDTO(hospitalUser.getHospitall());
+        System.out.println("*******************************************************************");
+        System.out.println(hospitalUser.toString());
+        HospitalDTO hospitalDTO = new HospitalDTO(hospitalUser.gethospital());
         UserDTO userDTO = new UserDTO(hospitalUser.getUser());
         logger.info("Creating Hospital : {}", hospitalDTO);
 
 
         if(hospitalDTO.getAddress().getCity().getName() == null){
         	 logger.error(" City name should not be null");
-             return new ResponseEntity(("Unable to register Hospital, City name should,nt be null"), HttpStatus.CONFLICT);
+             return new ResponseEntity<>(("Unable to register Hospital, City name should,nt be null"), HttpStatus.CONFLICT);
 
         }
         else if(hospitalService.isHospitalExist(hospitalDTO, userDTO)){
             logger.error(" Hospital already exist");
-            return new ResponseEntity(("Unable to register Hospital. A hospital with registration no. or hospital name" +
+            return new ResponseEntity<>(("Unable to register Hospital. A hospital with registration no. or hospital name" +
                     " or lisence no. or usernme is already exist."), HttpStatus.CONFLICT);
         }
         hospitalService.registerHospital(hospitalDTO, userDTO);
@@ -60,12 +67,12 @@ public class HospitalController {
     }
 
     //-------------- display testing----//
-  /*  @RequestMapping(value = "/display", method = RequestMethod.GET)
+  @RequestMapping(value = "/hospital", method = RequestMethod.GET)
     public ResponseEntity<List<HospitalUser>> listAllUsers() {
-         List<HospitalUser> list = hospitalUserRepository.findAll();
-        if(list.isEmpty()){
-            return new ResponseEntity<List<HospitalUser>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
-        }
-        return new ResponseEntity(list, HttpStatus.OK);
-    }*/
+      List<HospitalUser> list = hospitalUserRepository.findAll();
+      if (list.isEmpty()) {
+          return new ResponseEntity<List<HospitalUser>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+      }
+      return new ResponseEntity<>(list, HttpStatus.OK);
+  }
 }

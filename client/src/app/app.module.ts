@@ -16,6 +16,7 @@ import {LoginComponent} from "./login/login.component";
 
 import {DoctorService} from "./services/doctor.service";
 import {HospitalService} from "./services/hospital.service";
+import {DoctorGridView} from "./doctor/doctor-grid-view";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {HospitalService} from "./services/hospital.service";
     RegisterHospitalComponent,
     SearchDoctorComponent,
     HospitalPanelComponent,
-    LoginComponent
+    LoginComponent,
+    DoctorGridView
 
   ],
   imports: [
