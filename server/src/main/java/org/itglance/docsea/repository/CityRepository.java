@@ -1,6 +1,7 @@
 package org.itglance.docsea.repository;
 
 import org.itglance.docsea.domain.City;
+import org.itglance.docsea.domain.District;
 import org.itglance.docsea.service.dto.CityDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,5 +12,5 @@ import java.util.List;
  */
 public interface CityRepository extends JpaRepository<City, Long> {
     public City findByName(String name);
-    public List<CityDTO> findAllByDistrict(String district);
+    public List<City> findAllByDistrict(District district);
 }

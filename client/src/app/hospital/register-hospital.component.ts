@@ -1,7 +1,5 @@
-import {Component} from "@angular/core";
-import {Hospital} from "../model/hospital.model";
+import {Component, OnInit} from "@angular/core";
 import {HospitalService} from "../services/hospital.service";
-import {User} from "../model/user.model";
 import {HospitalUser} from "../model/hosptial-user.model";
 
 
@@ -12,15 +10,15 @@ import {HospitalUser} from "../model/hosptial-user.model";
   styleUrls: ['./register-hospital.component.css']
 })
 
-export class RegisterHospitalComponent{
+export class RegisterHospitalComponent implements OnInit{
   hospitalUser: HospitalUser;
-  // hospital: Hospital;
-  // user: User;
 
   constructor(private hosiptalService: HospitalService){
     this.hospitalUser = new HospitalUser();
-    // this.hospital = new Hospital();
-    // this.user = new User();
+  }
+
+  ngOnInit(){
+
   }
 
   onRegister(){

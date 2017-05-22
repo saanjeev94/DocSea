@@ -1,9 +1,13 @@
-.navbar{
+.navbar, .dropdown-menu{
   background: #3269AC;
 }
 
 .navbar a{
   color: #dbeafb;
+}
+
+.dropdown-menu a{
+  color: #dbeafb !important;
 }
 
 .navbar ul li a{

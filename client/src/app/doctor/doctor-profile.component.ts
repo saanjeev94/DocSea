@@ -20,8 +20,8 @@ export class DoctorProfileComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.contact = new Contact(1,"9860770501","9808524298","sonikamaharjan95@gmail.com","","");
-    this.doctor = new Doctor(1,"Sonika Maharjan","female","MD",null
-      ,"cardiology",this.contact,"1","sdbkjakcsbnskjdcds");
+    // this.contact = new Contact(1,"9860770501","9808524298","sonikamaharjan95@gmail.com","","");
+    // this.doctor = new Doctor(1,"Sonika Maharjan","female","MD",null
+    //   ,"cardiology",this.contact,"1","sdbkjakcsbnskjdcds");
   }
 }

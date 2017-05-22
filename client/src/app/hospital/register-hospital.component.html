@@ -34,7 +34,7 @@
                 <span [hidden]="!country.errors.required">Country is required</span>
               </div>
             </div>
-`
+            `
             <!-- Zone -->
             <div class="col-md-2">
               <select class="form-control" name="zone"
@@ -68,7 +68,7 @@
               <select class="form-control" name="city"
                       [(ngModel)]="hospitalUser.hospital.address.city.name" #city="ngModel"
                       required [disabled]="!district.valid">
-                <option value="Kathamandu">Kathmandu</option>
+                <option value="Kathmandu">Kathmandu</option>
                 <option value="lalitpur">lalitpur</option>
               </select>
 
@@ -76,9 +76,12 @@
                 <span [hidden]="!city.errors.required">City is required</span>
               </div>
             </div>
+          </div>
 
-            <!-- District -->
-            <div class="col-md-3">
+          <!-- Street -->
+          <div class="form-group">
+            <label for="streetAddress" class="col-md-2 control-label">Street</label>
+            <div class="col-md-9">
               <input type="text" class="form-control"
                      id="streetAddress" placeholder="Street"
                      name="streetAddress" [(ngModel)]="hospitalUser.hospital.address.streetAddress" #streetAddress="ngModel"
@@ -181,10 +184,11 @@
               <input type="email" class="form-control"
                      id="emailId" placeholder="Email Address"
                      name="emailId" [(ngModel)]="hospitalUser.hospital.contact.emailId" #emailId="ngModel"
-                     required #email>
+                     required #email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 
               <div *ngIf="emailId.errors && emailId.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!emailId.errors.required">Email is required</span>
+                <span [hidden]="!emailId.errors.pattern">Email is not valid</span>
               </div>
             </div>
 
@@ -205,13 +209,12 @@
             <div class="col-md-9">
               <input type="url" class="form-control"
                      id="website" placeholder="Website"
-                     name="website" [(ngModel)]="hospitalUser.hospital.contact.website" #webiste="ngModel">
-
-              <!-- <div *ngIf="website.errors && website.touched" class="alert alert-danger custom-label-alert">
-                <span [hidden]="!website.errors.required">Hospital website is required</span>
-              </div> -->
+                     name="website" [(ngModel)]="hospitalUser.hospital.contact.website" #website="ngModel"
+                      pattern="">
+              <div *ngIf="website.errors && website.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!website.errors.pattern">website is not valid</span>
+              </div>
             </div>
-
           </div> <!-- form-group -->
         </div> <!-- #contactGroup -->
 

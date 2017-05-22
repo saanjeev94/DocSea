@@ -32,7 +32,7 @@ public class HospitalUserDTO {
         return id;
     }
 
-    public Hospital gethospital() {
+    public Hospital getHospital() {
         return hospital;
     }
 
