@@ -1,8 +1,18 @@
 package org.itglance.docsea.service;
 
-import org.itglance.docsea.domain.*;
+
+import org.itglance.docsea.domain.Hospital;
+import org.itglance.docsea.domain.HospitalUser;
+import org.itglance.docsea.domain.Status;
+import org.itglance.docsea.domain.User;
+import org.itglance.docsea.domain.Role;
+import org.itglance.docsea.domain.Contact;
+import org.itglance.docsea.domain.Address;
+
+
 import org.itglance.docsea.repository.*;
 import org.itglance.docsea.service.dto.HospitalDTO;
+
 import org.itglance.docsea.service.dto.HospitalUserDTO;
 import org.itglance.docsea.service.dto.UserDTO;
 import org.slf4j.Logger;
@@ -11,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +53,8 @@ public class HospitalService {
 
     private final DistrictRepository districtRepository;
 
+    private final RoleRepository roleRepository;
+
 
 
     @Autowired
@@ -55,7 +68,7 @@ public class HospitalService {
                            StatusRepository statusRepository,RoleService roleService, HospitalUserRepository hospitalUserRepository
                             , UserRepository userRepository, AddressRepository addressRepository, CityRepository cityRepository
                             , ContactRepository contactRepository, StatusService statusService,CountryRepository countryRepository
-                            ,ZoneRepository zoneRepository,DistrictRepository districtRepository) {
+                            ,ZoneRepository zoneRepository,DistrictRepository districtRepository, RoleRepository roleRepository) {
         this.hospitalRepository = hospitalRepository;
         this.statusRepository = statusRepository;
         this.roleService = roleService;
@@ -68,6 +81,7 @@ public class HospitalService {
         this.countryRepository = countryRepository;
         this.zoneRepository = zoneRepository;
         this.districtRepository = districtRepository;
+        this.roleRepository = roleRepository;
     }
 
     public void registerHospital(HospitalDTO hospitalDTO, UserDTO userDTO){
@@ -75,7 +89,6 @@ public class HospitalService {
         HospitalUser hospitalUser = new HospitalUser();
         User user = new User();
         Status status = new Status();
-
         Role role = null;
         Contact contact = new Contact();
 
@@ -135,6 +148,15 @@ public class HospitalService {
 
         return false;
     }
+    
+    public boolean isHospitalExist(Long id){
+
+        HospitalUser hospitalUser = hospitalUserRepository.findOne(id);
+        if(hospitalUser!= null){
+            return true;
+        }
+        return false;
+    }
 
     public List<HospitalUser> getAllHospitalUser() {
         List<HospitalUser> hospitalList = hospitalUserRepository.findAll();
@@ -147,7 +169,100 @@ public class HospitalService {
         return hospitalUser;
     }
 
-   /* public boolean isHospitalExist(HospitalUserDTO hospitalUserDTO) {
-        User = user = userRepository.findByUsername(hospitalUserDTO.getHospital().)
-    }*/
+    public void updateHospital(HospitalUserDTO hospitalUserDTO){
+
+        HospitalUser hospitalUser = hospitalUserRepository.findOne(hospitalUserDTO.getId());
+
+        Hospital hospital = hospitalRepository.findOne(hospitalUserDTO.getHospital().getId());
+        hospital.setName(hospitalUserDTO.getHospital().getName());
+        hospital.setRegistrationNo(hospitalUserDTO.getHospital().getRegistrationNo());
+        hospital.setLisenceNo(hospitalUserDTO.getHospital().getLisenceNo());
+
+        Contact contact = contactRepository.findOne(hospitalUserDTO.getHospital().getContact().getId());
+        contact.setWebsite(hospitalUserDTO.getHospital().getContact().getWebsite());
+        contact.setFax(hospitalUserDTO.getHospital().getContact().getFax());
+        contact.setEmailId(hospitalUserDTO.getHospital().getContact().getEmailId());
+        contact.setContactNumber1(hospitalUserDTO.getHospital().getContact().getContactNumber1());
+        contact.setContactNumber2(hospitalUserDTO.getHospital().getContact().getContactNumber2());
+        contactRepository.save(contact);
+        hospital.setContact(contact);
+
+        Address address = addressRepository.findOne(hospitalUserDTO.getHospital().getAddress().getId());
+        address.setStreetAddress(hospitalUserDTO.getHospital().getAddress().getStreetAddress());
+        address.setCountry(countryRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCountry().getName()));
+        address.setZone(zoneRepository.findByName(hospitalUserDTO.getHospital().getAddress().getZone().getName()));
+        address.setDistrict(districtRepository.findByName(hospitalUserDTO.getHospital().getAddress().getDistrict().getName()));
+        address.setCity(cityRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCity().getName()));
+        addressRepository.save(address);
+        hospital.setAddress(address);
+        hospitalUser.setHospital(hospital);
+
+
+        User user = userRepository.findOne(hospitalUserDTO.getUser().getId());
+        user.setUsername(hospitalUserDTO.getUser().getUsername());
+        user.setPassword(hospitalUserDTO.getUser().getPassword());
+
+        Status status = statusService.getStatusObject(hospitalUserDTO.getUser().getStatus().getStatus());
+        user.setStatus(status);
+        userRepository.save(user);
+        hospitalUser.setUser(user);
+
+        hospitalUserRepository.save(hospitalUser);
+
+}
+    //Username validation
+    public boolean validateUsernameForUpdate(User user) {
+        List<User> users = new ArrayList<>();
+        users = userRepository.findAllByUsername(user.getUsername());
+        if(users.size() == 0){
+            return true;
+        }else if(users.size() == 1){
+            if(users.get(0).getId() == user.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Hospital name validation
+    public boolean validateHospitalNameForUpdate(Hospital hospital) {
+        List<Hospital> hospitals = new ArrayList<>();
+        hospitals = hospitalRepository.findAllByName(hospital.getName());
+        if(hospitals.size() == 0){
+            return true;
+        }else if(hospitals.size() == 1){
+            if(hospitals.get(0).getId() == hospital.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Hospital Lisence no. validation
+    public boolean validateLisenceForUpdate(Hospital hospital) {
+        List<Hospital> hospitals = new ArrayList<>();
+        hospitals = hospitalRepository.findAllByLisenceNo(hospital.getLisenceNo());
+        if(hospitals.size() == 0){
+            return true;
+        }else if(hospitals.size() == 1){
+            if(hospitals.get(0).getId() == hospital.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Hospital registration validation
+    public boolean validateRegForUpdate(Hospital hospital) {
+        List<Hospital> hospitals = new ArrayList<>();
+        hospitals = hospitalRepository.findAllByRegistrationNo(hospital.getRegistrationNo());
+        if(hospitals.size() == 0){
+            return true;
+        }else if(hospitals.size() == 1){
+            if(hospitals.get(0).getId() == hospital.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

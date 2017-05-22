@@ -60,7 +60,7 @@ public class AddressController {
             logger.error("There is no records in zone table.");
             return new ResponseEntity(("There is no records in zone table."), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<List<String>> (zones, HttpStatus.OK);
+        return new ResponseEntity<> (zones, HttpStatus.OK);
     }
 
     @GetMapping(value = "/addresses/districts")

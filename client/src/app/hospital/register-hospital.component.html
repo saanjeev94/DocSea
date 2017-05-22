@@ -183,7 +183,7 @@
               <input type="email" class="form-control"
                      id="emailId" placeholder="Email Address"
                      name="emailId" [(ngModel)]="hospitalUser.hospital.contact.emailId" #emailId="ngModel"
-                     required #email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                     required #email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
 
               <div *ngIf="emailId.errors && emailId.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!emailId.errors.required">Email is required</span>
