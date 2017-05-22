@@ -20,7 +20,7 @@ export class RegisterHospitalComponent{
   constructor(private hosiptalService: HospitalService){
     this.hospitalUser = new HospitalUser();
     // this.hospital = new Hospital();
-    // this.user = new User();
+
   }
 
   onRegister(){
