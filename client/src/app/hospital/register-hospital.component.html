@@ -26,8 +26,8 @@
             <div class="col-md-2">
               <select class="form-control" name="country"
                       [(ngModel)]="hospitalUser.hospital.address.country.name" #country="ngModel"
-                      required>
-                <option value="Nepal">Nepal</option>
+                      required (change)="getZones($event.target.value)">
+                <option value="{{countries}}" *ngFor="let countries of countryObject" >{{ countries }}</option>
               </select>
 
               <div *ngIf="country.errors && country.touched" class="alert alert-danger custom-label-alert">
@@ -39,9 +39,9 @@
             <div class="col-md-2">
               <select class="form-control" name="zone"
                       [(ngModel)]="hospitalUser.hospital.address.zone.name" #zone="ngModel"
-                      required [disabled]="!country.valid">
-                <option value="Bagmati">Bagmati</option>
-                <option value="gandaki">Gandaki</option>
+                      required [disabled]="!country.valid"
+                      (change)="getDistricts($event.target.value)">
+                <option value="{{zones}}" *ngFor="let zones of zoneObject">{{zones}}</option>
               </select>
 
               <div *ngIf="zone.errors && zone.touched" class="alert alert-danger custom-label-alert">
@@ -53,9 +53,9 @@
             <div class="col-md-2">
               <select class="form-control" name="district"
                       [(ngModel)]="hospitalUser.hospital.address.district.name" #district="ngModel"
-                      required [disabled]="!zone.valid">
-                <option value="Kathmandu">Kathmandu</option>
-                <option value="lalitpur">Lalitpur</option>
+                      required [disabled]="!zone.valid"
+                      (change)="getCities($event.target.value)">
+                <option value="{{districts}}" *ngFor="let districts of districtObject">{{districts}}</option>
               </select>
 
               <div *ngIf="district.errors && district.touched" class="alert alert-danger custom-label-alert">
@@ -68,8 +68,7 @@
               <select class="form-control" name="city"
                       [(ngModel)]="hospitalUser.hospital.address.city.name" #city="ngModel"
                       required [disabled]="!district.valid">
-                <option value="Kathmandu">Kathmandu</option>
-                <option value="lalitpur">lalitpur</option>
+                <option value="{{cities}}" *ngFor="let cities of cityObject">{{cities}}</option>
               </select>
 
               <div *ngIf="city.errors && city.touched" class="alert alert-danger custom-label-alert">

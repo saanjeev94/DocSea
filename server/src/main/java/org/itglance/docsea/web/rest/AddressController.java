@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Mahesh on 5/8/2017.
  */
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api")
 public class AddressController {
@@ -90,7 +91,7 @@ public class AddressController {
 
         System.out.println(country);
         List<String> zones = addressService.getZonesFromCountry(country);
-        return new ResponseEntity<List<String>> (zones, HttpStatus.OK);
+        return new ResponseEntity<> (zones, HttpStatus.OK);
     }
 
     @GetMapping(value = "/addresses/districts/{zone}")

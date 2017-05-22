@@ -19,5 +19,4 @@ export class HospitalService{
     return this.http.post(this.hospitalUrl,hospitalUser).map(res => res.json());
   }
 
-
 }

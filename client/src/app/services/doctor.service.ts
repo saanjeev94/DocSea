@@ -9,11 +9,11 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class DoctorService{
 
+  private doctorUrl='api/doctor';
+
   constructor(private http:Http){
 
   }
-
-  private doctorUrl='api/doctor';
 
   addDoctor(doctor:Doctor){
     return this.http.post(this.doctorUrl,doctor);
