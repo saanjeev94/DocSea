@@ -68,8 +68,8 @@
         <div class="form-group">
           <label class="col-md-4">Upload Picture</label>
           <div class="col-md-7">
-            <input type="file" [(ngModel)]="doctor.photo" name="photo"
-                   #photo="ngModel" accept="image/*" (change)="onChange($event)">
+            <input type="file" name="photo"
+                    accept="image/*" (change)="onChange($event)">
           </div>
         </div>
 
@@ -119,7 +119,7 @@
         </div>
 
         <div class="col-md-offset-4 col-md-7">
-          <button type="submit" class="btn btn-default" [routerlink]="['/update',doctor.id]">Update</button>
+          <button type="submit" class="btn btn-default" [routerLink]="['/update',doctor.id]">Update</button>
         </div>
 
       </form>

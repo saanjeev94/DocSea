@@ -23,7 +23,6 @@ public class District {
     @NotNull(message = "District name should not be null.")
     private String name;
     
-    @NotNull(message = "(ForeignKeyNullException) District name should point to its Zone.")
     @ManyToOne(cascade = CascadeType.ALL)
     private Zone zone;
 

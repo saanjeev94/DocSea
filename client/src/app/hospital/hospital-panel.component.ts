@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {DoctorService} from "../services/doctor.service";
+declare var $ : any;
 
 @Component({
   selector: 'docsea-hospital-panel',
@@ -26,6 +27,7 @@ export class HospitalPanelComponent implements OnInit{
     })
   }
 
-
-
+  ngAfterViewInit(){
+    $('#hospital-panel-table').dataTable();
+  }
 }

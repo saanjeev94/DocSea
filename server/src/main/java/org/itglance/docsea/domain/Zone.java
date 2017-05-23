@@ -24,7 +24,6 @@ public class Zone {
     @NotNull(message = "Zone name should not be null.")
     private String name;
     
-    @NotNull(message = "(ForeignKeyNullException) Zone name should point to its Country.")
     @ManyToOne(cascade = CascadeType.ALL)
     private Country country;
 

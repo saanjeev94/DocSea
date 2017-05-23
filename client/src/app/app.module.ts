@@ -16,6 +16,8 @@ import {LoginComponent} from "./login/login.component";
 
 import {DoctorService} from "./services/doctor.service";
 import {HospitalService} from "./services/hospital.service";
+import {DoctorGridView} from "./doctor/doctor-grid-view";
+import {AddressService} from "./services/address.service";
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import {HospitalService} from "./services/hospital.service";
     RegisterHospitalComponent,
     SearchDoctorComponent,
     HospitalPanelComponent,
-    LoginComponent
+    LoginComponent,
+    DoctorGridView
 
   ],
   imports: [
@@ -39,7 +42,8 @@ import {HospitalService} from "./services/hospital.service";
 
   providers: [
     HospitalService,
-    DoctorService
+    DoctorService,
+    AddressService
   ],
 
   bootstrap: [AppComponent]

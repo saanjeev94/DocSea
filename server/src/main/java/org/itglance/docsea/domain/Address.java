@@ -24,16 +24,12 @@ public class Address {
     @NotNull(message = "Hospital street address should not be null")
     private String streetAddress;
 
-    @NotNull(message = "Address's cityId should not be null (foreign key)")
     @ManyToOne
     private City city;
-    @NotNull(message = "Address's districtId should not be null (foreign key)")
     @ManyToOne
     private District district;
-    @NotNull(message = "Address's ZoneId should not be null (foreign key)")
     @ManyToOne
     private Zone zone;
-    @NotNull(message = "Address's countryId should not be null (foreign key)")
     @ManyToOne
     private Country country;
 

@@ -21,7 +21,6 @@ public class City {
     private Long id;
     @NotNull(message = "City name should not be null.")
     private String name;
-    @NotNull(message = "(ForeignKeyNullException) City name should point to its district.")
     @ManyToOne(cascade = CascadeType.ALL)
     private District district;
 
