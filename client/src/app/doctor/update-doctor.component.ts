@@ -7,14 +7,14 @@ import {DoctorService} from "../services/doctor.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'update-doctor',
-  templateUrl: './update-doctor.component.html',
-  styleUrls: ['./update-doctor.component.css']
+  selector: 'add-doctor',
+  templateUrl: './add-doctor.component.html',
+  styleUrls: ['./add-doctor.component.css']
 })
 export class UpdateDoctorComponent implements OnInit{
   title = 'Update Doctor Information';
   doctor:Doctor;
-  photofile:File;
+  photofile:File=null;
 
   constructor(private doctorService:DoctorService, private route:ActivatedRoute){
     this.doctor=new Doctor();
@@ -36,6 +36,7 @@ export class UpdateDoctorComponent implements OnInit{
     formdata.append('photofile',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
     console.log(this.doctor);
+    console.log(this.photofile);
     this.doctorService.updateDoctor(formdata);
   }
 
