@@ -26,8 +26,8 @@ export class AddDoctorComponent implements OnInit{
 
   onChange(event) {
     let file = event.srcElement.files;
-    this.photofile=file[0];
     console.log(this.photofile);
+    this.photofile=file[0];
   }
 
   onSubmit(){

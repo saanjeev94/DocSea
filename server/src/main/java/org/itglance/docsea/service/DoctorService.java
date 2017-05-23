@@ -110,10 +110,6 @@ public class DoctorService {
         int random = (int) (Math.random() * 50000 + 1);
         String fileName = file.getOriginalFilename();
         String extension = FilenameUtils.getExtension(fileName);
-//        int i = fileName.lastIndexOf('.');
-//        if (i > 0) {
-//            extension = fileName.substring(i + 1);
-//        }
         System.out.println(extension);
         String newFileName = "doctor-" + random + "." + extension;
         try {
