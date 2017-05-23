@@ -3,6 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../model/doctor.model";
+import {DoctorService} from "../services/doctor.service";
 
 @Component({
   selector: 'add-doctor',
@@ -12,8 +13,10 @@ import {Doctor} from "../model/doctor.model";
 export class AddDoctorComponent implements OnInit{
   title = 'Add Doctor';
   doctor:Doctor;
+  photofile:File;
 
-  constructor(){
+
+  constructor(private doctorService:DoctorService){
     this.doctor=new Doctor();
   }
 
@@ -21,7 +24,17 @@ export class AddDoctorComponent implements OnInit{
 
   }
 
+  onChange(event) {
+    let file = event.srcElement.files;
+    this.photofile=file[0];
+    console.log(this.photofile);
+  }
+
   onSubmit(){
+    let formdata:FormData=new FormData();
+    formdata.append('file',this.photofile);
+    formdata.append('doctor',JSON.stringify(this.doctor));
     console.log(this.doctor);
+    this.doctorService.addDoctor(formdata).subscribe((response)=>response.json());
   }
 }

@@ -70,24 +70,24 @@ public class HospitalController {
             logger.error("Can't find hospital in the database");
             return new ResponseEntity<String>(("Cannot find hospital in database. "), HttpStatus.CONFLICT);
         }else if(!hospitalService.validateUsernameForUpdate(hospitalUserDTO.getUser())){
-            logger.error("There is already exist username in the database");
-            return new ResponseEntity<String>(("There is already exist username in the database"), HttpStatus.CONFLICT);
+            logger.error("Hospital with the Username "+hospitalUserDTO.getUser().getUsername()+" already exist");
+            return new ResponseEntity<String>(("Hospital with the Username "+hospitalUserDTO.getUser().getUsername()+" already exist"), HttpStatus.CONFLICT);
 
         }else if(!hospitalService.validateHospitalNameForUpdate(hospitalUserDTO.getHospital())){
-            logger.error("There is already exist Hospital name in the database");
-            return new ResponseEntity<String>(("There is already exist Hospital name in the database"), HttpStatus.CONFLICT);
+            logger.error("Hospital with the name "+hospitalUserDTO.getHospital().getName()+" already exist");
+            return new ResponseEntity<String>(("Hospital with the name already "+hospitalUserDTO.getHospital().getName()+" exist"), HttpStatus.CONFLICT);
         }else if(!hospitalService.validateLisenceForUpdate(hospitalUserDTO.getHospital())){
-            logger.error("There is already exist Hospital Lisence number in the database");
-            return new ResponseEntity<String>(("There is already exist Hospital Lisence number in the database"), HttpStatus.CONFLICT);
+            logger.error("Hospital with the Lisence number "+hospitalUserDTO.getHospital().getLisenceNo()+" already exist");
+            return new ResponseEntity<String>(("Hospital with the Lisence number "+hospitalUserDTO.getHospital().getLisenceNo()+" already exist"), HttpStatus.CONFLICT);
         }else if(!hospitalService.validateRegForUpdate(hospitalUserDTO.getHospital())){
-            logger.error("There is already exist Hospital Registration number in the database");
-            return new ResponseEntity<String>(("There is already exist Hospital Registration number in the database"), HttpStatus.CONFLICT);
+            logger.error("Hospital with the Registration number "+hospitalUserDTO.getHospital().getRegistrationNo()+" already exist");
+            return new ResponseEntity<String>(("Hospital with the Registration number "+hospitalUserDTO.getHospital().getRegistrationNo()+" already exist"), HttpStatus.CONFLICT);
         }
 
         hospitalService.updateHospital(hospitalUserDTO);
 
         logger.info("Hospital updated "+hospitalUserDTO);
-        return new ResponseEntity<String>("Hospital has been updated sucessfull",HttpStatus.OK);
+        return new ResponseEntity<String>("Hospital ("+hospitalUserDTO.getHospital().getName()+") has been updated sucessfull",HttpStatus.OK);
 
     }
 

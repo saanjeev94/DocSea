@@ -1,13 +1,7 @@
 package org.itglance.docsea.service;
 
 
-import org.itglance.docsea.domain.Hospital;
-import org.itglance.docsea.domain.HospitalUser;
-import org.itglance.docsea.domain.Status;
-import org.itglance.docsea.domain.User;
-import org.itglance.docsea.domain.Role;
-import org.itglance.docsea.domain.Contact;
-import org.itglance.docsea.domain.Address;
+import org.itglance.docsea.domain.*;
 
 
 import org.itglance.docsea.repository.*;
@@ -193,6 +187,7 @@ public class HospitalService {
         address.setZone(zoneRepository.findByName(hospitalUserDTO.getHospital().getAddress().getZone().getName()));
         address.setDistrict(districtRepository.findByName(hospitalUserDTO.getHospital().getAddress().getDistrict().getName()));
         address.setCity(cityRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCity().getName()));
+
         addressRepository.save(address);
         hospital.setAddress(address);
         hospitalUser.setHospital(hospital);
