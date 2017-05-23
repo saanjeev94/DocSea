@@ -6,6 +6,7 @@ import {Doctor} from "../model/doctor.model";
 import {Contact} from "../model/contact.model";
 import {DoctorService} from "../services/doctor.service";
 import {ActivatedRoute} from "@angular/router";
+declare var $ : any;
 
 @Component({
   selector: 'doctor-profile',
