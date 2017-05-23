@@ -26,9 +26,9 @@ export class DoctorProfileComponent implements OnInit{
     })
   }
 
-  getDoctorById(id){
-    this.doctorService.findById(id).subscribe(response=>{
-      this.doctor=response;
+  getDoctorById(id) {
+    this.doctorService.findById(id).subscribe(response => {
+      this.doctor = response;
       console.log(this.doctor);
     })
   }

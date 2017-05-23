@@ -10,7 +10,7 @@
           <div class="col-md-9">
             <input type="text" class="form-control"
                    id="name" placeholder="Hospital"
-                   name="name" [(ngModel)]="hospital.name" #name="ngModel"
+                   name="name" [(ngModel)]="hospitalUser.hospital.name" #name="ngModel"
                    required>
 
             <div *ngIf="name.errors && name.touched" class="alert alert-danger custom-label-alert">
@@ -19,16 +19,29 @@
           </div>
         </div>
 
-        <div id="addressGroup" ngModelGroup="address">
+        <div id="addressGroup">
           <div class="form-group">
             <label class="col-md-2 control-label">Address</label>
+            <!-- Country -->
+            <div class="col-md-2">
+              <select class="form-control" name="country"
+                      [(ngModel)]="hospitalUser.hospital.address.country.name" #country="ngModel"
+                      required (change)="getZones($event.target.value)">
+                <option value="{{countries}}" *ngFor="let countries of countryObject" >{{ countries }}</option>
+              </select>
+
+              <div *ngIf="country.errors && country.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!country.errors.required">Country is required</span>
+              </div>
+            </div>
+            `
             <!-- Zone -->
             <div class="col-md-2">
               <select class="form-control" name="zone"
-                      [(ngModel)]="hospital.zone" #zone="ngModel"
-                      required>
-                <option value="bagmati">Bagmati</option>
-                <option value="gandaki">Gandaki</option>
+                      [(ngModel)]="hospitalUser.hospital.address.zone.name" #zone="ngModel"
+                      required [disabled]="!country.valid"
+                      (change)="getDistricts($event.target.value)">
+                <option value="{{zones}}" *ngFor="let zones of zoneObject">{{zones}}</option>
               </select>
 
               <div *ngIf="zone.errors && zone.touched" class="alert alert-danger custom-label-alert">
@@ -39,10 +52,10 @@
             <!-- District -->
             <div class="col-md-2">
               <select class="form-control" name="district"
-                      [(ngModel)]="hospital.district" #district="ngModel"
-                      required [disabled]="!zone.valid">
-                <option value="kathmandu">Kathmandu</option>
-                <option value="lalitpur">Lalitpur</option>
+                      [(ngModel)]="hospitalUser.hospital.address.district.name" #district="ngModel"
+                      required [disabled]="!zone.valid"
+                      (change)="getCities($event.target.value)">
+                <option value="{{districts}}" *ngFor="let districts of districtObject">{{districts}}</option>
               </select>
 
               <div *ngIf="district.errors && district.touched" class="alert alert-danger custom-label-alert">
@@ -53,22 +66,24 @@
             <!-- City -->
             <div class="col-md-2">
               <select class="form-control" name="city"
-                      [(ngModel)]="hospital.city" #city="ngModel"
+                      [(ngModel)]="hospitalUser.hospital.address.city.name" #city="ngModel"
                       required [disabled]="!district.valid">
-                <option value="kathamdu">Kathmandu</option>
-                <option value="lalitpur">lalitpur</option>
+                <option value="{{cities}}" *ngFor="let cities of cityObject">{{cities}}</option>
               </select>
 
               <div *ngIf="city.errors && city.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!city.errors.required">City is required</span>
               </div>
             </div>
+          </div>
 
-            <!-- District -->
-            <div class="col-md-3">
+          <!-- Street -->
+          <div class="form-group">
+            <label for="streetAddress" class="col-md-2 control-label">Street</label>
+            <div class="col-md-9">
               <input type="text" class="form-control"
                      id="streetAddress" placeholder="Street"
-                     name="streetAddress" [(ngModel)]="hospital.streetAddress" #streetAddress="ngModel"
+                     name="streetAddress" [(ngModel)]="hospitalUser.hospital.address.streetAddress" #streetAddress="ngModel"
                      required [disabled]="!city.valid">
 
               <div *ngIf="streetAddress.errors && streetAddress.touched" class="alert alert-danger custom-label-alert">
@@ -78,13 +93,13 @@
           </div> <!-- form-group -->
         </div> <!-- ngModelGroup address -->
 
-        <div id="hositalUser" ngModelGroup="users">
+        <div id="hositalUser" ngModelGroup="user">
           <div class="form-group">
             <label for="username" class="col-md-2 control-label">Username</label>
             <div class="col-md-9">
               <input type="text" class="form-control"
                      id="username" placeholder="Username"
-                     name="username" [(ngModel)]="hospital.username" #username="ngModel"
+                     name="username" [(ngModel)]="hospitalUser.user.username" #username="ngModel"
                      required>
 
               <div *ngIf="username.errors && username.touched" class="alert alert-danger custom-label-alert">
@@ -98,7 +113,7 @@
             <div class="col-md-9">
               <input type="password" class="form-control"
                      id="password" placeholder="password"
-                     name="password" [(ngModel)]="hospital.password" #password="ngModel"
+                     name="password" [(ngModel)]="hospitalUser.user.password" #password="ngModel"
                      required>
 
               <div *ngIf="password.errors && password.touched" class="alert alert-danger custom-label-alert">
@@ -113,7 +128,7 @@
           <div class="col-md-3">
             <input type="text" class="form-control"
                    id="lisenceNo" placeholder="Lisence Number"
-                   name="lisenceNo" [(ngModel)]="hospital.lisenceNo" #lisenceNo="ngModel"
+                   name="lisenceNo" [(ngModel)]="hospitalUser.hospital.lisenceNo" #lisenceNo="ngModel"
                    required>
 
             <div *ngIf="lisenceNo.errors && lisenceNo.touched" class="alert alert-danger custom-label-alert">
@@ -125,7 +140,7 @@
           <div class="col-md-3">
             <input type="text" class="form-control"
                    id="registrationNo" placeholder="Registration Number"
-                   name="registrationNo" [(ngModel)]="hospital.registrationNo" #registrationNo="ngModel"
+                   name="registrationNo" [(ngModel)]="hospitalUser.hospital.registrationNo" #registrationNo="ngModel"
                    required>
 
             <div *ngIf="registrationNo.errors && registrationNo.touched" class="alert alert-danger custom-label-alert">
@@ -140,7 +155,7 @@
             <div class="col-md-3">
               <input type="text" class="form-control"
                      id="contactNumber1" placeholder="Primary Number"
-                     name="contactNumber1" [(ngModel)]="hospital.contactNumber1" #contactNumber1="ngModel"
+                     name="contactNumber1" [(ngModel)]="hospitalUser.hospital.contact.contactNumber1" #contactNumber1="ngModel"
                      required pattern="[0-9]{10}" maxlength="10">
 
               <div *ngIf="contactNumber1.errors && contactNumber1.touched" class="alert alert-danger custom-label-alert">
@@ -153,7 +168,7 @@
             <div class="col-md-3">
               <input type="text" class="form-control"
                      id="contactNumber2" placeholder="Secondary Number"
-                     name="contactNumber2" [(ngModel)]="hospital.contactNumber2" #contactNumber2="ngModel"
+                     name="contactNumber2" [(ngModel)]="hospitalUser.hospital.contact.contactNumber2" #contactNumber2="ngModel"
                      pattern="[0-9]{10}" maxlength="10">
 
               <div *ngIf="contactNumber2.errors && contactNumber2.touched" class="alert alert-danger custom-label-alert">
@@ -167,11 +182,12 @@
             <div class="col-md-3">
               <input type="email" class="form-control"
                      id="emailId" placeholder="Email Address"
-                     name="emailId" [(ngModel)]="hospital.emailId" #emailId="ngModel"
-                     required #email>
+                     name="emailId" [(ngModel)]="hospitalUser.hospital.contact.emailId" #emailId="ngModel"
+                     required #email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
 
               <div *ngIf="emailId.errors && emailId.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!emailId.errors.required">Email is required</span>
+                <span [hidden]="!emailId.errors.pattern">Email is not valid</span>
               </div>
             </div>
 
@@ -179,7 +195,7 @@
             <div class="col-md-3">
               <input type="text" class="form-control"
                      id="fax" placeholder="Fax"
-                     name="fax" [(ngModel)]="hospital.fax" #fax="ngModel">
+                     name="fax" [(ngModel)]="hospitalUser.hospital.contact.fax" #fax="ngModel">
 
               <div *ngIf="fax.errors && fax.touched" class="alert alert-danger custom-label-alert">
                 <span></span>
@@ -192,17 +208,16 @@
             <div class="col-md-9">
               <input type="url" class="form-control"
                      id="website" placeholder="Website"
-                     name="website" [(ngModel)]="hospital.website" #webiste="ngModel">
-
-              <!-- <div *ngIf="website.errors && website.touched" class="alert alert-danger custom-label-alert">
-                <span [hidden]="!website.errors.required">Hospital website is required</span>
-              </div> -->
+                     name="website" [(ngModel)]="hospitalUser.hospital.contact.website" #website="ngModel"
+                      pattern="">
+              <div *ngIf="website.errors && website.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!website.errors.pattern">website is not valid</span>
+              </div>
             </div>
-
           </div> <!-- form-group -->
         </div> <!-- #contactGroup -->
 
-        <div class="col-md-11 no">
+        <div class="col-md-11 no-padding">
           <input type="submit" value="Register"
                  class="btn btn-md btn-success pull-right"
                  [disabled]="!hospitalRegister.valid">
@@ -213,4 +228,5 @@
       </form>
     </div> <!-- ./col-md-12 -->
   </div> <!-- ./row -->
+  <div></div>
 </div>

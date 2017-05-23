@@ -10,10 +10,11 @@ export class Doctor{
   public gender?:string;
   public qualification?:string;
   public photo?:string;
-  public speciality?:Speciality;
+  public speciality?: Speciality;
   public contact?:Contact;
   public nmcNumber?:string;
   public details?:string;
+
 
   constructor(id?:number,name?:string,gender?:string,qualification?:string,photo?:string,speciality?:Speciality,contact?:Contact,nmcNumber?:string,details?:string){
     this.id=id?id:null;

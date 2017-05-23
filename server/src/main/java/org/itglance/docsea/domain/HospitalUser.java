@@ -13,7 +13,7 @@ public class HospitalUser {
     private Long id;
 
     @ManyToOne
-    private Hospital hospitall;
+    private Hospital hospital;
 
     @OneToOne
     private User user;
@@ -26,12 +26,12 @@ public class HospitalUser {
         this.id = id;
     }
 
-    public Hospital getHospitall() {
-        return hospitall;
+    public Hospital getHospital() {
+        return hospital;
     }
 
-    public void setHospitall(Hospital hospitall) {
-        this.hospitall = hospitall;
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
     }
 
     public User getUser() {

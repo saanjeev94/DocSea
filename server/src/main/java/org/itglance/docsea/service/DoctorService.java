@@ -106,7 +106,7 @@ public class DoctorService {
     }
 
     public String renamePhoto(MultipartFile file) {
-        final String UPLOADED_FOLDER = "F:\\docsea\\docsea\\client\\src\\assets\\images\\";
+        final String UPLOADED_FOLDER = "D:\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
         int random = (int) (Math.random() * 50000 + 1);
         String fileName = file.getOriginalFilename();
         String extension = FilenameUtils.getExtension(fileName);

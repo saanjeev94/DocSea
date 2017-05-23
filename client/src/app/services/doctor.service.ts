@@ -7,8 +7,8 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class DoctorService{
-
   private headers:Headers;
+
   constructor(private http:Http){
     this.headers= new Headers();
     this.headers.append('Content-Type','mulipart/form-data');
@@ -16,6 +16,7 @@ export class DoctorService{
   }
 
   private doctorUrl='http://localhost:8080/api/doctors';
+
 
   addDoctor(formdata:FormData){
     return this.http.post(this.doctorUrl,formdata,this.headers).map(res=>res.json());
