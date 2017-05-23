@@ -106,10 +106,11 @@ public class HospitalService {
 
         Address address = new Address();
         address.setStreetAddress(hospitalDTO.getAddress().getStreetAddress());
-        address.setCity(cityRepository.findByName( hospitalDTO.getAddress().getCity().getName() ) );
         address.setDistrict(districtRepository.findByName(hospitalDTO.getAddress().getDistrict().getName()));
         address.setZone(zoneRepository.findByName(hospitalDTO.getAddress().getZone().getName()));
         address.setCountry(countryRepository.findByName(hospitalDTO.getAddress().getCountry().getName()));
+        address.setCity(cityRepository.findByDistrict( districtRepository.findByName(hospitalDTO.getAddress().getDistrict().getName())));
+
         addressRepository.save(address);
         hospital.setAddress(address);
         hospitalRepository.save(hospital);
@@ -129,6 +130,8 @@ public class HospitalService {
 
         hospitalUser.setHospital(hospital);
         hospitalUser.setUser(user);
+
+
 
         log.info(hospitalDTO.getName()+" has been registered into system");
 
