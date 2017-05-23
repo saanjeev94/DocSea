@@ -16,8 +16,8 @@ const ROUTES: Routes = [
   { path: 'search-doctor', component: SearchDoctorComponent },
   { path: 'hospital-panel', component: HospitalPanelComponent },
   {path:'register-doctor', component: AddDoctorComponent},
-  {path:'update', component: UpdateDoctorComponent},
-  {path:'profile', component: DoctorProfileComponent}
+  {path:'update/:id', component: UpdateDoctorComponent},
+  {path:'profile/:id', component: DoctorProfileComponent}
 ];
 
 @NgModule({

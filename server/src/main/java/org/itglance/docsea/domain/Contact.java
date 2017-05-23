@@ -24,14 +24,16 @@ public class Contact {
    
    @NotNull(message = "contact no.1 should not be null.")
    private String contactNumber1;
+
+   @NotNull(message = "contact no.2 should not be null.")
    private String contactNumber2;
    
    @Email
    @NotNull(message = "email Id should be not be null.")
    private String emailId;
+
    private String website;
-   
-   @NotNull(message = "fax field should be not be null.")
+
    private String fax;
 
    public Long getId() {

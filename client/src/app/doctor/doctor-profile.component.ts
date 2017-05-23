@@ -4,6 +4,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../model/doctor.model";
 import {Contact} from "../model/contact.model";
+import {DoctorService} from "../services/doctor.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'doctor-profile',
@@ -11,17 +13,23 @@ import {Contact} from "../model/contact.model";
   styleUrls: ['./doctor-profile.component.css']
 })
 export class DoctorProfileComponent implements OnInit{
+  doctorList:any;
   doctor:Doctor;
-  contact:Contact;
 
-  constructor(){
-    this.contact=new Contact(1,"9860770501","9808524298","sonikamaharjan95@gmail.com","","");
-    this.doctor=new Doctor(1,"Sonika Maharjan","female","MD",null
-      ,"cardiology",this.contact,"1","sdbkjakcsbnskjdcds");
-    // this.doctor=new Doctor();
+  constructor(private doctorService:DoctorService, private route:ActivatedRoute){
+    this.doctor=new Doctor();
   }
 
   ngOnInit(){
+    this.route.params.subscribe(params=>{
+      this.getDoctorById(params['id']);
+    })
+  }
 
+  getDoctorById(id){
+    this.doctorService.findById(id).subscribe(response=>{
+      this.doctor=response;
+      console.log(this.doctor);
+    })
   }
 }

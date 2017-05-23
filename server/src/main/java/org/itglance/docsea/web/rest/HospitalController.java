@@ -59,13 +59,4 @@ public class HospitalController {
         return new ResponseEntity<String> ("Inserted sucessfully", HttpStatus.OK);
     }
 
-    //-------------- display testing----//
-  /*  @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ResponseEntity<List<HospitalUser>> listAllUsers() {
-         List<HospitalUser> list = hospitalUserRepository.findAll();
-        if(list.isEmpty()){
-            return new ResponseEntity<List<HospitalUser>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
-        }
-        return new ResponseEntity(list, HttpStatus.OK);
-    }*/
 }

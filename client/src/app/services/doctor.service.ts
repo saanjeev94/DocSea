@@ -1,7 +1,6 @@
 /**
  * Created by soni on 5/16/2017.
  */
-import {Doctor} from "../model/doctor.model";
 import {Http} from "@angular/http";
 import {Injectable} from "@angular/core";
 
@@ -9,30 +8,33 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class DoctorService{
 
+  private headers:Headers;
   constructor(private http:Http){
-
+    this.headers= new Headers();
+    this.headers.append('Content-Type','mulipart/form-data');
+    this.headers.append('Accept','application/json');
   }
 
-  private doctorUrl='api/doctor';
+  private doctorUrl='http://localhost:8080/api/doctors';
 
-  addDoctor(doctor:Doctor){
-    return this.http.post(this.doctorUrl,doctor);
+  addDoctor(formdata:FormData){
+    return this.http.post(this.doctorUrl,formdata,this.headers).map(res=>res.json());
   }
 
   getDoctors(){
-    return this.http.get(this.doctorUrl);
+    return this.http.get(this.doctorUrl).map(res => res.json() );
   }
 
-  find(){
-    return this.http.get(this.doctorUrl+'{id}');
+  findById(id:number){
+    return this.http.get(this.doctorUrl+'/'+id).map(res=>res.json());
   }
 
-  updateDoctor(doctor:Doctor){
-    return this.http.put(this.doctorUrl+'/{id}',doctor);
+  updateDoctor(formData:FormData){
+    return this.http.put(this.doctorUrl,formData).map(res=>res.json());
   }
 
   deleteDoctor(id : any){
-    return this.http.delete(this.doctorUrl, id);
+    return this.http.delete(this.doctorUrl, id).map(res=>res.json());
   }
 
 }

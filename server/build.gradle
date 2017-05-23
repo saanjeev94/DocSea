@@ -34,4 +34,6 @@ dependencies {
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+	compile group: 'commons-io', name: 'commons-io', version: '2.4'
+
 }
