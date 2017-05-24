@@ -74,19 +74,6 @@ public class DoctorController {
         return new ResponseEntity("Doctor inserted", HttpStatus.OK);
     }
 
-    //Adding doctor
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> addDoctor(@RequestBody DoctorDTO doctorDTO) {
-
-        if (doctorService.isDoctorExist(doctorDTO)) {
-
-            return new ResponseEntity("Doctor already exists", HttpStatus.CONFLICT);
-        }
-        doctorService.addDoctor(doctorDTO);
-
-        return new ResponseEntity("Doctor inserted", HttpStatus.OK);
-
-    }
     @RequestMapping( method = RequestMethod.GET)
     public ResponseEntity<List<Doctor>> listAllDoctors() {
         List<Doctor> list = doctorRepository.findAll();
@@ -122,7 +109,7 @@ public class DoctorController {
             }else if(!doctorService.validateNmcforUpdate(doctorDTO)){
                 return new ResponseEntity<String>(("Doctor with the nmcNumber "+doctorDTO.getNmcNumber()+" already exists"), HttpStatus.CONFLICT);
             }
-            doctorService.addDoctor(doctorDTO);
+            doctorService.updateDoctor(doctorDTO);
         }catch (JsonParseException e1) {
             e1.printStackTrace();
         } catch (JsonMappingException e1) {
@@ -134,18 +121,13 @@ public class DoctorController {
 
     }
 
-
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateDoctor(@RequestBody DoctorDTO doctorDTO) {
-        if (!doctorService.isDoctorExist(doctorDTO)) {
-            return new ResponseEntity("Doctor not found", HttpStatus.CONFLICT);
-        } else {
-            System.out.println(doctorDTO.toString());
-            doctorService.updateDoctor(doctorDTO);
-            return new ResponseEntity("Updated Successfully", HttpStatus.OK);
+    @GetMapping(value="/{id}")
+    public ResponseEntity<Doctor> getDoctor(@PathVariable("id") Long id){
+        Doctor doctor = doctorRepository.findOne(id);
+        if (doctor==null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-
-
+        return new ResponseEntity<>(doctor, HttpStatus.OK);
     }
 
     //Add doctor schedule

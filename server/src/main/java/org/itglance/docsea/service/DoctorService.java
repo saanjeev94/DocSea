@@ -1,6 +1,7 @@
 package org.itglance.docsea.service;
 
 import org.itglance.docsea.repository.SpecialityRepository;
+
 import org.apache.commons.io.FilenameUtils;
 import org.itglance.docsea.domain.*;
 import org.itglance.docsea.repository.ContactRepository;
@@ -8,9 +9,9 @@ import org.itglance.docsea.repository.DoctorRepository;
 import org.itglance.docsea.repository.ScheduleRepository;
 import org.itglance.docsea.service.dto.DoctorDTO;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.itglance.docsea.repository.*;
 import org.itglance.docsea.service.dto.ScheduleDTO;
+
+import javax.transaction.Transactional;
 
 
 /**
