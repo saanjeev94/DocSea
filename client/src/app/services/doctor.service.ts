@@ -29,13 +29,10 @@ export class DoctorService{
   }
 
   updateDoctor(formData:FormData){
-    console.log("yo chai service hai");
     console.log(formData);
     let headers= new Headers();
     headers.append('Content-Type', 'undefined' );
 
-
-    // return this.http.put(this.doctorUrl,formData,this.headers);
     return this.http.put(this.doctorUrl,formData,headers).map(res=>res.json());
   }
 

@@ -117,7 +117,7 @@ public class DoctorController {
             }else if(!doctorService.validateNmcforUpdate(doctorDTO)){
                 return new ResponseEntity<String>(("Doctor with the nmcNumber "+doctorDTO.getNmcNumber()+" already exists"), HttpStatus.CONFLICT);
             }
-            doctorService.addDoctor(doctorDTO);
+            doctorService.updateDoctor(doctorDTO);
         }catch (JsonParseException e1) {
             e1.printStackTrace();
         } catch (JsonMappingException e1) {

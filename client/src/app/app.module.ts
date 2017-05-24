@@ -19,6 +19,7 @@ import {HospitalService} from "./services/hospital.service";
 import {DoctorGridView} from "./doctor/doctor-grid-view";
 import {AddressService} from "./services/address.service";
 import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgxDatatableModule,
     DocseaRoutingModule
   ],
 

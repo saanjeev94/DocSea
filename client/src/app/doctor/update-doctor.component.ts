@@ -31,8 +31,6 @@ export class UpdateDoctorComponent implements OnInit{
   }
 
   update(){
-    console.log("yaha pugyo hola hai");
-    console.log(this.photofile);
     let formdata:FormData = new FormData();
     formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));

@@ -1,5 +1,8 @@
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+
 import {Component, OnInit} from "@angular/core";
-import {DoctorService} from "../services/doctor.service";
+import {DoctorService} from "../services/doctor.service"
+
 declare var $ : any;
 
 @Component({
@@ -11,6 +14,18 @@ declare var $ : any;
 export class HospitalPanelComponent implements OnInit{
 
   doctorList: any;
+
+  rows = [
+    { name: 'Austin', gender: 'Male', company: 'Swimlane' },
+    { name: 'Dany', gender: 'Male', company: 'KFC' },
+    { name: 'Molly', gender: 'Female', company: 'Burger King' },
+  ];
+  columns = [
+    { prop: 'name' },
+    { name: 'Gender' },
+    { name: 'Company' }
+  ];
+
   constructor(private doctorService:DoctorService){
 
   }
@@ -30,4 +45,6 @@ export class HospitalPanelComponent implements OnInit{
   ngAfterViewInit(){
     $('#hospital-panel-table').dataTable();
   }
+
+
 }
