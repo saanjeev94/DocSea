@@ -1,4 +1,4 @@
-package org.itglance.docsea;
+package org.itglance.docsea.config;
 
 import org.springframework.web.filter.GenericFilterBean;
 
