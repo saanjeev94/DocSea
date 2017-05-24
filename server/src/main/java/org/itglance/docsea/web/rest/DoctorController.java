@@ -1,6 +1,7 @@
 package org.itglance.docsea.web.rest;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.itglance.docsea.domain.Doctor;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -35,7 +38,7 @@ public class DoctorController {
 
     //Adding doctor
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> addDoctor(
+    public ResponseEntity<?> addDoctor(
             @RequestParam MultipartFile file,
             @RequestParam String doctor,
             HttpServletRequest request) throws MissingServletRequestPartException{
@@ -77,20 +80,41 @@ public class DoctorController {
 
 
     //Updating Doctor
-    @RequestMapping(method=RequestMethod.PUT)
-    public ResponseEntity<Void> updateDoctor(@RequestBody DoctorDTO doctorDTO){
+    @PutMapping
+    public ResponseEntity<?> updateDoctor(
+            @RequestParam(required = false) MultipartFile file,
+            @RequestParam(required = true) String doctor,
+            HttpServletRequest request) throws MissingServletRequestPartException,IOException{
 
-       if(!doctorService.isDoctorExist(doctorDTO)) {
-           return new ResponseEntity("Doctor not found", HttpStatus.CONFLICT);
-       }
-       else
-       {
-           System.out.println(doctorDTO.toString());
-           doctorService.updateDoctor(doctorDTO);
-           return new ResponseEntity("Updated Successfully", HttpStatus.OK);
-       }
+        System.out.println("*********************************************************************");
+        Doctor doctor1=new Doctor();
+        ObjectMapper objectMapper=new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try{
+            DoctorDTO doctorDTO=objectMapper.readValue(doctor,DoctorDTO.class);
+            if(file!=null) {
+                String photoName = doctorService.renamePhoto(file);
+                System.out.println(photoName);
+                doctorDTO.setPhoto(photoName);
+                System.out.println(doctorDTO.toString());
+            }
+            if(!doctorService.isDoctorExist(doctorDTO.getId())){
+                return new ResponseEntity<String>(("Cannot find doctor in database."), HttpStatus.CONFLICT);
+            }else if(!doctorService.validateNmcforUpdate(doctorDTO)){
+                return new ResponseEntity<String>(("Doctor with the nmcNumber "+doctorDTO.getNmcNumber()+" already exists"), HttpStatus.CONFLICT);
+            }
+            doctorService.addDoctor(doctorDTO);
+        }catch (JsonParseException e1) {
+            e1.printStackTrace();
+        } catch (JsonMappingException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return new ResponseEntity("Doctor updated", HttpStatus.OK);
 
     }
+
 
     @RequestMapping( method = RequestMethod.GET, value="/{id}")
     public ResponseEntity<Doctor> getDoctorByID(@PathVariable("id") Long id) {

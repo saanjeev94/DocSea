@@ -67,7 +67,6 @@ public class HospitalController {
         }else if(!hospitalService.validateUsernameForUpdate(hospitalUserDTO.getUser())){
             logger.error("Hospital with the Username "+hospitalUserDTO.getUser().getUsername()+" already exist");
             return new ResponseEntity<String>(("Hospital with the Username "+hospitalUserDTO.getUser().getUsername()+" already exist"), HttpStatus.CONFLICT);
-
         }else if(!hospitalService.validateHospitalNameForUpdate(hospitalUserDTO.getHospital())){
             logger.error("Hospital with the name "+hospitalUserDTO.getHospital().getName()+" already exist");
             return new ResponseEntity<String>(("Hospital with the name already "+hospitalUserDTO.getHospital().getName()+" exist"), HttpStatus.CONFLICT);

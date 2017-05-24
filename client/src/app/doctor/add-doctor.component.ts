@@ -34,6 +34,7 @@ export class AddDoctorComponent implements OnInit{
     let formdata:FormData=new FormData();
     formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
+    console.log(formdata);
     console.log(this.doctor);
     this.doctorService.addDoctor(formdata).subscribe((response)=>response.json());
   }

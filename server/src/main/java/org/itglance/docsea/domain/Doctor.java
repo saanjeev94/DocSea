@@ -18,7 +18,6 @@ public class Doctor {
     private Long id;
 
     @NotNull( message = "NMC number cannot be null")
-    @Column(unique = true)
     private int nmcNumber;
 
     @NotNull( message = "Name cannot be null")

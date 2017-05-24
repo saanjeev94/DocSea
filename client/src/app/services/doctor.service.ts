@@ -32,7 +32,14 @@ export class DoctorService{
   }
 
   updateDoctor(formData:FormData){
-    return this.http.put(this.doctorUrl,formData).map(res=>res.json());
+    console.log("yo chai service hai");
+    console.log(formData);
+    let headers= new Headers();
+    headers.append('Content-Type', 'undefined' );
+
+
+    // return this.http.put(this.doctorUrl,formData,this.headers);
+    return this.http.put(this.doctorUrl,formData,headers).map(res=>res.json());
   }
 
   deleteDoctor(id : any){
