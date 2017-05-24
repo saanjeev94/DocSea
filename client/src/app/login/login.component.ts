@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {User} from "../model/user.model";
 
 @Component({
   selector: 'docsea-login',
@@ -7,5 +8,8 @@ import {Component} from "@angular/core";
 })
 
 export class LoginComponent{
-
+  user: User;
+  constructor(){
+    this.user = new User();
+  }
 }

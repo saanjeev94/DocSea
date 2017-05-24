@@ -56,6 +56,20 @@
   border-color: rgba(0, 0, 0, 0.2);
 }
 
+.icon-pos{
+  font-size: 18px;
+  padding-right: 10px;
+  padding-top: 5px;
+  display: inline-block;
+  position: relative;
+  right: 20px;
+}
+
+.custom-label-alert{
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+
 
 
 
