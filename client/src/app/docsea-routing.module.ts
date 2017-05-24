@@ -9,6 +9,7 @@ import {AddDoctorComponent} from "./doctor/add-doctor.component";
 import {UpdateDoctorComponent} from "./doctor/update-doctor.component";
 import {DoctorProfileComponent} from "./doctor/doctor-profile.component";
 import {DoctorGridView} from "./doctor/doctor-grid-view";
+import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
 
 const ROUTES: Routes = [
   { path: '', redirectTo: '/search-doctor', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const ROUTES: Routes = [
   {path:'profile/:id', component: DoctorProfileComponent},
   {path:'update', component: UpdateDoctorComponent},
   {path:'profile', component: DoctorProfileComponent},
-  {path:'doctor-view', component: DoctorGridView}
+  {path:'doctor-view', component: DoctorGridView},
+  {path:'hospital-update/:username', component: UpdateHospitalComponent}
 ];
 
 @NgModule({
