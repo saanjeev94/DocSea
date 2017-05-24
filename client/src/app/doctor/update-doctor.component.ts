@@ -8,11 +8,10 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'add-doctor',
-  templateUrl: './add-doctor.component.html',
-  styleUrls: ['./add-doctor.component.css']
+  templateUrl: './update-doctor.component.html',
+  styleUrls: ['./update-doctor.component.css']
 })
 export class UpdateDoctorComponent implements OnInit{
-  title = 'Update Doctor Information';
   doctor:Doctor;
   photofile:File=null;
 
@@ -37,13 +36,7 @@ export class UpdateDoctorComponent implements OnInit{
     let formdata:FormData = new FormData();
     formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
-<<<<<<< HEAD
-    console.log(this.doctor);
-    console.log(this.photofile);
-    this.doctorService.updateDoctor(formdata);
-=======
     this.doctorService.updateDoctor(formdata).subscribe((response)=>response.json());
->>>>>>> origin/updatedoctor
   }
 
   getDoctorDetails(id:number){

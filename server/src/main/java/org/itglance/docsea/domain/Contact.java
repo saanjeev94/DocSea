@@ -25,7 +25,6 @@ public class Contact {
    @NotNull(message = "contact no.1 should not be null.")
    private String contactNumber1;
 
-   @NotNull(message = "contact no.2 should not be null.")
    private String contactNumber2;
    
    @Email

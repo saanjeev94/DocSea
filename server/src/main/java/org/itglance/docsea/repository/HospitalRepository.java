@@ -20,18 +20,15 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long>{
     @Query("SELECT h FROM Hospital h WHERE h.name = :hName OR h.registrationNo = :reg OR h.lisenceNo = :lisence")
     public HospitalDTO findByhospitalNameRegLisence(@Param("hName") String hName, @Param("reg") String reg, @Param("lisence") String lisence);
 
-<<<<<<< HEAD
     public List<Hospital> findAllByName(String name);
 
    public List<Hospital> findAllByLisenceNo(String lisenceNo);
 
     public List<Hospital> findAllByRegistrationNo(String registrationNo);
-=======
 
     @Query("SELECT h.schedules FROM Hospital h WHERE h.id=:hospitalId")
     public List<Schedule> findScheduleByHospitalId(@Param("hospitalId") Long hospitalId);
 
->>>>>>> origin/scheduleBackendRevised
 }
 
 

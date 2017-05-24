@@ -46,81 +46,12 @@ public class DoctorController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addDoctor(
             @RequestParam MultipartFile file,
-<<<<<<< HEAD
-            @RequestParam String doctor) throws MissingServletRequestPartException{
-
-        DoctorDTO doctorDTO;
-        Doctor doctor1 = new Doctor();
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            doctorDTO = objectMapper.readValue(doctor, DoctorDTO.class);
-            if(file!=null) {
-                String photoName = doctorService.renamePhoto(file);
-                System.out.println(photoName);
-                doctorDTO.setPhoto(photoName);
-            }
-=======
             @RequestParam String doctor,
             HttpServletRequest request) throws MissingServletRequestPartException{
 
-        System.out.println("***********************");
+        System.out.println("*********  ADD DOCTOR  **************");
         System.out.println(file.getName());
         System.out.println(doctor);
-        ObjectMapper objectMapper=new ObjectMapper();
-
-        try{
-            DoctorDTO doctorDTO=objectMapper.readValue(doctor,DoctorDTO.class);
-            String photoName=doctorService.renamePhoto(file);
-            System.out.println(photoName);
-            doctorDTO.setPhoto(photoName);
->>>>>>> origin/updatedoctor
-            System.out.println(doctorDTO.toString());
-            if (doctorService.isDoctorExist(doctorDTO)) {
-                return new ResponseEntity("Doctor already exists", HttpStatus.CONFLICT);
-            }
-            doctorService.updateDoctor(doctorDTO);
-        } catch (JsonParseException e1) {
-            e1.printStackTrace();
-        } catch (JsonMappingException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        return new ResponseEntity("Doctor inserted", HttpStatus.OK);
-    }
-
-    //Adding doctor
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> addDoctor(@RequestBody DoctorDTO doctorDTO) {
-
-        if (doctorService.isDoctorExist(doctorDTO)) {
-
-            return new ResponseEntity("Doctor already exists", HttpStatus.CONFLICT);
-        }
-        doctorService.addDoctor(doctorDTO);
-
-        return new ResponseEntity("Doctor inserted", HttpStatus.OK);
-
-    }
-    @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<Doctor>> listAllDoctors() {
-        List<Doctor> list = doctorRepository.findAll();
-        if (list.isEmpty()) {
-            return new ResponseEntity<List<Doctor>>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-
-
-
-    //Updating Doctor
-<<<<<<< HEAD
-    @RequestMapping(method=RequestMethod.PUT)
-    public ResponseEntity<Void> updateDoctor(
-            @RequestParam MultipartFile file,
-            @RequestParam String doctor){
-        Doctor doctor1=new Doctor();
         ObjectMapper objectMapper=new ObjectMapper();
 
         try{
@@ -131,14 +62,45 @@ public class DoctorController {
             System.out.println(doctorDTO.toString());
             if(doctorService.isDoctorExist(doctorDTO)){
                 return new ResponseEntity("Doctor already exists", HttpStatus.CONFLICT);
-=======
+            }
+            doctorService.addDoctor(doctorDTO);
+        }catch (JsonParseException e1) {
+            e1.printStackTrace();
+        } catch (JsonMappingException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return new ResponseEntity("Doctor inserted", HttpStatus.OK);
+    }
+
+
+    @RequestMapping( method = RequestMethod.GET)
+    public ResponseEntity<List<Doctor>> listAllDoctors() {
+        List<Doctor> list = doctorRepository.findAll();
+        if (list.isEmpty()) {
+            return new ResponseEntity<List<Doctor>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/{id}")
+    public ResponseEntity<Doctor> getDoctor(@PathVariable("id") Long id){
+        Doctor doctor = doctorRepository.findOne(id);
+        if (doctor==null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(doctor, HttpStatus.OK);
+    }
+
+    //Updating Doctor
     @PutMapping
     public ResponseEntity<?> updateDoctor(
             @RequestParam(required = false) MultipartFile file,
             @RequestParam(required = true) String doctor,
             HttpServletRequest request) throws MissingServletRequestPartException,IOException{
 
-        System.out.println("*********************************************************************");
+        System.out.println("***************** UPDATE DOCOTR ************************");
         Doctor doctor1=new Doctor();
         ObjectMapper objectMapper=new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -154,7 +116,6 @@ public class DoctorController {
                 return new ResponseEntity<String>(("Cannot find doctor in database."), HttpStatus.CONFLICT);
             }else if(!doctorService.validateNmcforUpdate(doctorDTO)){
                 return new ResponseEntity<String>(("Doctor with the nmcNumber "+doctorDTO.getNmcNumber()+" already exists"), HttpStatus.CONFLICT);
->>>>>>> origin/updatedoctor
             }
             doctorService.addDoctor(doctorDTO);
         }catch (JsonParseException e1) {
@@ -164,25 +125,7 @@ public class DoctorController {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-<<<<<<< HEAD
-        return new ResponseEntity("Doctor inserted", HttpStatus.OK);
-=======
         return new ResponseEntity("Doctor updated", HttpStatus.OK);
->>>>>>> origin/updatedoctor
-
-    }
-
-
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateDoctor(@RequestBody DoctorDTO doctorDTO) {
-        if (!doctorService.isDoctorExist(doctorDTO)) {
-            return new ResponseEntity("Doctor not found", HttpStatus.CONFLICT);
-        } else {
-            System.out.println(doctorDTO.toString());
-            doctorService.updateDoctor(doctorDTO);
-            return new ResponseEntity("Updated Successfully", HttpStatus.OK);
-        }
-
 
     }
 

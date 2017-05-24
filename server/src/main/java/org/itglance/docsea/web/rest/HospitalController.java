@@ -55,10 +55,6 @@ public class HospitalController {
         return new ResponseEntity<String> ("Inserted sucessfully", HttpStatus.OK);
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/updatedoctor
     //-----------------Updating hospital------------------
    @PutMapping(value = "/hospital")
     public ResponseEntity<?> updateHospitalUser(@RequestBody HospitalUserDTO hospitalUserDTO){
@@ -107,13 +103,10 @@ public class HospitalController {
         return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
     }
 
-<<<<<<< HEAD
     //----------- display hospital by hospital id-------
     @GetMapping(value = "/hospitalId/{id}")
     public ResponseEntity<?> getHospitalUserById(@PathVariable("id") Long id){
         HospitalUser hospitalUser = hospitalService.getHospitalById(id);
         return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
     }
-=======
->>>>>>> origin/updatedoctor
 }
