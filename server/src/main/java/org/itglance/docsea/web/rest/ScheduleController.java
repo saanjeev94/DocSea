@@ -2,6 +2,8 @@ package org.itglance.docsea.web.rest;
 
 import org.itglance.docsea.domain.Schedule;
 import org.itglance.docsea.repository.ScheduleRepository;
+import org.itglance.docsea.service.ScheduleService;
+import org.itglance.docsea.service.dto.ScheduleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,48 +23,38 @@ public class ScheduleController {
         @Autowired
         private ScheduleRepository scheduleRepository;
 
+        @Autowired
+        private ScheduleService scheduleService;
+
 
         //Adding Schedule
-        @RequestMapping(method = RequestMethod.POST)
-        public ResponseEntity<Void> addSchedule(@RequestBody Schedule schedule, UriComponentsBuilder ucBuilder) {
-            System.out.println("Adding Schedule***************************s " );
-            List<Schedule> schedules= scheduleRepository.findAll();
-            for(Schedule sch:schedules){
-                if((sch.getStartTime()==schedule.getStartTime()) &&(sch.getEndTime()==schedule.getEndTime()))
-                {
-                    System.out.println("The schedule already exists");
-                    return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-                }
-            }
-            scheduleRepository.save(schedule);
+        @RequestMapping(method=RequestMethod.POST)
+        public ResponseEntity<Void> addSchedule(@RequestBody ScheduleDTO scheduleDTO){
+            if(scheduleService.isScheduleExist(scheduleDTO)){
+                return new ResponseEntity("Schedule already exists",HttpStatus.CONFLICT);
 
-            System.out.println("Schedule Added");
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.setLocation(ucBuilder.path("/add/{id}").buildAndExpand(schedule.getId()).toUri());
-            return new ResponseEntity<Void>(HttpStatus.CREATED);
+            }
+            scheduleService.addSchedule(scheduleDTO);
+            return new ResponseEntity("Schedule added", HttpStatus.OK);
 
         }
 
+//        //Update Schedule
+//        @RequestMapping(method=RequestMethod.PUT)
+//        public ResponseEntity<Void> updateSchedule(@RequestBody ScheduleDTO scheduleDTO) {
+//            if (scheduleService.isScheduleExist(scheduleDTO)) {
+//                scheduleService.updateSchedule(scheduleDTO);
+//                return new ResponseEntity("Schedule updated", HttpStatus.OK);
+//
+//            } else {
+//                return new ResponseEntity("Schedule does not exists", HttpStatus.CONFLICT);
+//            }
+//        }
 
-        //update Schedule
-        @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-        public ResponseEntity<?> updateSchedule(@PathVariable("id") Long id, @RequestBody Schedule schedule) {
 
-            Schedule currentSchedule = scheduleRepository.findOne(id);
 
-            if (currentSchedule == null) {
-                System.out.println("Unable to update");
-                return new ResponseEntity("Unable to update", HttpStatus.NOT_FOUND);
-            }
 
-            currentSchedule.setStartTime(schedule.getStartTime());
-            currentSchedule.setEndTime(schedule.getEndTime());
 
-            scheduleRepository.save(currentSchedule);
-
-            System.out.println("Update successful");
-            return new ResponseEntity<Schedule>(currentSchedule, HttpStatus.OK);
-        }
 
         //Display
 

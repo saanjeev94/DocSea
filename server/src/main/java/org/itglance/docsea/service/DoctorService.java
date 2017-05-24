@@ -1,18 +1,15 @@
 package org.itglance.docsea.service;
 
 ;
-import org.itglance.docsea.domain.Contact;
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.domain.Speciality;
-import org.itglance.docsea.repository.ContactRepository;
-import org.itglance.docsea.repository.DoctorRepository;
-import org.itglance.docsea.repository.ScheduleRepository;
-import org.itglance.docsea.repository.SpecialityRepository;
+import org.itglance.docsea.domain.*;
+import org.itglance.docsea.repository.*;
 import org.itglance.docsea.service.dto.DoctorDTO;
+import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import java.util.List;
 
 
 /**
@@ -26,13 +23,19 @@ public class DoctorService {
     private final SpecialityRepository specialityRepository;
     private final ContactRepository contactRepository;
     private final ScheduleRepository scheduleRepository;
+    private final HospitalDoctorRepository hospitalDoctorRepository;
+    private final HospitalRepository hospitalRepository;
+    @Autowired
+    ScheduleService scheduleService;
 
 
-    public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository, ContactRepository contactRepository, ScheduleRepository scheduleRepository) {
+    public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository, ContactRepository contactRepository, ScheduleRepository scheduleRepository, HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository) {
         this.doctorRepository = doctorRepository;
         this.specialityRepository = specialityRepository;
         this.contactRepository = contactRepository;
         this.scheduleRepository = scheduleRepository;
+        this.hospitalDoctorRepository = hospitalDoctorRepository;
+        this.hospitalRepository = hospitalRepository;
     }
 
     public void addDoctor(DoctorDTO doctorDTO) {
@@ -44,8 +47,7 @@ public class DoctorService {
         doctor.setPhoto(doctorDTO.getPhoto());
         doctor.setGender(doctorDTO.getGender());
 
-        Speciality speciality=new Speciality() ;
-        speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
+        Speciality speciality= specialityRepository.findByName(doctorDTO.getSpeciality().getName());
         doctor.setSpeciality(speciality);
 
 
@@ -82,9 +84,12 @@ public class DoctorService {
 
         public void updateDoctor(DoctorDTO doctorDTO){
 
+            Doctor doctor = doctorRepository.getOne(doctorDTO.getId());
+
+
 
             System.out.println("update doctor" +doctorDTO.toString());
-            Doctor doctor = doctorRepository.getOne(doctorDTO.getId());
+
 
             //doctor.setNmcNumber(doctorDTO.getNmcNumber());
 //            doctor.setId(doctorDTO.getId());
@@ -119,6 +124,17 @@ public class DoctorService {
 
 
         }
+
+        public void linkSchedule(Long id,ScheduleDTO scheduleDTO, List<Schedule> schedule){
+            Doctor doctor=doctorRepository.getOne(id);
+//            System.out.println(scheduleDTO.toString());
+//            System.out.println( scheduleService.getScheduleId(scheduleDTO));
+            schedule.add(scheduleRepository.findById(scheduleService.getScheduleId(scheduleDTO)));
+            doctor.setSchedules(schedule);
+            doctorRepository.save(doctor);
+        }
+
+
 
 
 
