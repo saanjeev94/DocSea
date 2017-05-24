@@ -157,6 +157,12 @@ public class HospitalService {
         return hospitalList;
     }
 
+    public HospitalUser getHospitalById(Long id) {
+        Hospital hospital = hospitalRepository.findOne(id);
+        HospitalUser hospitalUser = hospitalUserRepository.findByHospital(hospital);
+        return hospitalUser;
+    }
+
     public HospitalUser getHospitalByUsername(String username) {
         User user = userRepository.findByUsername(username);
         HospitalUser hospitalUser = hospitalUserRepository.findByUser(user);

@@ -40,6 +40,7 @@ public class HospitalController {
     @RequestMapping(value = "/hospital", method = RequestMethod.POST)
     public ResponseEntity<?> register(@Valid @RequestBody HospitalUserDTO hospitalUser)
     {
+
         HospitalDTO hospitalDTO = new HospitalDTO(hospitalUser.getHospital());
         UserDTO userDTO = new UserDTO(hospitalUser.getUser());
         logger.info("Creating Hospital : {}", hospitalDTO);
@@ -104,8 +105,15 @@ public class HospitalController {
 
     //----------- display hospital by username-------
     @GetMapping(value = "/hospital/{username}")
-    public ResponseEntity<?> getHospitalUserById(@PathVariable("username") String username){
+    public ResponseEntity<?> getHospitalUserByU(@PathVariable("username") String username){
         HospitalUser hospitalUser = hospitalService.getHospitalByUsername(username);
+        return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
+    }
+
+    //----------- display hospital by hospital id-------
+    @GetMapping(value = "/hospitalId/{id}")
+    public ResponseEntity<?> getHospitalUserById(@PathVariable("id") Long id){
+        HospitalUser hospitalUser = hospitalService.getHospitalById(id);
         return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
     }
 }
