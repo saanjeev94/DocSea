@@ -20,8 +20,6 @@ const ROUTES: Routes = [
   {path:'register-doctor', component: AddDoctorComponent},
   {path:'update/:id', component: UpdateDoctorComponent},
   {path:'profile/:id', component: DoctorProfileComponent},
-  {path:'update', component: UpdateDoctorComponent},
-  {path:'profile', component: DoctorProfileComponent},
   {path:'doctor-view', component: DoctorGridView},
   {path:'hospital-update/:username', component: UpdateHospitalComponent}
 ];

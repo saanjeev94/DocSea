@@ -7,7 +7,13 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class DoctorService{
+<<<<<<< HEAD
   private headers:Headers;
+=======
+
+  private headers:Headers;
+  private doctorUrl='http://localhost:8080/api/doctors';
+>>>>>>> origin/updatedoctor
 
   constructor(private http:Http){
     this.headers= new Headers();
@@ -15,7 +21,11 @@ export class DoctorService{
     this.headers.append('Accept','application/json');
   }
 
+<<<<<<< HEAD
   private doctorUrl='http://localhost:8080/api/doctors';
+=======
+
+>>>>>>> origin/updatedoctor
 
 
   addDoctor(formdata:FormData){
@@ -31,7 +41,14 @@ export class DoctorService{
   }
 
   updateDoctor(formData:FormData){
-    return this.http.put(this.doctorUrl,formData).map(res=>res.json());
+    console.log("yo chai service hai");
+    console.log(formData);
+    let headers= new Headers();
+    headers.append('Content-Type', 'undefined' );
+
+
+    // return this.http.put(this.doctorUrl,formData,this.headers);
+    return this.http.put(this.doctorUrl,formData,headers).map(res=>res.json());
   }
 
   deleteDoctor(id : any){

@@ -34,7 +34,7 @@
                 <span [hidden]="!country.errors.required">Country is required</span>
               </div>
             </div>
-            `
+
             <!-- Zone -->
             <div class="col-md-2">
               <select class="form-control" name="zone"
@@ -69,6 +69,7 @@
                       [(ngModel)]="hospitalUser.hospital.address.city.name" #city="ngModel"
                       required [disabled]="!district.valid">
                 <option value="{{cities}}" *ngFor="let cities of cityObject">{{cities}}</option>
+
               </select>
 
               <div *ngIf="city.errors && city.touched" class="alert alert-danger custom-label-alert">

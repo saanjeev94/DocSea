@@ -31,19 +31,24 @@ export class UpdateDoctorComponent implements OnInit{
     this.photofile=file[0];
   }
 
-  onSubmit(){
-    let formdata:FormData=new FormData();
-    formdata.append('photofile',this.photofile);
+  update(){
+    console.log("yaha pugyo hola hai");
+    console.log(this.photofile);
+    let formdata:FormData = new FormData();
+    formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
+<<<<<<< HEAD
     console.log(this.doctor);
     console.log(this.photofile);
     this.doctorService.updateDoctor(formdata);
+=======
+    this.doctorService.updateDoctor(formdata).subscribe((response)=>response.json());
+>>>>>>> origin/updatedoctor
   }
 
   getDoctorDetails(id:number){
     this.doctorService.findById(id).subscribe(response=>{
       this.doctor=response;
-      console.log(this.doctor);
     })
   }
 }

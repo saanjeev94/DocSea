@@ -1,25 +1,24 @@
 package org.itglance.docsea.service;
 
+import org.itglance.docsea.repository.SpecialityRepository;
 import org.apache.commons.io.FilenameUtils;
-import org.itglance.docsea.domain.Contact;
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.domain.Speciality;
+import org.itglance.docsea.domain.*;
 import org.itglance.docsea.repository.ContactRepository;
 import org.itglance.docsea.repository.DoctorRepository;
 import org.itglance.docsea.repository.ScheduleRepository;
-import org.itglance.docsea.repository.SpecialityRepository;
 import org.itglance.docsea.service.dto.DoctorDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Properties;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+import org.itglance.docsea.repository.*;
+import org.itglance.docsea.service.dto.ScheduleDTO;
 
 
 /**
@@ -35,7 +34,11 @@ public class DoctorService {
     private final ScheduleRepository scheduleRepository;
 
 
-    public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository, ContactRepository contactRepository, ScheduleRepository scheduleRepository) {
+
+    ScheduleService scheduleService;
+
+
+    public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository, ContactRepository contactRepository, ScheduleRepository scheduleRepository, HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository) {
         this.doctorRepository = doctorRepository;
         this.specialityRepository = specialityRepository;
         this.contactRepository = contactRepository;
@@ -76,31 +79,69 @@ public class DoctorService {
 
         if(doctor!=null){
             return true;
+
         }
         else{
             return false;
         }
     }
 
+    public boolean isDoctorExist(Long id){
+
+        Doctor doctor = doctorRepository.findOne(id);
+        if(doctor!= null){
+            return true;
+        }
+        return false;
+    }
+
+
+//    public void updateDoctor(DoctorDTO doctorDTO){
+//
+//
+//        System.out.println("update doctor" +doctorDTO.toString());
+//        Doctor doctor = doctorRepository.getOne(doctorDTO.getId());
+//        doctor.setName(doctorDTO.getName());
+//        doctor.setQualification(doctorDTO.getQualification());
+//        doctor.setPhoto(doctorDTO.getPhoto());
+//        doctor.setGender(doctorDTO.getGender());
+//        Speciality speciality=new Speciality() ;
+//        speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
+//        doctor.setSpeciality(speciality);
+//        System.out.println("contact id " +doctorDTO.getContact().getId());
+//        doctor.getContact().setContactNumber1(doctorDTO.getContact().getContactNumber1());
+//        doctor.getContact().setContactNumber2(doctorDTO.getContact().getContactNumber2());
+//        doctor.getContact().setEmailId(doctorDTO.getContact().getEmailId());
+//        doctor.getContact().setWebsite(doctorDTO.getContact().getWebsite());
+//        doctor.getContact().setFax(doctorDTO.getContact().getFax());
+//        doctorRepository.save(doctor);
+//
+//    }
 
     public void updateDoctor(DoctorDTO doctorDTO){
 
+        System.out.println("**************************************************************************");
+        //Doctor doctor = doctorRepository.findOne(doctorDTO.getId());
 
-        System.out.println("update doctor" +doctorDTO.toString());
-        Doctor doctor = doctorRepository.getOne(doctorDTO.getId());
+        Doctor doctor = doctorRepository.findOne(doctorDTO.getId());
         doctor.setName(doctorDTO.getName());
-        doctor.setQualification(doctorDTO.getQualification());
-        doctor.setPhoto(doctorDTO.getPhoto());
         doctor.setGender(doctorDTO.getGender());
-        Speciality speciality=new Speciality() ;
-        speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
-        doctor.setSpeciality(speciality);
-        System.out.println("contact id " +doctorDTO.getContact().getId());
-        doctor.getContact().setContactNumber1(doctorDTO.getContact().getContactNumber1());
-        doctor.getContact().setContactNumber2(doctorDTO.getContact().getContactNumber2());
-        doctor.getContact().setEmailId(doctorDTO.getContact().getEmailId());
-        doctor.getContact().setWebsite(doctorDTO.getContact().getWebsite());
-        doctor.getContact().setFax(doctorDTO.getContact().getFax());
+        doctor.setPhoto(doctorDTO.getPhoto());
+
+        Contact contact = contactRepository.findOne(doctorDTO.getContact().getId());
+        contact.setWebsite(doctorDTO.getContact().getWebsite());
+        contact.setFax(doctorDTO.getContact().getFax());
+        contact.setEmailId(doctorDTO.getContact().getEmailId());
+        contact.setContactNumber1(doctorDTO.getContact().getContactNumber1());
+        contact.setContactNumber2(doctorDTO.getContact().getContactNumber2());
+        contactRepository.save(contact);
+        doctor.setContact(contact);
+
+        doctor.setNmcNumber(doctorDTO.getNmcNumber());
+        doctor.setDetails(doctorDTO.getDetails());
+        doctor.setQualification(doctorDTO.getQualification());
+        doctor.setSpeciality(doctorDTO.getSpeciality());
+
         doctorRepository.save(doctor);
 
     }
@@ -121,4 +162,86 @@ public class DoctorService {
         }
         return newFileName;
     }
+
+    // Hospital nmc no. validation
+    public boolean validateNmcforUpdate(DoctorDTO doctorDTO) {
+        List<Doctor> doctors = new ArrayList<>();
+        doctors = doctorRepository.findAllByNmcNumber(doctorDTO.getNmcNumber());
+        if(doctors.size() == 0){
+            return true;
+        }else if(doctors.size() == 1){
+            if(doctors.get(0).getId() == doctorDTO.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+//        public void updateDoctor(DoctorDTO doctorDTO){
+//
+//            Doctor doctor = doctorRepository.getOne(doctorDTO.getId());
+//
+//
+//
+//            System.out.println("update doctor" +doctorDTO.toString());
+//
+//
+//            //doctor.setNmcNumber(doctorDTO.getNmcNumber());
+////            doctor.setId(doctorDTO.getId());
+//            doctor.setName(doctorDTO.getName());
+//            doctor.setQualification(doctorDTO.getQualification());
+//            doctor.setPhoto(doctorDTO.getPhoto());
+//            doctor.setGender(doctorDTO.getGender());
+//            Speciality speciality=new Speciality() ;
+//            speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
+//            doctor.setSpeciality(speciality);
+//
+//
+////            Contact contact = new Contact();
+//            System.out.println("contact id " +doctorDTO.getContact().getId());
+////            doctor.getContact().setId(doctorDTO.getContact().getId());
+//            doctor.getContact().setContactNumber1(doctorDTO.getContact().getContactNumber1());
+//            doctor.getContact().setContactNumber2(doctorDTO.getContact().getContactNumber2());
+//            doctor.getContact().setEmailId(doctorDTO.getContact().getEmailId());
+//            doctor.getContact().setWebsite(doctorDTO.getContact().getWebsite());
+//            doctor.getContact().setFax(doctorDTO.getContact().getFax());
+////            doctor.setContact(contact);
+//
+//            //doctor.setDetails(doctorDTO.getDetails());
+//            //System.out.println(doctor.toString());
+//
+//            doctorRepository.save(doctor);
+//
+//
+//
+//
+//
+//
+//
+//        }
+
+        public void linkSchedule(Long id,ScheduleDTO scheduleDTO, List<Schedule> schedule){
+            Doctor doctor=doctorRepository.getOne(id);
+//            System.out.println(scheduleDTO.toString());
+//            System.out.println( scheduleService.getScheduleId(scheduleDTO));
+            schedule.add(scheduleRepository.findById(scheduleService.getScheduleId(scheduleDTO)));
+            doctor.setSchedules(schedule);
+            doctorRepository.save(doctor);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

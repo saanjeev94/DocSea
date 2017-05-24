@@ -10,12 +10,19 @@ export class Doctor{
   public gender?:string;
   public qualification?:string;
   public photo?:string;
+<<<<<<< HEAD
   public speciality?: Speciality;
+=======
+  public speciality?:Speciality;
+>>>>>>> origin/updatedoctor
   public contact?:Contact;
   public nmcNumber?:string;
   public details?:string;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/updatedoctor
   constructor(id?:number,name?:string,gender?:string,qualification?:string,photo?:string,speciality?:Speciality,contact?:Contact,nmcNumber?:string,details?:string){
     this.id=id?id:null;
     this.name=name?name:null;

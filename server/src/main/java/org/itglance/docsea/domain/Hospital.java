@@ -41,6 +41,7 @@ public class Hospital {
     @ManyToMany
     private List<Schedule> schedules=new ArrayList<>();
 
+
     public Long getId() {
         return id;
     }

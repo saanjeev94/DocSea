@@ -1,10 +1,5 @@
 package org.itglance.docsea.web.rest;
 
-
-
-
-
-
 import org.itglance.docsea.domain.HospitalUser;
 import org.itglance.docsea.service.HospitalService;
 import org.itglance.docsea.service.dto.HospitalDTO;
@@ -60,7 +55,10 @@ public class HospitalController {
         return new ResponseEntity<String> ("Inserted sucessfully", HttpStatus.OK);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/updatedoctor
     //-----------------Updating hospital------------------
    @PutMapping(value = "/hospital")
     public ResponseEntity<?> updateHospitalUser(@RequestBody HospitalUserDTO hospitalUserDTO){
@@ -74,7 +72,6 @@ public class HospitalController {
         }else if(!hospitalService.validateUsernameForUpdate(hospitalUserDTO.getUser())){
             logger.error("Hospital with the Username "+hospitalUserDTO.getUser().getUsername()+" already exist");
             return new ResponseEntity<String>(("Hospital with the Username "+hospitalUserDTO.getUser().getUsername()+" already exist"), HttpStatus.CONFLICT);
-
         }else if(!hospitalService.validateHospitalNameForUpdate(hospitalUserDTO.getHospital())){
             logger.error("Hospital with the name "+hospitalUserDTO.getHospital().getName()+" already exist");
             return new ResponseEntity<String>(("Hospital with the name already "+hospitalUserDTO.getHospital().getName()+" exist"), HttpStatus.CONFLICT);
@@ -110,10 +107,13 @@ public class HospitalController {
         return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
     }
 
+<<<<<<< HEAD
     //----------- display hospital by hospital id-------
     @GetMapping(value = "/hospitalId/{id}")
     public ResponseEntity<?> getHospitalUserById(@PathVariable("id") Long id){
         HospitalUser hospitalUser = hospitalService.getHospitalById(id);
         return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
     }
+=======
+>>>>>>> origin/updatedoctor
 }

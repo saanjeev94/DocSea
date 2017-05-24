@@ -46,4 +46,8 @@ public class StatusService {
         status = statusRepository.findByStatus(statusStr);
         return status;
     }
+
+//    public boolean changeStatus(String status){
+//        if(!)
+//    }
 }
