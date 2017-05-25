@@ -1,9 +1,7 @@
-import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import {AfterViewInit, Component, OnInit} from "@angular/core";
+import {DoctorService} from "../services/doctor.service";
 
-import {Component, OnInit} from "@angular/core";
-import {DoctorService} from "../services/doctor.service"
-
-declare var $ : any;
+declare var $: any;
 
 @Component({
   selector: 'docsea-hospital-panel',
@@ -11,20 +9,10 @@ declare var $ : any;
   styleUrls: ['./hospital-panel.component.css']
 })
 
-export class HospitalPanelComponent implements OnInit{
+export class HospitalPanelComponent implements OnInit, AfterViewInit{
 
   doctorList: any;
-
-  rows = [
-    { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-    { name: 'Dany', gender: 'Male', company: 'KFC' },
-    { name: 'Molly', gender: 'Female', company: 'Burger King' },
-  ];
-  columns = [
-    { prop: 'name' },
-    { name: 'Gender' },
-    { name: 'Company' }
-  ];
+  public tableWidget: any;
 
   constructor(private doctorService:DoctorService){
 
@@ -32,7 +20,6 @@ export class HospitalPanelComponent implements OnInit{
 
   ngOnInit(){
     this.getAllDoctorList();
-
   }
 
   getAllDoctorList(){
@@ -42,9 +29,14 @@ export class HospitalPanelComponent implements OnInit{
     })
   }
 
-  ngAfterViewInit(){
-    $('#hospital-panel-table').dataTable();
+  ngAfterViewInit() {
+    setTimeout(() => this.initDatatable(),300)
   }
 
-
+  private initDatatable(): void {
+    let exampleId: any = $('#hospital-panel-table');
+    this.tableWidget = exampleId.DataTable({
+      select: true
+    });
+  }
 }

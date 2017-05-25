@@ -25,28 +25,20 @@
         <tbody>
 
         <ng-container *ngFor="let doclist of doctorList">
-        <tr>
-          <td>{{ doclist.name }}</td>
-          <td>{{doclist.speciality.name}}</td>
-          <td>{{doclist.contact.contactNumber1}}</td>
-          <td class="no-padding text-center"><img src="../../assets/images/{{doclist.photo}}" class="img-circle" alt="doctor's image" width="75" height="75"></td>
-          <td class="text-center"><a href="" class="btn btn-sm btn-danger">Inactive</a></td>
-          <td class="text-center">
-            <button [routerLink]="['/profile',doclist.id]" class="btn btn-sm btn-primary">Details</button>
-          </td>
-        </tr>
+          <tr>
+            <td>{{ doclist.name }}</td>
+            <td>{{doclist.speciality.name}}</td>
+            <td>{{doclist.contact.contactNumber1}}</td>
+            <td class="no-padding text-center"><img src="../../assets/images/{{doclist.photo}}" class="img-circle" alt="doctor's image" width="75" height="75"></td>
+            <td class="text-center"><a href="" class="btn btn-sm btn-danger">Inactive</a></td>
+            <td class="text-center">
+              <button [routerLink]="['/profile',doclist.id]" class="btn btn-sm btn-primary">Details</button>
+            </td>
+          </tr>
         </ng-container>
 
         </tbody>
       </table>
     </div>
   </div> <!-- /.row -->
-
-  <div>
-    <ngx-datatable
-      [rows]="rows"
-      [columns]="columns">
-    </ngx-datatable>
-  </div>
-
 </div> <!-- /.container -->
