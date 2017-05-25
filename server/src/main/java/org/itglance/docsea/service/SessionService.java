@@ -85,14 +85,11 @@ public class SessionService {
     public void removeSession(String authenticate){
         byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
         String str = new String(decodedBytes);
-        String[] array = str.split("-");
+        String[] array = str.split("\\.");
         String token = array[0];
-        Session session = sessionRepository.findByToken(token);
-        if(sessions.containsKey(token) || session != null){
             sessions.remove(token);
-            sessionRepository.delete(session);
             System.out.println("Session deleted sucessfull !!!!");
-        }
+
     }
 
 }
