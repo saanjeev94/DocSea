@@ -37,7 +37,7 @@ public class SessionService {
 
     public boolean checkSession(String authenticate) {
         //TODO DO Base64 Decode
-        byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
+     /*   byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
         String str = new String(decodedBytes);
         System.out.println("Token = "+str);
         String[]  array = str.split("\\.");
@@ -56,7 +56,8 @@ public class SessionService {
         }catch(Exception e)
         {
             System.out.println("This exception came from arrey ignore it");
-        }
+        }*/
+        String token = authenticate;
         if(sessions.containsKey(token))
         {
            return true;
@@ -82,11 +83,11 @@ public class SessionService {
         return session;
     }
 
-    public void removeSession(String authenticate){
-        byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
+    public void removeSession(String token){
+       /* byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
         String str = new String(decodedBytes);
         String[] array = str.split("\\.");
-        String token = array[0];
+        String token = array[0];*/
             sessions.remove(token);
             System.out.println("Session deleted sucessfull !!!!");
 
