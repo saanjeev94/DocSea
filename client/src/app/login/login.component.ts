@@ -20,10 +20,10 @@ export class LoginComponent{
    this.authService.login(this.user).subscribe(token => this.onSuccessLogin(token));
   }
 
-  onSuccessLogin(token){
-    this.token = token;
+  onSuccessLogin(token: any){
+    this.token = token._body;
     console.log(this.token);
-    let decodedToken:string = window.atob(token);
+    let decodedToken = atob(token);
     console.log(decodedToken);
   }
 }

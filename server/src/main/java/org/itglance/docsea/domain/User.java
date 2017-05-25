@@ -28,8 +28,15 @@ public class User {
     @OneToOne
     private Status status;
 
-    @ManyToMany
-    private List<Role> roles=new ArrayList<>();
+   private int userType;
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
 
     public Long getId() {
         return id;
@@ -63,13 +70,6 @@ public class User {
         this.status = status;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 
     @Override
     public String toString() {
@@ -78,7 +78,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
-                ", roles=" + roles +
+                ", userType=" + userType +
                 '}';
     }
 }

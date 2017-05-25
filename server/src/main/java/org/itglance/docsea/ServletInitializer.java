@@ -28,8 +28,9 @@ public class ServletInitializer extends SpringBootServletInitializer {
 	public FilterRegistrationBean someFilterRegistration(){
 		FilterRegistrationBean registration = new FilterRegistrationBean();
 		registration.setFilter(someFilter());
-		registration.addUrlPatterns("/api/doctors","/api/doctors/addSchedules/*","/api/hospitalDoctors/*/*"
-										,"/api/schedules", "/api/hospital");
+		registration.addUrlPatterns("/api/schedules");
 		return registration;
 	}
 }
+
+///api/doctors","/api/doctors/addSchedules/*","/api/hospitalDoctors/*/*","/api/schedules
