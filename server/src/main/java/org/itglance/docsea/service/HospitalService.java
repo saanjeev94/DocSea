@@ -47,25 +47,20 @@ public class HospitalService {
 
     private final DistrictRepository districtRepository;
 
-    private final RoleRepository roleRepository;
 
 
-
-    @Autowired
-    private final RoleService roleService;
 
     @Autowired
     private final StatusService statusService;
 
 
     public HospitalService(HospitalRepository hospitalRepository,
-                           StatusRepository statusRepository,RoleService roleService, HospitalUserRepository hospitalUserRepository
+                           StatusRepository statusRepository, HospitalUserRepository hospitalUserRepository
                             , UserRepository userRepository, AddressRepository addressRepository, CityRepository cityRepository
                             , ContactRepository contactRepository, StatusService statusService,CountryRepository countryRepository
-                            ,ZoneRepository zoneRepository,DistrictRepository districtRepository, RoleRepository roleRepository) {
+                            ,ZoneRepository zoneRepository,DistrictRepository districtRepository) {
         this.hospitalRepository = hospitalRepository;
         this.statusRepository = statusRepository;
-        this.roleService = roleService;
         this.hospitalUserRepository = hospitalUserRepository;
         this.userRepository = userRepository;
         this.cityRepository = cityRepository;
@@ -75,7 +70,6 @@ public class HospitalService {
         this.countryRepository = countryRepository;
         this.zoneRepository = zoneRepository;
         this.districtRepository = districtRepository;
-        this.roleRepository = roleRepository;
     }
 
     public void registerHospital(HospitalDTO hospitalDTO, UserDTO userDTO){
@@ -83,7 +77,6 @@ public class HospitalService {
         HospitalUser hospitalUser = new HospitalUser();
         User user = new User();
         Status status = new Status();
-        Role role = null;
         Contact contact = new Contact();
 
         hospital.setLisenceNo(hospitalDTO.getLisenceNo());
@@ -110,16 +103,12 @@ public class HospitalService {
 
         user.setPassword(userDTO.getPassword());
         user.setUsername(userDTO.getUsername());
+        user.setUserType(1);
 
         status = statusService.getStatusObject("INACTIVE");
         user.setStatus(status);
 
-        role = roleService.getRoleObject("HOSPITAL");
-        user.getRoles().add(role);
-
-
         userRepository.save(user);
-
 
         hospitalUser.setHospital(hospital);
         hospitalUser.setUser(user);

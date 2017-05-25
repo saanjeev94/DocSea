@@ -1,11 +1,8 @@
 package org.itglance.docsea.service.dto;
 
-import org.itglance.docsea.domain.Role;
 import org.itglance.docsea.domain.Status;
 import org.itglance.docsea.domain.User;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,21 +15,21 @@ public class UserDTO {
     private String username;
     private String password;
     private Status status;
-    private List<Role> roles=new ArrayList<>();
+    private int userType;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String username, String password, Status status, List<Role> roles) {
+    public UserDTO(Long id, String username, String password, Status status, int userType) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.status = status;
-        this.roles = roles;
+        this.userType = userType;
     }
 
     public UserDTO(User user){
-        this(user.getId(),user.getUsername(),user.getPassword(),user.getStatus(),user.getRoles());
+        this(user.getId(),user.getUsername(),user.getPassword(),user.getStatus(),user.getUserType());
     }
 
     public Long getId() {
@@ -51,8 +48,8 @@ public class UserDTO {
         return status;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public int getUserType() {
+        return userType;
     }
 
     @Override
@@ -62,7 +59,7 @@ public class UserDTO {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
-                ", roles=" + roles +
+                ", userType=" + userType +
                 '}';
     }
 }

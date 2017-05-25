@@ -16,7 +16,7 @@ import java.util.List;
 @Transactional
 public class StatusService {
 
-    private final Logger log = LoggerFactory.getLogger(RoleService.class);
+    private final Logger log = LoggerFactory.getLogger(Status.class);
     private final StatusRepository statusRepository;
 
     public StatusService(StatusRepository statusRepository) {

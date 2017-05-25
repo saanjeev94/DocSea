@@ -49,10 +49,12 @@ public class SessionService {
         String token = null;
         Long hospitalId = null;
         Long userId = null;
+        int userType ;
         try {
            token = array[0];
            hospitalId = Long.valueOf(array[1]);
            userId = Long.valueOf(array[2]);
+           userType = Integer.parseInt(array[3]);
         }catch(Exception e)
         {
             System.out.println("This exception came from arrey ignore it");
@@ -76,6 +78,7 @@ public class SessionService {
         session.setToken(token);
         session.setHospitalId(hospitalUser.getHospital().getId());
         session.setUserId(hospitalUser.getUser().getId());
+        session.setUserType(hospitalUser.getUser().getUserType());
         sessions.put(token, session);
         sessionRepository.save(session);
 
@@ -89,7 +92,6 @@ public class SessionService {
         String token = array[0];
             sessions.remove(token);
             System.out.println("Session deleted sucessfull !!!!");
-
     }
 
 }
