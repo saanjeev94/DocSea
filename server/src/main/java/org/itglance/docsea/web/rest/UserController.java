@@ -35,11 +35,11 @@ public class UserController {
         System.out.println("******************* LOGIN ********************");
         System.out.println(user.toString());
         logger.info("Validating username and password");
-        String encodedMainToken = userService.validateLogin(user);
-        if(encodedMainToken == null){
+        Session session = userService.validateLogin(user);
+        if(session == null){
             logger.error("Invalid Username or Password.");
             return new ResponseEntity<String>("Invalid Username or Password.", HttpStatus.CONFLICT);
         }
-        return  new ResponseEntity<String>(new String(encodedMainToken), HttpStatus.OK);
+        return  new ResponseEntity<Session>(session, HttpStatus.OK);
     }
 }
