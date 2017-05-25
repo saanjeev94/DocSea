@@ -49,6 +49,6 @@ public class Session {
     }
 
     public String toStringForToken() {
-        return token+"-"+hospitalId+"-"+userId;
+        return token+"."+hospitalId+"."+userId;
     }
 }
