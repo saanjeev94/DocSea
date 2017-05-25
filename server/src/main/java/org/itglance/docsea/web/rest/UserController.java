@@ -32,6 +32,7 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody User user){
+        System.out.println("******************* LOGIN ********************");
         System.out.println(user.toString());
         logger.info("Validating username and password");
         String encodedMainToken = userService.validateLogin(user);

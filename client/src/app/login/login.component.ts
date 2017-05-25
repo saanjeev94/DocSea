@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {User} from "../model/user.model";
 
+
 @Component({
   selector: 'docsea-login',
   templateUrl: './login.component.html',
@@ -9,7 +10,6 @@ import {User} from "../model/user.model";
 
 export class LoginComponent{
   user: User;
-  constructor(){
-    this.user = new User();
-  }
+
+
 }
