@@ -129,7 +129,7 @@ public class DoctorController {
 
     }
 
-    //Add doctor schedule
+   /* //Add doctor schedule
     @RequestMapping(value = "/addSchedules/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> addDoctorSchedule(@PathVariable("id") Long id, @RequestBody List<ScheduleDTO> scheduleDTO) {
         List<Schedule> schedule = new ArrayList<>();
@@ -140,5 +140,5 @@ public class DoctorController {
             doctorService.linkSchedule(id,sch,schedule);
         }
         return new ResponseEntity("New schedule linked", HttpStatus.OK);
-    }
+    }*/
 }

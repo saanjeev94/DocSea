@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface DaysRepository extends JpaRepository<Days,Long>{
-
+    public Days findByDay(String days);
 
 
 

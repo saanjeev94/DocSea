@@ -38,7 +38,7 @@ public class SessionCheckerFilter extends GenericFilterBean {
                 httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Required header (Authorization) not specified in the request");
 
                 return;
-            } else if (!sessionService.checkSession(token)) {
+            } else if (sessionService.checkSession(token) == null) {
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
                 httpResponse.setContentType("application/json");
                 httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Token");
