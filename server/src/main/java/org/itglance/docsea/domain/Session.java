@@ -12,6 +12,7 @@ public class Session {
     private String token;
     private Long hospitalId;
     private Long userId;
+    private int userType;
 
     public String getToken() {
         return token;
@@ -37,7 +38,13 @@ public class Session {
         this.userId = userId;
     }
 
+    public int getUserType() {
+        return userType;
+    }
 
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
 
     @Override
     public String toString() {
@@ -45,10 +52,11 @@ public class Session {
                 "token='" + token + '\'' +
                 ", hospitalId=" + hospitalId +
                 ", userId=" + userId +
+                ", userType=" + userType +
                 '}';
     }
 
     public String toStringForToken() {
-        return token+"."+hospitalId+"."+userId;
+        return token+"."+hospitalId+"."+userId+"."+userType;
     }
 }

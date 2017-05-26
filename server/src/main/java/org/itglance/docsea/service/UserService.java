@@ -30,14 +30,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String validateLogin(User user){
+    public Session validateLogin(User user){
         User dbUser = userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
         if(dbUser != null){
             HospitalUser hospitalUser =hospitalUserRepository.findByUser(dbUser);
             Session session = sessionService.createSession(hospitalUser);
-            String mainToken =  session.toStringForToken();
-            byte[] encode = Base64.getEncoder().encode(mainToken.getBytes());
-            return new String(encode);
+           /* String mainToken =  session.toStringForToken();
+            byte[] encode = Base64.getEncoder().encode(mainToken.getBytes());*/
+            return session;
         }
         return null;
     }

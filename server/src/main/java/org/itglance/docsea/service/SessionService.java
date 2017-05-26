@@ -35,9 +35,9 @@ public class SessionService {
     }
 
 
-    public boolean checkSession(String authenticate) {
+    public Session checkSession(String authenticate) {
         //TODO DO Base64 Decode
-        byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
+     /*   byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
         String str = new String(decodedBytes);
         System.out.println("Token = "+str);
         String[]  array = str.split("\\.");
@@ -49,25 +49,28 @@ public class SessionService {
         String token = null;
         Long hospitalId = null;
         Long userId = null;
+        int userType ;
         try {
            token = array[0];
            hospitalId = Long.valueOf(array[1]);
            userId = Long.valueOf(array[2]);
+           userType = Integer.parseInt(array[3]);
         }catch(Exception e)
         {
             System.out.println("This exception came from arrey ignore it");
-        }
+        }*/
+        String token = authenticate;
         if(sessions.containsKey(token))
         {
-           return true;
+           return sessions.get(token);
         }else{
             Session  session = sessionRepository.findByToken(token);
             if(session != null){
                 sessions.put(token, session);
-                return true;
+                return session;
             }
         }
-        return false;
+        return null;
     }
 
     public Session createSession(HospitalUser hospitalUser){
@@ -76,20 +79,20 @@ public class SessionService {
         session.setToken(token);
         session.setHospitalId(hospitalUser.getHospital().getId());
         session.setUserId(hospitalUser.getUser().getId());
+        session.setUserType(hospitalUser.getUser().getUserType());
         sessions.put(token, session);
         sessionRepository.save(session);
 
         return session;
     }
 
-    public void removeSession(String authenticate){
-        byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
+    public void removeSession(String token){
+       /* byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
         String str = new String(decodedBytes);
         String[] array = str.split("\\.");
-        String token = array[0];
+        String token = array[0];*/
             sessions.remove(token);
             System.out.println("Session deleted sucessfull !!!!");
-
     }
 
 }

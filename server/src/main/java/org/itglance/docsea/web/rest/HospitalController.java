@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by sanj__000 on 5/10/2017.
  */
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api")
 public class HospitalController {
