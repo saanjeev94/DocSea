@@ -41,3 +41,9 @@
   height: 120px;
   border-radius: 50%;
 }
+
+td.overflow{
+  display: block;
+  height: 90px;
+  overflow: auto;
+}

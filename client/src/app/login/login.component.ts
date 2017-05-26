@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {User} from "../model/user.model";
 import {AuthenticationService} from "../services/authentication.service";
+import {current} from "codelyzer/util/syntaxKind";
 
 @Component({
   selector: 'docsea-login',
@@ -10,7 +11,7 @@ import {AuthenticationService} from "../services/authentication.service";
 
 export class LoginComponent{
   user: User;
-  token: string;
+  tokenBack: any;
 
   constructor(private authService: AuthenticationService){
     this.user = new User();
@@ -20,11 +21,12 @@ export class LoginComponent{
    this.authService.login(this.user).subscribe(token => this.onSuccessLogin(token));
   }
 
-  onSuccessLogin(token: any){
-    this.token = token._body;
-    console.log(this.token);
-    let decodedToken = atob(token);
-    console.log(decodedToken);
+  onSuccessLogin(token){
+    this.tokenBack = token;
+    localStorage.setItem('currentUser', this.tokenBack.token);
+    localStorage.setItem('hospitalId', this.tokenBack.hospitalId);
+    localStorage.setItem('userId', this.tokenBack.userId);
+    localStorage.setItem('userType', this.tokenBack.userType);
   }
 
 

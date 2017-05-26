@@ -26,18 +26,28 @@
 
         <ng-container *ngFor="let doclist of doctorList">
           <tr>
-            <td>{{ doclist.name }}</td>
-            <td>{{doclist.speciality.name}}</td>
-            <td>{{doclist.contact.contactNumber1}}</td>
-            <td class="no-padding text-center"><img src="../../assets/images/{{doclist.photo}}" class="img-circle" alt="doctor's image" width="75" height="75"></td>
-            <td class="text-center"><a href="" class="btn btn-sm btn-danger">Inactive</a></td>
-            <td class="text-center">
+            <td class="text-capitalize">{{ doclist.name }}</td>
+            <td class="text-capitalize">{{doclist.speciality.name}}</td>
+            <td class="text-capitalize">{{doclist.contact.contactNumber1}}</td>
+            <td class="no-padding text-center"><img src="../../assets/images/{{doclist.photo}}" class="img-circle custom-circle" alt="doctor's image" width="75" height="75"></td>
+            <td class="text-center text-capitalize"><a href="" class="btn btn-sm btn-danger">Inactive</a></td>
+            <td class="text-center text-capitalize">
               <button [routerLink]="['/profile',doclist.id]" class="btn btn-sm btn-primary">Details</button>
             </td>
           </tr>
         </ng-container>
 
         </tbody>
+        <tfoot>
+        <tr >
+          <th class="text-center">Name</th>
+          <th class="text-center">Speciality</th>
+          <th class="text-center">Contact</th>
+          <th class="text-center">Photo</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Action</th>
+        </tr>
+        </tfoot>
       </table>
     </div>
   </div> <!-- /.row -->

@@ -15,7 +15,7 @@ export class AuthenticationService{
 
   login(user: User){
     // console.log(user);
-    return this.http.post(this.loginUrl,user).map(res => res);
+    return this.http.post(this.loginUrl,user).map(res => res.json());
   }
 }
 
