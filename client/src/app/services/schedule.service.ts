@@ -7,10 +7,12 @@ import {Http} from "@angular/http";
 @Injectable()
 export class ScheduleService{
 
-public scheduleUrl='http://localhost:8080/api/hospitalDoctors';
+public scheduleUrl='http://localhost:8080/api/schedules';
 
+  headers:Headers;
   constructor(private http:Http){
-
+    this.headers=new Headers();
+    this.headers.append("Authorization","Basic"+"token");
   }
 
   addSchedule(){
@@ -22,7 +24,7 @@ public scheduleUrl='http://localhost:8080/api/hospitalDoctors';
   }
 
   getSchedules(id:number){
-    return this.http.get(this.scheduleUrl+'/'+id).map(res=>res.json());
+    return this.http.get(this.scheduleUrl+'/hospitalDoctor/'+id,this.headers).map(res=>res.json());
   }
 
 }

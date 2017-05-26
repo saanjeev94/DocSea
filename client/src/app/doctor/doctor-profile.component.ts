@@ -3,9 +3,9 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../model/doctor.model";
-import {Contact} from "../model/contact.model";
 import {DoctorService} from "../services/doctor.service";
 import {ActivatedRoute} from "@angular/router";
+import {ScheduleService} from "../services/schedule.service";
 declare var $ : any;
 
 @Component({
@@ -17,16 +17,20 @@ export class DoctorProfileComponent implements OnInit{
   doctorList:any;
   sabin:string;
   doctor:Doctor;
+  doctorScheduleList:any;
+  days:number[];
 
-  constructor(private doctorService:DoctorService, private route:ActivatedRoute){
+  constructor(private doctorService:DoctorService,private scheduleService:ScheduleService, private route:ActivatedRoute){
     this.doctor=new Doctor();
+    this.days=[1,2,3,4,5,6,7];
   }
 
 
   ngOnInit(){
     this.route.params.subscribe(params=>{
       this.getDoctorById(params['id']);
-    })
+      this.getSchedule(params['id']);
+    });
   }
 
   getDoctorById(id) {
@@ -35,7 +39,10 @@ export class DoctorProfileComponent implements OnInit{
     })
   }
 
-  displayTime(){
-    console.log(this.sabin);
+  getSchedule(id:number){
+    this.scheduleService.getSchedules(id).subscribe(response=>{
+      console.log(this.doctorScheduleList);
+      this.doctorScheduleList=response;
+    });
   }
 }

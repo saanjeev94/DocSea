@@ -31,12 +31,5 @@ public class HospitalDoctorController {
 
         return new ResponseEntity("Status Changed", HttpStatus.OK);
     }
-    @RequestMapping(value="/{doctorId}",method=RequestMethod.GET)
-    public ResponseEntity<Void> displayHospitalDoctorSchedules(@PathVariable("doctorId") Long doctorId){
-
-        hospitalDoctorService.hospitalDoctorSchedule(doctorId);
-        return new ResponseEntity("List of Schedules",HttpStatus.OK);
-
-    }
 
 }

@@ -9,12 +9,9 @@ export class AuthenticationService{
 
   constructor(private http:Http){
     this.headers= new Headers();
-    // this.headers.append('Content-Type','mulipart/form-data');
-    // this.headers.append('Accept','application/json');
   }
 
   login(user: User){
-    // console.log(user);
     return this.http.post(this.loginUrl,user).map(res => res);
   }
 }

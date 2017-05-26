@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Created by sriyanka on 5/14/2017.
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value="/api/schedules")
 public class ScheduleController {
@@ -28,7 +29,6 @@ public class ScheduleController {
         private ScheduleService scheduleService;
         @Autowired
         private SessionService sessionService;
-
 
         //Adding Schedule
         @RequestMapping(value = "/{doctorId}", method=RequestMethod.POST)
@@ -135,37 +135,4 @@ public class ScheduleController {
 
     }
 
-
-
-//        //Update Schedule
-//        @RequestMapping(method=RequestMethod.PUT)
-//        public ResponseEntity<Void> updateSchedule(@RequestBody ScheduleDTO scheduleDTO) {
-//            if (scheduleService.isScheduleExist(scheduleDTO)) {
-//                scheduleService.updateSchedule(scheduleDTO);
-//                return new ResponseEntity("Schedule updated", HttpStatus.OK);
-//
-//            } else {
-//                return new ResponseEntity("Schedule does not exists", HttpStatus.CONFLICT);
-//            }
-//        }
-
-
-
-
-
-
-        //Display
-
-        /*@RequestMapping(method = RequestMethod.GET)
-         public ResponseEntity<List<Schedule>> listAllSchedules() {
-            List<Schedule> schedules= scheduleRepository.findAll();
-            if (schedules.isEmpty()) {
-             return new ResponseEntity(HttpStatus.NO_CONTENT);
-
-            }
-            return new ResponseEntity<List<Schedule>>(schedules, HttpStatus.OK);
-         }*/
-
-
-
-    }
+}
