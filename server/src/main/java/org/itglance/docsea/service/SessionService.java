@@ -35,7 +35,7 @@ public class SessionService {
     }
 
 
-    public boolean checkSession(String authenticate) {
+    public Session checkSession(String authenticate) {
         //TODO DO Base64 Decode
      /*   byte[] decodedBytes = Base64.getDecoder().decode(authenticate.getBytes());
         String str = new String(decodedBytes);
@@ -62,15 +62,15 @@ public class SessionService {
         String token = authenticate;
         if(sessions.containsKey(token))
         {
-           return true;
+           return sessions.get(token);
         }else{
             Session  session = sessionRepository.findByToken(token);
             if(session != null){
                 sessions.put(token, session);
-                return true;
+                return session;
             }
         }
-        return false;
+        return null;
     }
 
     public Session createSession(HospitalUser hospitalUser){

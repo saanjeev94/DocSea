@@ -1,15 +1,15 @@
 package org.itglance.docsea.web.rest;
 
 import org.itglance.docsea.domain.Schedule;
-import org.itglance.docsea.repository.ScheduleRepository;
 import org.itglance.docsea.service.ScheduleService;
+import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -20,24 +20,122 @@ import java.util.List;
 @RequestMapping(value="/api/schedules")
 public class ScheduleController {
 
-        @Autowired
-        private ScheduleRepository scheduleRepository;
+        /*@Autowired
+        private ScheduleRepository scheduleRepository;*/
 
+    private final Logger log = LoggerFactory.getLogger(ScheduleController.class);
         @Autowired
         private ScheduleService scheduleService;
+        @Autowired
+        private SessionService sessionService;
 
 
         //Adding Schedule
-        @RequestMapping(method=RequestMethod.POST)
-        public ResponseEntity<Void> addSchedule(@RequestBody ScheduleDTO scheduleDTO){
-            if(scheduleService.isScheduleExist(scheduleDTO)){
-                return new ResponseEntity("Schedule already exists",HttpStatus.CONFLICT);
-
+        @RequestMapping(value = "/{doctorId}", method=RequestMethod.POST)
+        public ResponseEntity<?> addSchedule(@RequestBody ScheduleDTO scheduleDTO
+                                            , @PathVariable("doctorId") Long doctorId
+                                            , @RequestHeader String Authorization){
+            Long hospitalId = sessionService.checkSession(Authorization).getHospitalId();
+            ScheduleDTO scheduleDto= scheduleService.checkScheduleForInsert(scheduleDTO, doctorId);
+            if(scheduleDto != null){
+                log.error("The schedule is overLapped to "+scheduleDto);
+                System.out.println("The schedule is overLapped to "+scheduleDto);
+                return new ResponseEntity<ScheduleDTO>(scheduleDto,HttpStatus.CONFLICT);
             }
-            scheduleService.addSchedule(scheduleDTO);
-            return new ResponseEntity("Schedule added", HttpStatus.OK);
-
+            ScheduleDTO catchSchedule = scheduleService.addSchedule(scheduleDTO,doctorId,hospitalId);
+            log.info("Schedule has beed inserted sucessfully");
+            return new ResponseEntity<ScheduleDTO>(catchSchedule,HttpStatus.OK);
         }
+
+
+        //return whole schedule of datatbase
+        @GetMapping
+        public ResponseEntity<?> getSchedule(){
+            List<ScheduleDTO> scheduleDTO = scheduleService.getSchedule();
+            if(scheduleDTO == null)
+            {
+                log.error("cannot find any schedule with schedule in database");
+                return new ResponseEntity<String>("cannot find any schedule with schedule in database", HttpStatus.CONFLICT);
+            }
+            return new ResponseEntity<List<ScheduleDTO>>(scheduleDTO, HttpStatus.OK);
+    }
+
+        // Returns schedule by schedule Id
+        @GetMapping(value = "/{scheduleId}")
+        public ResponseEntity<?> getSchedule(@PathVariable("scheduleId") Long scheduleId){
+            ScheduleDTO scheduleDTO = scheduleService.getScheduleById(scheduleId);
+            if(scheduleDTO == null)
+            {
+                log.error("cannot find the schedule with schedule id: "+scheduleId);
+                return new ResponseEntity<String>("cannot find the schedule with schedule id: "+scheduleId, HttpStatus.CONFLICT);
+            }
+            return new ResponseEntity<ScheduleDTO>(scheduleDTO, HttpStatus.OK);
+        }
+
+        //Returns list of schedule of hospital by hospital Id
+        @GetMapping(value = "/hospital/{hospitalId}")
+        public ResponseEntity<?> getScheduleByHospitalId(@PathVariable("hospitalId") Long hospitalId){
+            List<ScheduleDTO> scheduleDTOS = scheduleService.getScheduleByHospitalId(hospitalId);
+            if(scheduleDTOS == null)
+            {
+                log.error("cannot find the schedule with hospital id: "+hospitalId);
+                return new ResponseEntity<String>("cannot find the schedule with hospital id: "+hospitalId, HttpStatus.CONFLICT);
+            }
+            return new ResponseEntity<List<ScheduleDTO>>(scheduleDTOS, HttpStatus.OK);
+        }
+    //Returns list of schedule of doctor by doctor Id
+    @GetMapping(value = "/doctor/{doctorId}")
+    public ResponseEntity<?> getScheduleByDoctorId(@PathVariable("doctorId") Long doctorId){
+        List<ScheduleDTO> scheduleDTOS = scheduleService.getScheduleByDoctorId(doctorId);
+        if(scheduleDTOS == null)
+        {
+            log.error("cannot find the schedule with doctor id: "+doctorId);
+            return new ResponseEntity<String>("cannot find the schedule with doctor id: "+doctorId, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<List<ScheduleDTO>>(scheduleDTOS, HttpStatus.OK);
+    }
+
+    //Returns list of schedule of doctor work in particular hospital
+    @GetMapping(value = "/hospitalDoctor/{doctorId}")
+    public ResponseEntity<?> getScheduleByHospitalDoctorId(@PathVariable("doctorId") Long doctorId,
+                                                           @RequestHeader String Authorization){
+        Long hospitalId = sessionService.checkSession(Authorization).getHospitalId();
+        List<ScheduleDTO> scheduleDTOS = scheduleService.getScheduleByHospitalDoctorId(hospitalId, doctorId);
+        if(scheduleDTOS == null)
+        {
+            log.error("There is no schedule of doctor with doctorId: "+doctorId);
+            return new ResponseEntity<String>("There is no schedule of doctor with doctorId: "+doctorId, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<List<ScheduleDTO>>(scheduleDTOS, HttpStatus.OK);
+    }
+
+    //update schedule
+    @PutMapping(value = "/{doctorId}")
+    public ResponseEntity<?> updateSchedule(@RequestBody ScheduleDTO scheduleDTO
+                                            , @PathVariable("doctorId") Long doctorId){
+        System.out.println(scheduleDTO.toString());
+        if(scheduleDTO.getId() == null){
+            log.error("Schedule id is null, can't update it.");
+            return new ResponseEntity<String>("Schedule id is null, can't update it.", HttpStatus.CONFLICT);
+        }
+
+        ScheduleDTO scheduleDTO1 = scheduleService.checkScheduleForUpdate(scheduleDTO, doctorId);
+        if(scheduleDTO1 != null){
+            log.error("Schedule overLapped, Update schedule denied");
+            return new ResponseEntity<ScheduleDTO>(scheduleDTO1, HttpStatus.CONFLICT);
+        }
+
+        ScheduleDTO catchSchedule = scheduleService.updateSchedule(scheduleDTO);
+        if(catchSchedule == null){
+            log.error("Update schedule unsuccessful");
+            return new ResponseEntity<String>("Update schedule unsuccessful", HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<ScheduleDTO>(catchSchedule, HttpStatus.OK);
+
+
+    }
+
+
 
 //        //Update Schedule
 //        @RequestMapping(method=RequestMethod.PUT)
@@ -58,7 +156,7 @@ public class ScheduleController {
 
         //Display
 
-        @RequestMapping(method = RequestMethod.GET)
+        /*@RequestMapping(method = RequestMethod.GET)
          public ResponseEntity<List<Schedule>> listAllSchedules() {
             List<Schedule> schedules= scheduleRepository.findAll();
             if (schedules.isEmpty()) {
@@ -66,7 +164,7 @@ public class ScheduleController {
 
             }
             return new ResponseEntity<List<Schedule>>(schedules, HttpStatus.OK);
-         }
+         }*/
 
 
 
