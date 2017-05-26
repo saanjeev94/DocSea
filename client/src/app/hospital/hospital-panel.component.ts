@@ -12,7 +12,6 @@ declare var $: any;
 export class HospitalPanelComponent implements OnInit, AfterViewInit{
 
   doctorList: any;
-  public tableWidget: any;
 
   constructor(private doctorService:DoctorService){
 
@@ -24,19 +23,12 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
 
   getAllDoctorList(){
     this.doctorService.getDoctors().subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       this.doctorList = response;
     })
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.initDatatable(),300)
-  }
-
-  private initDatatable(): void {
-    let exampleId: any = $('#hospital-panel-table');
-    this.tableWidget = exampleId.DataTable({
-      select: true
-    });
+    setTimeout(() => $("#hospital-panel-table").dataTable(),500);
   }
 }

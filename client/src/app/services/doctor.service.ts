@@ -10,10 +10,13 @@ export class DoctorService{
   private headers:Headers;
   private doctorUrl='http://localhost:8080/api/doctors';
 
+  token = localStorage.getItem('currentUser');
+
   constructor(private http:Http){
     this.headers= new Headers();
     this.headers.append('Content-Type','mulipart/form-data');
     this.headers.append('Accept','application/json');
+    this.headers.append('Authorization',this.token);
   }
 
   addDoctor(formdata:FormData){
@@ -21,17 +24,18 @@ export class DoctorService{
   }
 
   getDoctors(){
-    return this.http.get(this.doctorUrl).map(res => res.json() );
+    return this.http.get(this.doctorUrl,this.headers).map(res => res.json() );
   }
 
   findById(id:number){
-    return this.http.get(this.doctorUrl+'/'+id).map(res=>res.json());
+    return this.http.get(this.doctorUrl+'/'+id,this.headers).map(res=>res.json());
   }
 
   updateDoctor(formData:FormData){
     console.log(formData);
     let headers= new Headers();
     headers.append('Content-Type', 'undefined' );
+    headers.append('Authorization', this.token );
 
     return this.http.put(this.doctorUrl,formData,headers).map(res=>res.json());
   }

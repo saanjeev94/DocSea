@@ -5,3 +5,9 @@ td{
 .no-padding{
   padding: 0 !important;
 }
+
+.custom-circle{
+  border: 1px solid black;
+  padding: 3px;
+  box-sizing: border-box;
+}

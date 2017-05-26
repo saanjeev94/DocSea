@@ -5,11 +5,14 @@ import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AddressService{
-
+  private headers:Headers;
   private addressUrl='http://localhost:8080/api/addresses';
 
+  token = localStorage.getItem('currentUser');
   constructor(private http:Http){
-
+    this.headers = new Headers();
+    this.headers.append('Accept','application/json');
+    this.headers.append('Authorization', this.token);
   }
 
   getCountries(): Observable<any>{
