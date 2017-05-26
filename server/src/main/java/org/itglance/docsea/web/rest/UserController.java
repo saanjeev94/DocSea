@@ -43,5 +43,11 @@ public class UserController {
         return  new ResponseEntity<Session>(session, HttpStatus.OK);
     }
 
-    
+    @PostMapping(value = "/logout")
+    public ResponseEntity logout(@RequestBody Session session){
+        String token = session.getToken();
+        sessionService.removeSession(token);
+        return new ResponseEntity<Session>(session, HttpStatus.OK);
+    }
+
 }
