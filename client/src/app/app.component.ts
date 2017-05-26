@@ -25,13 +25,10 @@ export class AppComponent{
 
   logout(){
     this.token = localStorage.getItem('currentUser');
-    console.log("logout ma pugyo");
     this.authService.logout(this.token).subscribe( (token) => this.onSuccessLogout(token));
   }
 
   onSuccessLogout(token){
-    console.log(token);
-    console.log("logout onsuccess ma pugyo");
     localStorage.clear();
     this.authService.isLoggedIn = false;
   }

@@ -36,3 +36,7 @@
 .navbar li.active:hover a{
   color: #000 !important;
 }
+
+.hand-pointer{
+  cursor: pointer;
+}
