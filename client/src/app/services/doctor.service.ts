@@ -1,7 +1,7 @@
 /**
  * Created by soni on 5/16/2017.
  */
-import {Http} from "@angular/http";
+import {Headers, Http, RequestOptions} from "@angular/http";
 import {Injectable} from "@angular/core";
 
 
@@ -14,13 +14,15 @@ export class DoctorService{
 
   constructor(private http:Http){
     this.headers= new Headers();
-    this.headers.append('Content-Type','mulipart/form-data');
-    this.headers.append('Accept','application/json');
     this.headers.append('Authorization',this.token);
+    // this.headers.append('Content-Type','mulipart/form-data');
+    this.headers.append('Accept','Application/json');
   }
 
   addDoctor(formdata:FormData){
-    return this.http.post(this.doctorUrl,formdata,this.headers).map(res=>res.json());
+
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.post(this.doctorUrl,formdata,options).map(res=>res.json());
   }
 
   getDoctors(){

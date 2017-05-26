@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +49,7 @@ public class DoctorController {
     public ResponseEntity<?> addDoctor(
             @RequestParam MultipartFile file,
             @RequestParam String doctor,
-            HttpServletRequest request) throws MissingServletRequestPartException{
+            MultipartHttpServletRequest request) throws MissingServletRequestPartException,IOException,MultipartException{
 
         System.out.println("*********  ADD DOCTOR  **************");
         System.out.println(file.getName());
