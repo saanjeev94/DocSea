@@ -29,7 +29,7 @@ public class SessionCheckerFilter extends GenericFilterBean {
         String method = ((HttpServletRequest) request).getMethod();
         System.out.println("****************Token checking*****************");
         System.out.println(method);
-        if(method.equals("POST")  || method.equals("PUT")) {
+        /*if(method.equals("POST")  || method.equals("PUT")) {
             HttpServletRequest req = (HttpServletRequest) request;
             String token = req.getHeader("Authorization");
             if (token.equals("")) {
@@ -44,7 +44,7 @@ public class SessionCheckerFilter extends GenericFilterBean {
                 httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Token");
             }
             System.out.println("****************Token checked*****************");
-        }
+        }*/
         chain.doFilter(request, response);
     }
 

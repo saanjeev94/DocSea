@@ -15,11 +15,13 @@ declare var $ : any;
 })
 export class DoctorProfileComponent implements OnInit{
   doctorList:any;
+  sabin:string;
   doctor:Doctor;
 
   constructor(private doctorService:DoctorService, private route:ActivatedRoute){
     this.doctor=new Doctor();
   }
+
 
   ngOnInit(){
     this.route.params.subscribe(params=>{
@@ -30,7 +32,10 @@ export class DoctorProfileComponent implements OnInit{
   getDoctorById(id) {
     this.doctorService.findById(id).subscribe(response => {
       this.doctor = response;
-      // console.log(this.doctor);
     })
+  }
+
+  displayTime(){
+    console.log(this.sabin);
   }
 }

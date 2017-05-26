@@ -36,6 +36,7 @@ public class HospitalDoctorController {
 
         hospitalDoctorService.hospitalDoctorSchedule(doctorId);
         return new ResponseEntity("List of Schedules",HttpStatus.OK);
+
     }
 
 }

@@ -70,8 +70,23 @@
                   <th class="text-center">Action</th>
                 </tr>
                 <tr>
-                  <td>Sunday</td>
-                  <td>2:00 pm to 4:00 pm</td>
+
+                  <ng-container *ngFor="let schedule of doctorScheduleList">
+                   <ng-container *ngFor="let i = days">
+                    <ng-container *ngIf="schedule.days.id===i">
+                      <td>{{schedule.days.name}}</td>
+                      <td>
+                        <span>
+                          <input type="time" name="sundaySchedule" [(ngModel)]="schedule.startTime" #sundaySchedule="ngModel">
+                        </span>
+                        to
+                        <span>
+                          <input type="time" name="sundaySchedule" [(ngModel)]="sundaySchedule" #sundaySchedule="ngModel">
+                        </span>
+                      </td>
+                    </ng-container>
+                   </ng-container>
+                  </ng-container>
                   <td>
                     <button class="btn btn-warning">
                       <span class="glyphicon glyphicon-pencil"></span>
@@ -83,7 +98,7 @@
                 </tr>
                 <tr>
                   <td>Monday</td>
-                  <td>2:00 pm to 4:00 pm</td>
+                  <td>{{doctorSchedule.</td>
                   <td>
                     <button class="btn btn-warning">
                       <span class="glyphicon glyphicon-pencil"></span>
@@ -95,7 +110,7 @@
                 </tr>
                 <tr>
                   <td>Tuesday</td>
-                  <td>2:00 pm to 4:00 pm</td>
+                  <td></td>
                   <td>
                     <button class="btn btn-warning">
                       <span class="glyphicon glyphicon-pencil"></span>
@@ -162,6 +177,8 @@
           <p><br></p>
 
         </div>
+        <input type="time" name="sabin" [(ngModel)]="sabin" >
+        <button type="submit" (click)="displayTime()">display time</button>
 
       </div>
     </div>

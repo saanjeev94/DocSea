@@ -3,6 +3,7 @@
  */
 import {Contact} from "./contact.model";
 import {Speciality} from "./speciality.model";
+import {Schedule} from "./schedule.model";
 
 export class Doctor{
   public id?:number;
@@ -10,12 +11,15 @@ export class Doctor{
   public gender?:string;
   public qualification?:string;
   public photo?:string;
-  public speciality?: Speciality;
+  public speciality?:Speciality;
   public contact?:Contact;
   public nmcNumber?:string;
   public details?:string;
+  public schedules?:Array<Schedule>;
 
-  constructor(id?:number,name?:string,gender?:string,qualification?:string,photo?:string,speciality?:Speciality,contact?:Contact,nmcNumber?:string,details?:string){
+  constructor(id?:number,name?:string,gender?:string,qualification?:string,photo?:string,
+              speciality?:Speciality,contact?:Contact,nmcNumber?:string,details?:string,
+              schedules?:Array<Schedule>){
     this.id=id?id:null;
     this.name=name?name:null;
     this.gender=gender?gender:null;
@@ -25,5 +29,6 @@ export class Doctor{
     this.contact=contact?contact:new Contact();
     this.nmcNumber=nmcNumber?nmcNumber:null;
     this.details=details?details:null;
+    this.schedules=schedules?schedules:new Array<Schedule>();
   }
 }
