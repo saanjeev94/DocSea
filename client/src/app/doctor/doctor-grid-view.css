@@ -25,6 +25,7 @@ ul li{
   -o-perspective: 800px;
   perspective: 800px;
   margin-bottom: 30px;
+  box-shadow: 1px 1px 1px black;
 }
 /* flip the pane when hovered */
 .card-container:not(.manual-flip):hover .card,

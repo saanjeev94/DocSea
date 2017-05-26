@@ -11,7 +11,7 @@ import {current} from "codelyzer/util/syntaxKind";
 
 export class LoginComponent{
   user: User;
-  tokenBack: any;
+  public tokenBack: any;
 
   constructor(private authService: AuthenticationService){
     this.user = new User();
@@ -27,8 +27,8 @@ export class LoginComponent{
     localStorage.setItem('hospitalId', this.tokenBack.hospitalId);
     localStorage.setItem('userId', this.tokenBack.userId);
     localStorage.setItem('userType', this.tokenBack.userType);
+    this.authService.isLoggedIn = true;
   }
-
 
   //push garna lai matra
 }

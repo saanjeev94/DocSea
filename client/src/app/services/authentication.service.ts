@@ -5,7 +5,8 @@ import {User} from "../model/user.model";
 @Injectable()
 export class AuthenticationService{
   private headers:Headers;
-  private loginUrl='http://localhost:8080/api/login';
+  public isLoggedIn: boolean = false;
+  private loginUrl='http://localhost:8080/api/';
 
   constructor(private http:Http){
     this.headers= new Headers();
@@ -15,7 +16,12 @@ export class AuthenticationService{
 
   login(user: User){
     // console.log(user);
-    return this.http.post(this.loginUrl,user).map(res => res.json());
+    return this.http.post(this.loginUrl+"login",user).map(res => res.json());
+  }
+
+  logout(token: string){
+    // console.log(user);
+    return this.http.post(this.loginUrl+"logout",token).map(res => res);
   }
 }
 

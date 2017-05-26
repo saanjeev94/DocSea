@@ -11,6 +11,7 @@ export class HospitalService{
   private hospitalUrl = 'http://localhost:8080/api/hospital/';
   token = localStorage.getItem('curretUser');
   constructor(private http: Http){
+    this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
     this.headers.append('Authorization', this.token);
   }

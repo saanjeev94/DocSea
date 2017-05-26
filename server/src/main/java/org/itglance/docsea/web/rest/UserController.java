@@ -44,10 +44,10 @@ public class UserController {
     }
 
     @PostMapping(value = "/logout")
-    public ResponseEntity logout(@RequestBody Session session){
-        String token = session.getToken();
+    public ResponseEntity logout(@RequestBody String token){
+        System.out.println(token);
         sessionService.removeSession(token);
-        return new ResponseEntity<Session>(session, HttpStatus.OK);
+        return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
 }

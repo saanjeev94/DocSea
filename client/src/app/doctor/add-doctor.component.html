@@ -70,7 +70,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-md-2 control-label">Primary Number:</label>
+          <label class="col-md-2 control-label">Primary Contact:</label>
           <div class="col-md-3">
             <input type="text" class="form-control" name="docnumber1"
                    [(ngModel)]="doctor.contact.contactNumber1"
@@ -79,12 +79,12 @@
 
             <div *ngIf="docnumber1.errors && docnumber1.touched" class="alert alert-danger custom-label-alert">
               <span [hidden]="!docnumber1.errors.required">Number is required</span>
-              <span [hidden]="!docnumber1.errors.pattern">Number must be digit only</span>
+              <span [hidden]="!docnumber1.errors.pattern">Number must be digit only of length 9 or 10</span>
             </div>
           </div>
 
           <!-- Secondary Number -->
-          <label class="col-md-3 control-label">Secondary Number:</label>
+          <label class="col-md-3 control-label">Secondary Contact:</label>
           <div class="col-md-3">
             <input type="text" class="form-control" name="docnumber4"
                    [(ngModel)]="doctor.contact.contactNumber2"
