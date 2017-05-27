@@ -93,10 +93,12 @@ public class HospitalService {
 
         Address address = new Address();
         address.setStreetAddress(hospitalDTO.getAddress().getStreetAddress());
-        address.setCity(cityRepository.findByName( hospitalDTO.getAddress().getCity().getName() ) );
         address.setDistrict(districtRepository.findByName(hospitalDTO.getAddress().getDistrict().getName()));
         address.setZone(zoneRepository.findByName(hospitalDTO.getAddress().getZone().getName()));
         address.setCountry(countryRepository.findByName(hospitalDTO.getAddress().getCountry().getName()));
+//        address.setCity(cityRepository.findByName( hospitalDTO.getAddress().getCity().getName() ) );
+        District district = districtRepository.findByName(hospitalDTO.getAddress().getDistrict().getName());
+        address.setCity(cityRepository.findByDistrictAndCityName(district, hospitalDTO.getAddress().getCity().getName()) );
         addressRepository.save(address);
         hospital.setAddress(address);
         hospitalRepository.save(hospital);
@@ -181,8 +183,9 @@ public class HospitalService {
         address.setCountry(countryRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCountry().getName()));
         address.setZone(zoneRepository.findByName(hospitalUserDTO.getHospital().getAddress().getZone().getName()));
         address.setDistrict(districtRepository.findByName(hospitalUserDTO.getHospital().getAddress().getDistrict().getName()));
-        address.setCity(cityRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCity().getName()));
-
+//        address.setCity(cityRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCity().getName()));
+        District district = districtRepository.findByName(hospitalUserDTO.getHospital().getAddress().getDistrict().getName());
+        address.setCity(cityRepository.findByDistrictAndCityName(district, hospitalUserDTO.getHospital().getAddress().getCity().getName()) );
         addressRepository.save(address);
         hospital.setAddress(address);
         hospitalUser.setHospital(hospital);
