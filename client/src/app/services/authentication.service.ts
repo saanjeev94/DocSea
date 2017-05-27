@@ -15,12 +15,3 @@ export class AuthenticationService{
     return this.http.post(this.loginUrl,user).map(res => res.json());
   }
 }
-
-
-
-
-
-
-
-
-
