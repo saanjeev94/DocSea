@@ -42,4 +42,11 @@ public class UserService {
         return null;
     }
 
+    public boolean isUserActive(Long userId) {
+        User user = userRepository.findOne(userId);
+        if(user.getStatus().getStatus().equalsIgnoreCase("ACTIVE")){
+            return true;
+        }
+        return  false;
+    }
 }
