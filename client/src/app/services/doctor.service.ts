@@ -44,6 +44,4 @@ export class DoctorService{
     return this.http.delete(this.doctorUrl, id).map(res=>res.json());
   }
 
-  // push garna lai matra
-
 }
