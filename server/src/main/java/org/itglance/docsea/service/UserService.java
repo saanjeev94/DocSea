@@ -1,5 +1,6 @@
 package org.itglance.docsea.service;
 
+import org.itglance.docsea.config.CryptoUtil;
 import org.itglance.docsea.domain.HospitalUser;
 import org.itglance.docsea.domain.Session;
 import org.itglance.docsea.domain.User;
@@ -31,14 +32,23 @@ public class UserService {
     }
 
     public Session validateLogin(User user){
-        User dbUser = userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
+
+        User dbUser = null;
+        try {
+            System.out.println("------- checking password and username-------");
+            dbUser = userRepository.findByUsernameAndPassword(user.getUsername(), CryptoUtil.encrypt(user.getPassword(), user.getUsername()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(dbUser != null){
             HospitalUser hospitalUser =hospitalUserRepository.findByUser(dbUser);
             Session session = sessionService.createSession(hospitalUser);
            /* String mainToken =  session.toStringForToken();
             byte[] encode = Base64.getEncoder().encode(mainToken.getBytes());*/
+            System.out.println("-----password and username matched");
             return session;
         }
+        System.out.println("-----password and username invalid");
         return null;
     }
 

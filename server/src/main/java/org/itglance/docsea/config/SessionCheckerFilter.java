@@ -25,7 +25,6 @@ public class SessionCheckerFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-
         String method = ((HttpServletRequest) request).getMethod();
         System.out.println("****************Token checking*****************");
         System.out.println(method);
@@ -37,15 +36,19 @@ public class SessionCheckerFilter extends GenericFilterBean {
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
                 httpResponse.setContentType("application/json");
                 httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Required header (Authorization) not specified in the request");
-
+                System.out.println("Can't find token in header.");
+                System.out.println("****************Token Failed*****************");
                 return;
             } else if (sessionService.checkSession(token) == null) {
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
                 httpResponse.setContentType("application/json");
                 httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Token");
+                System.out.println("****************Invalid Token *****************");
+
+                return;
             }
             System.out.println(token);
-            System.out.println("****************Token checked*****************");
+            System.out.println("****************Token pass*****************");
         }
         chain.doFilter(request, response);
     }

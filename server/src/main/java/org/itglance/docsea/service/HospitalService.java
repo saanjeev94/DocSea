@@ -1,6 +1,7 @@
 package org.itglance.docsea.service;
 
 
+import org.itglance.docsea.config.CryptoUtil;
 import org.itglance.docsea.domain.*;
 
 
@@ -103,7 +104,12 @@ public class HospitalService {
         hospital.setAddress(address);
         hospitalRepository.save(hospital);
 
-        user.setPassword(userDTO.getPassword());
+        try {
+            user.setPassword(CryptoUtil.encrypt(userDTO.getPassword(), userDTO.getUsername()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         user.setUsername(userDTO.getUsername());
         user.setUserType(1);
 

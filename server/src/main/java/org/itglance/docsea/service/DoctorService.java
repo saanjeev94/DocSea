@@ -7,6 +7,7 @@ import org.itglance.docsea.repository.ContactRepository;
 import org.itglance.docsea.repository.DoctorRepository;
 import org.itglance.docsea.repository.ScheduleRepository;
 import org.itglance.docsea.service.dto.DoctorDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,20 +33,31 @@ public class DoctorService {
     private final SpecialityRepository specialityRepository;
     private final ContactRepository contactRepository;
     private final ScheduleRepository scheduleRepository;
+    private final SessionRepository sessionRepository;
+    private final HospitalDoctorRepository hospitalDoctorRepository;
+    private final HospitalRepository hospitalRepository;
 
 
-
+    @Autowired
     ScheduleService scheduleService;
+    @Autowired
+    StatusService statusService;
 
 
-    public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository, ContactRepository contactRepository, ScheduleRepository scheduleRepository, HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository) {
+    public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository
+            , ContactRepository contactRepository, ScheduleRepository scheduleRepository
+            , HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository
+            , SessionRepository sessionRepository) {
         this.doctorRepository = doctorRepository;
         this.specialityRepository = specialityRepository;
         this.contactRepository = contactRepository;
         this.scheduleRepository = scheduleRepository;
+        this.sessionRepository = sessionRepository;
+        this.hospitalDoctorRepository = hospitalDoctorRepository;
+        this.hospitalRepository = hospitalRepository;
     }
 
-    public void addDoctor(DoctorDTO doctorDTO) {
+    public void addDoctor(DoctorDTO doctorDTO, String token) {
         Doctor doctor = new Doctor();
 
         doctor.setNmcNumber(doctorDTO.getNmcNumber());
@@ -71,6 +83,17 @@ public class DoctorService {
         doctor.setDetails(doctorDTO.getDetails());
 
         doctorRepository.save(doctor);
+
+        HospitalDoctor hospitalDoctor = new HospitalDoctor();
+        Session session = sessionRepository.findByToken(token);
+        Hospital hospital = hospitalRepository.findOne(session.getHospitalId());
+
+        hospitalDoctor.setHospital(hospital);
+        hospitalDoctor.setDoctor(doctor);
+
+        Status status = statusService.getStatusObject("INACTIVE");
+        hospitalDoctor.setStatus(status);
+        hospitalDoctorRepository.save(hospitalDoctor);
     }
 
     public boolean isDoctorExist(DoctorDTO doctorDTO){
@@ -149,8 +172,8 @@ public class DoctorService {
     public String renamePhoto(MultipartFile file) {
 //        final String UPLOADED_FOLDER = "F:\\docsea\\docsea\\client\\src\\assets\\images\\";
 //        final String UPLOADED_FOLDER = "F:\\college\\Project\\DocSea\\client\\src\\assets\\images\\";
-        final String UPLOADED_FOLDER = "D:\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
-
+        //final String UPLOADED_FOLDER = "D:\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
+        final String UPLOADED_FOLDER = "F:\\projects\\DocSea\\client\\src\\assets\\images";
         int random = (int) (Math.random() * 50000 + 1);
         String fileName = file.getOriginalFilename();
         String extension = FilenameUtils.getExtension(fileName);

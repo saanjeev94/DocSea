@@ -67,7 +67,7 @@ public class DoctorController {
             if(doctorService.isDoctorExist(doctorDTO)){
                 return new ResponseEntity("Doctor already exists", HttpStatus.CONFLICT);
             }
-            doctorService.addDoctor(doctorDTO);
+            doctorService.addDoctor(doctorDTO, Authorization);
         }catch (JsonParseException e1) {
             e1.printStackTrace();
         } catch (JsonMappingException e1) {
