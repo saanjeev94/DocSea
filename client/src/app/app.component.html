@@ -8,26 +8,37 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="">DocSea</a>
+      <a class="navbar-brand" routerLink="/search-doctor"><img src="../assets/images/logo.jpg" class="img-custom" alt=""></a>
     </div>
+
+    <ul class="nav navbar-nav">
+      <!--<li *ngIf="isLoggedIn">-->
+      <!--Welcome-->
+      <!--</li>-->
+    </ul>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 
         <!--  ROUTERLINK -->
         <li class="active"><a routerLink="/search-doctor" routerLinkActive="active">Find Doc</a></li>
-        <li><a routerLink="/hospital-panel" routerLinkActive="active">Hospital</a></li>
         <li><a routerLink="/doctor-view" routerLinkActive="active">View Doctor</a></li>
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <div *ngIf="!authService.isLoggedIn; else notLogged">
-              <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            <ng-container *ngIf="isLoggedIn">
+              <li><a routerLink="/hospital-panel" routerLinkActive="active" class="margin-left">Hospital</a></li>
+            </ng-container>
+            <div *ngIf="!isLoggedIn; else notLogged">
+              <li><a routerLink="/login" routerLinkActive="active" class="margin-left">Login</a></li>
             </div>
             <ng-template #notLogged>
-              <li><a (click)="logout()" class="hand-pointer">Logout</a></li>
+              <li (click)="logout()"><a class="hand-pointer no-padding-left">Logout</a></li>
             </ng-template>
-            <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
+            <div *ngIf="!isLoggedIn;">
+              <li><a routerLink="/register" routerLinkActive="active" class="margin-left">Register</a></li>
+            </div>
           </ul>
         </li>
       </ul>

@@ -4,6 +4,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../model/doctor.model";
 import {DoctorService} from "../services/doctor.service";
+import {AuthenticationService} from "../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'add-doctor',
@@ -16,7 +18,7 @@ export class AddDoctorComponent implements OnInit{
   photofile:File;
 
 
-  constructor(private doctorService:DoctorService){
+  constructor(private doctorService:DoctorService, private authService: AuthenticationService, private router: Router){
     this.doctor=new Doctor();
   }
 
@@ -37,5 +39,6 @@ export class AddDoctorComponent implements OnInit{
     console.log(formdata);
     console.log(this.doctor);
     this.doctorService.addDoctor(formdata).subscribe((response)=>response.json());
+    this.router.navigate(['/hospital-panel']);
   }
 }

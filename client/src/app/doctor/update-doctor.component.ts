@@ -4,7 +4,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../model/doctor.model";
 import {DoctorService} from "../services/doctor.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'add-doctor',
@@ -15,7 +16,8 @@ export class UpdateDoctorComponent implements OnInit{
   doctor:Doctor;
   photofile:File=null;
 
-  constructor(private doctorService:DoctorService, private route:ActivatedRoute){
+  constructor(private doctorService:DoctorService, private route:ActivatedRoute, private router: Router,
+              private authService: AuthenticationService){
     this.doctor=new Doctor();
   }
 
@@ -34,7 +36,8 @@ export class UpdateDoctorComponent implements OnInit{
     let formdata:FormData = new FormData();
     formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
-    this.doctorService.updateDoctor(formdata).subscribe((response)=>response.json());
+    this.doctorService.updateDoctor(formdata).subscribe((response)=> this.doctor = response);
+    this.router.navigate(['/hospsital-panel']);
   }
 
   getDoctorDetails(id:number){

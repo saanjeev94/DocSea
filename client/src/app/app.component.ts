@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, DoCheck, OnInit} from '@angular/core';
 import {AuthenticationService} from "./services/authentication.service";
 import {LoginComponent} from "./login/login.component";
+import {Router} from "@angular/router";
 declare var $: any;
 
 @Component({
@@ -8,12 +9,22 @@ declare var $: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent implements DoCheck, AfterViewInit{
 
   token: string;
 
-  constructor(private authService: AuthenticationService){
+  private isLoggedIn: boolean;
 
+  constructor(private authService: AuthenticationService, private router: Router){
+
+  }
+
+  ngDoCheck(){
+    if( !localStorage.getItem('currentUser') ){
+      this.isLoggedIn = false;
+    }else{
+      this.isLoggedIn = true;
+    }
   }
 
   ngAfterViewInit(){
@@ -30,6 +41,6 @@ export class AppComponent{
 
   onSuccessLogout(token){
     localStorage.clear();
-    this.authService.isLoggedIn = false;
+    this.router.navigate(['/search-doctor']);
   }
 }

@@ -6,6 +6,8 @@ import {Country} from "../model/country.model";
 import {Zone} from "app/model/zone.model";
 import {City} from "../model/city.model";
 import {District} from "../model/district.model";
+import {AuthenticationService} from "../services/authentication.service";
+import {Router} from "@angular/router";
 
 
 
@@ -23,7 +25,8 @@ export class RegisterHospitalComponent implements OnInit{
   districtObject: District[];
   cityObject: City[];
 
-  constructor(private hosiptalService: HospitalService, private addressService: AddressService){
+  constructor(private hosiptalService: HospitalService, private addressService: AddressService,
+                private authService: AuthenticationService, private router: Router){
     this.hospitalUser = new HospitalUser();
   }
 
@@ -32,8 +35,13 @@ export class RegisterHospitalComponent implements OnInit{
   }
 
   onRegister(){
-    this.hosiptalService.addHospital(this.hospitalUser).subscribe((result) => console.log(result));
+    this.hosiptalService.addHospital(this.hospitalUser).subscribe((result) => this.hospitalUser = result);
+    this.router.navigate((['/login']));
   }
+
+  // onSuccessRegister(result){
+  //   this.router.navigate(['/login']);
+  // }
 
   getCountries(){
     this.addressService.getCountries().subscribe(countries=>this.onSuccessCountries(countries), () => console.log('error'));

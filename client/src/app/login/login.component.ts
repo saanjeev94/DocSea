@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {User} from "../model/user.model";
 import {AuthenticationService} from "../services/authentication.service";
-import {current} from "codelyzer/util/syntaxKind";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'docsea-login',
@@ -13,7 +13,7 @@ export class LoginComponent{
   user: User;
   public tokenBack: any;
 
-  constructor(private authService: AuthenticationService){
+  constructor(private authService: AuthenticationService, private router: Router){
     this.user = new User();
   }
 
@@ -27,8 +27,6 @@ export class LoginComponent{
     localStorage.setItem('hospitalId', this.tokenBack.hospitalId);
     localStorage.setItem('userId', this.tokenBack.userId);
     localStorage.setItem('userType', this.tokenBack.userType);
-    this.authService.isLoggedIn = true;
+    this.router.navigate(['/hospital-panel']);
   }
-
-  //push garna lai matra
 }

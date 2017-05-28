@@ -5,7 +5,7 @@ import {User} from "../model/user.model";
 @Injectable()
 export class AuthenticationService{
   private headers:Headers;
-  public isLoggedIn: boolean = false;
+
   private loginUrl='http://localhost:8080/api/';
 
   constructor(private http:Http){

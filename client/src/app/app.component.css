@@ -40,3 +40,25 @@
 .hand-pointer{
   cursor: pointer;
 }
+
+.margin-left{
+  display: block;
+  padding:7px 0;
+}
+
+.margin-left:hover{
+  background-color: white;
+}
+
+.margin-left:hover{
+  color: #f4f4f4;
+}
+
+.no-padding-left{
+  padding-left:0;
+}
+
+.img-custom{
+  position: relative;
+  bottom : 8px;
+}

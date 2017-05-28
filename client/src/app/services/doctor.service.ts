@@ -20,7 +20,6 @@ export class DoctorService{
   }
 
   addDoctor(formdata:FormData){
-
     const options = new RequestOptions({headers: this.headers});
     return this.http.post(this.doctorUrl,formdata,options).map(res=>res.json());
   }
@@ -34,7 +33,6 @@ export class DoctorService{
   }
 
   updateDoctor(formData:FormData){
-    console.log(formData);
     let headers= new Headers();
     headers.append('Content-Type', 'undefined' );
     headers.append('Authorization', this.token );

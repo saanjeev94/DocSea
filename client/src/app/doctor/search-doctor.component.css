@@ -11,3 +11,11 @@
   width: 90%;
   display: inline-block;
 }
+
+.img-custom{
+  height: 70px;
+  width: 335px;
+  margin-bottom: 20px;
+  position: relative;
+  left: 100px;
+}
