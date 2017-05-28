@@ -38,7 +38,13 @@ public class UserController {
         Session session = userService.validateLogin(user);
         if(session == null){
             logger.error("Invalid Username or Password.");
+            System.out.println("Invalid Username or Password.");
             return new ResponseEntity<String>("Invalid Username or Password.", HttpStatus.CONFLICT);
+        }
+        if(!userService.isUserActive(session.getUserId())){
+            logger.error("Your Hospital registration is on the way for verification.......");
+            System.out.println("Your Hospital registration is on the way for verification.......");
+            return new ResponseEntity<String>("Your Hospital registration is on the way for verification.......", HttpStatus.CONFLICT);
         }
         return  new ResponseEntity<Session>(session, HttpStatus.OK);
     }
