@@ -16,10 +16,6 @@ public class Speciality {
     private Long id;
     private String name;
 
-    @ManyToMany
-    private List<Hospital> hospitals=new ArrayList<>();
-
-
     public Long getId() {
         return id;
     }
@@ -37,7 +33,6 @@ public class Speciality {
         return "Speciality{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", hospitals=" + hospitals +
                 '}';
     }
 }
