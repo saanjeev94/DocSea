@@ -49,8 +49,8 @@ public class DoctorController {
     public ResponseEntity<?> addDoctor(
             @RequestParam MultipartFile file,
             @RequestParam String doctor,
-            MultipartHttpServletRequest request
-            ,@RequestHeader String Authorization) throws MissingServletRequestPartException,IOException,MultipartException{
+            MultipartHttpServletRequest request,
+            @RequestHeader String Authorization) throws MissingServletRequestPartException,IOException,MultipartException{
 
         System.out.println("*********  ADD DOCTOR  **************");
         System.out.println(Authorization);

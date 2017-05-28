@@ -25,8 +25,6 @@ public class Hospital {
     @NotNull(message = "Hospital Lisence no. shouldn't be null")
     private String lisenceNo;
 
-
-
     @NotNull(message = "Hospital registration no. shouldn't be null")
     private String registrationNo;
 
