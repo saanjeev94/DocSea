@@ -15,8 +15,8 @@ export class DoctorService{
   constructor(private http:Http){
     this.headers= new Headers();
     this.headers.append('Authorization',this.token);
-    // this.headers.append('Content-Type','mulipart/form-data');
     this.headers.append('Accept','Application/json');
+    // this.headers.append('Content-Type','mulipart/form-data');
   }
 
   addDoctor(formdata:FormData){
@@ -25,19 +25,21 @@ export class DoctorService{
   }
 
   getDoctors(){
-    return this.http.get(this.doctorUrl,this.headers).map(res => res.json() );
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.get(this.doctorUrl,options).map(res => res.json() );
   }
 
   findById(id:number){
-    return this.http.get(this.doctorUrl+'/'+id,this.headers).map(res=>res.json());
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.get(this.doctorUrl+'/'+id,options).map(res=>res.json());
   }
 
   updateDoctor(formData:FormData){
     let headers= new Headers();
-    headers.append('Content-Type', 'undefined' );
-    headers.append('Authorization', this.token );
-
-    return this.http.put(this.doctorUrl,formData,headers).map(res=>res.json());
+    // headers.append('Content-Type', 'undefined' );
+    // headers.append('Authorization', this.token );
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.put(this.doctorUrl,formData,options).map(res=>res.json());
   }
 
   deleteDoctor(id : any){

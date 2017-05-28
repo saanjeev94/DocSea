@@ -129,7 +129,7 @@ public class DoctorController {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        return new ResponseEntity("Doctor updated", HttpStatus.OK);
+        return new ResponseEntity<String>("Doctor updated", HttpStatus.OK);
 
     }
 

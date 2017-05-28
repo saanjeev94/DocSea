@@ -6,7 +6,7 @@ import {Country} from "../model/country.model";
 import {Zone} from "app/model/zone.model";
 import {City} from "../model/city.model";
 import {District} from "../model/district.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 
@@ -24,7 +24,8 @@ export class UpdateHospitalComponent implements OnInit{
   districtObject: District[];
   cityObject: City[];
 
-  constructor(private hosiptalService: HospitalService, private addressService: AddressService, private route: ActivatedRoute){
+  constructor(private hosiptalService: HospitalService, private addressService: AddressService,
+              private route: ActivatedRoute, private router: Router){
     this.hospitalUser = new HospitalUser();
   }
 
@@ -45,6 +46,8 @@ export class UpdateHospitalComponent implements OnInit{
 
   onUpdate(){
     this.hosiptalService.updateHospital(this.hospitalUser).subscribe((result) => console.log(result));
+    this.router.navigate(['/hospital-panel']);
+
   }
 
   getCountries(){

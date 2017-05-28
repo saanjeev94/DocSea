@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
+import {Http, RequestOptions, Response,Headers} from "@angular/http";
 
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AddressService{
-  private headers:Headers;
+  private headers: Headers;
   private addressUrl='http://localhost:8080/api/addresses';
 
   token = localStorage.getItem('currentUser');
@@ -16,7 +16,8 @@ export class AddressService{
   }
 
   getCountries(): Observable<any>{
-    return this.http.get(this.addressUrl+"/countries")
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.get(this.addressUrl+"/countries",options)
       .map((res: Response) => res.json());
   }
 
@@ -26,8 +27,9 @@ export class AddressService{
   }
 
   getZonesOfCountry(country: string): Observable<any> {
-    console.log(country);
-    return this.http.get(this.addressUrl+"/zones/"+country).map((res: Response) => res.json());
+    const options = new RequestOptions({headers: this.headers});
+    // console.log(country);
+    return this.http.get(this.addressUrl+"/zones/"+country,options).map((res: Response) => res.json());
 
   }
 
@@ -37,7 +39,8 @@ export class AddressService{
   }
 
   getDistrictsOfZone(zone: string): Observable<any> {
-    return this.http.get(this.addressUrl+"/districts/"+zone).map((res: Response) => res.json());
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.get(this.addressUrl+"/districts/"+zone,options).map((res: Response) => res.json());
   }
 
   getCities(): Observable<any> {
@@ -46,7 +49,8 @@ export class AddressService{
   }
 
   getCitiesOfDistrict(district: string): Observable<any> {
-    return this.http.get(this.addressUrl+"/cities/"+district).map((res: Response) => res.json());
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.get(this.addressUrl+"/cities/"+district,options).map((res: Response) => res.json());
   }
 
 

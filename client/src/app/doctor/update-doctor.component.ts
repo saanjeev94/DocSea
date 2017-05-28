@@ -36,8 +36,8 @@ export class UpdateDoctorComponent implements OnInit{
     let formdata:FormData = new FormData();
     formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
-    this.doctorService.updateDoctor(formdata).subscribe((response)=> this.doctor = response);
-    this.router.navigate(['/hospsital-panel']);
+    this.doctorService.updateDoctor(formdata).subscribe((result) => console.log(result));
+    this.router.navigate(['/hospital-panel']);
   }
 
   getDoctorDetails(id:number){
