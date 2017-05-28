@@ -34,6 +34,8 @@ public class HospitalDoctorService {
 
     @Autowired
     StatusService statusService;
+    @Autowired
+    SessionService sessionService;
 
     public HospitalDoctorService(HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository, DoctorRepository doctorRepository, ScheduleRepository scheduleRepository) {
         this.hospitalDoctorRepository = hospitalDoctorRepository;
@@ -42,7 +44,7 @@ public class HospitalDoctorService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public void changeHospitalDoctorStatus(Long hospitalId, Long doctorId){
+    /*public void changeHospitalDoctorStatus(Long hospitalId, Long doctorId){
 
         HospitalDoctor hospitalDoctor= hospitalDoctorRepository.findByHospitalDoctor(hospitalId, doctorId);
         System.out.println(hospitalDoctor.toString());
@@ -61,7 +63,7 @@ public class HospitalDoctorService {
         hospitalDoctorRepository.save(hospitalDoctor);
 
 
-    }
+    }*/
 
     public void hospitalDoctorSchedule(Long doctorId){
         long hospitalId=1;
@@ -84,4 +86,11 @@ public class HospitalDoctorService {
 
     }
 
+    public Status getStatusFromHospitalAndDoctor(Long doctorId, String token) {
+        Long hospitalId = sessionService.checkSession(token).getHospitalId();
+        Hospital hospital = hospitalRepository.findOne(hospitalId);
+        Doctor doctor = doctorRepository.findOne(doctorId);
+        Status status = hospitalDoctorRepository.findStatusByHospitalDoctor(hospital, doctor);
+        return status;
+    }
 }

@@ -1,8 +1,10 @@
 package org.itglance.docsea.service;
 
-import org.itglance.docsea.domain.HospitalDoctor;
+import org.itglance.docsea.domain.*;
 import org.itglance.docsea.repository.HospitalDoctorRepository;
+import org.itglance.docsea.repository.HospitalRepository;
 import org.itglance.docsea.service.dto.HospitalDoctorDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +20,15 @@ import java.util.List;
 public class DoctorSearchService {
 
     private final HospitalDoctorRepository hospitalDoctorRepository;
+    private final HospitalRepository hospitalRepository;
+    @Autowired
+    SessionService sessionService;
+    @Autowired
+    StatusService statusService;
 
-    public DoctorSearchService(HospitalDoctorRepository hospitalDoctorRepository) {
+    public DoctorSearchService(HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository) {
         this.hospitalDoctorRepository = hospitalDoctorRepository;
+        this.hospitalRepository = hospitalRepository;
     }
 
 
@@ -40,9 +48,13 @@ public class DoctorSearchService {
 //            System.out.println(doctorDTO1.toString());
 //        }
         return hospitalDoctorDTO;
+    }
 
-
-
-
+    public List<Doctor> findAllDoctorsOfHospital(String token) {
+        Session session = sessionService.checkSession(token);
+        Hospital hospital = hospitalRepository.findOne(session.getHospitalId());
+        Status status = statusService.getStatusObject("DEACTIVE");
+        List<Doctor> doctors = hospitalDoctorRepository.findAllByHospital(hospital, status);
+        return doctors;
     }
 }

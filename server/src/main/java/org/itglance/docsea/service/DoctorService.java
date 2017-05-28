@@ -91,7 +91,7 @@ public class DoctorService {
         hospitalDoctor.setHospital(hospital);
         hospitalDoctor.setDoctor(doctor);
 
-        Status status = statusService.getStatusObject("INACTIVE");
+        Status status = statusService.getStatusObject("ACTIVE");
         hospitalDoctor.setStatus(status);
         hospitalDoctorRepository.save(hospitalDoctor);
     }
