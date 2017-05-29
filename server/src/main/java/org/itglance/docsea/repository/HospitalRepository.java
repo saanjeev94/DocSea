@@ -29,6 +29,9 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long>{
     @Query("SELECT h.schedules FROM Hospital h WHERE h.id=:hospitalId")
     public List<Schedule> findScheduleByHospitalId(@Param("hospitalId") Long hospitalId);
 
+
+    @Query("SELECT h.name FROM Hospital h WHERE h.name LIKE LOWER(CONCAT(:str, '%'))")
+    public List<String> findThisDoctor(@Param("str") String str);
 }
 
 

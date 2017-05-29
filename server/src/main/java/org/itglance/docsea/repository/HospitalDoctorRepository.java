@@ -32,6 +32,9 @@ public interface HospitalDoctorRepository extends JpaRepository<HospitalDoctor,L
     public List<HospitalDoctor> findDoctorByString(@Param("searchString") String searchString);
 
 
+
+
+
     @Query("SELECT  hd FROM HospitalDoctor hd WHERE hd.doctor = :doctor AND hd.hospital = :hospital")
     public HospitalDoctor findByHospitalAndDoctor(Hospital hospital, Doctor doctor);
 

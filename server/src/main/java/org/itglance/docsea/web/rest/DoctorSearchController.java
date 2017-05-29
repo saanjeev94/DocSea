@@ -41,4 +41,13 @@ public class DoctorSearchController {
         doctors = doctorSearchService.findAllDoctorsOfHospital(Authorization);
         return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
     }
+
+
+    @GetMapping(value = "/quickSearch/{str}")
+    public ResponseEntity<?> quickSearch(@PathVariable("str") String str){
+        List<String> searchResults =new ArrayList<>();
+        searchResults = doctorSearchService.getStringListForSearch(str);
+        System.out.println("------search result------");
+       return new ResponseEntity<List<String>>(searchResults, HttpStatus.OK);
+    }
 }

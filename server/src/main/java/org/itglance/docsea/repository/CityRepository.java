@@ -20,4 +20,7 @@ public interface CityRepository extends JpaRepository<City, Long> {
 
     @Query("SELECT c FROM City c WHERE c.district = :district AND c.name LIKE :city")
     City findByDistrictAndCityName(@Param("district") District district, @Param("city") String city);
+
+    @Query("SELECT c.name FROM City c WHERE c.name LIKE LOWER(CONCAT(:str, '%'))")
+    public List<String> findThisDoctor(@Param("str") String str);
 }

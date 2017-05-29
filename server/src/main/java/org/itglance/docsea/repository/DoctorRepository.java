@@ -24,8 +24,6 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long>{
     public List<Schedule> findScheduleByDoctorId(@Param("doctorId") Long doctorId);
 
 
-
-
-
-
+    @Query("SELECT d.name FROM Doctor d WHERE d.name LIKE LOWER(CONCAT(:str, '%'))")
+    public List<String> findThisDoctor(@Param("str") String str);
 }
