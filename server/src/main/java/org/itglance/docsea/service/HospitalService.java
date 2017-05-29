@@ -163,6 +163,12 @@ public class HospitalService {
     public HospitalUser getHospitalByUsername(String username) {
         User user = userRepository.findByUsername(username);
         HospitalUser hospitalUser = hospitalUserRepository.findByUser(user);
+        String encryptedPassword = hospitalUser.getUser().getPassword();
+        try {
+            hospitalUser.getUser().setPassword(CryptoUtil.decrypt(encryptedPassword, hospitalUser.getUser().getUsername()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return hospitalUser;
     }
 
@@ -199,7 +205,12 @@ public class HospitalService {
 
         User user = userRepository.findOne(hospitalUserDTO.getUser().getId());
         user.setUsername(hospitalUserDTO.getUser().getUsername());
-        user.setPassword(hospitalUserDTO.getUser().getPassword());
+        try {
+            user.setPassword(CryptoUtil.encrypt(hospitalUserDTO.getUser().getPassword(),hospitalUser.getUser().getUsername()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        user.setPassword(hospitalUserDTO.getUser().getPassword());
 
         Status status = statusService.getStatusObject(hospitalUserDTO.getUser().getStatus().getStatus());
         user.setStatus(status);

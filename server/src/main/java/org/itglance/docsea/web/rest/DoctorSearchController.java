@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,5 +31,14 @@ public class DoctorSearchController {
 
        return new ResponseEntity<List<HospitalDoctorDTO>>(hospitalDoctors,HttpStatus.OK);
 
+    }
+
+
+    //Search all the doctor according to the hospital
+    @GetMapping
+    public ResponseEntity<?> searchAllDoctorOfHospital(@RequestHeader String Authorization){
+        List<Doctor> doctors = new ArrayList<>();
+        doctors = doctorSearchService.findAllDoctorsOfHospital(Authorization);
+        return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
     }
 }

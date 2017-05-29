@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/api/hospitalDoctors")
+@RequestMapping(value = "/api/hospitalDoctor")
 public class HospitalDoctorController {
 
     @Autowired
@@ -24,18 +24,24 @@ public class HospitalDoctorController {
 
     //change Doctor status
 
-    @RequestMapping(value="/{hospitalId}/{doctorId}", method= RequestMethod.PUT)
+  /*  @RequestMapping(value="/{hospitalId}/{doctorId}", method= RequestMethod.PUT)
     public ResponseEntity<Void> changeHospitalDoctorStatus(@PathVariable ("hospitalId") Long hospitalId, @PathVariable ("doctorId") Long doctorId){
 
         hospitalDoctorService.changeHospitalDoctorStatus(hospitalId,doctorId);
 
         return new ResponseEntity("Status Changed", HttpStatus.OK);
-    }
-    @RequestMapping(value="/{doctorId}",method=RequestMethod.GET)
+    }*/
+    /*@RequestMapping(value="/{doctorId}",method=RequestMethod.GET)
     public ResponseEntity<Void> displayHospitalDoctorSchedules(@PathVariable("doctorId") Long doctorId){
 
         hospitalDoctorService.hospitalDoctorSchedule(doctorId);
         return new ResponseEntity("List of Schedules",HttpStatus.OK);
+    }*/
+
+    @GetMapping(value = "/status/{doctorId}")
+    public ResponseEntity<?> getStatusOfDoctor(@RequestHeader String Authorization, @PathVariable("doctorId") Long doctorId){
+        Status status = hospitalDoctorService.getStatusFromHospitalAndDoctor(doctorId, Authorization);
+        return new ResponseEntity<Status>(status, HttpStatus.OK);
     }
 
 }
