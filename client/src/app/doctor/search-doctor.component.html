@@ -6,9 +6,20 @@
   </div> <!-- /.row -->
   <div class="row">
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <form id="doctor-search" class="text-center">
-        <input type="text" name="doctor" class="form-control" placeholder="Search Your Doctor...">
+      <form id="doctor-search" class="text-center" #searchform="ngForm">
+        <input type="text" name="searchDoctor" class="form-control" placeholder="Search Your Doctor..."
+               #searchDoctor id="searchDoctor" (keyup)="search(searchDoctor.value)">
         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+
+        <div *ngFor="let hospitalDoctor of hospitalDoctorList" class="search-result">
+          <!--(click)="gotoDetail(hero)" class="search-result" >-->
+
+          <!--|| {{ hospitalDoctor.doctor.speciality.name }}-->
+          <!--|| {{ hospitalDoctor.hospital.name }} || {{ hospitalDoctor.hospital.address.district.name }}-->
+          <!--|| {{ hospitalDoctor.hospital.address.city.name }} || {{ hospitalDoctor.hospital.address.streetAddress }}-->
+
+          {{ hospitalDoctor.doctor.name }}
+        </div>
       </form>
     </div>
   </div> <!-- /.row -->

@@ -47,3 +47,7 @@ td.overflow{
   height: 90px;
   overflow: auto;
 }
+
+.footer-height{
+  height: 55px !important;
+}

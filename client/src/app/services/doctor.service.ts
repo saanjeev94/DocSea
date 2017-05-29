@@ -3,12 +3,16 @@
  */
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Injectable} from "@angular/core";
-
+import {Doctor} from "../model/doctor.model";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import {HospitalDoctor} from "../model/hospital-doctor.model";
 
 @Injectable()
 export class DoctorService{
   private headers:Headers;
   private doctorUrl='http://localhost:8080/api/doctors';
+  private doctorSearchUrl='http://localhost:8080/api/doctorSearch/';
 
   token = localStorage.getItem('currentUser');
 
@@ -40,6 +44,13 @@ export class DoctorService{
     // headers.append('Authorization', this.token );
     const options = new RequestOptions({headers: this.headers});
     return this.http.put(this.doctorUrl,formData,options).map(res=>res.json());
+  }
+
+  search(term: string): Observable<HospitalDoctor>{
+    console.log(term);
+    return this.http
+      .get(this.doctorSearchUrl+term)
+      .map(response => response.json());
   }
 
   deleteDoctor(id : any){

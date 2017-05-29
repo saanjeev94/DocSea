@@ -28,7 +28,7 @@ public class DoctorSearchController {
     public ResponseEntity<List<HospitalDoctorDTO>> searchDoctor(@PathVariable String searchString){
        List<HospitalDoctorDTO> hospitalDoctors= doctorSearchService.findDoctor(searchString);
 
-       return new ResponseEntity(hospitalDoctors,HttpStatus.OK);
+       return new ResponseEntity<List<HospitalDoctorDTO>>(hospitalDoctors,HttpStatus.OK);
 
     }
 }
