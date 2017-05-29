@@ -1,8 +1,17 @@
 package org.itglance.docsea.service;
 
+import org.itglance.docsea.domain.Contact;
+import org.itglance.docsea.domain.Doctor;
+import org.itglance.docsea.domain.HospitalDoctor;
+import org.itglance.docsea.domain.Speciality;
+import org.itglance.docsea.domain.Session;
+import org.itglance.docsea.domain.Hospital;
+import org.itglance.docsea.domain.Status;
+
+
+
 import org.itglance.docsea.repository.SpecialityRepository;
 import org.apache.commons.io.FilenameUtils;
-import org.itglance.docsea.domain.*;
 import org.itglance.docsea.repository.ContactRepository;
 import org.itglance.docsea.repository.DoctorRepository;
 import org.itglance.docsea.repository.ScheduleRepository;
@@ -18,6 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.itglance.docsea.repository.*;
 import org.itglance.docsea.service.dto.ScheduleDTO;
 
@@ -143,7 +153,7 @@ public class DoctorService {
 
     public void updateDoctor(DoctorDTO doctorDTO){
 
-        System.out.println("**************************************************************************");
+        System.out.println("*************************updating docotor*************************************************");
         //Doctor doctor = doctorRepository.findOne(doctorDTO.getId());
 
         Doctor doctor = doctorRepository.findOne(doctorDTO.getId());
@@ -247,27 +257,5 @@ public class DoctorService {
 //
 //
 //        }
-
-        public void linkSchedule(Long id,ScheduleDTO scheduleDTO, List<Schedule> schedule){
-            Doctor doctor=doctorRepository.getOne(id);
-//            System.out.println(scheduleDTO.toString());
-//            System.out.println( scheduleService.getScheduleId(scheduleDTO));
-            schedule.add(scheduleRepository.findById(scheduleService.getScheduleId(scheduleDTO)));
-            doctor.setSchedules(schedule);
-            doctorRepository.save(doctor);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -1,6 +1,5 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.HospitalUser;
 import org.itglance.docsea.domain.Session;
 import org.itglance.docsea.domain.User;
 import org.itglance.docsea.service.SessionService;
@@ -10,9 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Base64;
 
 /**
  * Created by soni on 5/8/2017.

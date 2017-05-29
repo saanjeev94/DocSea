@@ -33,7 +33,6 @@ public class DoctorSearchController {
 
     }
 
-
     //Search all the doctor according to the hospital
     @GetMapping
     public ResponseEntity<?> searchAllDoctorOfHospital(@RequestHeader String Authorization){

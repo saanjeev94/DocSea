@@ -86,7 +86,7 @@ public class HospitalController {
 
     }
 
-    //-------------- display testing----//
+    //-------------- display all hospital in the database----//
    @RequestMapping(value = "/hospital", method = RequestMethod.GET)
     public ResponseEntity<List<HospitalUser>> listAllUsers() {
          List<HospitalUser> list = hospitalService.getAllHospitalUser();

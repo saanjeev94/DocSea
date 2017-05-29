@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 
 import javax.validation.constraints.NotNull;
 
-import javax.persistence.CascadeType;
 
 /**
  * Created by Mahesh on 5/8/2017.
