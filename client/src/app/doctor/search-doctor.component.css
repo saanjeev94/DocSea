@@ -7,9 +7,10 @@
 }
 
 #doctor-search input[type="text"]{
-  border-radius: 17px;
+  border-radius: 19px;
   width: 90%;
   display: inline-block;
+  height: 38px;
 }
 
 .img-custom{
@@ -23,8 +24,6 @@
 /* search dropdown */
 .search-result{
   border-bottom: 1px solid #66AFE9;
-  /*border-left: 1px solid #66AFE9;*/
-  /*border-right: 1px solid #66AFE9;*/
   width: 505px;
   height: 30px;
   padding: 5px 0 5px 25px;

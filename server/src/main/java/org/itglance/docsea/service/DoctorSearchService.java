@@ -27,6 +27,7 @@ public class DoctorSearchService {
     private final DistrictRepository districtRepository;
     private final CityRepository cityRepository;
     private final SpecialityRepository specialityRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
     SessionService sessionService;
@@ -35,7 +36,8 @@ public class DoctorSearchService {
 
     public DoctorSearchService(HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository
                             , DoctorRepository doctorRepository, CountryRepository countryRepository, ZoneRepository zoneRepository
-            , DistrictRepository districtRepository, CityRepository cityRepository, SpecialityRepository specialityRepository) {
+            , DistrictRepository districtRepository, CityRepository cityRepository, SpecialityRepository specialityRepository
+                ,AddressRepository addressRepository) {
         this.hospitalDoctorRepository = hospitalDoctorRepository;
         this.hospitalRepository = hospitalRepository;
         this.doctorRepository = doctorRepository;
@@ -44,6 +46,7 @@ public class DoctorSearchService {
         this.districtRepository = districtRepository;
         this.cityRepository = cityRepository;
         this.specialityRepository = specialityRepository;
+        this.addressRepository=addressRepository;
     }
 
     public List<HospitalDoctorDTO> findDoctor(String searchString){
@@ -78,8 +81,7 @@ public class DoctorSearchService {
     public List<String> getStringListForSearch(String str){
          List<String> combineResult = new ArrayList<>();
         combineResult.clear();
-        List<String> hospitalResult = hospitalRepository.findThisDoctor(str);
-        combineResult.addAll(hospitalResult);
+
 
 
         List<String> doctorResult = doctorRepository .findThisDoctor(str);
@@ -88,17 +90,23 @@ public class DoctorSearchService {
         List<String> specialityResult = specialityRepository .findThisDoctor(str);
         combineResult.addAll(specialityResult);
 
-        List<String> countryResult = countryRepository.findThisDoctor(str);
-        combineResult.addAll(countryResult);
+        List<String> hospitalResult = hospitalRepository.findThisDoctor(str);
+        combineResult.addAll(hospitalResult);
 
-        List<String> zoneResult = zoneRepository.findThisDoctor(str);
-        combineResult.addAll(zoneResult);
+        List<String> addressResult = addressRepository.findThisDoctor(str);
+        combineResult.addAll(addressResult);
 
-        List<String> districtResult = districtRepository.findThisDoctor(str);
-        combineResult.addAll(districtResult);
-
-        List<String> cityResult = cityRepository.findThisDoctor(str);
-        combineResult.addAll(cityResult);
+//        List<String> countryResult = countryRepository.findThisDoctor(str);
+//        combineResult.addAll(countryResult);
+//
+//        List<String> zoneResult = zoneRepository.findThisDoctor(str);
+//        combineResult.addAll(zoneResult);
+//
+//        List<String> districtResult = districtRepository.findThisDoctor(str);
+//        combineResult.addAll(districtResult);
+//
+//        List<String> cityResult = cityRepository.findThisDoctor(str);
+//        combineResult.addAll(cityResult);
 
 
         System.out.println(combineResult);

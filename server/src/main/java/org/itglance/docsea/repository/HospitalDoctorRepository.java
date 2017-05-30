@@ -19,17 +19,21 @@ public interface HospitalDoctorRepository extends JpaRepository<HospitalDoctor,L
     public HospitalDoctor findByHospitalDoctor(@Param("hospitalId") Long hospitalId, @Param("doctorId") Long doctorId);
 
 //    Search Doctor
-    @Query("SELECT h FROM HospitalDoctor h WHERE " + " h.doctor.name LIKE LOWER(CONCAT('%',:searchString, '%')) " +
-            "OR h.doctor.speciality.name  LIKE LOWER(CONCAT('%',:searchString, '%')) " +
-            "OR h.hospital.name  LIKE LOWER(CONCAT('%',:searchString, '%')) " +
-            "OR h.hospital.address.streetAddress  LIKE LOWER(CONCAT('%',:searchString, '%'))" +
-            "OR h.hospital.address.city.name  LIKE LOWER(CONCAT('%',:searchString, '%')) "+
-            "OR h.hospital.address.district.name  LIKE LOWER(CONCAT('%',:searchString, '%'))" +
-            "OR h.hospital.address.zone.name  LIKE LOWER(CONCAT('%',:searchString, '%'))" +
-            "OR h.hospital.address.country.name  LIKE LOWER(CONCAT('%',:searchString, '%'))"
-//            nativeQuery = true
-            )
-    public List<HospitalDoctor> findDoctorByString(@Param("searchString") String searchString);
+/*@Query("SELECT hd FROM HospitalDoctor hd ,Hospital h, Speciality s,Doctor d WHERE " +
+        "d.name=:searchString " +
+        "OR s.name = :searchString " +
+        "OR h.name = :searchString " +
+        "OR h.name = :searchString " +
+        "OR h.address.streetAddress = :searchString ")*/
+
+
+    @Query("SELECT hd FROM HospitalDoctor hd WHERE " +
+            "hd.doctor.name=:searchString " +
+            "OR hd.doctor.speciality.name = :searchString " +
+            "OR hd.hospital.name = :searchString " +
+            "OR hd.hospital.address.streetAddress = :searchString ")
+public List<HospitalDoctor> findDoctorByString(@Param("searchString") String searchString);
+
 
 
 

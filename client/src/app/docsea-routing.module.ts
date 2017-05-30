@@ -10,6 +10,7 @@ import {UpdateDoctorComponent} from "./doctor/update-doctor.component";
 import {DoctorProfileComponent} from "./doctor/doctor-profile.component";
 import {DoctorGridView} from "./doctor/doctor-grid-view";
 import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
+import {AdminComponent} from "./admin/admin.component";
 
 const ROUTES: Routes = [
   { path: '', redirectTo: '/search-doctor', pathMatch: 'full' },
@@ -17,10 +18,12 @@ const ROUTES: Routes = [
   { path: 'register', component: RegisterHospitalComponent },
   { path: 'search-doctor', component: SearchDoctorComponent },
   { path: 'hospital-panel', component: HospitalPanelComponent },
+  { path: 'admin', component: AdminComponent },
   {path:'register-doctor', component: AddDoctorComponent},
   {path:'update/:id', component: UpdateDoctorComponent},
   {path:'profile/:id', component: DoctorProfileComponent},
-  {path:'doctor-view', component: DoctorGridView},
+  // {path:'doctor-view', component: DoctorGridView},
+  {path:'doctor-view/:doctor', component: DoctorGridView},
   {path:'hospital-update/:username', component: UpdateHospitalComponent}
 ];
 

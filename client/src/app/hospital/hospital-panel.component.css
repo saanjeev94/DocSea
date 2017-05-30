@@ -11,3 +11,18 @@ td{
   padding: 3px;
   box-sizing: border-box;
 }
+
+h1{
+  /*background: #3498db;*/
+  color: #3498db;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 35px;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-padding{
+  padding: 8px 4px 6px !important;
+}

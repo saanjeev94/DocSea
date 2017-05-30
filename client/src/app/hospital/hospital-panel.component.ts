@@ -29,6 +29,6 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-    setTimeout(() => $("#hospital-panel-table").dataTable(),500);
+    setTimeout(() => $("#hospital-panel-table").dataTable(),1500);
   }
 }

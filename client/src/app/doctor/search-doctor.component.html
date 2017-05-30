@@ -1,26 +1,22 @@
 <div class="container">
-  <div class="row top-margin">
+  <div class="row top-margin animated fadeInDown">
     <div class="col-md-6 col-md-offset-3 text-center">
       <img src="../../assets/images/logo.PNG" class="img-responsive img-custom" alt="">
     </div>
   </div> <!-- /.row -->
   <div class="row">
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 animated fadeInUp">
       <form id="doctor-search" class="text-center" #searchform="ngForm">
         <input type="text" name="searchDoctor" class="form-control" placeholder="Search Your Doctor..."
-               #searchDoctor id="searchDoctor" (keyup)="search(searchDoctor.value)">
+               id="searchDoctor" (keyup)="search(searchDoctor.value)" #searchDoctor>
         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 
-        <div *ngFor="let hospitalDoctor of hospitalDoctorList" class="search-result">
-          <!--(click)="gotoDetail(hero)" class="search-result" >-->
-
-          <!--|| {{ hospitalDoctor.doctor.speciality.name }}-->
-          <!--|| {{ hospitalDoctor.hospital.name }} || {{ hospitalDoctor.hospital.address.district.name }}-->
-          <!--|| {{ hospitalDoctor.hospital.address.city.name }} || {{ hospitalDoctor.hospital.address.streetAddress }}-->
-
-          {{ hospitalDoctor.doctor.name }}
+        <div *ngFor="let hospitalDoctor of hospitalDoctorList" class="search-result"
+          (click)="doctorDetails(hospitalDoctor)">
+          {{ hospitalDoctor }}
         </div>
       </form>
     </div>
+
   </div> <!-- /.row -->
 </div> <!-- /.container -->

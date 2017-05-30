@@ -31,4 +31,8 @@ export class HospitalService{
     return this.http.put(this.hospitalUrl,hospitalUser,options).map(res => res.json());
   }
 
+  getAllHospitals(){
+
+  }
+
 }

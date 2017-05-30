@@ -14,9 +14,11 @@ import {Router} from "@angular/router";
 })
 
 export class SearchDoctorComponent implements OnInit{
-  hospitalDoctorList: HospitalDoctor;
+  searchDoctor: string = '';
+  hospitalDoctorList: any;
+  doctorList: HospitalDoctor;
 
-  constructor(private http: Http, private doctorService: DoctorService, private router: Router) {}
+  constructor(private doctorService: DoctorService, private router: Router) {}
 
   ngOnInit(){
   }
@@ -25,7 +27,16 @@ export class SearchDoctorComponent implements OnInit{
     // console.log(term);
     this.doctorService.search(term)
     .subscribe((result) => this.hospitalDoctorList = result);
-    console.log(this.hospitalDoctorList);
+    // console.log(this.hospitalDoctorList);
+  }
+
+  doctorDetails(doctor: string): void{
+    // console.log(doctor);
+    this.router.navigate(['/doctor-view',doctor]);
+  }
+  selectString(hospitalDoctor: string){
+    console.log(hospitalDoctor);
+    this.searchDoctor = hospitalDoctor;
   }
 
 }

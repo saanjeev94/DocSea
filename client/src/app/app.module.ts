@@ -20,6 +20,7 @@ import {DoctorGridView} from "./doctor/doctor-grid-view";
 import {AddressService} from "./services/address.service";
 import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
 import {AuthenticationService} from "./services/authentication.service";
+import {AdminComponent} from "./admin/admin.component";
 
 @NgModule({
   declarations: [
@@ -32,8 +33,8 @@ import {AuthenticationService} from "./services/authentication.service";
     HospitalPanelComponent,
     LoginComponent,
     DoctorGridView,
-    UpdateHospitalComponent
-
+    UpdateHospitalComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

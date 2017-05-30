@@ -46,11 +46,15 @@ export class DoctorService{
     return this.http.put(this.doctorUrl,formData,options).map(res=>res.json());
   }
 
-  search(term: string): Observable<HospitalDoctor>{
-    console.log(term);
+  search(term: string): Observable<any>{
+    // console.log(term);
     return this.http
-      .get(this.doctorSearchUrl+term)
+      .get(this.doctorSearchUrl+'/quickSearch/'+term)
       .map(response => response.json());
+  }
+
+  searchDoctor(searchTerm: string){
+    return this.http.get(this.doctorSearchUrl + searchTerm).map(response => response.json());
   }
 
   deleteDoctor(id : any){
