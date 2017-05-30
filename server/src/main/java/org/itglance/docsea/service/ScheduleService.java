@@ -4,17 +4,21 @@ import org.itglance.docsea.domain.Days;
 import org.itglance.docsea.domain.Doctor;
 import org.itglance.docsea.domain.Hospital;
 import org.itglance.docsea.domain.Schedule;
-import org.itglance.docsea.repository.DaysRepository;
-import org.itglance.docsea.repository.DoctorRepository;
-import org.itglance.docsea.repository.HospitalRepository;
-import org.itglance.docsea.repository.ScheduleRepository;
+import org.itglance.docsea.repository.*;
 import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.itglance.docsea.service.dto.ScheduleStringDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by sriyanka on 5/21/2017.
@@ -31,16 +35,18 @@ public class ScheduleService {
 
 
 
+
     @Autowired
     public DayService dayService;
 
     public ScheduleService(ScheduleRepository scheduleRepository, DaysRepository daysRepository,
                            HospitalRepository hospitalRepository
-                            ,DoctorRepository doctorRepository   ) {
+                            ,DoctorRepository doctorRepository) {
         this.scheduleRepository = scheduleRepository;
         this.daysRepository = daysRepository;
         this.hospitalRepository = hospitalRepository;
         this.doctorRepository = doctorRepository;
+
     }
 
     //inserting Schedule
@@ -78,6 +84,7 @@ public class ScheduleService {
         Doctor doctor = doctorRepository.findOne(doctorId);
         List<Schedule> schedules = doctor.getSchedules() ;
         for(Schedule s : schedules){
+
             if(s.getStartTime().equals(scheduleDTO.getStartTime()) ||
                     ((s.getStartTime().before(scheduleDTO.getStartTime()) && s.getEndTime().after(scheduleDTO.getStartTime()))) ||
                     s.getEndTime().equals(scheduleDTO.getEndTime()) ||
@@ -106,6 +113,9 @@ public class ScheduleService {
                     ((s.getStartTime().before(scheduleDTO.getEndTime()) && s.getEndTime().after(scheduleDTO.getEndTime())))
                     ){
                 if(s.getDays().getDay() . equals(scheduleDTO.getDays().getDay())){
+                    if(scheduleDTO.getId() == s.getId()){
+                        return null;
+                    }
                     return new ScheduleDTO(s);
                 }
             }
@@ -179,6 +189,53 @@ public class ScheduleService {
         scheduleRepository.save(schedule);
 
         return new ScheduleDTO(schedule);
+    }
+
+
+    public ScheduleDTO convertIntoTime(ScheduleStringDTO scheduleStringDTO) throws NumberFormatException{
+        //scheduleStringDTO.getEndTime().concat(":00");
+        ScheduleDTO scheduleDTO=new ScheduleDTO();
+
+//        try {
+//            scheduleDTO = new ScheduleDTO(scheduleStringDTO.getId(), new Time(Long.parseLong(scheduleStringDTO.getStartTime().concat(":00"))),
+//                    new Time(Long.parseLong(scheduleStringDTO.getEndTime().concat(":00"))), scheduleStringDTO.getDays());
+//        }
+//        catch (Exception e){
+//
+//            System.out.println("***********error**********");
+//            e.printStackTrace();
+//        }
+        try {
+            Time startTime;
+            Time endTime;
+            SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+            java.util.Date date =(java.util.Date)format.parse(scheduleStringDTO.getStartTime().concat(":00"));
+            startTime = new Time(date.getTime());
+            System.out.println(startTime);
+            java.util.Date date1 =(java.util.Date)format.parse(scheduleStringDTO.getEndTime().concat(":00"));
+            endTime = new Time(date1.getTime());
+            System.out.println(endTime);
+            scheduleDTO = new ScheduleDTO(scheduleStringDTO.getId(),startTime,endTime,scheduleStringDTO.getDays());
+            return scheduleDTO;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return scheduleDTO;
+    }
+
+    public void deleteSchedule(Long scheduleId, Long hospitalId, Long doctorId) {
+        Hospital hospital = hospitalRepository.findOne(hospitalId);
+        Doctor doctor = doctorRepository.findOne(doctorId);
+        Schedule schedule = scheduleRepository.findOne(scheduleId);
+
+        hospital.getSchedules().remove(schedule);
+        hospitalRepository.save(hospital);
+
+        doctor.getSchedules().remove(schedule);
+        doctorRepository.save(doctor);
+
+        scheduleRepository.delete(schedule.getId());
     }
 }
 

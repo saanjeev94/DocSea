@@ -19,7 +19,7 @@ export class ScheduleService{
 
   addSchedule(schedule:Schedule,id:number){
     const options = new RequestOptions({headers: this.headers});
-    return this.http.post(this.scheduleUrl+'/'+id,schedule,options).map(res=>res.json());
+    return this.http.put(this.scheduleUrl+'/'+id,schedule,options).map(res=>res.json());
   }
 
   getAllSchedule(){

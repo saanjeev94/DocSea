@@ -1,9 +1,9 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.Schedule;
 import org.itglance.docsea.service.ScheduleService;
 import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.itglance.docsea.service.dto.ScheduleStringDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ScheduleController {
 
 
         //Adding Schedule
-        @RequestMapping(value = "/{doctorId}", method=RequestMethod.POST)
+       /* @RequestMapping(value = "/{doctorId}", method=RequestMethod.POST)
         public ResponseEntity<?> addSchedule(@RequestBody ScheduleDTO scheduleDTO
                                             , @PathVariable("doctorId") Long doctorId
                                             , @RequestHeader String Authorization){
@@ -51,7 +51,7 @@ public class ScheduleController {
 //            }
             return null;
         }
-
+*/
 
         //return whole schedule of datatbase
         @GetMapping
@@ -116,18 +116,46 @@ public class ScheduleController {
 
     //update schedule
     @PutMapping(value = "/{doctorId}")
-    public ResponseEntity<?> updateSchedule(@RequestBody ScheduleDTO scheduleDTO
-                                            , @PathVariable("doctorId") Long doctorId){
+    public ResponseEntity<?> updateSchedule(@RequestBody ScheduleStringDTO scheduleStringDTO
+                                            , @PathVariable("doctorId") Long doctorId
+                                            , @RequestHeader String Authorization){
+        System.out.println("*********************before *********************");
+        System.out.println(scheduleStringDTO.toString());
+        Long hospitalId = sessionService.checkSession(Authorization).getHospitalId();
+
+        if(scheduleStringDTO.getEndTime().equals("") || scheduleStringDTO.getStartTime().equals("")){
+            scheduleService.deleteSchedule(scheduleStringDTO.getId(),hospitalId,doctorId);
+            return  new ResponseEntity<String>("Schedule Deleted", HttpStatus.OK);
+        }
+
+        ScheduleDTO scheduleDTO = scheduleService.convertIntoTime(scheduleStringDTO);
+        System.out.println("************************After converting into Time*****************************");
         System.out.println(scheduleDTO.toString());
+
         if(scheduleDTO.getId() == null){
-            log.error("Schedule id is null, can't update it.");
-            return new ResponseEntity<String>("Schedule id is null, can't update it.", HttpStatus.CONFLICT);
+            ScheduleDTO scheduleDto= scheduleService.checkScheduleForInsert(scheduleDTO, doctorId);
+            if(scheduleDto != null){
+                log.error("The schedule is overLapped to "+scheduleDto);
+                System.out.println("The schedule is overLapped to "+scheduleDto);
+                return new ResponseEntity<ScheduleDTO>(scheduleDto,HttpStatus.OK);
+            }
+            else {
+                ScheduleDTO catchSchedule = scheduleService.addSchedule(scheduleDTO, doctorId, hospitalId);
+                log.info("Schedule has beed inserted sucessfully");
+                return new ResponseEntity<ScheduleDTO>(catchSchedule, HttpStatus.OK);
+            }
+
+
+
+           /* log.error("Schedule id is null, can't update it.");
+            return new ResponseEntity<String>("Schedule id is null, can't update it.", HttpStatus.CONFLICT);*/
         }
 
         ScheduleDTO scheduleDTO1 = scheduleService.checkScheduleForUpdate(scheduleDTO, doctorId);
-        if(scheduleDTO1 != null){
+        if(scheduleDTO1 != null  && (scheduleDTO1.getEndTime() != null || scheduleDTO1.getStartTime() != null) ){
+
             log.error("Schedule overLapped, Update schedule denied");
-            return new ResponseEntity<ScheduleDTO>(scheduleDTO1, HttpStatus.CONFLICT);
+            return new ResponseEntity<ScheduleDTO>(scheduleDTO1, HttpStatus.OK);
         }
 
         ScheduleDTO catchSchedule = scheduleService.updateSchedule(scheduleDTO);
@@ -139,37 +167,6 @@ public class ScheduleController {
 
 
     }
-
-
-
-//        //Update Schedule
-//        @RequestMapping(method=RequestMethod.PUT)
-//        public ResponseEntity<Void> updateSchedule(@RequestBody ScheduleDTO scheduleDTO) {
-//            if (scheduleService.isScheduleExist(scheduleDTO)) {
-//                scheduleService.updateSchedule(scheduleDTO);
-//                return new ResponseEntity("Schedule updated", HttpStatus.OK);
-//
-//            } else {
-//                return new ResponseEntity("Schedule does not exists", HttpStatus.CONFLICT);
-//            }
-//        }
-
-
-
-
-
-
-        //Display
-
-        /*@RequestMapping(method = RequestMethod.GET)
-         public ResponseEntity<List<Schedule>> listAllSchedules() {
-            List<Schedule> schedules= scheduleRepository.findAll();
-            if (schedules.isEmpty()) {
-             return new ResponseEntity(HttpStatus.NO_CONTENT);
-
-            }
-            return new ResponseEntity<List<Schedule>>(schedules, HttpStatus.OK);
-         }*/
 
 
 
