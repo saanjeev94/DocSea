@@ -16,17 +16,16 @@ import java.util.List;
 public interface HospitalDoctorRepository extends JpaRepository<HospitalDoctor,Long>{
 
 
+
     @Query("SELECT hd FROM HospitalDoctor  hd WHERE hd.hospital.id=:hospitalId AND hd.doctor.id=:doctorId ")
     public HospitalDoctor findByHospitalDoctor(@Param("hospitalId") Long hospitalId, @Param("doctorId") Long doctorId);
 
-    @Query("SELECT h FROM HospitalDoctor h WHERE h.doctor.name=:searchString " +
-            "OR h.doctor.speciality.name LIKE :searchString " +
-            "OR h.hospital.name=:searchString " +
-            "OR h.hospital.address.streetAddress=:searchString " +
-            "OR h.hospital.address.city.name=:searchString " +
-            "OR h.hospital.address.district.name=:searchString " +
-            "OR h.hospital.address.zone.name=:searchString " +
-            "OR h.hospital.address.country.name=:searchString")
+    @Query("SELECT hd FROM HospitalDoctor hd ,Hospital h, Speciality s,Doctor d WHERE " +
+            "d.name=:searchString " +
+            "OR s.name LIKE :searchString " +
+            "OR h.name LIKE :searchString " +
+            "OR h.name LIKE:searchString " +
+            "OR h.address.streetAddress LIKE :searchString ")
     public List<HospitalDoctor> findDoctorByString(@Param("searchString") String searchString);
 
 
