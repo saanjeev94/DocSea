@@ -62,97 +62,27 @@
         <div class="panel-body table-padding">
           <div class="row">
             <div class="col-md-offset-1 col-md-10">
-              <table class="table">
+
+              <table class="table table-doctor-schedule">
                 <tbody class="text-center">
                 <tr>
                   <th class="text-center">Day</th>
                   <th class="text-center">Time</th>
-                  <th class="text-center">Action</th>
                 </tr>
-                <tr>
-                  <td>Sunday</td>
-                  <td>2:00 pm to 4:00 pm</td>
-                  <td>
-                    <button class="btn btn-warning">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Monday</td>
-                  <td>2:00 pm to 4:00 pm</td>
-                  <td>
-                    <button class="btn btn-warning">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Tuesday</td>
-                  <td>2:00 pm to 4:00 pm</td>
-                  <td>
-                    <button class="btn btn-warning">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Wednesday</td>
-                  <td>2:00 pm to 4:00 pm</td>
-                  <td>
-                    <button class="btn btn-warning">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Thursday</td>
-                  <td>2:00 pm to 4:00 pm</td>
-                  <td>
-                    <button class="btn btn-warning">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Friday</td>
-                  <td>2:00 pm to 4:00 pm</td>
-                  <td>
-                    <button class="btn btn-warning">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Saturday</td>
-                  <td>2:00 pm to 4:00 pm</td>
-                  <td>
-                    <button class="btn btn-warning">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  </td>
-                </tr>
+                  <ng-container *ngFor="let schedule of doctorScheduleList">
+                    <tr>
+                      <td>{{schedule.days.day}}</td>
+                      <td>
+                        <span>
+                          <input type="time" name="startTime" [(ngModel)]="schedule.startTime" #startTime="ngModel" [disabled]="tick">
+                        </span>
+                        to
+                        <span>
+                          <input type="time" name="endTime" [(ngModel)]="schedule.endTime" #endTime="ngModel" [disabled]="tick">
+                        </span>
+                      </td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </table>
             </div>
@@ -161,9 +91,22 @@
         <div class="panel-footer footer-height">
           <p><br></p>
 
+        <div class="panel-footer">
+          <ng-container *ngIf="hide">
+          <button class="btn btn-warning" (click)="onEdit()">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          </ng-container>
+          <ng-container name="save-block" *ngIf="!hide">
+            <button class="btn btn-success" name="save" (click)="onSave()">
+              <span class="glyphicon glyphicon-ok">
+              </span>
+            </button>
+          </ng-container>
         </div>
 
       </div>
     </div>
   </div>
+</div>
 </div>

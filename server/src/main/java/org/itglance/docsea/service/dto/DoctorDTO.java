@@ -1,9 +1,6 @@
 package org.itglance.docsea.service.dto;
 
-import org.itglance.docsea.domain.Contact;
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.domain.Schedule;
-import org.itglance.docsea.domain.Speciality;
+import org.itglance.docsea.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ public class DoctorDTO {
     private Long id;
     private int nmcNumber;
     private String name;
-    private String qualification;
+    private Qualification qualification;
     private String photo;
     private String gender;
     private Speciality speciality;
@@ -26,7 +23,7 @@ public class DoctorDTO {
 
     public DoctorDTO(){}
 
-    public DoctorDTO(Long id, int nmcNumber, String name, String qualification, String photo, String gender, Speciality speciality, Contact contact, List<Schedule> schedules, String details) {
+    public DoctorDTO(Long id, int nmcNumber, String name, Qualification qualification, String photo, String gender, Speciality speciality, Contact contact, List<Schedule> schedules, String details) {
         this.id = id;
         this.nmcNumber = nmcNumber;
         this.name = name;
@@ -54,7 +51,7 @@ public class DoctorDTO {
     public String getName() { return name;}
 
 
-    public String getQualification() {
+    public Qualification getQualification() {
         return qualification;
     }
 

@@ -42,9 +42,10 @@
           <label class="col-md-2  control-label">Qualification</label>
           <div class="col-md-3">
             <select type="text" class="form-control" name="docqualification"
-                    [(ngModel)]="doctor.qualification" #docqualification="ngModel" required>
-              <option value="MD">MD</option>
-              <option value="MBBS">MBBS</option>
+                    [(ngModel)]="doctor.qualification.qualification" #docqualification="ngModel" required>
+              <ng-container *ngFor="let qualification of qualificationList">
+                <option value="qualification.qualification">{{qualification.qualification}}</option>
+              </ng-container>
             </select>
 
             <div *ngIf="docqualification.errors && docqualification.touched" class="alert alert-danger custom-label-alert">
@@ -54,13 +55,13 @@
 
           <!-- Speciality -->
           <label class="col-md-3  control-label">Speciality:</label>
-
           <div class="col-md-3">
             <select type="text" class="form-control" name="docspeciality"
                     [(ngModel)]="doctor.speciality.name"
                     #docspeciality="ngModel" required>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Neurology">Neurology</option>
+              <ng-container *ngFor="let speciality of specialityList">
+                <option value="speciality.name">{{speciality.name}}</option>
+              </ng-container>
             </select>
 
             <div *ngIf="docspeciality.errors && docspeciality.touched" class="alert alert-danger custom-label-alert">

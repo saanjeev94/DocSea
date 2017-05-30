@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions} from "@angular/http";
-import {Hospital} from "../model/hospital.model";
 import 'rxjs/add/operator/map';
-import {User} from "../model/user.model";
 import {HospitalUser} from "../model/hosptial-user.model";
 import {Observable} from "rxjs/Observable";
 

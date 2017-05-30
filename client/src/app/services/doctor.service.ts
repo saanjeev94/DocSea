@@ -13,7 +13,6 @@ export class DoctorService{
   private headers:Headers;
   private doctorUrl='http://localhost:8080/api/doctors';
   private doctorSearchUrl='http://localhost:8080/api/doctorSearch/';
-
   token = localStorage.getItem('currentUser');
 
   constructor(private http:Http){
@@ -39,9 +38,6 @@ export class DoctorService{
   }
 
   updateDoctor(formData:FormData){
-    let headers= new Headers();
-    // headers.append('Content-Type', 'undefined' );
-    // headers.append('Authorization', this.token );
     const options = new RequestOptions({headers: this.headers});
     return this.http.put(this.doctorUrl,formData,options).map(res=>res.json());
   }
