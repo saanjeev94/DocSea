@@ -33,7 +33,7 @@
 }
 
 .table-padding{
-  padding-top: 57px;
+  padding-top: 50px;
 }
 
 .custom-image{
@@ -46,4 +46,16 @@ td.overflow{
   display: block;
   height: 90px;
   overflow: auto;
+}
+
+.table-doctor-schedule > tbody > tr > td{
+  height:50px;
+  padding-top:12px;
+}
+
+.table-doctor-schedule > tbody > tr > th{
+  height:53px;
+  padding-top:15px;
+  font-size: large;
+  font-weight: bold;
 }

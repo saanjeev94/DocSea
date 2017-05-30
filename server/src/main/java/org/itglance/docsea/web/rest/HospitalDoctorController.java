@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by sriyanka on 5/23/2017.
  */
-
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/hospitalDoctors")
 public class HospitalDoctorController {

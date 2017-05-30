@@ -57,7 +57,6 @@ public class DoctorController {
         System.out.println(file.getName());
         System.out.println(doctor);
         ObjectMapper objectMapper=new ObjectMapper();
-
         try{
             DoctorDTO doctorDTO=objectMapper.readValue(doctor,DoctorDTO.class);
             String photoName=doctorService.renamePhoto(file);

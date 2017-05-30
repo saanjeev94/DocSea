@@ -20,6 +20,7 @@ import {DoctorGridView} from "./doctor/doctor-grid-view";
 import {AddressService} from "./services/address.service";
 import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
 import {AuthenticationService} from "./services/authentication.service";
+import {ScheduleService} from "./services/schedule.service";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {AuthenticationService} from "./services/authentication.service";
     HospitalService,
     DoctorService,
     AddressService,
-    AuthenticationService
+    AuthenticationService,
+    ScheduleService
   ],
 
   bootstrap: [AppComponent]

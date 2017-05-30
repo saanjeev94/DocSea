@@ -8,7 +8,7 @@ import {HospitalUser} from "../model/hosptial-user.model";
 @Injectable()
 export class HospitalService{
   private headers:Headers;
-  private hospitalUrl = 'http://localhost:8080/api/hospital/';
+  private hospitalUrl = 'http://localhost:9999/api/hospital/';
   token = localStorage.getItem('curretUser');
   constructor(private http: Http){
     this.headers = new Headers();

@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Created by sriyanka on 5/14/2017.
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value="/api/schedules")
 public class ScheduleController {
@@ -35,16 +36,20 @@ public class ScheduleController {
         public ResponseEntity<?> addSchedule(@RequestBody ScheduleDTO scheduleDTO
                                             , @PathVariable("doctorId") Long doctorId
                                             , @RequestHeader String Authorization){
+            System.out.println(scheduleDTO.toString());
             Long hospitalId = sessionService.checkSession(Authorization).getHospitalId();
-            ScheduleDTO scheduleDto= scheduleService.checkScheduleForInsert(scheduleDTO, doctorId);
-            if(scheduleDto != null){
-                log.error("The schedule is overLapped to "+scheduleDto);
-                System.out.println("The schedule is overLapped to "+scheduleDto);
-                return new ResponseEntity<ScheduleDTO>(scheduleDto,HttpStatus.CONFLICT);
-            }
-            ScheduleDTO catchSchedule = scheduleService.addSchedule(scheduleDTO,doctorId,hospitalId);
-            log.info("Schedule has beed inserted sucessfully");
-            return new ResponseEntity<ScheduleDTO>(catchSchedule,HttpStatus.OK);
+//            ScheduleDTO scheduleDto= scheduleService.checkScheduleForInsert(scheduleDTO, doctorId);
+//            if(scheduleDto != null){
+//                log.error("The schedule is overLapped to "+scheduleDto);
+//                System.out.println("The schedule is overLapped to "+scheduleDto);
+//                return new ResponseEntity<ScheduleDTO>(scheduleDto,HttpStatus.OK);
+//            }
+//            else {
+//                ScheduleDTO catchSchedule = scheduleService.addSchedule(scheduleDTO, doctorId, hospitalId);
+//                log.info("Schedule has beed inserted sucessfully");
+//                return new ResponseEntity<ScheduleDTO>(catchSchedule, HttpStatus.OK);
+//            }
+            return null;
         }
 
 

@@ -8,7 +8,7 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class DoctorService{
   private headers:Headers;
-  private doctorUrl='http://localhost:8080/api/doctors';
+  private doctorUrl='http://localhost:9999/api/doctors';
 
   token = localStorage.getItem('currentUser');
 
