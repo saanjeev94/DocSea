@@ -48,11 +48,14 @@ public class DoctorSearchService {
 
     public List<HospitalDoctorDTO> findDoctor(String searchString){
         List<HospitalDoctor> hospitalDoctors=hospitalDoctorRepository.findDoctorByString(searchString);
+        System.out.println("***********************hospital doctor******************");
+        System.out.println(hospitalDoctors);
         if(hospitalDoctors==null){
             return null;
         }
 
         List<HospitalDoctorDTO> hospitalDoctorDTO=new ArrayList<>();
+        hospitalDoctorDTO.clear();
         for(HospitalDoctor d : hospitalDoctors)
         {
             hospitalDoctorDTO.add(new HospitalDoctorDTO(d));

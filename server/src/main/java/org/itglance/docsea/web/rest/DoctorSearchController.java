@@ -26,11 +26,10 @@ public class DoctorSearchController {
     private DoctorSearchService doctorSearchService;
 
     @RequestMapping(value="/{searchString}", method = RequestMethod.GET)
-    public ResponseEntity<List<HospitalDoctorDTO>> searchDoctor(@PathVariable String searchString){
+    public ResponseEntity<List<HospitalDoctorDTO>> searchDoctor(@PathVariable("searchString") String searchString){
        List<HospitalDoctorDTO> hospitalDoctors= doctorSearchService.findDoctor(searchString);
 
        return new ResponseEntity<List<HospitalDoctorDTO>>(hospitalDoctors,HttpStatus.OK);
-
     }
 
 
