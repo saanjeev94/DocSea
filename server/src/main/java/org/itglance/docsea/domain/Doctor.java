@@ -18,14 +18,14 @@ public class Doctor {
     private Long id;
 
     @NotNull( message = "NMC number cannot be null")
-//    @Column(unique = true)
     private int nmcNumber;
 
     @NotNull( message = "Name cannot be null")
     private String name;
 
     @NotNull( message = "Qualification cannot be null")
-    private String qualification;
+    @OneToOne
+    private Qualification qualification;
 
     @NotNull( message = "Photo cannot be null")
     private String photo;
@@ -70,11 +70,11 @@ public class Doctor {
         this.name = name;
     }
 
-    public String getQualification() {
+    public Qualification getQualification() {
         return qualification;
     }
 
-    public void setQualification(String qualification) {
+    public void setQualification(Qualification qualification) {
         this.qualification = qualification;
     }
 
@@ -93,7 +93,6 @@ public class Doctor {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
 
     public Speciality getSpeciality() {
         return speciality;

@@ -1,15 +1,13 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions} from "@angular/http";
-import {Hospital} from "../model/hospital.model";
 import 'rxjs/add/operator/map';
-import {User} from "../model/user.model";
 import {HospitalUser} from "../model/hosptial-user.model";
 
 @Injectable()
 export class HospitalService{
   private headers:Headers;
   private hospitalUrl = 'http://localhost:9999/api/hospital/';
-  token = localStorage.getItem('curretUser');
+  token = localStorage.getItem('currentUser');
   constructor(private http: Http){
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
