@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by soni on 5/8/2017.
  */
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/status")
 public class StatusController {
@@ -29,19 +30,24 @@ public class StatusController {
     private final HospitalRepository hospitalRepository;
     private final HospitalDoctorRepository hospitalDoctorRepository;
     private final DoctorRepository doctorRepository;
+    private final HospitalUserRepository hospitalUserRepository;
 
     public StatusController(UserRepository userRepository, StatusRepository statusRepository, HospitalRepository hospitalRepository
-                            , HospitalDoctorRepository hospitalDoctorRepository, DoctorRepository doctorRepository) {
+                            , HospitalDoctorRepository hospitalDoctorRepository, DoctorRepository doctorRepository
+                            , HospitalUserRepository hospitalUserRepository) {
         this.userRepository = userRepository;
         this.statusRepository = statusRepository;
         this.hospitalRepository = hospitalRepository;
         this.hospitalDoctorRepository = hospitalDoctorRepository;
         this.doctorRepository = doctorRepository;
+        this.hospitalUserRepository = hospitalUserRepository;
     }
 
     @PutMapping(value = "/toggleHospital/{userId}")
     public ResponseEntity<?> toggleHospitalStatus(@PathVariable("userId") Long userId){
-        User user = userRepository.findOne(userId);
+        HospitalUser hospitalUser = hospitalUserRepository.findOne(userId);
+
+        User user = userRepository.findOne(hospitalUser.getUser().getId());
         Status status = new Status();
         if(user.getStatus().getStatus().equalsIgnoreCase("ACTIVE"))
         {
@@ -56,7 +62,8 @@ public class StatusController {
         }
         user.setStatus(status);
         userRepository.save(user);
-        return new ResponseEntity<String>("Toggled user status !!", HttpStatus.OK);
+        HospitalUser hospitalUser1 = hospitalUserRepository.findOne(userId);
+        return new ResponseEntity<HospitalUser>(hospitalUser1, HttpStatus.OK);
     }
 
     @PutMapping(value = "/toggleDoctor/{doctorId}")
@@ -80,6 +87,6 @@ public class StatusController {
         }
         hospitalDoctor.setStatus(status);
         hospitalDoctorRepository.save(hospitalDoctor);
-        return new ResponseEntity<String>("Toggled doctor status !!", HttpStatus.OK);
+        return new ResponseEntity<HospitalDoctor>(hospitalDoctor, HttpStatus.OK);
     }
 }

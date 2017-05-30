@@ -22,10 +22,8 @@ export class DoctorGridView implements OnInit{
 
   getDoctorDetails(doctor: string){
     // console.log(doctor);
-    this.doctorService.searchDoctor(doctor).subscribe((result) => {
-      this.doctorList = result;
-    });
-    // console.log(this.doctorList);
+    this.doctorService.searchDoctor(doctor).subscribe((result) => this.doctorList = result );
+    console.log(this.doctorList);
   }
 
 }

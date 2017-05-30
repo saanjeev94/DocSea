@@ -4,12 +4,14 @@ import {Hospital} from "../model/hospital.model";
 import 'rxjs/add/operator/map';
 import {User} from "../model/user.model";
 import {HospitalUser} from "../model/hosptial-user.model";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class HospitalService{
   private headers:Headers;
   private hospitalUrl = 'http://localhost:8080/api/hospital/';
-  token = localStorage.getItem('curretUser');
+  token = localStorage.getItem('currentUser');
+
   constructor(private http: Http){
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
@@ -32,6 +34,11 @@ export class HospitalService{
   }
 
   getAllHospitals(){
+    return this.http.get(this.hospitalUrl).map(res => res.json());
+  }
+
+  toggleHospitalStatus(id):Observable<any>{
+    return this.http.put('http://localhost:8080/api/status/toggleHospital/'+id,id).map(res => res.json());
 
   }
 
