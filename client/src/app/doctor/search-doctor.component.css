@@ -14,7 +14,7 @@
 }
 
 .img-custom{
-  height: 70px;
+  height: 80px;
   width: 335px;
   margin-bottom: 20px;
   position: relative;
@@ -34,4 +34,21 @@
 .search-result:hover {
   color: #eee;
   background-color: #607D8B;
+}
+
+.custom-submit{
+  display: none;
+}
+
+.custom-search{
+  position: absolute;
+  top: 13px;
+  left: 512px;
+}
+
+#background{
+  background: url("../../assets/images/search-background.jpg");
+  padding-bottom: 270px;
+  margin-top: -20px;
+  padding-top: 45px;
 }

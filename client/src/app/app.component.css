@@ -1,3 +1,7 @@
+.navbar{
+  margin-bottom: 0;
+}
+
 .navbar, .dropdown-menu{
   background: #3498db;
 }
@@ -41,16 +45,16 @@
   cursor: pointer;
 }
 
-.margin-left{
+.padding-left{
   display: block;
-  padding:7px 0;
+  padding: 7px 21px;
 }
 
-.margin-left:hover{
+.padding-left:hover{
   background-color: white;
 }
 
-.margin-left:hover{
+.paddding-left:hover{
   color: #f4f4f4;
 }
 
@@ -59,6 +63,22 @@
 }
 
 .img-custom{
+  height: 50px;
+  width: 50px;
   position: relative;
-  bottom : 8px;
+  top: -15px;
+  left: 10px;
 }
+
+hr{
+  margin: 0;
+}
+
+footer{
+  font-size: 15px;
+  padding: 3px 0;
+  text-align: center;
+  background: #3498db;
+  color: white;
+}
+
