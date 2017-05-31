@@ -14,6 +14,8 @@ export class AppComponent implements DoCheck, AfterViewInit{
   token: string;
 
   private isLoggedIn: boolean;
+  private userType : any;
+  private username : string;
 
   constructor(private authService: AuthenticationService, private router: Router){
 
@@ -25,6 +27,8 @@ export class AppComponent implements DoCheck, AfterViewInit{
     }else{
       this.isLoggedIn = true;
     }
+    this.username = localStorage.getItem('username');
+    this.userType = localStorage.getItem('userType');
   }
 
   ngAfterViewInit(){

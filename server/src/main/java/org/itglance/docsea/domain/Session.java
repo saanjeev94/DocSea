@@ -13,6 +13,7 @@ public class Session {
     private Long hospitalId;
     private Long userId;
     private int userType;
+    private String username;
 
     public String getToken() {
         return token;
@@ -46,6 +47,14 @@ public class Session {
         this.userType = userType;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "Session{" +
@@ -53,10 +62,11 @@ public class Session {
                 ", hospitalId=" + hospitalId +
                 ", userId=" + userId +
                 ", userType=" + userType +
+                ", username='" + username + '\'' +
                 '}';
     }
 
     public String toStringForToken() {
-        return token+"."+hospitalId+"."+userId+"."+userType;
+        return token+"."+hospitalId+"."+userId+"."+userType+"."+username;
     }
 }

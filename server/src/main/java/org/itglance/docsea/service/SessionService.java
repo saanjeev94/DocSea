@@ -80,6 +80,7 @@ public class SessionService {
         session.setHospitalId(hospitalUser.getHospital().getId());
         session.setUserId(hospitalUser.getUser().getId());
         session.setUserType(hospitalUser.getUser().getUserType());
+        session.setUsername(hospitalUser.getUser().getUsername());
         sessions.put(token, session);
         sessionRepository.save(session);
 

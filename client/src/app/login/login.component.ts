@@ -27,6 +27,7 @@ export class LoginComponent{
     localStorage.setItem('hospitalId', this.tokenBack.hospitalId);
     localStorage.setItem('userId', this.tokenBack.userId);
     localStorage.setItem('userType', this.tokenBack.userType);
+    localStorage.setItem('username', this.tokenBack.username);
     this.router.navigate(['/hospital-panel']);
   }
 }

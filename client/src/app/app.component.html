@@ -22,14 +22,20 @@
 
         <!--  ROUTERLINK -->
         <li class="active"><a routerLink="/search-doctor" routerLinkActive="active">Find Doc</a></li>
-        <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span *ngIf="username; else noUser">{{ username }}</span>
+            <ng-template #noUser>More</ng-template>
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
-            <ng-container *ngIf="isLoggedIn">
-              <li><a routerLink="/hospital-panel" routerLinkActive="active" class="margin-left text-center">Manage</a></li>
+            <ng-container *ngIf="isLoggedIn && userType == 0">
+              <li><a routerLink="/admin" routerLinkActive="active" class="margin-left text-center">Manage</a></li>
             </ng-container>
+            <ng-container *ngIf="isLoggedIn && userType == 1">
+            <li><a routerLink="/hospital-panel" routerLinkActive="active" class="margin-left text-center">Manage</a></li>
+          </ng-container>
             <div *ngIf="!isLoggedIn; else notLogged">
               <li><a routerLink="/login" routerLinkActive="active" class="margin-left text-center">Login</a></li>
             </div>
