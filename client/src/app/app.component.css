@@ -1,9 +1,10 @@
 .navbar{
   margin-bottom: 0;
+  border-bottom: none;
 }
 
 .navbar, .dropdown-menu{
-  background: #3498db;
+  background: #344f61;
 }
 
 .navbar a{
@@ -74,11 +75,4 @@ hr{
   margin: 0;
 }
 
-footer{
-  font-size: 15px;
-  padding: 3px 0;
-  text-align: center;
-  background: #3498db;
-  color: white;
-}
 

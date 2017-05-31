@@ -127,7 +127,8 @@ public class DoctorService {
     public void updateDoctor(DoctorDTO doctorDTO){
 
         System.out.println("**************************************************************************");
-        //Doctor doctor = doctorRepository.findOne(doctorDTO.getId());
+        System.out.println("docDTO::::"+doctorDTO.toString());
+
 
         Doctor doctor = doctorRepository.findOne(doctorDTO.getId());
         doctor.setName(doctorDTO.getName());
@@ -145,17 +146,22 @@ public class DoctorService {
 
         doctor.setNmcNumber(doctorDTO.getNmcNumber());
         doctor.setDetails(doctorDTO.getDetails());
-        doctor.setQualification(doctorDTO.getQualification());
-        doctor.setSpeciality(doctorDTO.getSpeciality());
+        Qualification qualification=qualificationRepository.findOne(doctorDTO.getQualification().getId());
+//        qualificationRepository.save(qualification);
+        doctor.setQualification(qualification);
+
+        Speciality speciality=specialityRepository.findOne(doctorDTO.getSpeciality().getId());
+//        specialityRepository.save(speciality);
+        doctor.setSpeciality(speciality);
 
         doctorRepository.save(doctor);
 
     }
 
     public String renamePhoto(MultipartFile file) {
-        final String UPLOADED_FOLDER = "F:\\docsea\\docsea\\client\\src\\assets\\images\\";
+//        final String UPLOADED_FOLDER = "F:\\docsea\\docsea\\client\\src\\assets\\images\\";
 //        final String UPLOADED_FOLDER = "F:\\college\\Project\\DocSea\\client\\src\\assets\\images\\";
-//        final String UPLOADED_FOLDER = "D:\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
+        final String UPLOADED_FOLDER = "D:\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
 //        final String UPLOADED_FOLDER = "F:\\projects\\DocSea\\client\\src\\assets\\images\\";
         int random = (int) (Math.random() * 50000 + 1);
         String fileName = file.getOriginalFilename();
@@ -185,51 +191,6 @@ public class DoctorService {
         }
         return false;
     }
-
-
-
-//        public void updateDoctor(DoctorDTO doctorDTO){
-//
-//            Doctor doctor = doctorRepository.getOne(doctorDTO.getId());
-//
-//
-//
-//            System.out.println("update doctor" +doctorDTO.toString());
-//
-//
-//            //doctor.setNmcNumber(doctorDTO.getNmcNumber());
-////            doctor.setId(doctorDTO.getId());
-//            doctor.setName(doctorDTO.getName());
-//            doctor.setName(doctorDTO.getName());
-//            doctor.setPhoto(doctorDTO.getPhoto());
-//            doctor.setGender(doctorDTO.getGender());
-//            Speciality speciality=new Speciality() ;
-//            speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
-//            doctor.setSpeciality(speciality);
-//
-//
-////            Contact contact = new Contact();
-//            System.out.println("contact id " +doctorDTO.getContact().getId());
-////            doctor.getContact().setId(doctorDTO.getContact().getId());
-//            doctor.getContact().setContactNumber1(doctorDTO.getContact().getContactNumber1());
-//            doctor.getContact().setContactNumber2(doctorDTO.getContact().getContactNumber2());
-//            doctor.getContact().setEmailId(doctorDTO.getContact().getEmailId());
-//            doctor.getContact().setWebsite(doctorDTO.getContact().getWebsite());
-//            doctor.getContact().setFax(doctorDTO.getContact().getFax());
-////            doctor.setContact(contact);
-//
-//            //doctor.setDetails(doctorDTO.getDetails());
-//            //System.out.println(doctor.toString());
-//
-//            doctorRepository.save(doctor);
-//
-//
-//
-//
-//
-//
-//
-//        }
 
         public void linkSchedule(Long id,ScheduleDTO scheduleDTO, List<Schedule> schedule){
             Doctor doctor=doctorRepository.getOne(id);

@@ -83,7 +83,6 @@ ul li{
 }
 /*        Style       */
 
-
 .card{
   background: none repeat scroll 0 0 #FFFFFF;
   border-radius: 4px;
@@ -157,6 +156,12 @@ ul li{
   font-weight: 400;
   padding-bottom: 10px;
   text-align: center;
+}
+
+.short-content{
+  height: 65px;
+  width: 322px;
+  overflow: hidden;
 }
 
 /*       Fix bug for IE      */

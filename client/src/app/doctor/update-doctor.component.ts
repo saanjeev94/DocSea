@@ -5,7 +5,8 @@ import {Component, OnInit} from '@angular/core';
 import {Doctor} from "../model/doctor.model";
 import {DoctorService} from "../services/doctor.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../services/authentication.service";
+import {SpecialityService} from "../services/speciality.service";
+import {QualificationService} from "../services/qualification.service";
 
 @Component({
   selector: 'add-doctor',
@@ -15,16 +16,25 @@ import {AuthenticationService} from "../services/authentication.service";
 export class UpdateDoctorComponent implements OnInit{
   doctor:Doctor;
   photofile:File=null;
+  specialityList:any;
+  qualificationList:any;
 
   constructor(private doctorService:DoctorService, private route:ActivatedRoute, private router: Router,
-              private authService: AuthenticationService){
+              private specialityService:SpecialityService, private qualificationService:QualificationService){
     this.doctor=new Doctor();
   }
 
   ngOnInit(){
     this.route.params.subscribe(params=>{
       this.getDoctorDetails(params['id']);
-    })
+    });
+      this.specialityService.getAllSpeciality().subscribe((response)=>{
+        this.specialityList=response;
+      });
+      this.qualificationService.getAllQualification().subscribe((response)=>{
+        this.qualificationList=response;
+      });
+
   }
 
   onChange(event) {

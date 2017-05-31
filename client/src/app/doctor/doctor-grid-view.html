@@ -16,7 +16,7 @@
               <div class="main">
                 <h3 class="name">{{ doc.doctor.name }}</h3>
                 <p class="profession">{{ doc.doctor.speciality.name }}</p>
-                <p class="text-center">{{doc.doctor.details}} </p>
+                <p class="text-center short-content">{{doc.doctor.details}} </p>
                 <hr class="margin-5">
                 <p class="text-center lead">{{ doc.doctor.gender}}</p>
               </div>
@@ -24,12 +24,12 @@
           </div> <!-- end front panel -->
           <div class="back">
             <div class="header">
-              <h5 class="nmc">d{{ doc.doctor.nmcNumber }}</h5>
+              <h5 class="nmc">NMC No. {{ doc.doctor.nmcNumber }}</h5>
             </div>
             <div class="content">
               <div class="main">
                 <h4 class="text-center">Qualification</h4>
-                <p class="text-center">{{ doc.doctor.qualification }}</p>
+                <p class="text-center">{{ doc.doctor.qualification.name }}</p>
                 <hr>
                 <h4 class="text-center">Hospital Contact</h4>
                 <ul class="no-list-style text-center">
@@ -39,7 +39,6 @@
                 </ul>
                 <hr class="margin-5">
                 <button class="btn btn-sm btn-primary" style="margin-left: 110px;">View Schedule</button>
-
               </div>
             </div>
           </div> <!-- end back panel -->

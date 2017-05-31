@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                   <td>Qualification</td>
-                  <td>{{doctor.name}}</td>
+                  <td>{{doctor.qualification.name}}</td>
                 </tr>
                 <tr>
                   <td>Speciality</td>
@@ -34,7 +34,7 @@
                   <td>{{doctor.contact.emailId}}</td>
                 </tr>
                 <tr>
-                  <td>Contact Number</td>
+                  <td>Contact No.</td>
                   <td>{{doctor.contact.contactNumber1}} , {{doctor.contact.contactNumber2}}</td>
                 </tr>
                 <tr>
@@ -69,33 +69,30 @@
                   <th class="text-center">Day</th>
                   <th class="text-center">Time</th>
                 </tr>
-                  <ng-container *ngFor="let schedule of doctorScheduleList">
-                    <tr>
-                      <td>{{schedule.days.day}}</td>
-                      <td>
+                <ng-container *ngFor="let schedule of doctorScheduleList">
+                  <tr>
+                    <td>{{schedule.days.day}}</td>
+                    <td>
                         <span>
                           <input type="time" name="startTime" [(ngModel)]="schedule.startTime" #startTime="ngModel" [disabled]="tick">
                         </span>
-                        to
-                        <span>
+                      to
+                      <span>
                           <input type="time" name="endTime" [(ngModel)]="schedule.endTime" #endTime="ngModel" [disabled]="tick">
                         </span>
-                      </td>
-                    </tr>
-                  </ng-container>
+                    </td>
+                  </tr>
+                </ng-container>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        <div class="panel-footer footer-height">
-          <p><br></p>
-
         <div class="panel-footer">
           <ng-container *ngIf="hide">
-          <button class="btn btn-warning" (click)="onEdit()">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </button>
+            <button class="btn btn-warning" (click)="onEdit()">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
           </ng-container>
           <ng-container name="save-block" *ngIf="!hide">
             <button class="btn btn-success" name="save" (click)="onSave()">
@@ -108,5 +105,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

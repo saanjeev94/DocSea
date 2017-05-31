@@ -16,6 +16,12 @@
   cursor: pointer;
 }
 
+.panel-heading{
+  background: #99ACA2;
+  color: white;
+  text-align: center;
+}
+
 .table-user-information > tbody > tr {
   border-top: 1px solid rgb(221, 221, 221);
 }
@@ -33,7 +39,7 @@
 }
 
 .table-padding{
-  padding-top: 50px;
+  padding-top: 56px;
 }
 
 .custom-image{
