@@ -59,4 +59,9 @@ public class UserService {
         }
         return  false;
     }
+
+    public User getAUser(Long userId) {
+        User user = userRepository.findOne(userId);
+        return user;
+    }
 }

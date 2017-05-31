@@ -30,6 +30,15 @@ public class UserController {
 
     public static final Logger logger = LoggerFactory.getLogger(HospitalController.class);
 
+
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<?> getUser(@RequestBody Long userId){
+        User user = userService.getAUser(userId);
+        return new ResponseEntity<User>(user,HttpStatus.OK);
+    }
+
+
+
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody User user){
         System.out.println("******************* LOGIN ********************");
