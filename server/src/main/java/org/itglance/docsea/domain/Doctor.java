@@ -132,7 +132,7 @@ public class Doctor {
                 "id=" + id +
                 ", nmcNumber=" + nmcNumber +
                 ", name='" + name + '\'' +
-                ", qualification='" + qualification + '\'' +
+                ", name='" + qualification + '\'' +
                 ", photo='" + photo + '\'' +
                 ", gender='" + gender + '\'' +
                 ", speciality=" + speciality +

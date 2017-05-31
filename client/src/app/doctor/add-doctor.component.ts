@@ -18,8 +18,8 @@ export class AddDoctorComponent implements OnInit{
   title = 'Add Doctor';
   doctor:Doctor;
   photofile:File;
-  speciality:any;
-  qualification:any;
+  specialityList:any;
+  qualificationList:any;
 
 
   constructor(private doctorService:DoctorService, private authService: AuthenticationService, private router: Router,
@@ -29,10 +29,10 @@ export class AddDoctorComponent implements OnInit{
 
   ngOnInit(){
     this.specialityService.getAllSpeciality().subscribe((response)=>{
-      this.speciality=response;
+      this.specialityList=response;
     });
     this.qualificationService.getAllQualification().subscribe((response)=>{
-      this.qualification=response;
+      this.qualificationList=response;
     });
   }
 

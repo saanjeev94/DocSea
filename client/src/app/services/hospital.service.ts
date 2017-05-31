@@ -7,7 +7,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class HospitalService{
   private headers:Headers;
-  private hospitalUrl = 'http://localhost:8080/api/hospital/';
+  private hospitalUrl = 'http://localhost:9999/api/hospital/';
   token = localStorage.getItem('currentUser');
 
   constructor(private http: Http){
@@ -36,7 +36,7 @@ export class HospitalService{
   }
 
   toggleHospitalStatus(id):Observable<any>{
-    return this.http.put('http://localhost:8080/api/status/toggleHospital/'+id,id).map(res => res.json());
+    return this.http.put('http://localhost:9999/api/status/toggleHospital/'+id,id).map(res => res.json());
 
   }
 

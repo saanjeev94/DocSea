@@ -22,6 +22,8 @@ import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
 import {AuthenticationService} from "./services/authentication.service";
 import {AdminComponent} from "./admin/admin.component";
 import {ScheduleService} from "./services/schedule.service";
+import {QualificationService} from "./services/qualification.service";
+import {SpecialityService} from "./services/speciality.service";
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import {ScheduleService} from "./services/schedule.service";
     DoctorService,
     AddressService,
     AuthenticationService,
-    ScheduleService
+    ScheduleService,
+    QualificationService,
+    SpecialityService
   ],
 
   bootstrap: [AppComponent]
