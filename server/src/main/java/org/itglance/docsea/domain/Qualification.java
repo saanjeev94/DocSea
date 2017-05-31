@@ -14,7 +14,7 @@ public class Qualification {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    String qualification;
+    String name;
 
     public Long getId() {
         return id;
@@ -24,11 +24,11 @@ public class Qualification {
         this.id = id;
     }
 
-    public String getQualification() {
-        return qualification;
+    public String getName() {
+        return name;
     }
 
-    public void setQualification(String qualification) {
-        this.qualification = qualification;
+    public void setName(String name) {
+        this.name = name;
     }
 }

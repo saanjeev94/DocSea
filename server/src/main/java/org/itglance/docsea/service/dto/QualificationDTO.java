@@ -8,25 +8,25 @@ import org.itglance.docsea.domain.Qualification;
 public class QualificationDTO {
 
     private Long id;
-    private String qualification;
+    private String name;
 
     public QualificationDTO() {
     }
 
-    public QualificationDTO(Long id, String qualification) {
+    public QualificationDTO(Long id, String name) {
         this.id = id;
-        this.qualification = qualification;
+        this.name = name;
     }
 
-    public QualificationDTO(Qualification qualification){
-        this(qualification.getId(),qualification.getQualification());
+    public QualificationDTO(Qualification name){
+        this(name.getId(), name.getName());
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getQualification() {
-        return qualification;
+    public String getName() {
+        return name;
     }
 }

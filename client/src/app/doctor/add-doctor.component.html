@@ -4,7 +4,7 @@
       <form class="form-horizontal form-box animated fadeInDownBig" #adddoctor="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <h2 class="text-center">Add a Doctor</h2>
         <div class="form-group" >
-          <label class="col-md-2 control-label">Name:</label>
+          <label class="col-md-2 control-label">Name</label>
           <div class="col-md-9">
             <input type="text" class="form-control" id="docName" name="docName"
                    [(ngModel)]="doctor.name" #docName="ngModel"
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-md-2  control-label">Gender:</label>
+          <label class="col-md-2  control-label">Gender</label>
           <div class="col-md-9">
             <span class="col-md-9 form-control">
             <span class="col-md-4">
@@ -42,9 +42,9 @@
           <label class="col-md-2  control-label">Qualification</label>
           <div class="col-md-3">
             <select type="text" class="form-control" name="docqualification"
-                    [(ngModel)]="doctor.qualification.qualification" #docqualification="ngModel" required>
+                    [(ngModel)]="doctor.qualification.name" #docqualification="ngModel" required>
               <ng-container *ngFor="let qualification of qualificationList">
-                <option value="qualification.qualification">{{qualification.qualification}}</option>
+                <option value="{{qualification.name}}">{{qualification.name}}</option>
               </ng-container>
             </select>
 
@@ -54,13 +54,13 @@
           </div>
 
           <!-- Speciality -->
-          <label class="col-md-3  control-label">Speciality:</label>
+          <label class="col-md-3  control-label">Speciality</label>
           <div class="col-md-3">
             <select type="text" class="form-control" name="docspeciality"
                     [(ngModel)]="doctor.speciality.name"
                     #docspeciality="ngModel" required>
               <ng-container *ngFor="let speciality of specialityList">
-                <option value="speciality.name">{{speciality.name}}</option>
+                <option value="{{speciality.name}}">{{speciality.name}}</option>
               </ng-container>
             </select>
 
@@ -71,7 +71,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-md-2 control-label">Primary Contact:</label>
+          <label class="col-md-2 control-label">Primary Contact</label>
           <div class="col-md-3">
             <input type="text" class="form-control" name="docnumber1"
                    [(ngModel)]="doctor.contact.contactNumber1"
@@ -85,7 +85,7 @@
           </div>
 
           <!-- Secondary Number -->
-          <label class="col-md-3 control-label">Secondary Contact:</label>
+          <label class="col-md-3 control-label">Secondary Contact</label>
           <div class="col-md-3">
             <input type="text" class="form-control" name="docnumber4"
                    [(ngModel)]="doctor.contact.contactNumber2"
@@ -99,7 +99,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-md-2 control-label">Upload Picture:</label>
+          <label class="col-md-2 control-label">Upload Picture</label>
           <div class="col-md-9">
             <input type="file" class="form-control" [(ngModel)]="doctor.photo" name="docphoto"
                    #docphoto="ngModel" accept="image/*" (change)="onChange($event)">
@@ -107,7 +107,7 @@
         </div>
 
         <div class=" form-group">
-          <label class="col-md-2 control-label">Email:</label>
+          <label class="col-md-2 control-label">Email</label>
           <div class="col-md-9">
             <input type="email" class="form-control" name="docemail"
                    [(ngModel)]="doctor.contact.emailId"
@@ -121,7 +121,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-2 control-label">NMC Number:</label>
+          <label class="col-md-2 control-label">NMC Number</label>
           <div class="col-md-9">
             <input type="text" class="form-control" name="docnmc"
                    [(ngModel)]="doctor.nmcNumber"
@@ -136,7 +136,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-md-2 control-label">Details:</label>
+          <label class="col-md-2 control-label">Details</label>
           <div class="col-md-9">
             <textarea rows="3" class="form-control" name="docdetails"
                       [(ngModel)]="doctor.details"

@@ -36,6 +36,7 @@ public class DoctorService {
     private final SessionRepository sessionRepository;
     private final HospitalDoctorRepository hospitalDoctorRepository;
     private final HospitalRepository hospitalRepository;
+    private final QualificationRepository qualificationRepository;
 
 
     @Autowired
@@ -47,7 +48,7 @@ public class DoctorService {
     public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository
             , ContactRepository contactRepository, ScheduleRepository scheduleRepository
             , HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository
-            , SessionRepository sessionRepository) {
+            , SessionRepository sessionRepository, QualificationRepository qualificationRepository) {
         this.doctorRepository = doctorRepository;
         this.specialityRepository = specialityRepository;
         this.contactRepository = contactRepository;
@@ -55,6 +56,7 @@ public class DoctorService {
         this.sessionRepository = sessionRepository;
         this.hospitalDoctorRepository = hospitalDoctorRepository;
         this.hospitalRepository = hospitalRepository;
+        this.qualificationRepository=qualificationRepository;
     }
 
     public void addDoctor(DoctorDTO doctorDTO, String token) {
@@ -69,6 +71,10 @@ public class DoctorService {
         Speciality speciality=new Speciality() ;
         speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
         doctor.setSpeciality(speciality);
+
+        Qualification qualification=new Qualification() ;
+        qualification=qualificationRepository.findByName(doctorDTO.getQualification().getName());
+        doctor.setQualification(qualification);
 
 
         Contact contact = new Contact();
@@ -117,29 +123,6 @@ public class DoctorService {
         }
         return false;
     }
-
-
-//    public void updateDoctor(DoctorDTO doctorDTO){
-//
-//
-//        System.out.println("update doctor" +doctorDTO.toString());
-//        Doctor doctor = doctorRepository.getOne(doctorDTO.getId());
-//        doctor.setName(doctorDTO.getName());
-//        doctor.setQualification(doctorDTO.getQualification());
-//        doctor.setPhoto(doctorDTO.getPhoto());
-//        doctor.setGender(doctorDTO.getGender());
-//        Speciality speciality=new Speciality() ;
-//        speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
-//        doctor.setSpeciality(speciality);
-//        System.out.println("contact id " +doctorDTO.getContact().getId());
-//        doctor.getContact().setContactNumber1(doctorDTO.getContact().getContactNumber1());
-//        doctor.getContact().setContactNumber2(doctorDTO.getContact().getContactNumber2());
-//        doctor.getContact().setEmailId(doctorDTO.getContact().getEmailId());
-//        doctor.getContact().setWebsite(doctorDTO.getContact().getWebsite());
-//        doctor.getContact().setFax(doctorDTO.getContact().getFax());
-//        doctorRepository.save(doctor);
-//
-//    }
 
     public void updateDoctor(DoctorDTO doctorDTO){
 
@@ -217,7 +200,7 @@ public class DoctorService {
 //            //doctor.setNmcNumber(doctorDTO.getNmcNumber());
 ////            doctor.setId(doctorDTO.getId());
 //            doctor.setName(doctorDTO.getName());
-//            doctor.setQualification(doctorDTO.getQualification());
+//            doctor.setName(doctorDTO.getName());
 //            doctor.setPhoto(doctorDTO.getPhoto());
 //            doctor.setGender(doctorDTO.getGender());
 //            Speciality speciality=new Speciality() ;

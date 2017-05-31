@@ -3,11 +3,11 @@
  */
 export class Qualification{
   public id?:number;
-  public qualification?:Qualification;
+  public name?:string;
 
 
-  constructor(id?: number, qualification?: Qualification) {
+  constructor(id?: number, name?: string) {
     this.id = id?id:null;
-    this.qualification = qualification?qualification:null;
+    this.name = name?name:null;
   }
 }
