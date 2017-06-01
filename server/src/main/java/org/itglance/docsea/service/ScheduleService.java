@@ -1,10 +1,8 @@
 package org.itglance.docsea.service;
 
-import org.itglance.docsea.domain.Days;
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.domain.Hospital;
-import org.itglance.docsea.domain.Schedule;
+import org.itglance.docsea.domain.*;
 import org.itglance.docsea.repository.*;
+import org.itglance.docsea.service.dto.HospitalDTO;
 import org.itglance.docsea.service.dto.ScheduleDTO;
 import org.itglance.docsea.service.dto.ScheduleStringDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,20 +30,23 @@ public class ScheduleService {
     private final DaysRepository daysRepository;
     private  final HospitalRepository hospitalRepository;
     private  final DoctorRepository doctorRepository;
+    private final HospitalDoctorRepository hospitalDoctorRepository;
 
 
-
+    @Autowired
+    public StatusService statusService;
 
     @Autowired
     public DayService dayService;
 
     public ScheduleService(ScheduleRepository scheduleRepository, DaysRepository daysRepository,
                            HospitalRepository hospitalRepository
-                            ,DoctorRepository doctorRepository) {
+                            ,DoctorRepository doctorRepository, HospitalDoctorRepository hospitalDoctorRepository) {
         this.scheduleRepository = scheduleRepository;
         this.daysRepository = daysRepository;
         this.hospitalRepository = hospitalRepository;
         this.doctorRepository = doctorRepository;
+        this.hospitalDoctorRepository = hospitalDoctorRepository;
 
     }
 
@@ -177,6 +178,29 @@ public class ScheduleService {
         return hospitalDoctorScheduleDTOS;
     }
 
+
+    public List<Schedule> getScheduleOfHospitalDoctorId(Long hospitalId, Long doctorId) {
+        Hospital hospital = hospitalRepository.findOne(hospitalId);
+        List<Schedule> hospitalSchedules = hospital.getSchedules();
+
+        Doctor doctor = doctorRepository.findOne(doctorId);
+        List<Schedule> doctorSchedules = doctor.getSchedules();
+
+        List<Schedule> hospitalDoctorSchedule = new ArrayList<>();
+        for(Schedule hospitalSchedule : hospitalSchedules){
+            for(Schedule doctorSchedule : doctorSchedules)
+            {
+                if(hospitalSchedule == doctorSchedule){
+                    hospitalDoctorSchedule.add(doctorSchedule);
+                }
+            }
+        }
+        return hospitalDoctorSchedule;
+    }
+
+
+
+
     public ScheduleDTO updateSchedule(ScheduleDTO scheduleDTO) {
 
         Schedule schedule = scheduleRepository.findOne(scheduleDTO.getId());
@@ -236,6 +260,26 @@ public class ScheduleService {
         doctorRepository.save(doctor);
 
         scheduleRepository.delete(schedule.getId());
+    }
+
+    public List<HospitalDTO> getHospitals(Long doctorId) {
+        Doctor doctor = doctorRepository.findOne(doctorId);
+        Status status = statusService.getStatusObject("ACTIVE");
+        List<Hospital> hospitals = hospitalDoctorRepository.findAllByDoctor(doctor, status);
+
+        List<HospitalDTO> hospitalDTOS = new ArrayList<>();
+        for(Hospital h : hospitals){
+            h.getSchedules().clear();
+            List<Schedule> schedule = getScheduleOfHospitalDoctorId(h.getId(),doctorId);
+            for(Schedule s:schedule){
+                h.getSchedules().add(s);
+            }
+        }
+
+        for(Hospital h: hospitals){
+            hospitalDTOS.add(new HospitalDTO(h));
+        }
+        return hospitalDTOS;
     }
 }
 
