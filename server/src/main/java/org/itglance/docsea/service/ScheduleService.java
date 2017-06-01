@@ -274,6 +274,7 @@ public class ScheduleService {
             for(Schedule s:schedule){
                 h.getSchedules().add(s);
             }
+            System.out.println(h.toString());
         }
 
         for(Hospital h: hospitals){

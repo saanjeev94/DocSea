@@ -14,7 +14,6 @@
             </div>
             <div class="content">
               <div class="main">
-                {{ doc.doctor.id}}
                 <h3 class="name">{{ doc.doctor.name }}</h3>
                 <p class="profession">{{ doc.doctor.speciality.name }}</p>
                 <p class="text-center short-content">{{doc.doctor.details}} </p>
@@ -39,7 +38,7 @@
                   <li>{{ doc.doctor.contact.emailId }}</li>
                 </ul>
                 <hr class="margin-5">
-                <button class="btn btn-sm btn-primary" style="margin-left: 110px;">View Schedule</button>
+                <button class="btn btn-sm btn-primary" style="margin-left: 110px;" [routerLink]="['/doctor-detail',doc.doctor.id]">View Schedule</button>
               </div>
             </div>
           </div> <!-- end back panel -->

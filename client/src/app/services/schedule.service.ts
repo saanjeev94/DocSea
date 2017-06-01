@@ -8,7 +8,8 @@ import {Schedule} from "../model/schedule.model";
 export class ScheduleService{
 
   private headers:Headers;
-  private scheduleUrl='http://localhost:9999/api/schedules'
+  private scheduleUrl='http://localhost:9999/api/schedules';
+  private doctorHospitalUrl='http://localhost:9999/api/schedules/hospitalSchedule';
   token = localStorage.getItem('currentUser');
 
   constructor(private http:Http){
@@ -22,8 +23,10 @@ export class ScheduleService{
     return this.http.put(this.scheduleUrl+'/'+id,schedule,options).map(res=>res.json());
   }
 
-  getAllSchedule(){
-
+  getDoctorAllHospitalSchedule(id){
+    const options = new RequestOptions({headers: this.headers});
+    console.log(id);
+    return this.http.get(this.doctorHospitalUrl+'/'+id,options).map(res=>res.json());
   }
 
   getHospitalDoctorSchedule(id:number){

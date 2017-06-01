@@ -26,7 +26,7 @@ const ROUTES: Routes = [
   // {path:'doctor-view', component: DoctorGridView},
   {path:'doctor-view/:doctor', component: DoctorGridView},
   {path:'hospital-update/:username', component: UpdateHospitalComponent},
-  {path:'doctor-detail', component: DoctorDetailsComponent}
+  {path:'doctor-detail/:id', component: DoctorDetailsComponent}
 ];
 
 @NgModule({

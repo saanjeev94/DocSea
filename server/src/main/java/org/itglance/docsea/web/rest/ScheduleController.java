@@ -117,8 +117,8 @@ public class ScheduleController {
 
 
     ///return list of hospitals with particular doctor schedule
-    @GetMapping(value = "/hospitalSchedule/{doctorID}")
-    public ResponseEntity<?> getHospitalsScheduleByDoctor(@PathVariable Long doctorId){
+    @GetMapping(value = "/hospitalSchedule/{doctorId}")
+    public ResponseEntity<?> getHospitalsScheduleByDoctor(@PathVariable("doctorId") Long doctorId){
         List<HospitalDTO> hospitalDTOS = scheduleService.getHospitals(doctorId);
         return new ResponseEntity<List<HospitalDTO>>(hospitalDTOS, HttpStatus.OK);
     }
