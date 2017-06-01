@@ -273,12 +273,11 @@ public class ScheduleService {
             List<Schedule> schedule = getScheduleOfHospitalDoctorId(h.getId(),doctorId);
             for(Schedule s:schedule){
                 h.getSchedules().add(s);
-            }
-        }
 
-        for(Hospital h: hospitals){
+            }
             hospitalDTOS.add(new HospitalDTO(h));
         }
+
         return hospitalDTOS;
     }
 }
