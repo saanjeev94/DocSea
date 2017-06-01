@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { NguiMapModule} from '@ngui/map';
 
 import {AddDoctorComponent} from "./doctor/add-doctor.component";
 import {DocseaRoutingModule} from "./docsea-routing.module";
@@ -24,6 +25,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {ScheduleService} from "./services/schedule.service";
 import {QualificationService} from "./services/qualification.service";
 import {SpecialityService} from "./services/speciality.service";
+import {DoctorDetailsComponent} from "./doctor/doctor-details.component";
 
 @NgModule({
   declarations: [
@@ -37,13 +39,15 @@ import {SpecialityService} from "./services/speciality.service";
     LoginComponent,
     DoctorGridView,
     UpdateHospitalComponent,
-    AdminComponent
+    AdminComponent,
+    DoctorDetailsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    DocseaRoutingModule
+    DocseaRoutingModule,
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCAk94S98uwgnhxikaz9YiGlz8nn8_SDLQ'})
   ],
 
   providers: [
