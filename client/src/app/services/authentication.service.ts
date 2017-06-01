@@ -6,7 +6,7 @@ import {User} from "../model/user.model";
 export class AuthenticationService{
   private headers:Headers;
 
-  private loginUrl='http://localhost:8080/api/';
+  private loginUrl='http://localhost:9999/api/';
 
   constructor(private http:Http){
     this.headers= new Headers();
@@ -14,7 +14,8 @@ export class AuthenticationService{
     // this.headers.append('Accept','application/json');
   }
 
-  login(user: User){
+  login(user: User)
+  {
     // console.log(user);
     return this.http.post(this.loginUrl+"login",user).map(res => res.json());
   }

@@ -268,14 +268,14 @@ public class ScheduleService {
         List<Hospital> hospitals = hospitalDoctorRepository.findAllByDoctor(doctor, status);
 
         List<HospitalDTO> hospitalDTOS = new ArrayList<>();
-        for(Hospital h : hospitals){
-            h.getSchedules().clear();
-            List<Schedule> schedule = getScheduleOfHospitalDoctorId(h.getId(),doctorId);
-            for(Schedule s:schedule){
-                h.getSchedules().add(s);
-            }
-            System.out.println(h.toString());
-        }
+//        for(Hospital h : hospitals){
+////            h.getSchedules().clear();
+//            List<Schedule> schedule = getScheduleOfHospitalDoctorId(h.getId(),doctorId);
+//            for(Schedule s:schedule){
+//                h.getSchedules().add(s);
+//            }
+//            System.out.println(h.toString());
+//        }
 
         for(Hospital h: hospitals){
             hospitalDTOS.add(new HospitalDTO(h));

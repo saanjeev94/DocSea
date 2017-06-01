@@ -11,41 +11,21 @@
     <p>{{hospital.name}}</p>
     <p>Schedule</p>
     <table class="table">
+      <tr>
+        <th>Day</th>
+        <th>Time</th>
+      </tr>
       <ng-container *ngFor="let schedule of hospital.schedules">
       <tr>
         <td>{{schedule.days.day}}</td>
-        <td>00</td>
-      </tr>
-      <tr>
-        <td>Monday</td>
-        <td>00</td>
-      </tr>
-      <tr>
-        <td>Tuesday</td>
-        <td>00</td>
-      </tr>
-      <tr>
-        <td>Wednesday</td>
-        <td>00</td>
-      </tr>
-      <tr>
-        <td>Thrusday</td>
-        <td>00</td>
-      </tr>
-      <tr>
-        <td>Friday</td>
-        <td>00</td>
-      </tr>
-      <tr>
-        <td>Saturday</td>
-        <td>00</td>
+        <td>{{schedule.startTime}} to {{schedule.endTime}}</td>
       </tr>
       </ng-container>
     </table>
   </div>
   <div class="col-md-5">
-    <ngui-map zoom="14" center="basantapur, kathmandu, Nepal">
-      <marker position="basantapur" draggable="true"></marker>
+    <ngui-map zoom="14" center="{{hospital.address.streetAddress}}, {{hospital.address.city.name}}, {{hospital.address.country.name}}">
+      <marker position="{{hospital.address.streetAddress}}" draggable="true"></marker>
     </ngui-map>
   </div>
   </ng-container>

@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AddressService{
   private headers: Headers;
-  private addressUrl='http://localhost:8080/api/addresses';
+  private addressUrl='http://localhost:9999/api/addresses';
 
   token = localStorage.getItem('currentUser');
   constructor(private http:Http){
