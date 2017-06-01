@@ -91,6 +91,7 @@ public class DoctorService {
         doctorRepository.save(doctor);
 
         HospitalDoctor hospitalDoctor = new HospitalDoctor();
+        System.out.println(token);
         Session session = sessionRepository.findByToken(token);
         Hospital hospital = hospitalRepository.findOne(session.getHospitalId());
 
@@ -159,9 +160,9 @@ public class DoctorService {
     }
 
     public String renamePhoto(MultipartFile file) {
-//        final String UPLOADED_FOLDER = "F:\\docsea\\docsea\\client\\src\\assets\\images\\";
+        final String UPLOADED_FOLDER = "F:\\docsea\\docsea\\client\\src\\assets\\images\\";
 //        final String UPLOADED_FOLDER = "F:\\college\\Project\\DocSea\\client\\src\\assets\\images\\";
-        final String UPLOADED_FOLDER = "D:\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
+//        final String UPLOADED_FOLDER = "D:\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
 //        final String UPLOADED_FOLDER = "F:\\projects\\DocSea\\client\\src\\assets\\images\\";
         int random = (int) (Math.random() * 50000 + 1);
         String fileName = file.getOriginalFilename();

@@ -44,25 +44,29 @@ public class DoctorController {
     @Autowired
     private ScheduleService scheduleService;
 
+    private String defaultPhoto="doctor.png";
+
     //Adding doctor
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addDoctor(
-            @RequestParam MultipartFile file,
+            @RequestParam(required = false) MultipartFile file,
             @RequestParam String doctor,
             MultipartHttpServletRequest request,
             @RequestHeader String Authorization) throws MissingServletRequestPartException,IOException,MultipartException{
 
         System.out.println("*********  ADD DOCTOR  **************");
         System.out.println(Authorization);
-        System.out.println(file.getName());
-        System.out.println(doctor);
         ObjectMapper objectMapper=new ObjectMapper();
         try{
             DoctorDTO doctorDTO=objectMapper.readValue(doctor,DoctorDTO.class);
-            String photoName=doctorService.renamePhoto(file);
-            System.out.println(photoName);
+            String photoName;
+            if(file!=null) {
+                photoName = doctorService.renamePhoto(file);
+            }
+            else{
+                photoName=defaultPhoto;
+            }
             doctorDTO.setPhoto(photoName);
-            System.out.println(doctorDTO.toString());
             if(doctorService.isDoctorExist(doctorDTO)){
                 return new ResponseEntity("Doctor already exists", HttpStatus.CONFLICT);
             }
@@ -109,11 +113,10 @@ public class DoctorController {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try{
             DoctorDTO doctorDTO=objectMapper.readValue(doctor,DoctorDTO.class);
+            String photoName;
             if(file!=null) {
-                String photoName = doctorService.renamePhoto(file);
-                System.out.println(photoName);
+                photoName = doctorService.renamePhoto(file);
                 doctorDTO.setPhoto(photoName);
-                System.out.println(doctorDTO.toString());
             }
             if(!doctorService.isDoctorExist(doctorDTO.getId())){
                 return new ResponseEntity<String>(("Cannot find doctor in database."), HttpStatus.CONFLICT);

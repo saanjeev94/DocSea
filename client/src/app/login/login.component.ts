@@ -3,6 +3,8 @@ import {User} from "../model/user.model";
 import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
 
+declare var swal:any;
+
 @Component({
   selector: 'docsea-login',
   templateUrl: './login.component.html',
@@ -18,7 +20,20 @@ export class LoginComponent{
   }
 
   onlogin(){
-   this.authService.login(this.user).subscribe(token => this.onSuccessLogin(token));
+   this.authService.login(this.user).subscribe(
+     token => {this.onSuccessLogin(token)},
+     response=>{
+       console.log(response.status);
+       console.log(response._body);
+       if (!(response.status === 200)) {
+         swal(
+           'Oops...',
+           response._body,
+           'error'
+         )
+       }
+     }
+   );
   }
 
   onSuccessLogin(token){

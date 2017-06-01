@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from "@angular/core";
 import {DoctorService} from "../services/doctor.service";
 
 declare var $: any;
+declare var swal:any;
 
 @Component({
   selector: 'docsea-hospital-panel',
@@ -22,11 +23,20 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
   }
 
   getAllDoctorList(){
-    this.doctorService.getDoctors().subscribe((response) => {
-      // console.log(response);
-      this.doctorList = response;
-    })
-  }
+    this.doctorService.getDoctors().subscribe(
+      data=>{
+        this.doctorList = data;
+      },
+      response=>{
+        if (!(response.status === 200)) {
+          swal(
+            'Oops...',
+            response._body,
+            'error'
+          )
+        }
+      }
+    )}
 
   ngAfterViewInit() {
     setTimeout(() => $("#hospital-panel-table").dataTable(),1500);

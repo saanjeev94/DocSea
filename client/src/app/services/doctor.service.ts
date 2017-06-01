@@ -11,8 +11,8 @@ import {HospitalDoctor} from "../model/hospital-doctor.model";
 @Injectable()
 export class DoctorService{
   private headers:Headers;
-  private doctorUrl='http://localhost:8080/api/doctors';
-  private doctorSearchUrl='http://localhost:8080/api/doctorSearch/';
+  private doctorUrl='http://localhost:9999/api/doctors';
+  private doctorSearchUrl='http://localhost:9999/api/doctorSearch/';
   token = localStorage.getItem('currentUser');
 
   constructor(private http:Http){
@@ -23,6 +23,7 @@ export class DoctorService{
   }
 
   addDoctor(formdata:FormData){
+    console.log(this.headers);
     const options = new RequestOptions({headers: this.headers});
     return this.http.post(this.doctorUrl,formdata,options).map(res=>res.json());
   }

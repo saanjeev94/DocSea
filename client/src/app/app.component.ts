@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, DoCheck, OnInit} from '@angular/core';
 import {AuthenticationService} from "./services/authentication.service";
-import {LoginComponent} from "./login/login.component";
 import {Router} from "@angular/router";
 declare var $: any;
 

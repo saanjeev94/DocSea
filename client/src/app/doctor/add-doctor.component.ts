@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 import {SpecialityService} from "../services/speciality.service";
 import {QualificationService} from "../services/qualification.service";
 
+declare var swal:any;
+
 @Component({
   selector: 'add-doctor',
   templateUrl: './add-doctor.component.html',
@@ -38,7 +40,6 @@ export class AddDoctorComponent implements OnInit{
 
   onChange(event) {
     let file = event.srcElement.files;
-    console.log(this.photofile);
     this.photofile=file[0];
   }
 
@@ -46,9 +47,20 @@ export class AddDoctorComponent implements OnInit{
     let formdata:FormData=new FormData();
     formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
-    console.log(formdata);
-    console.log(this.doctor);
-    this.doctorService.addDoctor(formdata).subscribe((response)=>response.json());
+    this.doctorService.addDoctor(formdata).subscribe(
+      response=>{
+        response.json()
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+      );
     this.router.navigate(['/hospital-panel']);
   }
 }

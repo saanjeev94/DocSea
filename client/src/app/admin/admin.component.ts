@@ -3,6 +3,7 @@ import {Hospital} from "../model/hospital.model";
 import {HospitalService} from "../services/hospital.service";
 import {User} from "../model/user.model";
 declare var $: any;
+declare var swal:any;
 
 @Component({
   selector: 'docsea-admin',
@@ -27,11 +28,35 @@ export class AdminComponent implements OnInit, AfterViewInit{
   }
 
   getHospitals(){
-    this.hospitalService.getAllHospitals().subscribe((result) => this.hospitals = result);
+    this.hospitalService.getAllHospitals().subscribe(
+      result =>{ this.hospitals = result},
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+    );
   }
 
   toggleStatus(id: number){
-    this.hospitalService.toggleHospitalStatus(id).subscribe((result) => this.getHospitals());
+    this.hospitalService.toggleHospitalStatus(id).subscribe(
+      result => {
+        this.getHospitals()
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+      );
   }
 
 }

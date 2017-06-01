@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DoctorService} from "../services/doctor.service";
 import {HospitalDoctor} from "../model/hospital-doctor.model";
 
+declare var swal:any;
+
 @Component({
   selector: "docsea-doctor-grid-view",
   templateUrl: "./doctor-grid-view.html",
@@ -21,9 +23,19 @@ export class DoctorGridView implements OnInit{
   }
 
   getDoctorDetails(doctor: string){
-    // console.log(doctor);
-    this.doctorService.searchDoctor(doctor).subscribe((result) => this.doctorList = result );
-    console.log(this.doctorList);
+    this.doctorService.searchDoctor(doctor).subscribe(
+      result => {
+        this.doctorList = result
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      });
   }
 
 }
