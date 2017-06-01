@@ -3,12 +3,13 @@ import {HospitalService} from "../services/hospital.service";
 import {HospitalUser} from "../model/hosptial-user.model";
 import {AddressService} from "../services/address.service";
 import {Country} from "../model/country.model";
-import {Zone} from "app/model/zone.model";
+import {Zone} from "app/model/zone.modDel";
 import {City} from "../model/city.model";
 import {District} from "../model/district.model";
 import {ActivatedRoute, Router} from "@angular/router";
 
 declare var swal:any;
+
 @Component({
   selector: 'docsea-update-hospital',
   templateUrl: './update-hospital.component.html',
@@ -17,7 +18,6 @@ declare var swal:any;
 
 export class UpdateHospitalComponent implements OnInit{
   hospitalUser: HospitalUser;
-
   countryObject: Country[];
   zoneObject: Zone[];
   districtObject: District[];

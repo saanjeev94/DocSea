@@ -127,9 +127,6 @@ public class DoctorService {
 
     public void updateDoctor(DoctorDTO doctorDTO){
 
-        System.out.println("**************************************************************************");
-        System.out.println("docDTO::::"+doctorDTO.toString());
-
 
         Doctor doctor = doctorRepository.findOne(doctorDTO.getId());
         doctor.setName(doctorDTO.getName());
@@ -148,11 +145,9 @@ public class DoctorService {
         doctor.setNmcNumber(doctorDTO.getNmcNumber());
         doctor.setDetails(doctorDTO.getDetails());
         Qualification qualification=qualificationRepository.findByName(doctorDTO.getQualification().getName());
-//        qualificationRepository.save(qualification);
         doctor.setQualification(qualification);
 
         Speciality speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
-//        specialityRepository.save(speciality);
         doctor.setSpeciality(speciality);
 
         doctorRepository.save(doctor);
@@ -195,24 +190,9 @@ public class DoctorService {
 
         public void linkSchedule(Long id,ScheduleDTO scheduleDTO, List<Schedule> schedule){
             Doctor doctor=doctorRepository.getOne(id);
-//            System.out.println(scheduleDTO.toString());
-//            System.out.println( scheduleService.getScheduleId(scheduleDTO));
             schedule.add(scheduleRepository.findById(scheduleService.getScheduleId(scheduleDTO)));
             doctor.setSchedules(schedule);
             doctorRepository.save(doctor);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
