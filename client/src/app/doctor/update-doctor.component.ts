@@ -8,6 +8,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SpecialityService} from "../services/speciality.service";
 import {QualificationService} from "../services/qualification.service";
 
+declare var swal:any;
+
 @Component({
   selector: 'add-doctor',
   templateUrl: './update-doctor.component.html',
@@ -28,12 +30,33 @@ export class UpdateDoctorComponent implements OnInit{
     this.route.params.subscribe(params=>{
       this.getDoctorDetails(params['id']);
     });
-      this.specialityService.getAllSpeciality().subscribe((response)=>{
-        this.specialityList=response;
-      });
-      this.qualificationService.getAllQualification().subscribe((response)=>{
-        this.qualificationList=response;
-      });
+      this.specialityService.getAllSpeciality().subscribe(
+        response=>{
+          this.specialityList=response;
+        },
+        error=>{
+          if (!(error.status === 200)) {
+            swal(
+              'Oops...',
+              error._body,
+              'error'
+            )
+          }
+        }
+        );
+      this.qualificationService.getAllQualification().subscribe(
+        response=>{
+          this.qualificationList=response;
+        },
+        error=>{
+          if (!(error.status === 200)) {
+            swal(
+              'Oops...',
+              error._body,
+              'error'
+            )
+          }
+        });
 
   }
 
@@ -46,13 +69,35 @@ export class UpdateDoctorComponent implements OnInit{
     let formdata:FormData = new FormData();
     formdata.append('file',this.photofile);
     formdata.append('doctor',JSON.stringify(this.doctor));
-    this.doctorService.updateDoctor(formdata).subscribe((result) => console.log(result));
+    this.doctorService.updateDoctor(formdata).subscribe(
+      result => {
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+    );
     this.router.navigate(['/hospital-panel']);
   }
 
   getDoctorDetails(id:number){
-    this.doctorService.findById(id).subscribe(response=>{
-      this.doctor=response;
-    })
+    this.doctorService.findById(id).subscribe(
+      response=>{
+        this.doctor=response;
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      });
   }
 }

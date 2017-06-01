@@ -8,8 +8,7 @@ import {City} from "../model/city.model";
 import {District} from "../model/district.model";
 import {ActivatedRoute, Router} from "@angular/router";
 
-
-
+declare var swal:any;
 @Component({
   selector: 'docsea-update-hospital',
   templateUrl: './update-hospital.component.html',
@@ -38,32 +37,102 @@ export class UpdateHospitalComponent implements OnInit{
   }
 
   getHospitalDetails(username: string){
-    this.hosiptalService.getHospitalByUsername(username).subscribe((result) => {
-      this.hospitalUser=result;
-      console.log(result);
-    });
+    this.hosiptalService.getHospitalByUsername(username).subscribe(
+      result => {
+        this.hospitalUser=result;
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+    );
   }
 
   onUpdate(){
-    this.hosiptalService.updateHospital(this.hospitalUser).subscribe((result) => console.log(result));
+    this.hosiptalService.updateHospital(this.hospitalUser).subscribe(
+      result => {},
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      });
     this.router.navigate(['/hospital-panel']);
 
   }
 
   getCountries(){
-    this.addressService.getCountries().subscribe(countries=>this.onSuccessCountries(countries), () => console.log('error'));
+    this.addressService.getCountries().subscribe(
+      countries=> {
+        this.onSuccessCountries(countries)
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+    );
   }
 
   getZones(country: string){
-    this.addressService.getZonesOfCountry(country).subscribe(zones=>this.onSuccessZones(zones), () => console.log('error'));
+    this.addressService.getZonesOfCountry(country).subscribe(
+      zones=> {
+        this.onSuccessZones(zones)
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+    );
   }
 
   getDistricts(zone: string){
-    this.addressService.getDistrictsOfZone(zone).subscribe(districts=>this.onSuccessDistricts(districts), () => console.log('error'));
+    this.addressService.getDistrictsOfZone(zone).subscribe(
+      districts=> {
+        this.onSuccessDistricts(districts)
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      });
   }
 
   getCities(district: string){
-    this.addressService.getCitiesOfDistrict(district).subscribe(cities=>this.onSuccessCities(cities), () => console.log('error'));
+    this.addressService.getCitiesOfDistrict(district).subscribe(
+      cities=> {
+        this.onSuccessCities(cities)
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      });
   }
 
   onSuccessCountries(res){

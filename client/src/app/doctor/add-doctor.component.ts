@@ -49,7 +49,7 @@ export class AddDoctorComponent implements OnInit{
     formdata.append('doctor',JSON.stringify(this.doctor));
     this.doctorService.addDoctor(formdata).subscribe(
       response=>{
-        response.json()
+
       },
       error=>{
         if (!(error.status === 200)) {

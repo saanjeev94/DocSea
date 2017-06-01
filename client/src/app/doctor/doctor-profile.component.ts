@@ -11,6 +11,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 import {Schedule} from "../model/schedule.model";
 import {isNumber} from "util";
 declare var $ : any;
+declare var swal:any;
 
 @Component({
   selector: 'doctor-profile',
@@ -42,42 +43,59 @@ export class DoctorProfileComponent implements OnInit{
   }
 
   getDoctorById(id) {
-    this.doctorService.findById(id).subscribe(response => {
-      this.doctor = response;
-    });
+    this.doctorService.findById(id).subscribe(
+      response => {
+        this.doctor = response;
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      });
   }
 
   getDoctorSchedule(id){
-    this.scheduleService.getHospitalDoctorSchedule(id).subscribe(response => {
-      this.schedule=Array<Schedule>();
-      this.schedulestat=[];
-      this.count=0;
-      console.log(response);
-      for (let day of this.days) {
-        if (response.length !== 0) {
-          for (let object of response) {
-            if (object.days.day == day) {
-              this.schedule[this.count] = object;
-              this.schedulestat[day] = true;
-            }
-            else {
-              if (!this.schedulestat[day]) {
-                this.schedule[this.count] = new Schedule(null, null, null, new Days(this.count + 1, this.days[this.count]));
+    this.scheduleService.getHospitalDoctorSchedule(id).subscribe(
+      response => {
+        this.schedule=Array<Schedule>();
+        this.schedulestat=[];
+        this.count=0;
+        console.log(response);
+        for (let day of this.days) {
+          if (response.length !== 0) {
+            for (let object of response) {
+              if (object.days.day == day) {
+                this.schedule[this.count] = object;
+                this.schedulestat[day] = true;
               }
-
+              else {
+                if (!this.schedulestat[day]) {
+                  this.schedule[this.count] = new Schedule(null, null, null, new Days(this.count + 1, this.days[this.count]));
+                }
+              }
             }
+            this.count = this.count + 1;
           }
-          this.count = this.count + 1;
-        }
-        else {
+          else {
             this.schedule[this.count] = new Schedule(null, null, null, new Days(this.count + 1, this.days[this.count]));
             this.count=this.count+1;
+          }
         }
-      }
-      console.log((this.schedule));
       this.doctorScheduleList=(this.schedule);
-      console.log(this.doctorScheduleList);
-    });
+    },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      });
   }
 
   onEdit(){
@@ -97,9 +115,18 @@ export class DoctorProfileComponent implements OnInit{
     for(let schedule of this.doctorScheduleList) {
       if(schedule.startTime!==null||schedule.endTime!==null) {
         console.log(schedule);
-        this.scheduleService.addSchedule(schedule, id).subscribe(response => {
-          console.log(response);
-        });
+        this.scheduleService.addSchedule(schedule, id).subscribe(
+          response => {},
+          error=>{
+            if (!(error.status === 200)) {
+              swal(
+                'Oops...',
+                error._body,
+                'error'
+              )
+            }
+          }
+        );
       }
     }
   }

@@ -147,11 +147,11 @@ public class DoctorService {
 
         doctor.setNmcNumber(doctorDTO.getNmcNumber());
         doctor.setDetails(doctorDTO.getDetails());
-        Qualification qualification=qualificationRepository.findOne(doctorDTO.getQualification().getId());
+        Qualification qualification=qualificationRepository.findByName(doctorDTO.getQualification().getName());
 //        qualificationRepository.save(qualification);
         doctor.setQualification(qualification);
 
-        Speciality speciality=specialityRepository.findOne(doctorDTO.getSpeciality().getId());
+        Speciality speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
 //        specialityRepository.save(speciality);
         doctor.setSpeciality(speciality);
 

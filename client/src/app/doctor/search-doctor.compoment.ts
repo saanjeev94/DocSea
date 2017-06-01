@@ -7,6 +7,8 @@ import {DoctorService} from "../services/doctor.service";
 import {HospitalDoctor} from "../model/hospital-doctor.model";
 import {Router} from "@angular/router";
 
+declare var swal:any;
+
 @Component({
   selector: 'docsea-search-doctor',
   templateUrl: './search-doctor.component.html',
@@ -24,18 +26,27 @@ export class SearchDoctorComponent implements OnInit{
   }
 
   search(term: string): void {
-    // console.log(term);
     this.doctorService.search(term)
-    .subscribe((result) => this.hospitalDoctorList = result);
-    // console.log(this.hospitalDoctorList);
+    .subscribe(
+      result => {
+        this.hospitalDoctorList = result;
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
+      }
+    );
   }
 
   doctorDetails(doctor: string): void{
-    // console.log(doctor);
     this.router.navigate(['/doctor-view',doctor]);
   }
   selectString(hospitalDoctor: string){
-    console.log(hospitalDoctor);
     this.searchDoctor = hospitalDoctor;
   }
 
