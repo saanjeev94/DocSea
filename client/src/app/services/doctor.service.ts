@@ -11,8 +11,8 @@ import {HospitalDoctor} from "../model/hospital-doctor.model";
 @Injectable()
 export class DoctorService{
   private headers:Headers;
-  private doctorUrl='http://localhost:9999/api/doctors';
-  private doctorSearchUrl='http://localhost:9999/api/doctorSearch/';
+  private doctorUrl='http://localhost:8080/api/doctors';
+  private doctorSearchUrl='http://localhost:8080/api/doctorSearch/';
   token = localStorage.getItem('currentUser');
 
   constructor(private http:Http){

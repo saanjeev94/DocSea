@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 animated fadeIn">
       <div class="well custom-padding">
       <h1 class="pull-left no-margin-top">Doctors</h1>
       <form class="clearfix">
@@ -11,7 +11,7 @@
   </div> <!-- /.row -->
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12  animated fadeIn">
       <table class="table table-bordered table-striped table-hover" id="hospital-panel-table">
         <thead>
         <tr >
@@ -33,7 +33,9 @@
             <td class="text-capitalize">{{ doclist.name }}</td>
             <td class="text-capitalize">{{doclist.speciality.name}}</td>
             <td class="text-capitalize">{{doclist.contact.contactNumber1}}</td>
-            <td class="text-center text-capitalize"><a href="" class="btn btn-sm btn-danger">Inactive</a></td>
+            <td class="text-center text-capitalize">
+              <a href="" class="btn btn-sm btn-success">Active</a>
+            </td>
             <td class="text-center text-capitalize">
               <button [routerLink]="['/profile',doclist.id]" class="btn btn-sm btn-primary">Details</button>
             </td>

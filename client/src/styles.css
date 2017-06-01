@@ -39,4 +39,14 @@ input.ng-dirty.ng-valid, select.ng-dirty.ng-valid{
   border-left: 5px solid green;
 }
 
+/* LOADING */
+#loading-msg{
+  font-size: 30px;
+  padding-left: 550px;
+  padding-top: 220px;
+}
+
+
+
+
 
