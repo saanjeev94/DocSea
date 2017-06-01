@@ -6,7 +6,7 @@ import {User} from "../model/user.model";
 export class AuthenticationService{
   private headers:Headers;
 
-  private loginUrl='http://localhost:9999/api/';
+  private loginUrl='http://localhost:8080/api/';
 
   constructor(private http:Http){
     this.headers= new Headers();

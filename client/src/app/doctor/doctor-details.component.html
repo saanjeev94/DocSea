@@ -1,5 +1,6 @@
-<div class="row">
-  <div class="col-md-3 col-sm-12 text-center profile-background">
+<div class="container-fluid">
+  <div class="row animated fadeIn">
+    <div class="col-md-3 col-sm-12 text-center profile-background">
     <img src='../../assets/images/{{doctor.photo}}' class="custom-image">
     <br>{{doctor.name}}
     <br>{{doctor.speciality.name}}
@@ -43,10 +44,10 @@
     </table>
   </div>
   <div class="col-md-5">
-    <p>Map</p>
     <ngui-map zoom="14" center="basantapur, kathmandu, Nepal">
       <marker position="basantapur" draggable="true"></marker>
     </ngui-map>
   </div>
   </ng-container>
+  </div>
 </div>

@@ -24,12 +24,13 @@
 /* search dropdown */
 .search-result{
   border-bottom: 1px solid #66AFE9;
-  width: 505px;
+  width: 496px;
   height: 30px;
   padding: 5px 0 5px 25px;
   background-color: white;
   cursor: pointer;
   text-align: left;
+  margin: 1px 0 0 30px;
 }
 .search-result:hover {
   color: #eee;

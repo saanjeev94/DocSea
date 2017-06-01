@@ -71,6 +71,35 @@
 }
 
 
+/* new one*/
+.login-background{
+  background-image: url("../../assets/images/backgroundLogin.jpg");
+  padding-bottom: 240px;
+  margin-top: -20px;
+  padding-top: 45px;
+}
+
+.sign-in-msg{
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.login{
+  padding-top: 160px;
+}
+
+.login-btn{
+  padding-right: 0;
+}
+
+.remember{
+  color: #fff;
+  padding-left: 5px;
+  font-size: 16px;
+}
+
 
 
 
