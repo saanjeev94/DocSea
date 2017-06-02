@@ -4,6 +4,7 @@ import {ScheduleService} from "../services/schedule.service";
 import {ActivatedRoute} from "@angular/router";
 import {DoctorService} from "../services/doctor.service";
 import {Hospital} from "../model/hospital.model";
+import {Schedule} from "../model/schedule.model";
 
 declare var swal:any;
 
@@ -15,27 +16,39 @@ declare var swal:any;
 
 export class DoctorDetailsComponent{
   doctor:Doctor;
+  // scheduleMap:any;
+  scheduleMap:any;
   hospitalList:Array<Hospital>;
-  hospitalSchedules:any;
-
+  scheduleList:any;
+  scheduleDoubleList:Array<Array<Schedule>>;
+  // index:Array<number>=[0,1,2,3,4,5,6];
 
   constructor(private scheduleService:ScheduleService, private route:ActivatedRoute, private doctorService:DoctorService) {
       this.doctor=new Doctor();
+      // this.scheduleMap=new Map<number,Array<Schedule>>();
       this.hospitalList=new Array<Hospital>();
+      this.scheduleDoubleList=new Array<Array<Schedule>>();
   }
   ngOnInit(){
     this.route.params.subscribe(params=>{
-      this.displayDoctorDetails(params['id']);
       this.getDoctor(params['id']);
-      // this.splitSchedule();
+      this.getHospitals(params['id']);
+      this.displayDoctorDetails(params['id']);
     });
   }
 
   displayDoctorDetails(id){
     this.scheduleService.getDoctorAllHospitalSchedule(id).subscribe(
       response=>{
-        this.hospitalList=response;
-        console.log(this.hospitalList);
+        this.scheduleMap=response;
+        console.log(this.scheduleMap);
+        for(let hospital of this.hospitalList){
+          for(let schedule of this.scheduleMap[hospital.id]){
+            console.log(schedule);
+            console.log("******************");
+
+          }
+        }
       },
       error=>{
         if (!(error.status === 200)) {
@@ -63,10 +76,24 @@ export class DoctorDetailsComponent{
       }
     );
   }
-  // splitSchedule(){
-  //   for(let hospital of this.hospitalList){
-  //   }
-  // }
+
+  getHospitals(id){
+    this.doctorService.getHospitals(id).subscribe(
+      response=>{
+        this.hospitalList=response;
+        console.log(this.hospitalList);
+      },
+    error=>{
+      if (!(error.status === 200)) {
+        swal(
+          'Oops...',
+          error._body,
+          'error'
+        )
+      }
+    }
+    );
+  }
 
   onSuccess(response){
     this.doctor=response;

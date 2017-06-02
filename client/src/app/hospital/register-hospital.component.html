@@ -161,7 +161,7 @@
 
               <div *ngIf="contactNumber1.errors && contactNumber1.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!contactNumber1.errors.required">Number is required</span>
-                <span [hidden]="!contactNumber1.errors.pattern">Number must be digit only</span>
+                <span [hidden]="!contactNumber1.errors.pattern">Number must be 9-10 digit only</span>
               </div>
             </div>
 
@@ -173,7 +173,7 @@
                      pattern="[0-9]{10}" maxlength="10">
 
               <div *ngIf="contactNumber2.errors && contactNumber2.touched" class="alert alert-danger custom-label-alert">
-                <span [hidden]="!contactNumber2.errors.pattern">Number must be digit only</span>
+                <span [hidden]="!contactNumber2.errors.pattern">Number must be 9-10 digit only</span>
               </div>
             </div>
           </div> <!-- form group -->

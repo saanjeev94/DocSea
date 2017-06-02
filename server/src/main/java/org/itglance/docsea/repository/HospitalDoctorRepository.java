@@ -50,4 +50,8 @@ public List<HospitalDoctor> findDoctorByString(@Param("searchString") String sea
 
     @Query("SELECT hd.status FROM HospitalDoctor hd WHERE hd.hospital = :hospital AND hd.doctor = :doctor")
     public Status findStatusByHospitalDoctor(@Param("hospital") Hospital hospital,@Param("doctor") Doctor doctor);
+
+    @Query("SELECT hd.doctor FROM HospitalDoctor hd WHERE hd.hospital = :hospital")
+    public List<Doctor> findAllByHospital(@Param("hospital") Hospital hospital);
 }
+

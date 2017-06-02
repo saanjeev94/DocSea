@@ -93,4 +93,17 @@ public class HospitalDoctorService {
         Status status = hospitalDoctorRepository.findStatusByHospitalDoctor(hospital, doctor);
         return status;
     }
+
+    public List<Hospital> getHospitals(Long docId) {
+        Doctor doctor = doctorRepository.findOne(docId);
+        Status status = statusService.getStatusObject("Active");
+        List<Hospital> hospitals= hospitalDoctorRepository.findAllByDoctor(doctor, status);
+        return hospitals;
+    }
+
+    public List<Doctor> getDoctors(Long hospitalId) {
+        Hospital hospital=hospitalRepository.findOne(hospitalId);
+        List<Doctor> doctors=hospitalDoctorRepository.findAllByHospital(hospital);
+        return doctors;
+    }
 }

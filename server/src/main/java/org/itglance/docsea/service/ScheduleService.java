@@ -15,7 +15,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -262,25 +264,18 @@ public class ScheduleService {
         scheduleRepository.delete(schedule.getId());
     }
 
-    public List<HospitalDTO> getHospitals(Long doctorId) {
+    public Map<Long, List<ScheduleDTO>> getHospitals(Long doctorId) {
         Doctor doctor = doctorRepository.findOne(doctorId);
         Status status = statusService.getStatusObject("ACTIVE");
         List<Hospital> hospitals = hospitalDoctorRepository.findAllByDoctor(doctor, status);
+        Map<Long, List<ScheduleDTO>> stringListMap = new HashMap<>();
 
         List<HospitalDTO> hospitalDTOS = new ArrayList<>();
-//        for(Hospital h : hospitals){
-////            h.getSchedules().clear();
-//            List<Schedule> schedule = getScheduleOfHospitalDoctorId(h.getId(),doctorId);
-//            for(Schedule s:schedule){
-//                h.getSchedules().add(s);
-//            }
-//            System.out.println(h.toString());
-//        }
-
-        for(Hospital h: hospitals){
-            hospitalDTOS.add(new HospitalDTO(h));
+        for(Hospital h : hospitals){
+            List<ScheduleDTO> scheduleDTO = getScheduleByHospitalDoctorId(h.getId(),doctorId);
+            stringListMap.put(h.getId(),scheduleDTO);
         }
-        return hospitalDTOS;
+        return stringListMap;
     }
 }
 

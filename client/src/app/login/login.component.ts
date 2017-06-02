@@ -41,6 +41,12 @@ export class LoginComponent{
     localStorage.setItem('userId', this.tokenBack.userId);
     localStorage.setItem('userType', this.tokenBack.userType);
     localStorage.setItem('username', this.tokenBack.username);
-    this.router.navigate(['/hospital-panel']);
+    if(this.tokenBack.userType==0){
+      this.router.navigate(['/admin']);
+    }
+    else{
+      this.router.navigate(['/hospital-panel']);
+    }
   }
+
 }

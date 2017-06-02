@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sriyanka on 5/14/2017.
@@ -119,8 +121,10 @@ public class ScheduleController {
     ///return list of hospitals with particular doctor schedule
     @GetMapping(value = "/hospitalSchedule/{doctorId}")
     public ResponseEntity<?> getHospitalsScheduleByDoctor(@PathVariable("doctorId") Long doctorId){
-        List<HospitalDTO> hospitalDTOS = scheduleService.getHospitals(doctorId);
-        return new ResponseEntity<List<HospitalDTO>>(hospitalDTOS, HttpStatus.OK);
+//        List<HospitalDTO> hospitalDTOS = scheduleService.getHospitals(doctorId);
+        Map<Long, List<ScheduleDTO>> stringListMap = new HashMap<>();
+        stringListMap = scheduleService.getHospitals(doctorId);
+        return new ResponseEntity< Map<Long, List<ScheduleDTO>>>(stringListMap, HttpStatus.OK);
     }
 
     //update schedule

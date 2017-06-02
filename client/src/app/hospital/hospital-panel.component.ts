@@ -23,7 +23,7 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
   }
 
   getAllDoctorList(){
-    this.doctorService.getDoctors().subscribe(
+    this.doctorService.getHospitalDoctors().subscribe(
       data=>{
         this.doctorList = data;
       },

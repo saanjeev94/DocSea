@@ -135,16 +135,5 @@ public class DoctorController {
 
     }
 
-   /* //Add doctor schedule
-    @RequestMapping(value = "/addSchedules/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Void> addDoctorSchedule(@PathVariable("id") Long id, @RequestBody List<ScheduleDTO> scheduleDTO) {
-        List<Schedule> schedule = new ArrayList<>();
-        for (ScheduleDTO sch : scheduleDTO) {
-            if (!scheduleService.isScheduleExist(sch)) {
-                scheduleService.addSchedule(sch);
-            }
-            doctorService.linkSchedule(id,sch,schedule);
-        }
-        return new ResponseEntity("New schedule linked", HttpStatus.OK);
-    }*/
+
 }

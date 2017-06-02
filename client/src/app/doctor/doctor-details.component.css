@@ -23,3 +23,18 @@
   position: relative;
   left: 410px;
 }
+
+.doctorName{
+  padding-top: 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.doctorSpeciality, .doctorGender{
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.doctorEmail{
+  font-size: 18px;
+}

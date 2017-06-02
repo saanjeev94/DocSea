@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1" >
 
-      <form class="form-horizontal form-box" #hospitalUpdate="ngForm" (ngSubmit)="onUpdate()">
+      <form class="form-horizontal form-box animated fadeInDownBig" #hospitalUpdate="ngForm" (ngSubmit)="onUpdate()">
         <h2 class="text-center">Edit Information</h2>
 
         <div class="form-group">
@@ -158,11 +158,11 @@
               <input type="text" class="form-control"
                      id="contactNumber1" placeholder="Primary Number"
                      name="contactNumber1" [(ngModel)]="hospitalUser.hospital.contact.contactNumber1" #contactNumber1="ngModel"
-                     required pattern="[0-9]{10}" maxlength="10">
+                     required pattern="[0-9]{9,10}" maxlength="10">
 
               <div *ngIf="contactNumber1.errors && contactNumber1.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!contactNumber1.errors.required">Number is required</span>
-                <span [hidden]="!contactNumber1.errors.pattern">Number must be digit only</span>
+                <span [hidden]="!contactNumber1.errors.pattern">Number must be 9-10 digit only</span>
               </div>
             </div>
 
@@ -171,10 +171,10 @@
               <input type="text" class="form-control"
                      id="contactNumber2" placeholder="Secondary Number"
                      name="contactNumber2" [(ngModel)]="hospitalUser.hospital.contact.contactNumber2" #contactNumber2="ngModel"
-                     pattern="[0-9]{10}" maxlength="10">
+                     pattern="[0-9]{9,10}" maxlength="10">
 
               <div *ngIf="contactNumber2.errors && contactNumber2.touched" class="alert alert-danger custom-label-alert">
-                <span [hidden]="!contactNumber2.errors.pattern">Number must be digit only</span>
+                <span [hidden]="!contactNumber2.errors.pattern">Number must be 9-10 digit only</span>
               </div>
             </div>
           </div> <!-- form group -->

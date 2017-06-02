@@ -11,8 +11,11 @@ import {HospitalDoctor} from "../model/hospital-doctor.model";
 @Injectable()
 export class DoctorService{
   private headers:Headers;
+
+  private hospitalDoctorUrl='http://localhost:9999/api/hospitalDoctor';
   private doctorUrl='http://localhost:9999/api/doctors';
   private doctorSearchUrl='http://localhost:9999/api/doctorSearch/';
+  private getHospitalUrl='http://localhost:9999/api/hospitalDoctor/';
   token = localStorage.getItem('currentUser');
 
   constructor(private http:Http){
@@ -28,9 +31,9 @@ export class DoctorService{
     return this.http.post(this.doctorUrl,formdata,options).map(res=>res.json());
   }
 
-  getDoctors(){
+  getHospitalDoctors(){
     const options = new RequestOptions({headers: this.headers});
-    return this.http.get(this.doctorUrl,options).map(res => res.json() );
+    return this.http.get(this.hospitalDoctorUrl,options).map(res => res.json() );
   }
 
   findById(id:number){
@@ -56,6 +59,10 @@ export class DoctorService{
 
   deleteDoctor(id : any){
     return this.http.delete(this.doctorUrl, id).map(res=>res.json());
+  }
+
+  getHospitals(id){
+    return this.http.get(this.getHospitalUrl+id).map(res=>res.json());
   }
 
 }
