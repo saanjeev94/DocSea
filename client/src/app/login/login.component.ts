@@ -21,7 +21,10 @@ export class LoginComponent{
 
   onlogin(){
    this.authService.login(this.user).subscribe(
-     token => {this.onSuccessLogin(token)},
+     token => {
+       this.onSuccessLogin(token);
+       console.log(token);
+     },
      error=>{
        if (!(error.status === 200)) {
          swal(

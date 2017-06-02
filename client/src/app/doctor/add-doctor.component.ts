@@ -49,18 +49,18 @@ export class AddDoctorComponent implements OnInit{
     formdata.append('doctor',JSON.stringify(this.doctor));
     this.doctorService.addDoctor(formdata).subscribe(
       response=>{
-        console.log(response);
+        // console.log(response);
       },
-      error=>{
-        if (!(error.status === 200)) {
-          swal(
-            'Oops...',
-            error._body,
-            'error'
-          )
-        }
-      }
-      );
+      error=> {
+        console.log(error);
+          if (error.status !== 200) {
+            swal(
+              'Oops...',
+              error._body,
+              'error'
+            )
+          }
+      });
     this.router.navigate(['/hospital-panel']);
   }
 }
