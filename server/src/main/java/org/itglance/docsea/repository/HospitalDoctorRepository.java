@@ -27,12 +27,12 @@ public interface HospitalDoctorRepository extends JpaRepository<HospitalDoctor,L
         "OR h.address.streetAddress = :searchString ")*/
 
 
-    @Query("SELECT hd FROM HospitalDoctor hd WHERE " +
+    @Query("SELECT hd.doctor FROM HospitalDoctor hd WHERE " +
             "hd.doctor.name=:searchString " +
             "OR hd.doctor.speciality.name = :searchString " +
             "OR hd.hospital.name = :searchString " +
             "OR hd.hospital.address.streetAddress = :searchString ")
-public List<HospitalDoctor> findDoctorByString(@Param("searchString") String searchString);
+public List<Doctor> findDoctorByString(@Param("searchString") String searchString);
 
 
     @Query("SELECT hd.hospital FROM HospitalDoctor hd WHERE hd.doctor = :doctor AND hd.status LIKE:status")
@@ -41,7 +41,7 @@ public List<HospitalDoctor> findDoctorByString(@Param("searchString") String sea
 
 
     @Query("SELECT  hd FROM HospitalDoctor hd WHERE hd.doctor = :doctor AND hd.hospital = :hospital")
-    public HospitalDoctor findByHospitalAndDoctor(Hospital hospital, Doctor doctor);
+    public HospitalDoctor findByHospitalAndDoctor(@Param("hospital") Hospital hospital,@Param("doctor") Doctor doctor);
 
 
     @Query("SELECT hd.doctor FROM HospitalDoctor hd WHERE hd.hospital = :hospital AND hd.status NOT LIKE:status")

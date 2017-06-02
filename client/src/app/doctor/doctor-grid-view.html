@@ -1,55 +1,54 @@
 <div class="col-sm-10 col-sm-offset-1">
-
-  <ng-container *ngIf="doctorList; else noData">
-  <div *ngFor="let doc of doctorList">
-    <div class="col-md-4 col-sm-6">
-      <div class="card-container animated flipInY">
-        <div class="card">
-          <div class="front">
-            <div class="cover">
-              <img src="../../assets/images/rotating_card_thumb.png"/>
-            </div>
-            <div class="user">
-              <img class="img-circle" src="../../assets/images/mahesh.jpg"/>
-            </div>
-            <div class="content">
-              <div class="main">
-                <h3 class="name">{{ doc.doctor.name }}</h3>
-                <p class="profession">{{ doc.doctor.speciality.name }}</p>
-                <p class="text-center short-content">{{doc.doctor.details}} </p>
-                <hr class="margin-5">
-                <p class="text-center lead">{{ doc.doctor.gender}}</p>
+  <ng-container *ngIf="List">
+    <div *ngFor="let doc of List">
+      <div class="col-md-3 col-sm-4">
+        <div class="card-container animated flipInY">
+          <div class="card">
+            <div class="front">
+              <div class="cover">
+                <img src="../../assets/images/rotating_card_thumb.png"/>
               </div>
-            </div>
-          </div> <!-- end front panel -->
-          <div class="back">
-            <div class="header">
-              <h5 class="nmc">NMC No. {{ doc.doctor.nmcNumber }}</h5>
-            </div>
-            <div class="content">
-              <div class="main">
-                <h4 class="text-center">Qualification</h4>
-                <p class="text-center">{{ doc.doctor.qualification.name }}</p>
-                <hr>
-                <h4 class="text-center">Hospital Contact</h4>
-                <ul class="no-list-style text-center">
-                  <li>{{ doc.hospital.contact.contactNumber1 }}</li>
-                  <li>{{ doc.hospital.contact.contactNumber2}}</li>
-                  <li>{{ doc.doctor.contact.emailId }}</li>
-                </ul>
-                <hr class="margin-5">
-                <button class="btn btn-sm btn-primary" style="margin-left: 110px;" [routerLink]="['/doctor-detail',doc.doctor.id]">View Schedule</button>
+              <div class="user">
+                <img class="img-circle" src="../../assets/images/{{doc.photo}}"/>
               </div>
-            </div>
-          </div> <!-- end back panel -->
-        </div> <!-- end card -->
-      </div> <!-- end card-container -->
-    </div> <!-- end col sm 3 -->
-
-  </div> <!-- ngFor -->
+              <div class="content">
+                <div class="main">
+                  <h3 class="name">{{ doc.name }}</h3>
+                  <p class="profession">{{ doc.gender }}</p>
+                  <hr class="margin-5">
+                  <p class="text-center">{{ doc.speciality.name}}</p>
+                </div>
+              </div>
+            </div> <!-- end front panel -->
+            <div class="back">
+              <div class="header">
+                <h5 class="nmc">NMC No. {{doc.nmcNumber}}</h5>
+              </div>
+              <div class="content">
+                <div class="main">
+                  <p class="text-center"><b>Qualification</b></p>
+                  <p class="text-center">{{ doc.qualification.name }}</p>
+                  <hr>
+                  <p class="text-center short-content">{{doc.details}} </p>
+                  <hr class="margin-5">
+                  <button class="btn btn-sm btn-primary btn-custom" [routerLink]="['/doctor-detail',doc.id]">View Schedule</button>
+                </div>
+              </div>
+            </div> <!-- end back panel -->
+          </div> <!-- end card -->
+        </div> <!-- end card-container -->
+      </div> <!-- end col sm 3 -->
+    </div> <!-- ngFor -->
   </ng-container>
-  <ng-template #noData>
-    <p> No Doctor Found...</p>
-  </ng-template>
+  <ng-template *ngIf="!List" class="middle">
+    <div class="loader-spinner">
+      <div class="spinner">
+        <div class="spinner-1">
+          <div class="spinner-2">
 
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>

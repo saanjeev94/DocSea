@@ -2,6 +2,7 @@ package org.itglance.docsea.service;
 
 import org.itglance.docsea.domain.*;
 import org.itglance.docsea.repository.*;
+import org.itglance.docsea.service.dto.DoctorDTO;
 import org.itglance.docsea.service.dto.HospitalDoctorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,22 +50,28 @@ public class DoctorSearchService {
         this.addressRepository=addressRepository;
     }
 
-    public List<HospitalDoctorDTO> findDoctor(String searchString){
-        List<HospitalDoctor> hospitalDoctors=hospitalDoctorRepository.findDoctorByString(searchString);
-        if(hospitalDoctors==null){
-            return null;
-        }
+    public List<DoctorDTO> findDoctor(String searchString){
+        List<Doctor> doctors=hospitalDoctorRepository.findDoctorByString(searchString);
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+        int flag = 0;
+       for(int i=0; i<doctors.size();i++){
+           for(int j=i+1; j < doctors.size(); j++){
+               if(doctors.get(i) == doctors.get(j)){
+                   flag =1;
+               }
+           }
+           if(flag == 0){
+               doctorDTOS.add(new DoctorDTO(doctors.get(i)));
+           }
+           flag= 0;
+       }
+        System.out.println(doctorDTOS);
+        System.out.println("************************************");
+        System.out.println(doctors);
 
-        List<HospitalDoctorDTO> hospitalDoctorDTO=new ArrayList<>();
-        for(HospitalDoctor d : hospitalDoctors)
-        {
-            hospitalDoctorDTO.add(new HospitalDoctorDTO(d));
-        }
 
-//        for(DoctorDTO doctorDTO1:doctorDTO){
-//            System.out.println(doctorDTO1.toString());
-//        }
-        return hospitalDoctorDTO;
+//
+        return doctorDTOS;
     }
 
     public List<Doctor> findAllDoctorsOfHospital(String token) {

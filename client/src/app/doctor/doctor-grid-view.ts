@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DoctorService} from "../services/doctor.service";
 import {HospitalDoctor} from "../model/hospital-doctor.model";
+import {Doctor} from "../model/doctor.model";
 
 declare var swal:any;
 
@@ -12,7 +13,7 @@ declare var swal:any;
 })
 
 export class DoctorGridView implements OnInit{
-  doctorList: HospitalDoctor;
+  List: Doctor;
   constructor(private doctorService: DoctorService, private router: Router, private route: ActivatedRoute){
   }
 
@@ -25,7 +26,8 @@ export class DoctorGridView implements OnInit{
   getDoctorDetails(doctor: string){
     this.doctorService.searchDoctor(doctor).subscribe(
       result => {
-        this.doctorList = result
+        this.List = result
+        console.log(this.List);
       },
       error=>{
         if (!(error.status === 200)) {

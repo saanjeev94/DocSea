@@ -66,6 +66,8 @@ public class DoctorService {
         Hospital hospital = hospitalRepository.findOne(session.getHospitalId());
 
         Doctor doctor1 =doctorRepository.findByNmcNumber(doctorDTO.getNmcNumber());
+        System.out.println("===============doctorsss==================");
+        System.out.println(doctor1);
         if(doctor1 == null) {
 
             doctor.setNmcNumber(doctorDTO.getNmcNumber());
@@ -95,16 +97,27 @@ public class DoctorService {
             doctor.setDetails(doctorDTO.getDetails());
 
             doctorRepository.save(doctor);
+
+            HospitalDoctor hospitalDoctor = new HospitalDoctor();
+
+            hospitalDoctor.setHospital(hospital);
+            hospitalDoctor.setDoctor(doctor);
+
+            Status status = statusService.getStatusObject("ACTIVE");
+            hospitalDoctor.setStatus(status);
+            hospitalDoctorRepository.save(hospitalDoctor);
+        }else{
+            HospitalDoctor hospitalDoctor = new HospitalDoctor();
+
+            hospitalDoctor.setHospital(hospital);
+            hospitalDoctor.setDoctor(doctor1);
+
+            Status status = statusService.getStatusObject("ACTIVE");
+            hospitalDoctor.setStatus(status);
+            hospitalDoctorRepository.save(hospitalDoctor);
         }
 
-        HospitalDoctor hospitalDoctor = new HospitalDoctor();
 
-        hospitalDoctor.setHospital(hospital);
-        hospitalDoctor.setDoctor(doctor);
-
-        Status status = statusService.getStatusObject("ACTIVE");
-        hospitalDoctor.setStatus(status);
-        hospitalDoctorRepository.save(hospitalDoctor);
     }
 
     public boolean isDoctorExist(DoctorDTO doctorDTO, Long hospitalId){
