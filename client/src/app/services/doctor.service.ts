@@ -22,7 +22,7 @@ export class DoctorService{
     this.headers= new Headers();
     this.headers.append('Authorization',this.token);
     this.headers.append('Accept','Application/json');
-    // this.headers.append('Content-Type','mulipart/form-data');
+    // this.headers.append('Content-Type','mulipart/form-data');a
   }
 
   addDoctor(formdata:FormData){
