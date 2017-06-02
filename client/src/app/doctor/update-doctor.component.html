@@ -84,7 +84,7 @@
 
             <div *ngIf="docnumber1.errors && docnumber1.touched" class="alert alert-danger custom-label-alert">
               <span [hidden]="!docnumber1.errors.required">Number is required</span>
-              <span [hidden]="!docnumber1.errors.pattern">Number must be digit only</span>
+              <span [hidden]="!docnumber1.errors.pattern">Number must be 9-10 digit only</span>
             </div>
           </div>
 
@@ -97,7 +97,7 @@
                    pattern="[0-9]{9,10}" maxlength="10">
 
             <div *ngIf="docnumber4.errors && docnumber4.touched" class="alert alert-danger custom-label-alert">
-              <span [hidden]="!docnumber4.errors.pattern">Number must be digit only</span>
+              <span [hidden]="!docnumber4.errors.pattern">Number must be 9-10 digit only</span>
             </div>
           </div>
         </div>
