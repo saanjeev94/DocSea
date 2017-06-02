@@ -12,10 +12,10 @@ import {HospitalDoctor} from "../model/hospital-doctor.model";
 export class DoctorService{
   private headers:Headers;
 
-  private hospitalDoctorUrl='http://localhost:8080/api/hospitalDoctor';
-  private doctorUrl='http://localhost:8080/api/doctors';
-  private doctorSearchUrl='http://localhost:8080/api/doctorSearch/';
-  private getHospitalUrl='http://localhost:8080/api/hospitalDoctor/';
+  private hospitalDoctorUrl='http://localhost:9999/api/hospitalDoctor';
+  private doctorUrl='http://localhost:9999/api/doctors';
+  private doctorSearchUrl='http://localhost:9999/api/doctorSearch/';
+  private getHospitalUrl='http://localhost:9999/api/hospitalDoctor/';
   token = localStorage.getItem('currentUser');
 
   constructor(private http:Http){
@@ -49,7 +49,7 @@ export class DoctorService{
   search(term: string): Observable<any>{
     // console.log(term);
     return this.http
-      .get(this.doctorSearchUrl+'/quickSearch/'+term)
+      .get(this.doctorSearchUrl+'quickSearch/'+term)
       .map(response => response.json());
   }
 

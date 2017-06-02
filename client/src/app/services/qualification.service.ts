@@ -7,7 +7,7 @@ import {Http, RequestOptions, Headers} from "@angular/http";
 @Injectable()
 export class QualificationService{
   private headers:Headers;
-  private qualificationUrl = 'http://localhost:8080/api/qualification';
+  private qualificationUrl = 'http://localhost:9999/api/qualification';
   token = localStorage.getItem('currentUser');
 
   constructor(private http: Http){
