@@ -9,7 +9,8 @@
       <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 animated fadeInUp">
         <form id="doctor-search" class="text-center" #searchform="ngForm" (onsubmit)="doctorDetails(searchDoctor.value)">
           <input type="text" name="searchDoctor" class="form-control" placeholder="Search Your Doctor..."
-                 id="searchDoctor" (keyup)="search(searchDoctor.value)" #searchDoctor>
+                 id="searchDoctor" (keyup)="search(searchDoctor.value)" (keyup.enter)="doctorDetails(searchDoctor.value)"
+                 #searchDoctor>
           <span class="glyphicon glyphicon-search custom-search"></span>
           <input type="submit" class="custom-submit">
 

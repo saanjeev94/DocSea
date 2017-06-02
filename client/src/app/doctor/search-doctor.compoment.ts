@@ -26,6 +26,7 @@ export class SearchDoctorComponent implements OnInit{
   }
 
   search(term: string): void {
+    // console.log(term);
     this.doctorService.search(term)
     .subscribe(
       result => {
@@ -44,6 +45,7 @@ export class SearchDoctorComponent implements OnInit{
   }
 
   doctorDetails(doctor: string): void{
+    // console.log(doctor);
     this.router.navigate(['/doctor-view',doctor]);
   }
   selectString(hospitalDoctor: string){
