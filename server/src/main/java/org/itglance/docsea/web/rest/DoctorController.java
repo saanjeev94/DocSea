@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.itglance.docsea.domain.Doctor;
 import org.itglance.docsea.repository.DoctorRepository;
 import org.itglance.docsea.service.DoctorService;
+import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.dto.DoctorDTO;
 import org.itglance.docsea.domain.Schedule;
 import org.itglance.docsea.service.ScheduleService;
@@ -44,6 +45,9 @@ public class DoctorController {
     @Autowired
     private ScheduleService scheduleService;
 
+    @Autowired
+    private SessionService sessionService;
+
     private String defaultPhoto="doctor.png";
 
     //Adding doctor
@@ -56,6 +60,7 @@ public class DoctorController {
 
         System.out.println("*********  ADD DOCTOR  **************");
         System.out.println(Authorization);
+        Long hospitalId = sessionService.checkSession(Authorization).getHospitalId();
         ObjectMapper objectMapper=new ObjectMapper();
         try{
             DoctorDTO doctorDTO=objectMapper.readValue(doctor,DoctorDTO.class);
@@ -67,8 +72,8 @@ public class DoctorController {
                 photoName=defaultPhoto;
             }
             doctorDTO.setPhoto(photoName);
-            if(doctorService.isDoctorExist(doctorDTO)){
-                return new ResponseEntity("Doctor already exists", HttpStatus.CONFLICT);
+            if(doctorService.isDoctorExist(doctorDTO, hospitalId)){
+                return new ResponseEntity("Doctor already exists (You have already inserted doctor)", HttpStatus.CONFLICT);
             }
             doctorService.addDoctor(doctorDTO, Authorization);
         }catch (JsonParseException e1) {

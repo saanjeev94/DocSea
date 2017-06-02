@@ -61,39 +61,43 @@ public class DoctorService {
 
     public void addDoctor(DoctorDTO doctorDTO, String token) {
         Doctor doctor = new Doctor();
-
-        doctor.setNmcNumber(doctorDTO.getNmcNumber());
-        doctor.setName(doctorDTO.getName());
-        doctor.setQualification(doctorDTO.getQualification());
-        doctor.setPhoto(doctorDTO.getPhoto());
-        doctor.setGender(doctorDTO.getGender());
-
-        Speciality speciality=new Speciality() ;
-        speciality=specialityRepository.findByName(doctorDTO.getSpeciality().getName());
-        doctor.setSpeciality(speciality);
-
-        Qualification qualification=new Qualification() ;
-        qualification=qualificationRepository.findByName(doctorDTO.getQualification().getName());
-        doctor.setQualification(qualification);
-
-
-        Contact contact = new Contact();
-        contact.setContactNumber1(doctorDTO.getContact().getContactNumber1());
-        contact.setContactNumber2(doctorDTO.getContact().getContactNumber2());
-        contact.setEmailId(doctorDTO.getContact().getEmailId());
-        contact.setWebsite(doctorDTO.getContact().getWebsite());
-        contact.setFax(doctorDTO.getContact().getFax());
-        contactRepository.save(contact);
-        doctor.setContact(contact);
-
-        doctor.setDetails(doctorDTO.getDetails());
-
-        doctorRepository.save(doctor);
-
-        HospitalDoctor hospitalDoctor = new HospitalDoctor();
         System.out.println(token);
         Session session = sessionRepository.findByToken(token);
         Hospital hospital = hospitalRepository.findOne(session.getHospitalId());
+
+        Doctor doctor1 =doctorRepository.findByNmcNumber(doctorDTO.getNmcNumber());
+        if(doctor1 == null) {
+
+            doctor.setNmcNumber(doctorDTO.getNmcNumber());
+            doctor.setName(doctorDTO.getName());
+            doctor.setQualification(doctorDTO.getQualification());
+            doctor.setPhoto(doctorDTO.getPhoto());
+            doctor.setGender(doctorDTO.getGender());
+
+            Speciality speciality = new Speciality();
+            speciality = specialityRepository.findByName(doctorDTO.getSpeciality().getName());
+            doctor.setSpeciality(speciality);
+
+            Qualification qualification = new Qualification();
+            qualification = qualificationRepository.findByName(doctorDTO.getQualification().getName());
+            doctor.setQualification(qualification);
+
+
+            Contact contact = new Contact();
+            contact.setContactNumber1(doctorDTO.getContact().getContactNumber1());
+            contact.setContactNumber2(doctorDTO.getContact().getContactNumber2());
+            contact.setEmailId(doctorDTO.getContact().getEmailId());
+            contact.setWebsite(doctorDTO.getContact().getWebsite());
+            contact.setFax(doctorDTO.getContact().getFax());
+            contactRepository.save(contact);
+            doctor.setContact(contact);
+
+            doctor.setDetails(doctorDTO.getDetails());
+
+            doctorRepository.save(doctor);
+        }
+
+        HospitalDoctor hospitalDoctor = new HospitalDoctor();
 
         hospitalDoctor.setHospital(hospital);
         hospitalDoctor.setDoctor(doctor);
@@ -103,13 +107,13 @@ public class DoctorService {
         hospitalDoctorRepository.save(hospitalDoctor);
     }
 
-    public boolean isDoctorExist(DoctorDTO doctorDTO){
+    public boolean isDoctorExist(DoctorDTO doctorDTO, Long hospitalId){
         Doctor doctor=new Doctor();
         doctor=doctorRepository.findByNmcNumber(doctorDTO.getNmcNumber());
-
-        if(doctor!=null){
+        Hospital hospital = hospitalRepository.findOne(hospitalId);
+        HospitalDoctor hospitalDoctor = hospitalDoctorRepository.findByHospitalAndDoctor(hospital,doctor);
+        if(hospitalDoctor!=null ){
             return true;
-
         }
         else{
             return false;
