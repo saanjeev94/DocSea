@@ -12,9 +12,11 @@ import {DoctorGridView} from "./doctor/doctor-grid-view";
 import {UpdateHospitalComponent} from "./hospital/update-hospital.component";
 import {AdminComponent} from "./admin/admin.component";
 import {DoctorDetailsComponent} from "./doctor/doctor-details.component";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 
 const ROUTES: Routes = [
-  { path: '', redirectTo: '/search-doctor', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: SearchDoctorComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterHospitalComponent },
   { path: 'search-doctor', component: SearchDoctorComponent },
@@ -26,7 +28,9 @@ const ROUTES: Routes = [
   // {path:'doctor-view', component: DoctorGridView},
   {path:'doctor-view/:doctor', component: DoctorGridView},
   {path:'hospital-update/:username', component: UpdateHospitalComponent},
-  {path:'doctor-detail/:id', component: DoctorDetailsComponent}
+  {path:'doctor-detail/:id', component: DoctorDetailsComponent},
+  {path:'not-found', component: PageNotFoundComponent},
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({

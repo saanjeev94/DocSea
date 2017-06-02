@@ -8,8 +8,8 @@ import {Schedule} from "../model/schedule.model";
 export class ScheduleService{
 
   private headers:Headers;
-  private scheduleUrl='http://localhost:9999/api/schedules';
-  private doctorHospitalUrl='http://localhost:9999/api/schedules/hospitalSchedule';
+  private scheduleUrl='http://localhost:8080/api/schedules';
+  private doctorHospitalUrl='http://localhost:8080/api/schedules/hospitalSchedule';
   token = localStorage.getItem('currentUser');
 
   constructor(private http:Http){

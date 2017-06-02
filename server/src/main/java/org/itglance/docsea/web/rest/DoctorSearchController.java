@@ -31,6 +31,10 @@ public class DoctorSearchController {
         System.out.println(searchString);
        List<DoctorDTO> doctors= doctorSearchService.findDoctor(searchString);
         System.out.println(doctors);
+        if(doctors.isEmpty()){
+            System.out.println("*********************doctor not found********************");
+            return  new ResponseEntity<String>("Doctor not found", HttpStatus.CONFLICT);
+        }
        return new ResponseEntity<List<DoctorDTO>>(doctors,HttpStatus.OK);
 
     }

@@ -27,7 +27,7 @@ export class DoctorGridView implements OnInit{
     this.doctorService.searchDoctor(doctor).subscribe(
       result => {
         this.List = result
-        console.log(this.List);
+        // console.log(this.List);
       },
       error=>{
         if (!(error.status === 200)) {

@@ -26,6 +26,7 @@ import {ScheduleService} from "./services/schedule.service";
 import {QualificationService} from "./services/qualification.service";
 import {SpecialityService} from "./services/speciality.service";
 import {DoctorDetailsComponent} from "./doctor/doctor-details.component";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {DoctorDetailsComponent} from "./doctor/doctor-details.component";
     UpdateHospitalComponent,
     AdminComponent,
     DoctorDetailsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

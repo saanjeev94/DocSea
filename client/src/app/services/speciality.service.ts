@@ -7,7 +7,7 @@ import {Http, RequestOptions, Headers} from "@angular/http";
 @Injectable()
 export class SpecialityService{
   private headers:Headers;
-  private specialityUrl = 'http://localhost:9999/api/speciality';
+  private specialityUrl = 'http://localhost:8080/api/speciality';
   token = localStorage.getItem('currentUser');
 
   constructor(private http: Http){
