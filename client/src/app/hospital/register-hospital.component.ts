@@ -38,16 +38,16 @@ export class RegisterHospitalComponent implements OnInit{
     this.hosiptalService.addHospital(this.hospitalUser).subscribe(
       result => {
         this.hospitalUser = result
-      },
-      error=>{
-        if (!(error.status === 200)) {
-          swal(
-            'Oops...',
-            error._body,
-            'error'
-          )
-        }
       }
+      // error=>{
+      //   if (!(error.status === 200)) {
+      //     swal(
+      //       'Oops...',
+      //       error._body,
+      //       'error'
+      //     )
+      //   }
+      // }
     );
     this.router.navigate((['/login']));
   }

@@ -72,15 +72,15 @@ export class UpdateDoctorComponent implements OnInit{
     this.doctorService.updateDoctor(formdata).subscribe(
       result => {
       },
-      error=>{
-        if (!(error.status === 200)) {
-          swal(
-            'Oops...',
-            error._body,
-            'error'
-          )
-        }
-      }
+      // error=>{
+      //   if (!(error.status === 200)) {
+      //     swal(
+      //       'Oops...',
+      //       error._body,
+      //       'error'
+      //     )
+      //   }
+      // }
     );
     this.router.navigate(['/hospital-panel']);
   }

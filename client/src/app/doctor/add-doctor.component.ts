@@ -50,17 +50,17 @@ export class AddDoctorComponent implements OnInit{
     this.doctorService.addDoctor(formdata).subscribe(
       response=>{
         // console.log(response);
-      },
-      error=> {
-        console.log(error);
-          if (error.status !== 200) {
-            swal(
-              'Oops...',
-              error._body,
-              'error'
-            )
-          }
-      });
+      }
+      // error=> {
+      //   console.log(error);
+      //     if (error.status !== 200) {
+      //       swal(
+      //         'Oops...',
+      //         error._body,
+      //         'error'
+      //       )
+      //     }
+      );
     this.router.navigate(['/hospital-panel']);
   }
 }

@@ -55,16 +55,17 @@ export class UpdateHospitalComponent implements OnInit{
 
   onUpdate(){
     this.hosiptalService.updateHospital(this.hospitalUser).subscribe(
-      result => {},
-      error=>{
-        if (!(error.status === 200)) {
-          swal(
-            'Oops...',
-            error._body,
-            'error'
-          )
-        }
-      });
+      result => {}
+      // error=>{
+      //   if (!(error.status === 200)) {
+      //     swal(
+      //       'Oops...',
+      //       error._body,
+      //       'error'
+      //     )
+      //   }
+      // }
+    );
     this.router.navigate(['/hospital-panel']);
 
   }
