@@ -26,16 +26,16 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
     this.doctorService.getHospitalDoctors().subscribe(
       data=>{
         this.doctorList = data;
-      },
-      response=>{
-        if (!(response.status === 200)) {
-          swal(
-            'Oops...',
-            response._body,
-            'error'
-          )
-        }
       }
+      // response=>{
+      //   if (!(response.status === 200)) {
+      //     swal(
+      //       'Oops...',
+      //       response._body,
+      //       'error'
+      //     )
+      //   }
+      // }
     )}
 
   ngAfterViewInit() {

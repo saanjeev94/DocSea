@@ -28,7 +28,7 @@
         <div class="col-md-5">
           <div class="map">
           <ngui-map zoom="18" center="{{hospital.name}}, {{hospital.address.streetAddress}}, {{hospital.address.city.name}}, {{hospital.address.country.name}}">
-            <marker position="{{hospital.name}}" draggable="true"></marker>
+            <marker position="{{hospital.name}}, {{hospital.address.streetAddress}}" draggable="true"></marker>
           </ngui-map>
         </div>
         </div>
