@@ -10,7 +10,7 @@ import org.itglance.docsea.domain.Status;
  */
 public class HospitalDoctorDTO {
 
-    private int id;
+    private Long id;
     private Hospital hospital;
     private Doctor doctor;
     private Status status;
@@ -19,7 +19,7 @@ public class HospitalDoctorDTO {
 
     }
 
-    public HospitalDoctorDTO(int id, Hospital hospital, Doctor doctor, Status status) {
+    public HospitalDoctorDTO(Long id, Hospital hospital, Doctor doctor, Status status) {
         this.id = id;
         this.hospital = hospital;
         this.doctor = doctor;
@@ -30,7 +30,7 @@ public class HospitalDoctorDTO {
         this(hospitalDoctor.getId(),hospitalDoctor.getHospital(),hospitalDoctor.getDoctor(),hospitalDoctor.getStatus());
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

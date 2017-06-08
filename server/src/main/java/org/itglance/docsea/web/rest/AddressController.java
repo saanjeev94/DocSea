@@ -1,7 +1,5 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.Address;
-import org.itglance.docsea.domain.Country;
 import org.itglance.docsea.service.AddressService;
 import org.itglance.docsea.service.dto.AddressDTO;
 import org.slf4j.Logger;
@@ -9,10 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -32,12 +28,12 @@ public class AddressController {
     @GetMapping(value = "/addresses")
     public ResponseEntity<?> getAddresses( )
     {
-        List<Address> addresseS = addressService.getAllAddresses();
-        if(addresseS == null){
+        List<AddressDTO> addressDto = addressService.getAllAddresses();
+        if(addressDto == null){
             logger.error("There is no records in address table.");
             return new ResponseEntity(("There is no records in address table."), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity< List<Address>> (addresseS, HttpStatus.OK);
+        return new ResponseEntity< List<AddressDTO>> (addressDto, HttpStatus.OK);
 
     }
 
@@ -60,7 +56,7 @@ public class AddressController {
             logger.error("There is no records in zone table.");
             return new ResponseEntity(("There is no records in zone table."), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<> (zones, HttpStatus.OK);
+        return new ResponseEntity<List<String>> (zones, HttpStatus.OK);
     }
 
     @GetMapping(value = "/addresses/districts")

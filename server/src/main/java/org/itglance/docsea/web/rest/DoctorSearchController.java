@@ -1,10 +1,7 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.domain.HospitalDoctor;
 import org.itglance.docsea.service.DoctorSearchService;
 import org.itglance.docsea.service.dto.DoctorDTO;
-import org.itglance.docsea.service.dto.HospitalDoctorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +40,9 @@ public class DoctorSearchController {
     //Search all the doctor according to the hospital
     @GetMapping
     public ResponseEntity<?> searchAllDoctorOfHospital(@RequestHeader String Authorization){
-        List<Doctor> doctors = new ArrayList<>();
-        doctors = doctorSearchService.findAllDoctorsOfHospital(Authorization);
-        return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+        doctorDTOS = doctorSearchService.findAllDoctorsOfHospital(Authorization);
+        return new ResponseEntity<List<DoctorDTO>>(doctorDTOS, HttpStatus.OK);
     }
 
 

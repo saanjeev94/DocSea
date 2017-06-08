@@ -149,18 +149,22 @@ public class HospitalService {
         return false;
     }
 
-    public List<HospitalUser> getAllHospitalUser() {
+    public List<HospitalUserDTO> getAllHospitalUser() {
         List<HospitalUser> hospitalList = hospitalUserRepository.findAll();
-        return hospitalList;
+        List<HospitalUserDTO> hospitalUserDTOS = new ArrayList<>();
+        for(HospitalUser hu: hospitalList){
+            hospitalUserDTOS.add(new HospitalUserDTO(hu));
+        }
+        return hospitalUserDTOS;
     }
 
-    public HospitalUser getHospitalById(Long id) {
+    public HospitalUserDTO getHospitalById(Long id) {
         Hospital hospital = hospitalRepository.findOne(id);
         HospitalUser hospitalUser = hospitalUserRepository.findByHospital(hospital);
-        return hospitalUser;
+        return new HospitalUserDTO(hospitalUser);
     }
 
-    public HospitalUser getHospitalByUsername(String username) {
+    public HospitalUserDTO getHospitalByUsername(String username) {
         User user = userRepository.findByUsername(username);
         HospitalUser hospitalUser = hospitalUserRepository.findByUser(user);
         String encryptedPassword = hospitalUser.getUser().getPassword();
@@ -169,7 +173,7 @@ public class HospitalService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return hospitalUser;
+        return new HospitalUserDTO(hospitalUser);
     }
 
     public void updateHospital(HospitalUserDTO hospitalUserDTO){

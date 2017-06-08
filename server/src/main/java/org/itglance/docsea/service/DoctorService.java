@@ -72,7 +72,7 @@ public class DoctorService {
 
             doctor.setNmcNumber(doctorDTO.getNmcNumber());
             doctor.setName(doctorDTO.getName());
-            doctor.setQualification(doctorDTO.getQualification());
+            //doctor.setQualification(doctorDTO.getQualification());
             doctor.setPhoto(doctorDTO.getPhoto());
             doctor.setGender(doctorDTO.getGender());
 
@@ -205,11 +205,18 @@ public class DoctorService {
         return false;
     }
 
-        public void linkSchedule(Long id,ScheduleDTO scheduleDTO, List<Schedule> schedule){
-            Doctor doctor=doctorRepository.getOne(id);
-            schedule.add(scheduleRepository.findById(scheduleService.getScheduleId(scheduleDTO)));
-            doctor.setSchedules(schedule);
-            doctorRepository.save(doctor);
-        }
 
+    public List<DoctorDTO> getAllDoctor() {
+        List<Doctor> doctors = doctorRepository.findAll();
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+        for(Doctor d: doctors){
+            doctorDTOS.add(new DoctorDTO(d));
+        }
+        return doctorDTOS;
+    }
+
+    public DoctorDTO getOneDoctor(Long id) {
+        Doctor doctor = doctorRepository.findOne(id);
+        return new DoctorDTO(doctor);
+    }
 }

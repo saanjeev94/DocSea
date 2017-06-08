@@ -23,7 +23,8 @@ public class DoctorDTO {
 
     public DoctorDTO(){}
 
-    public DoctorDTO(Long id, int nmcNumber, String name, Qualification qualification, String photo, String gender, Speciality speciality, Contact contact, List<Schedule> schedules, String details) {
+    public DoctorDTO(Long id, int nmcNumber, String name, Qualification qualification, String photo, String gender, Speciality speciality, Contact contact
+            , List<Schedule> schedules, String details) {
         this.id = id;
         this.nmcNumber = nmcNumber;
         this.name = name;

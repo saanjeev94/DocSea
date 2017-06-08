@@ -2,7 +2,6 @@ package org.itglance.docsea.web.rest;
 
 import org.itglance.docsea.service.ScheduleService;
 import org.itglance.docsea.service.SessionService;
-import org.itglance.docsea.service.dto.HospitalDTO;
 import org.itglance.docsea.service.dto.ScheduleDTO;
 import org.itglance.docsea.service.dto.ScheduleStringDTO;
 import org.slf4j.Logger;

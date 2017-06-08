@@ -4,14 +4,10 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.repository.DoctorRepository;
 import org.itglance.docsea.service.DoctorService;
 import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.dto.DoctorDTO;
-import org.itglance.docsea.domain.Schedule;
 import org.itglance.docsea.service.ScheduleService;
-import org.itglance.docsea.service.dto.ScheduleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +20,6 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,9 +33,6 @@ public class DoctorController {
 
     @Autowired
     private DoctorService doctorService;
-
-    @Autowired
-    private DoctorRepository doctorRepository;
 
     @Autowired
     private ScheduleService scheduleService;
@@ -88,21 +80,21 @@ public class DoctorController {
 
 
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<Doctor>> listAllDoctors() {
-        List<Doctor> list = doctorRepository.findAll();
+    public ResponseEntity<List<DoctorDTO>> listAllDoctors() {
+        List<DoctorDTO> list = doctorService.getAllDoctor();
         if (list.isEmpty()) {
-            return new ResponseEntity<List<Doctor>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<List<DoctorDTO>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<Doctor> getDoctor(@PathVariable("id") Long id){
-        Doctor doctor = doctorRepository.findOne(id);
-        if (doctor==null) {
+    public ResponseEntity<DoctorDTO> getDoctor(@PathVariable("id") Long id){
+        DoctorDTO doctorDTO = doctorService.getOneDoctor(id);
+        if (doctorDTO==null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(doctor, HttpStatus.OK);
+        return new ResponseEntity<DoctorDTO>(doctorDTO, HttpStatus.OK);
     }
 
     //Updating Doctor
@@ -113,7 +105,6 @@ public class DoctorController {
             HttpServletRequest request) throws MissingServletRequestPartException,IOException{
 
         System.out.println("***************** UPDATE DOCOTR ************************");
-        Doctor doctor1=new Doctor();
         ObjectMapper objectMapper=new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try{

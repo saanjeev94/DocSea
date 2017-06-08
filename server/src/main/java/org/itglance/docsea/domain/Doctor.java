@@ -34,7 +34,7 @@ public class Doctor {
     private String gender;
 
     @NotNull( message = "Speciality cannot be null")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Speciality speciality;
 
     @NotNull( message = "Contact cannot be null")
@@ -126,13 +126,14 @@ public class Doctor {
         this.schedules = schedules;
     }
 
+
     @Override
     public String toString() {
         return "Doctor{" +
                 "id=" + id +
                 ", nmcNumber=" + nmcNumber +
                 ", name='" + name + '\'' +
-                ", name='" + qualification + '\'' +
+                ", qualification=" + qualification +
                 ", photo='" + photo + '\'' +
                 ", gender='" + gender + '\'' +
                 ", speciality=" + speciality +
@@ -141,8 +142,10 @@ public class Doctor {
                 ", details='" + details + '\'' +
                 '}';
     }
-
 }
+
+
+
 
 
 

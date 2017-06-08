@@ -53,5 +53,7 @@ public List<Doctor> findDoctorByString(@Param("searchString") String searchStrin
 
     @Query("SELECT hd.doctor FROM HospitalDoctor hd WHERE hd.hospital = :hospital")
     public List<Doctor> findAllByHospital(@Param("hospital") Hospital hospital);
+
+    public HospitalDoctor findByDoctor(Doctor doctor);
 }
 

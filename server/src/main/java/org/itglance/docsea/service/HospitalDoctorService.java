@@ -6,7 +6,9 @@ import org.itglance.docsea.repository.HospitalDoctorRepository;
 import org.itglance.docsea.repository.HospitalRepository;
 import org.itglance.docsea.repository.ScheduleRepository;
 import org.itglance.docsea.service.dto.DoctorDTO;
+import org.itglance.docsea.service.dto.HospitalDTO;
 import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.itglance.docsea.service.dto.StatusDTO;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,28 +46,9 @@ public class HospitalDoctorService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    /*public void changeHospitalDoctorStatus(Long hospitalId, Long doctorId){
-
-        HospitalDoctor hospitalDoctor= hospitalDoctorRepository.findByHospitalDoctor(hospitalId, doctorId);
-        System.out.println(hospitalDoctor.toString());
-
-        String status1=hospitalDoctor.getStatus().getStatus();
-
-        if(status1.equalsIgnoreCase("Active")){
-            status1="Inactive";
-        }
-        else if(status1.equalsIgnoreCase("Inactive")){
-            status1="Active";
-        }
 
 
-        hospitalDoctor.setStatus(statusService.getStatusObject(status1));
-        hospitalDoctorRepository.save(hospitalDoctor);
-
-
-    }*/
-
-    public void hospitalDoctorSchedule(Long doctorId){
+    /*public void hospitalDoctorSchedule(Long doctorId){
         long hospitalId=1;
         List<Schedule> doctorSchedules=doctorRepository.findScheduleByDoctorId(doctorId);
         List<Schedule> hospitalSchedules=hospitalRepository.findScheduleByHospitalId(hospitalId);
@@ -82,28 +65,37 @@ public class HospitalDoctorService {
         for(Schedule schedule:hospitalDoctorSchedules){
             logger.info(schedule.toString());
         }
-
-
     }
+*/
 
-    public Status getStatusFromHospitalAndDoctor(Long doctorId, String token) {
+    public StatusDTO getStatusFromHospitalAndDoctor(Long doctorId, String token) {
         Long hospitalId = sessionService.checkSession(token).getHospitalId();
         Hospital hospital = hospitalRepository.findOne(hospitalId);
         Doctor doctor = doctorRepository.findOne(doctorId);
         Status status = hospitalDoctorRepository.findStatusByHospitalDoctor(hospital, doctor);
-        return status;
+        System.out.println();
+        System.out.println(status);
+        return new StatusDTO(status);
     }
 
-    public List<Hospital> getHospitals(Long docId) {
+    public List<HospitalDTO> getHospitals(Long docId) {
         Doctor doctor = doctorRepository.findOne(docId);
         Status status = statusService.getStatusObject("Active");
         List<Hospital> hospitals= hospitalDoctorRepository.findAllByDoctor(doctor, status);
-        return hospitals;
+        List<HospitalDTO> hospitalDTOS = new ArrayList<>();
+        for(Hospital h: hospitals){
+            hospitalDTOS.add(new HospitalDTO(h));
+        }
+        return hospitalDTOS;
     }
 
-    public List<Doctor> getDoctors(Long hospitalId) {
+    public List<DoctorDTO> getDoctors(Long hospitalId) {
         Hospital hospital=hospitalRepository.findOne(hospitalId);
         List<Doctor> doctors=hospitalDoctorRepository.findAllByHospital(hospital);
-        return doctors;
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+        for(Doctor d: doctors){
+            doctorDTOS.add(new DoctorDTO(d));
+        }
+        return doctorDTOS;
     }
 }

@@ -1,6 +1,5 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.HospitalUser;
 import org.itglance.docsea.service.HospitalService;
 import org.itglance.docsea.service.dto.HospitalDTO;
 import org.itglance.docsea.service.dto.HospitalUserDTO;
@@ -88,10 +87,10 @@ public class HospitalController {
 
     //-------------- display testing----//
    @RequestMapping(value = "/hospital", method = RequestMethod.GET)
-    public ResponseEntity<List<HospitalUser>> listAllUsers() {
-         List<HospitalUser> list = hospitalService.getAllHospitalUser();
+    public ResponseEntity<List<HospitalUserDTO>> listAllUsers() {
+         List<HospitalUserDTO> list = hospitalService.getAllHospitalUser();
         if(list.isEmpty()){
-            return new ResponseEntity<List<HospitalUser>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+            return new ResponseEntity<List<HospitalUserDTO>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
         return new ResponseEntity(list, HttpStatus.OK);
     }
@@ -99,14 +98,14 @@ public class HospitalController {
     //----------- display hospital by username-------
     @GetMapping(value = "/hospital/{username}")
     public ResponseEntity<?> getHospitalUserByU(@PathVariable("username") String username){
-        HospitalUser hospitalUser = hospitalService.getHospitalByUsername(username);
-        return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
+        HospitalUserDTO hospitalUserDTOs = hospitalService.getHospitalByUsername(username);
+        return new ResponseEntity<HospitalUserDTO>(hospitalUserDTOs ,HttpStatus.OK);
     }
 
     //----------- display hospital by hospital id-------
     @GetMapping(value = "/hospitalId/{id}")
     public ResponseEntity<?> getHospitalUserById(@PathVariable("id") Long id){
-        HospitalUser hospitalUser = hospitalService.getHospitalById(id);
-        return new ResponseEntity<HospitalUser>(hospitalUser ,HttpStatus.OK);
+        HospitalUserDTO hospitalUserDTOS = hospitalService.getHospitalById(id);
+        return new ResponseEntity<HospitalUserDTO>(hospitalUserDTOS ,HttpStatus.OK);
     }
 }
