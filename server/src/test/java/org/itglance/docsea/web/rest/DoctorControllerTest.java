@@ -68,8 +68,6 @@ public class DoctorControllerTest {
 
         qualification.setName("MD");
         doctor.setQualification(qualification);
-
-
     }
 
     @Test
