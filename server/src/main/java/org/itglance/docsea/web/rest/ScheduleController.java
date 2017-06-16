@@ -168,7 +168,7 @@ public class ScheduleController {
         if(scheduleDTO1 != null  && (scheduleDTO1.getEndTime() != null || scheduleDTO1.getStartTime() != null) ){
 
             log.error("Schedule overLapped, Update schedule denied");
-            return new ResponseEntity<ScheduleDTO>(scheduleDTO1, HttpStatus.OK);
+            return new ResponseEntity<String>("Schedule overLapped, Update schedule denied", HttpStatus.CONFLICT);
         }
 
         ScheduleDTO catchSchedule = scheduleService.updateSchedule(scheduleDTO);
