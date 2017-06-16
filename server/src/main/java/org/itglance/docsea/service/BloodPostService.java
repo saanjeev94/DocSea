@@ -35,8 +35,6 @@ public class BloodPostService {
     Date d = dateFormatter.parse(dateFormatter.format(new Date() ));
 
     public Page<BloodPost> getAllBlood(Pageable pageable) throws ParseException {
-        System.out.println("dsfadsfasdfa///////////////////////////////////////////");
-        System.out.println(d.toString());
         Page<BloodPost> bloodPosts = bloodPostRepository.findValideBlood(d, pageable);
        /* List<BloodPostDTO> bloodPostDTOS = new ArrayList<>();
 
@@ -46,6 +44,7 @@ public class BloodPostService {
                 bloodPostDTOS.add(new BloodPostDTO(b));
         }
         System.out.println(bloodPostDTOS.toString());*/
+        System.out.println(bloodPosts.toString());
         return bloodPosts;
     }
 

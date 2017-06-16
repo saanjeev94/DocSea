@@ -78,7 +78,6 @@ public class DoctorController {
         return new ResponseEntity("Doctor inserted", HttpStatus.OK);
     }
 
-
     @RequestMapping( method = RequestMethod.GET)
     public ResponseEntity<List<DoctorDTO>> listAllDoctors() {
         List<DoctorDTO> list = doctorService.getAllDoctor();

@@ -28,6 +28,7 @@ public class AddressController {
     @GetMapping(value = "/addresses")
     public ResponseEntity<?> getAddresses( )
     {
+        logger.info("get addresses api called  ");
         List<AddressDTO> addressDto = addressService.getAllAddresses();
         if(addressDto == null){
             logger.error("There is no records in address table.");

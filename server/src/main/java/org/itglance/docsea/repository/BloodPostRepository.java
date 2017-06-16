@@ -18,4 +18,6 @@ public interface BloodPostRepository extends JpaRepository <BloodPost,Long>{
     @Query(value = "SELECT b FROM BloodPost b WHERE b.deadline >= :date",
             countQuery = "SELECT count(b)FROM BloodPost b WHERE b.deadline >= :date")
     Page<BloodPost> findValideBlood( @Param("date") Date date, Pageable page );
+
+    public BloodPost findByBloodGroup(String group);
 }
