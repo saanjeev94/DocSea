@@ -1,42 +1,43 @@
 package org.itglance.docsea.domain;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
- * Created by Mahesh on 5/9/2017.
+ * Created by sriyanka on 6/12/17.
  */
+
 @Entity
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String eventName;
-    private String description;
-    private String date;
-    private String time;
-    private String photo;
 
-    @JoinColumn(name="hospital_id")
+//    @NotNull(message = "Event name cannot be null")
+    private String name;
+
     @ManyToOne
     private Hospital hospital;
+    private String description;
 
+//    @NotNull(message = "Date cannot be null")
+    private String date;
+
+//    @NotNull(message = "Time cannot be null")
+    private String time;
+    private String photo;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Hospital getHospital() {
@@ -83,7 +84,7 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", eventName='" + eventName + '\'' +
+                ", name='" + name + '\'' +
                 ", hospital=" + hospital +
                 ", description='" + description + '\'' +
                 ", date='" + date + '\'' +
@@ -92,3 +93,4 @@ public class Event {
                 '}';
     }
 }
+

@@ -1,5 +1,7 @@
 package org.itglance.docsea.domain;
 
+import org.jboss.logging.Field;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class HospitalDoctor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
 
     @ManyToOne
     private Hospital hospital;

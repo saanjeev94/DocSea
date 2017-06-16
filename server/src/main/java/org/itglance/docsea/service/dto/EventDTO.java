@@ -1,26 +1,48 @@
 package org.itglance.docsea.service.dto;
 
+import org.itglance.docsea.domain.Event;
+import org.itglance.docsea.domain.Hospital;
+
 /**
- * Created by Mahesh on 5/9/2017.
+ * Created by sriyanka on 6/12/17.
  */
 public class EventDTO {
+
     private Long id;
-    private String eventName;
-    private Long hospital;
+    private String name;
+    private Hospital hospital;
     private String description;
     private String date;
     private String time;
     private String photo;
 
+    public EventDTO(){
+
+    }
+
+    public EventDTO(Long id, String name, Hospital hospital, String description, String date, String time, String photo) {
+        this.id = id;
+        this.name = name;
+        this.hospital = hospital;
+        this.description = description;
+        this.date = date;
+        this.time = time;
+        this.photo = photo;
+    }
+
+    public EventDTO(Event event){
+        this(event.getId(),event.getName(), event.getHospital(), event.getDescription(), event.getDate(), event.getTime(),event.getPhoto());
+    }
+
     public Long getId() {
         return id;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getName() {
+        return name;
     }
 
-    public Long getHospital() {
+    public Hospital getHospital() {
         return hospital;
     }
 
@@ -44,7 +66,7 @@ public class EventDTO {
     public String toString() {
         return "EventDTO{" +
                 "id=" + id +
-                ", eventName='" + eventName + '\'' +
+                ", name='" + name + '\'' +
                 ", hospital=" + hospital +
                 ", description='" + description + '\'' +
                 ", date='" + date + '\'' +
