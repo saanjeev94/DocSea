@@ -4,6 +4,9 @@ import org.itglance.docsea.domain.Qualification;
 import org.itglance.docsea.domain.Speciality;
 import org.itglance.docsea.repository.QualificationRepository;
 import org.itglance.docsea.repository.SpecialityRepository;
+import org.itglance.docsea.service.QualificationService;
+import org.itglance.docsea.service.dto.QualificationDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,13 +26,19 @@ public class QualificationController {
 
     QualificationRepository qualificationRepository;
 
+    @Autowired
+    QualificationService qualificationService;
+
     public QualificationController(QualificationRepository qualificationRepository) {
         this.qualificationRepository = qualificationRepository;
     }
 
     @GetMapping
-    public ResponseEntity<List<Qualification>> getAllQualification(){
-        List<Qualification> qualifications= qualificationRepository.findAll();
-        return new ResponseEntity<List<Qualification>>(qualifications, HttpStatus.OK);
+    public ResponseEntity<?> getAllQualification(){
+        List<QualificationDTO> qualifications= qualificationService.getAllQualification();
+        if(qualifications.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<QualificationDTO>>(qualifications, HttpStatus.OK);
     }
 }

@@ -6,6 +6,8 @@ import org.itglance.docsea.domain.Session;
 import org.itglance.docsea.domain.User;
 import org.itglance.docsea.repository.HospitalUserRepository;
 import org.itglance.docsea.repository.UserRepository;
+import org.itglance.docsea.service.dto.SessionDTO;
+import org.itglance.docsea.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +33,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Session validateLogin(User user){
+    public SessionDTO validateLogin(UserDTO userDTO){
 
         User dbUser = null;
         try {
             System.out.println("------- checking password and username-------");
-            dbUser = userRepository.findByUsernameAndPassword(user.getUsername(), CryptoUtil.encrypt(user.getPassword(), user.getUsername()));
+            dbUser = userRepository.findByUsernameAndPassword(userDTO.getUsername(), CryptoUtil.encrypt(userDTO.getPassword(), userDTO.getUsername()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,7 +48,7 @@ public class UserService {
            /* String mainToken =  session.toStringForToken();
             byte[] encode = Base64.getEncoder().encode(mainToken.getBytes());*/
             System.out.println("-----password and username matched");
-            return session;
+            return new SessionDTO(session);
         }
         System.out.println("-----password and username invalid");
         return null;

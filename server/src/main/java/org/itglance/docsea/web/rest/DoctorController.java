@@ -12,6 +12,10 @@ import org.itglance.docsea.service.dto.DoctorDTO;
 import org.itglance.docsea.domain.Schedule;
 import org.itglance.docsea.service.ScheduleService;
 import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.itglance.docsea.service.DoctorService;
+import org.itglance.docsea.service.SessionService;
+import org.itglance.docsea.service.dto.DoctorDTO;
+import org.itglance.docsea.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,23 +90,22 @@ public class DoctorController {
         return new ResponseEntity("Doctor inserted", HttpStatus.OK);
     }
 
-
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<Doctor>> listAllDoctors() {
-        List<Doctor> list = doctorRepository.findAll();
+    public ResponseEntity<List<DoctorDTO>> listAllDoctors() {
+        List<DoctorDTO> list = doctorService.getAllDoctor();
         if (list.isEmpty()) {
-            return new ResponseEntity<List<Doctor>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<List<DoctorDTO>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<Doctor> getDoctor(@PathVariable("id") Long id){
-        Doctor doctor = doctorRepository.findOne(id);
-        if (doctor==null) {
+    public ResponseEntity<DoctorDTO> getDoctor(@PathVariable("id") Long id){
+        DoctorDTO doctorDTO = doctorService.getOneDoctor(id);
+        if (doctorDTO==null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(doctor, HttpStatus.OK);
+        return new ResponseEntity<DoctorDTO>(doctorDTO, HttpStatus.OK);
     }
 
     //Updating Doctor

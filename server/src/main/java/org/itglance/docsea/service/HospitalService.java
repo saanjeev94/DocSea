@@ -97,7 +97,6 @@ public class HospitalService {
         address.setDistrict(districtRepository.findByName(hospitalDTO.getAddress().getDistrict().getName()));
         address.setZone(zoneRepository.findByName(hospitalDTO.getAddress().getZone().getName()));
         address.setCountry(countryRepository.findByName(hospitalDTO.getAddress().getCountry().getName()));
-//        address.setCity(cityRepository.findByName( hospitalDTO.getAddress().getCity().getName() ) );
         District district = districtRepository.findByName(hospitalDTO.getAddress().getDistrict().getName());
         address.setCity(cityRepository.findByDistrictAndCityName(district, hospitalDTO.getAddress().getCity().getName()) );
         addressRepository.save(address);
@@ -160,7 +159,22 @@ public class HospitalService {
         return hospitalUser;
     }
 
-    public HospitalUser getHospitalByUsername(String username) {
+    public List<HospitalUserDTO> getAllHospitalUser() {
+        List<HospitalUser> hospitalList = hospitalUserRepository.findAll();
+        List<HospitalUserDTO> hospitalUserDTOS = new ArrayList<>();
+        for(HospitalUser hu: hospitalList){
+            hospitalUserDTOS.add(new HospitalUserDTO(hu));
+        }
+        return hospitalUserDTOS;
+    }
+
+    public HospitalUserDTO getHospitalById(Long id) {
+        Hospital hospital = hospitalRepository.findOne(id);
+        HospitalUser hospitalUser = hospitalUserRepository.findByHospital(hospital);
+        return new HospitalUserDTO(hospitalUser);
+    }
+
+    public HospitalUserDTO getHospitalByUsername(String username) {
         User user = userRepository.findByUsername(username);
         HospitalUser hospitalUser = hospitalUserRepository.findByUser(user);
         String encryptedPassword = hospitalUser.getUser().getPassword();
@@ -169,7 +183,7 @@ public class HospitalService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return hospitalUser;
+        return new HospitalUserDTO(hospitalUser);
     }
 
     public void updateHospital(HospitalUserDTO hospitalUserDTO){
@@ -195,7 +209,6 @@ public class HospitalService {
         address.setCountry(countryRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCountry().getName()));
         address.setZone(zoneRepository.findByName(hospitalUserDTO.getHospital().getAddress().getZone().getName()));
         address.setDistrict(districtRepository.findByName(hospitalUserDTO.getHospital().getAddress().getDistrict().getName()));
-//        address.setCity(cityRepository.findByName(hospitalUserDTO.getHospital().getAddress().getCity().getName()));
         District district = districtRepository.findByName(hospitalUserDTO.getHospital().getAddress().getDistrict().getName());
         address.setCity(cityRepository.findByDistrictAndCityName(district, hospitalUserDTO.getHospital().getAddress().getCity().getName()) );
         addressRepository.save(address);
@@ -210,7 +223,6 @@ public class HospitalService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        user.setPassword(hospitalUserDTO.getUser().getPassword());
 
         Status status = statusService.getStatusObject(hospitalUserDTO.getUser().getStatus().getStatus());
         user.setStatus(status);

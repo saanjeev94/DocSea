@@ -75,6 +75,7 @@
 .login-background{
   background-image: url("../../assets/images/backgroundLogin.jpg");
   padding-bottom: 247px;
+  /*padding-bottom: 240px;*/
   margin-top: -20px;
   padding-top: 45px;
 }

@@ -50,6 +50,7 @@
 #background{
   background: url("../../assets/images/background.jpg");
   padding-bottom: 268px;
+  /*padding-bottom: 258px;*/
   margin-top: -20px;
   padding-top: 45px;
 }

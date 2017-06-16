@@ -24,37 +24,11 @@ import java.util.Map;
 @RequestMapping(value="/api/schedules")
 public class ScheduleController {
 
-        /*@Autowired
-        private ScheduleRepository scheduleRepository;*/
-
     private final Logger log = LoggerFactory.getLogger(ScheduleController.class);
         @Autowired
         private ScheduleService scheduleService;
         @Autowired
         private SessionService sessionService;
-
-
-        //Adding Schedule
-       /* @RequestMapping(value = "/{doctorId}", method=RequestMethod.POST)
-        public ResponseEntity<?> addSchedule(@RequestBody ScheduleDTO scheduleDTO
-                                            , @PathVariable("doctorId") Long doctorId
-                                            , @RequestHeader String Authorization){
-            System.out.println(scheduleDTO.toString());
-            Long hospitalId = sessionService.checkSession(Authorization).getHospitalId();
-//            ScheduleDTO scheduleDto= scheduleService.checkScheduleForInsert(scheduleDTO, doctorId);
-//            if(scheduleDto != null){
-//                log.error("The schedule is overLapped to "+scheduleDto);
-//                System.out.println("The schedule is overLapped to "+scheduleDto);
-//                return new ResponseEntity<ScheduleDTO>(scheduleDto,HttpStatus.OK);
-//            }
-//            else {
-//                ScheduleDTO catchSchedule = scheduleService.addSchedule(scheduleDTO, doctorId, hospitalId);
-//                log.info("Schedule has beed inserted sucessfully");
-//                return new ResponseEntity<ScheduleDTO>(catchSchedule, HttpStatus.OK);
-//            }
-            return null;
-        }
-*/
 
         //return whole schedule of datatbase
         @GetMapping
@@ -66,7 +40,7 @@ public class ScheduleController {
                 return new ResponseEntity<String>("cannot find any schedule with schedule in database", HttpStatus.CONFLICT);
             }
             return new ResponseEntity<List<ScheduleDTO>>(scheduleDTO, HttpStatus.OK);
-    }
+        }
 
         // Returns schedule by schedule Id
         @GetMapping(value = "/{scheduleId}")
@@ -121,7 +95,6 @@ public class ScheduleController {
     ///return list of hospitals with particular doctor schedule
     @GetMapping(value = "/hospitalSchedule/{doctorId}")
     public ResponseEntity<?> getHospitalsScheduleByDoctor(@PathVariable("doctorId") Long doctorId){
-//        List<HospitalDTO> hospitalDTOS = scheduleService.getHospitals(doctorId);
         Map<Long, List<ScheduleDTO>> stringListMap = new HashMap<>();
         stringListMap = scheduleService.getHospitals(doctorId);
         return new ResponseEntity< Map<Long, List<ScheduleDTO>>>(stringListMap, HttpStatus.OK);
@@ -168,7 +141,7 @@ public class ScheduleController {
         if(scheduleDTO1 != null  && (scheduleDTO1.getEndTime() != null || scheduleDTO1.getStartTime() != null) ){
 
             log.error("Schedule overLapped, Update schedule denied");
-            return new ResponseEntity<String>("Schedule overLapped, Update schedule denied", HttpStatus.CONFLICT);
+            return new ResponseEntity<ScheduleDTO>(scheduleDTO1, HttpStatus.OK);
         }
 
         ScheduleDTO catchSchedule = scheduleService.updateSchedule(scheduleDTO);

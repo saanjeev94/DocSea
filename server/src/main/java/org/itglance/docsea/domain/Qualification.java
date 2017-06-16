@@ -31,4 +31,12 @@ public class Qualification {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Qualification{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -74,12 +74,16 @@ public class DoctorSearchService {
         return doctorDTOS;
     }
 
-    public List<Doctor> findAllDoctorsOfHospital(String token) {
+    public List<DoctorDTO> findAllDoctorsOfHospital(String token) {
         Session session = sessionService.checkSession(token);
         Hospital hospital = hospitalRepository.findOne(session.getHospitalId());
         Status status = statusService.getStatusObject("DEACTIVE");
         List<Doctor> doctors = hospitalDoctorRepository.findAllByHospital(hospital, status);
-        return doctors;
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+        for(Doctor d: doctors){
+            doctorDTOS.add(new DoctorDTO(d));
+        }
+        return doctorDTOS;
     }
 
 

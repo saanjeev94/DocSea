@@ -72,7 +72,6 @@ public class DoctorService {
 
             doctor.setNmcNumber(doctorDTO.getNmcNumber());
             doctor.setName(doctorDTO.getName());
-            doctor.setQualification(doctorDTO.getQualification());
             doctor.setPhoto(doctorDTO.getPhoto());
             doctor.setGender(doctorDTO.getGender());
 
@@ -212,4 +211,18 @@ public class DoctorService {
             doctorRepository.save(doctor);
         }
 
+
+    public List<DoctorDTO> getAllDoctor() {
+        List<Doctor> doctors = doctorRepository.findAll();
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+        for(Doctor d: doctors){
+            doctorDTOS.add(new DoctorDTO(d));
+        }
+        return doctorDTOS;
+    }
+
+    public DoctorDTO getOneDoctor(Long id) {
+        Doctor doctor = doctorRepository.findOne(id);
+        return new DoctorDTO(doctor);
+    }
 }

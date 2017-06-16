@@ -116,11 +116,13 @@ export class DoctorProfileComponent implements OnInit{
       if(schedule.startTime!==null||schedule.endTime!==null) {
         console.log(schedule);
         this.scheduleService.addSchedule(schedule, id).subscribe(
+          response => {},
           error=>{
             if (!(error.status === 200)) {
               swal(
                 'Oops...',
                 'The Schedule is overlapped',
+                error._body,
                 'error'
               )
             }

@@ -7,6 +7,9 @@ import org.itglance.docsea.repository.HospitalRepository;
 import org.itglance.docsea.repository.ScheduleRepository;
 import org.itglance.docsea.service.dto.DoctorDTO;
 import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.itglance.docsea.service.dto.HospitalDTO;
+import org.itglance.docsea.service.dto.ScheduleDTO;
+import org.itglance.docsea.service.dto.StatusDTO;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,7 +68,7 @@ public class HospitalDoctorService {
 
     }*/
 
-    public void hospitalDoctorSchedule(Long doctorId){
+    /*public void hospitalDoctorSchedule(Long doctorId){
         long hospitalId=1;
         List<Schedule> doctorSchedules=doctorRepository.findScheduleByDoctorId(doctorId);
         List<Schedule> hospitalSchedules=hospitalRepository.findScheduleByHospitalId(hospitalId);
@@ -86,7 +89,9 @@ public class HospitalDoctorService {
 
     }
 
-    public Status getStatusFromHospitalAndDoctor(Long doctorId, String token) {
+*/
+
+    public StatusDTO getStatusFromHospitalAndDoctor(Long doctorId, String token) {
         Long hospitalId = sessionService.checkSession(token).getHospitalId();
         Hospital hospital = hospitalRepository.findOne(hospitalId);
         Doctor doctor = doctorRepository.findOne(doctorId);
@@ -105,5 +110,26 @@ public class HospitalDoctorService {
         Hospital hospital=hospitalRepository.findOne(hospitalId);
         List<Doctor> doctors=hospitalDoctorRepository.findAllByHospital(hospital);
         return doctors;
+    }
+
+    public List<HospitalDTO> getHospitals(Long docId) {
+        Doctor doctor = doctorRepository.findOne(docId);
+        Status status = statusService.getStatusObject("Active");
+        List<Hospital> hospitals= hospitalDoctorRepository.findAllByDoctor(doctor, status);
+        List<HospitalDTO> hospitalDTOS = new ArrayList<>();
+        for(Hospital h: hospitals){
+            hospitalDTOS.add(new HospitalDTO(h));
+        }
+        return hospitalDTOS;
+    }
+
+    public List<DoctorDTO> getDoctors(Long hospitalId) {
+        Hospital hospital=hospitalRepository.findOne(hospitalId);
+        List<Doctor> doctors=hospitalDoctorRepository.findAllByHospital(hospital);
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+        for(Doctor d: doctors){
+            doctorDTOS.add(new DoctorDTO(d));
+        }
+        return doctorDTOS;
     }
 }

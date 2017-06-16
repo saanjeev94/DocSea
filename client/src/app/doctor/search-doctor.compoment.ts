@@ -30,16 +30,16 @@ export class SearchDoctorComponent implements OnInit{
     .subscribe(
       result => {
         this.hospitalDoctorList = result;
+      },
+      error=>{
+        if (!(error.status === 200)) {
+          swal(
+            'Oops...',
+            error._body,
+            'error'
+          )
+        }
       }
-      // error=>{
-      //   if (!(error.status === 200)) {
-      //     swal(
-      //       'Oops...',
-      //       error._body,
-      //       'error'
-      //     )
-      //   }
-      // }
     );
   }
 

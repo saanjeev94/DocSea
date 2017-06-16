@@ -2,6 +2,9 @@ package org.itglance.docsea.web.rest;
 
 import org.itglance.docsea.domain.Speciality;
 import org.itglance.docsea.repository.SpecialityRepository;
+import org.itglance.docsea.service.SpecialityService;
+import org.itglance.docsea.service.dto.SpecialityDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,9 +28,12 @@ public class SpecialityController {
         this.specialityRepository = specialityRepository;
     }
 
+    @Autowired
+    SpecialityService specialityService;
+
     @GetMapping
-    public ResponseEntity<List<Speciality>> getAllSpeciality(){
-        List<Speciality> specialities=specialityRepository.findAll();
-        return new ResponseEntity<List<Speciality>>(specialities, HttpStatus.OK);
+    public ResponseEntity<?> getAllSpeciality(){
+        List<SpecialityDTO> specialities = specialityService.getAllSpeciality();
+        return new ResponseEntity<List<SpecialityDTO>>(specialities, HttpStatus.OK);
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -32,12 +34,13 @@ public class AddressController {
     @GetMapping(value = "/addresses")
     public ResponseEntity<?> getAddresses( )
     {
-        List<Address> addresseS = addressService.getAllAddresses();
-        if(addresseS == null){
+        logger.info("get addresses api called  ");
+        List<AddressDTO> addressDto = addressService.getAllAddresses();
+        if(addressDto == null){
             logger.error("There is no records in address table.");
             return new ResponseEntity(("There is no records in address table."), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity< List<Address>> (addresseS, HttpStatus.OK);
+        return new ResponseEntity< List<AddressDTO>> (addressDto, HttpStatus.OK);
 
     }
 
@@ -60,7 +63,7 @@ public class AddressController {
             logger.error("There is no records in zone table.");
             return new ResponseEntity(("There is no records in zone table."), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<> (zones, HttpStatus.OK);
+        return new ResponseEntity<List<String>> (zones, HttpStatus.OK);
     }
 
     @GetMapping(value = "/addresses/districts")

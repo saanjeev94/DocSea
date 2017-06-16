@@ -5,6 +5,10 @@ import org.itglance.docsea.domain.Session;
 import org.itglance.docsea.domain.User;
 import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.UserService;
+import org.itglance.docsea.service.SessionService;
+import org.itglance.docsea.service.UserService;
+import org.itglance.docsea.service.dto.SessionDTO;
+import org.itglance.docsea.service.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,22 +35,23 @@ public class UserController {
     public static final Logger logger = LoggerFactory.getLogger(HospitalController.class);
 
     @PostMapping(value = "/login")
-    public ResponseEntity<?> login(@RequestBody User user){
+
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO){
         System.out.println("******************* LOGIN ********************");
-        System.out.println(user.toString());
+        System.out.println(userDTO.toString());
         logger.info("Validating username and password");
-        Session session = userService.validateLogin(user);
-        if(session == null){
+        SessionDTO sessionDTO = userService.validateLogin(userDTO);
+        if(sessionDTO == null){
             logger.error("Invalid Username or Password.");
             System.out.println("Invalid Username or Password.");
             return new ResponseEntity<String>("Invalid Username or Password.", HttpStatus.CONFLICT);
         }
-        if(!userService.isUserActive(session.getUserId())){
+        if(!userService.isUserActive(sessionDTO.getUserId())){
             logger.error("Your Hospital registration is on the way for verification.......");
             System.out.println("Your Hospital registration is on the way for verification.......");
             return new ResponseEntity<String>("Your Hospital registration is on the way for verification.......", HttpStatus.CONFLICT);
         }
-        return  new ResponseEntity<Session>(session, HttpStatus.OK);
+        return  new ResponseEntity<SessionDTO>(sessionDTO, HttpStatus.OK);
     }
 
     @PostMapping(value = "/logout")

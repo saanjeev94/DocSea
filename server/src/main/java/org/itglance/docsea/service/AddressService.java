@@ -34,11 +34,14 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public List<Address> getAllAddresses(){
+    public List<AddressDTO> getAllAddresses(){
 
         List<Address> addressLists = addressRepository.findAll();
-
-        return addressLists;
+        List<AddressDTO> addressDTOS = new ArrayList<>();
+        for(Address a: addressLists){
+            addressDTOS.add(new AddressDTO(a));
+        }
+        return addressDTOS;
     }
 
     public List<String> getAllCountries(){
