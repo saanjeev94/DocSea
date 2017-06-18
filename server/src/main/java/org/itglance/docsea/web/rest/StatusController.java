@@ -1,9 +1,7 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.*;
 import org.itglance.docsea.repository.*;
 import org.itglance.docsea.service.SessionService;
-import org.itglance.docsea.service.StatusService;
 import org.itglance.docsea.service.StatusService;
 import org.itglance.docsea.service.dto.HospitalDoctorDTO;
 import org.itglance.docsea.service.dto.HospitalUserDTO;

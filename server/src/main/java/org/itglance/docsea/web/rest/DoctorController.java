@@ -9,12 +9,6 @@ import org.itglance.docsea.repository.DoctorRepository;
 import org.itglance.docsea.service.DoctorService;
 import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.dto.DoctorDTO;
-import org.itglance.docsea.domain.Schedule;
-import org.itglance.docsea.service.ScheduleService;
-import org.itglance.docsea.service.dto.ScheduleDTO;
-import org.itglance.docsea.service.DoctorService;
-import org.itglance.docsea.service.SessionService;
-import org.itglance.docsea.service.dto.DoctorDTO;
 import org.itglance.docsea.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +22,6 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -106,6 +99,7 @@ public class DoctorController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<DoctorDTO>(doctorDTO, HttpStatus.OK);
+
     }
 
     //Updating Doctor

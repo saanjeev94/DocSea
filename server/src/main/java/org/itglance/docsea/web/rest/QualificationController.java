@@ -1,9 +1,6 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.Qualification;
-import org.itglance.docsea.domain.Speciality;
 import org.itglance.docsea.repository.QualificationRepository;
-import org.itglance.docsea.repository.SpecialityRepository;
 import org.itglance.docsea.service.QualificationService;
 import org.itglance.docsea.service.dto.QualificationDTO;
 import org.springframework.beans.factory.annotation.Autowired;

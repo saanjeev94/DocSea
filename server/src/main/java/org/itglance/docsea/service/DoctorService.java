@@ -211,7 +211,6 @@ public class DoctorService {
             doctorRepository.save(doctor);
         }
 
-
     public List<DoctorDTO> getAllDoctor() {
         List<Doctor> doctors = doctorRepository.findAll();
         List<DoctorDTO> doctorDTOS = new ArrayList<>();

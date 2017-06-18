@@ -6,9 +6,7 @@ import org.itglance.docsea.repository.HospitalDoctorRepository;
 import org.itglance.docsea.repository.HospitalRepository;
 import org.itglance.docsea.repository.ScheduleRepository;
 import org.itglance.docsea.service.dto.DoctorDTO;
-import org.itglance.docsea.service.dto.ScheduleDTO;
 import org.itglance.docsea.service.dto.HospitalDTO;
-import org.itglance.docsea.service.dto.ScheduleDTO;
 import org.itglance.docsea.service.dto.StatusDTO;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by sriyanka on 5/23/2017.
@@ -46,7 +43,6 @@ public class HospitalDoctorService {
         this.doctorRepository = doctorRepository;
         this.scheduleRepository = scheduleRepository;
     }
-
 
     public StatusDTO getStatusFromHospitalAndDoctor(Long doctorId, String token) {
         Long hospitalId = sessionService.checkSession(token).getHospitalId();

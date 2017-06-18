@@ -1,10 +1,5 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.domain.HospitalDoctor;
-import org.itglance.docsea.service.DoctorSearchService;
-import org.itglance.docsea.service.dto.DoctorDTO;
-import org.itglance.docsea.service.dto.HospitalDoctorDTO;
 import org.itglance.docsea.service.DoctorSearchService;
 import org.itglance.docsea.service.dto.DoctorDTO;
 import org.springframework.beans.factory.annotation.Autowired;

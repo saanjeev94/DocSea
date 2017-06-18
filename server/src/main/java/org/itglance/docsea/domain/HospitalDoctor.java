@@ -1,8 +1,6 @@
 package org.itglance.docsea.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by soni on 5/9/2017.
@@ -27,9 +25,7 @@ public class HospitalDoctor {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id=id; }
 
     public Hospital getHospital() {
         return hospital;

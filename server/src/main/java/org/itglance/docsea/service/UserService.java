@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Base64;
-
 /**
  * Created by soni on 5/8/2017.
  */
@@ -34,7 +32,6 @@ public class UserService {
     }
 
     public SessionDTO validateLogin(UserDTO userDTO){
-
         User dbUser = null;
         try {
             System.out.println("------- checking password and username-------");

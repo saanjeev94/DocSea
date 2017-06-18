@@ -1,11 +1,5 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.Doctor;
-import org.itglance.docsea.domain.Hospital;
-import org.itglance.docsea.domain.Schedule;
-import org.itglance.docsea.domain.Status;
-import org.itglance.docsea.service.HospitalDoctorService;
-import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.HospitalDoctorService;
 import org.itglance.docsea.service.SessionService;
 import org.itglance.docsea.service.dto.DoctorDTO;
@@ -16,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

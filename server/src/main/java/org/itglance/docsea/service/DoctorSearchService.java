@@ -86,14 +86,11 @@ public class DoctorSearchService {
         return doctorDTOS;
     }
 
-
     // Quick search ..........
 
     public List<String> getStringListForSearch(String str){
          List<String> combineResult = new ArrayList<>();
         combineResult.clear();
-
-
 
         List<String> doctorResult = doctorRepository .findThisDoctor(str);
         combineResult.addAll(doctorResult);
@@ -106,19 +103,6 @@ public class DoctorSearchService {
 
         List<String> addressResult = addressRepository.findThisDoctor(str);
         combineResult.addAll(addressResult);
-
-//        List<String> countryResult = countryRepository.findThisDoctor(str);
-//        combineResult.addAll(countryResult);
-//
-//        List<String> zoneResult = zoneRepository.findThisDoctor(str);
-//        combineResult.addAll(zoneResult);
-//
-//        List<String> districtResult = districtRepository.findThisDoctor(str);
-//        combineResult.addAll(districtResult);
-//
-//        List<String> cityResult = cityRepository.findThisDoctor(str);
-//        combineResult.addAll(cityResult);
-
 
         System.out.println(combineResult);
         Collections.sort(combineResult);

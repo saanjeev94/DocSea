@@ -18,15 +18,6 @@ public interface HospitalDoctorRepository extends JpaRepository<HospitalDoctor,L
     @Query("SELECT hd FROM HospitalDoctor  hd WHERE hd.hospital.id=:hospitalId AND hd.doctor.id=:doctorId ")
     public HospitalDoctor findByHospitalDoctor(@Param("hospitalId") Long hospitalId, @Param("doctorId") Long doctorId);
 
-//    Search Doctor
-/*@Query("SELECT hd FROM HospitalDoctor hd ,Hospital h, Speciality s,Doctor d WHERE " +
-        "d.name=:searchString " +
-        "OR s.name = :searchString " +
-        "OR h.name = :searchString " +
-        "OR h.name = :searchString " +
-        "OR h.address.streetAddress = :searchString ")*/
-
-
     @Query("SELECT hd.doctor FROM HospitalDoctor hd WHERE " +
             "hd.doctor.name=:searchString " +
             "OR hd.doctor.speciality.name = :searchString " +

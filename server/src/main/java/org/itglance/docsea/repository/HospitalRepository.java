@@ -32,6 +32,8 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long>{
 
     @Query("SELECT h.name FROM Hospital h WHERE h.name LIKE LOWER(CONCAT(:str, '%'))")
     public List<String> findThisDoctor(@Param("str") String str);
+
+    public Hospital findOne(Long id);
 }
 
 

@@ -1,6 +1,5 @@
 package org.itglance.docsea.web.rest;
 
-import org.itglance.docsea.domain.Speciality;
 import org.itglance.docsea.repository.SpecialityRepository;
 import org.itglance.docsea.service.SpecialityService;
 import org.itglance.docsea.service.dto.SpecialityDTO;

@@ -15,9 +15,11 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 
-
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+apply plugin:'org.springframework.boot'
+version ='1.5.3.RELEASE'
 
 repositories {
 	mavenCentral()
@@ -36,5 +38,7 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
 	compile group: 'commons-io', name: 'commons-io', version: '2.4'
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.10.Final'
+	compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.7.1.Final'
 
 }
