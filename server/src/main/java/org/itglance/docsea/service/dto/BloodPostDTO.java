@@ -1,5 +1,6 @@
 package org.itglance.docsea.service.dto;
 
+import org.itglance.docsea.domain.BloodGroup;
 import org.itglance.docsea.domain.BloodPost;
 import org.itglance.docsea.domain.Contact;
 
@@ -14,32 +15,31 @@ public class BloodPostDTO {
 
     private String post;
 
-    private String bloodGroup;
+    private BloodGroup bloodGroup;
 
     private Date deadline;
 
     private Date postDate;
 
-    private Contact contact;
+    private String contact;
 
-    public Contact getContact() {
-        return contact;
-    }
+    private String location;
 
     public BloodPostDTO() {
     }
 
-    public BloodPostDTO(Long id, String post, String bloodGroup, Date deadline, Date postDate, Contact contact) {
+    public BloodPostDTO(Long id, String post, BloodGroup bloodGroup, Date deadline, Date postDate, String contact, String location) {
         this.id = id;
         this.post = post;
         this.bloodGroup = bloodGroup;
         this.deadline = deadline;
         this.postDate = postDate;
         this.contact = contact;
+        this.location = location;
     }
 
     public BloodPostDTO(BloodPost bloodPost){
-        this(bloodPost.getId(),bloodPost.getPost(), bloodPost.getBloodGroup(), bloodPost.getDeadline(), bloodPost.getPostDate(), bloodPost.getContact());
+        this(bloodPost.getId(),bloodPost.getPost(), bloodPost.getBloodGroup(), bloodPost.getDeadline(), bloodPost.getPostDate(), bloodPost.getContact(), bloodPost.getLocation());
     }
 
     public Long getId() {
@@ -50,7 +50,7 @@ public class BloodPostDTO {
         return post;
     }
 
-    public String getBloodGroup() {
+    public BloodGroup getBloodGroup() {
         return bloodGroup;
     }
 
@@ -62,16 +62,24 @@ public class BloodPostDTO {
         return postDate;
     }
 
+    public String getContact() {
+        return contact;
+    }
 
+    public String getLocation() {
+        return location;
+    }
 
     @Override
     public String toString() {
         return "BloodPostDTO{" +
                 "id=" + id +
                 ", post='" + post + '\'' +
-                ", bloodGroup='" + bloodGroup + '\'' +
+                ", bloodGroup=" + bloodGroup +
                 ", deadline=" + deadline +
                 ", postDate=" + postDate +
+                ", contact='" + contact + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

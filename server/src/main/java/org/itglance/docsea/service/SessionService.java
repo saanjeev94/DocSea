@@ -2,10 +2,8 @@ package org.itglance.docsea.service;
 
 import org.itglance.docsea.domain.HospitalUser;
 import org.itglance.docsea.domain.Session;
-import org.itglance.docsea.repository.HospitalRepository;
-import org.itglance.docsea.repository.SessionRepository;
-import org.itglance.docsea.repository.StatusRepository;
-import org.itglance.docsea.repository.UserRepository;
+import org.itglance.docsea.domain.User;
+import org.itglance.docsea.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,13 +25,15 @@ public class SessionService {
     private final UserRepository userRepository;
     private final StatusRepository statusRepository;
 
-    public SessionService(SessionRepository sessionRepository, HospitalRepository hospitalRepository, UserRepository userRepository, StatusRepository statusRepository) {
+    private final HospitalUserRepository hospitalUserRepository;
+
+    public SessionService(SessionRepository sessionRepository, HospitalRepository hospitalRepository, UserRepository userRepository, StatusRepository statusRepository, HospitalUserRepository hospitalUserRepository) {
         this.sessionRepository = sessionRepository;
         this.hospitalRepository = hospitalRepository;
         this.userRepository = userRepository;
         this.statusRepository = statusRepository;
+        this.hospitalUserRepository = hospitalUserRepository;
     }
-
 
     public Session checkSession(String authenticate) {
         //TODO DO Base64 Decode
@@ -73,17 +73,20 @@ public class SessionService {
         return null;
     }
 
-    public Session createSession(HospitalUser hospitalUser){
+    public Session createSession(User dbUser){
+        HospitalUser hospitalUser =hospitalUserRepository.findByUser(dbUser);
         String token = UUID.randomUUID().toString();
         Session session = new Session();
         session.setToken(token);
-        session.setHospitalId(hospitalUser.getHospital().getId());
-        session.setUserId(hospitalUser.getUser().getId());
-        session.setUserType(hospitalUser.getUser().getUserType());
-        session.setUsername(hospitalUser.getUser().getUsername());
+        if(hospitalUser != null){
+            session.setHospitalId(hospitalUser.getHospital().getId());
+
+        }
+        session.setUserId(dbUser.getId());
+        session.setUserType(dbUser.getUserType());
+        session.setUsername(dbUser.getUsername());
         sessions.put(token, session);
         sessionRepository.save(session);
-
         return session;
     }
 
