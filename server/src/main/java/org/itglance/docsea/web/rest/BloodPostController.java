@@ -37,7 +37,7 @@ public class BloodPostController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getBloodPOst(Pageable page) throws ParseException {
+    public ResponseEntity<?> getBloodPost(Pageable page) throws ParseException {
         Page<BloodPost> bloodPost = bloodPostService.getAllBlood(page);
         if(bloodPost == null){
             return new ResponseEntity<String>("their is no bloodPost",HttpStatus.NO_CONTENT);

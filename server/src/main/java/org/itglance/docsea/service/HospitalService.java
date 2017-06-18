@@ -148,17 +148,6 @@ public class HospitalService {
         return false;
     }
 
-    public List<HospitalUser> getAllHospitalUser() {
-        List<HospitalUser> hospitalList = hospitalUserRepository.findAll();
-        return hospitalList;
-    }
-
-    public HospitalUser getHospitalById(Long id) {
-        Hospital hospital = hospitalRepository.findOne(id);
-        HospitalUser hospitalUser = hospitalUserRepository.findByHospital(hospital);
-        return hospitalUser;
-    }
-
     public List<HospitalUserDTO> getAllHospitalUser() {
         List<HospitalUser> hospitalList = hospitalUserRepository.findAll();
         List<HospitalUserDTO> hospitalUserDTOS = new ArrayList<>();

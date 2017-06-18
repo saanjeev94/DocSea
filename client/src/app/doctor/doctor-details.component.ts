@@ -16,16 +16,12 @@ declare var swal:any;
 
 export class DoctorDetailsComponent{
   doctor:Doctor;
-  // scheduleMap:any;
   scheduleMap:any;
   hospitalList:Array<Hospital>;
-  scheduleList:any;
   scheduleDoubleList:Array<Array<Schedule>>;
-  // index:Array<number>=[0,1,2,3,4,5,6];
 
   constructor(private scheduleService:ScheduleService, private route:ActivatedRoute, private doctorService:DoctorService) {
       this.doctor=new Doctor();
-      // this.scheduleMap=new Map<number,Array<Schedule>>();
       this.hospitalList=new Array<Hospital>();
       this.scheduleDoubleList=new Array<Array<Schedule>>();
   }

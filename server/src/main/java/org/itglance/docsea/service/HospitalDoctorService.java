@@ -47,69 +47,13 @@ public class HospitalDoctorService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    /*public void changeHospitalDoctorStatus(Long hospitalId, Long doctorId){
-
-        HospitalDoctor hospitalDoctor= hospitalDoctorRepository.findByHospitalDoctor(hospitalId, doctorId);
-        System.out.println(hospitalDoctor.toString());
-
-        String status1=hospitalDoctor.getStatus().getStatus();
-
-        if(status1.equalsIgnoreCase("Active")){
-            status1="Inactive";
-        }
-        else if(status1.equalsIgnoreCase("Inactive")){
-            status1="Active";
-        }
-
-
-        hospitalDoctor.setStatus(statusService.getStatusObject(status1));
-        hospitalDoctorRepository.save(hospitalDoctor);
-
-
-    }*/
-
-    /*public void hospitalDoctorSchedule(Long doctorId){
-        long hospitalId=1;
-        List<Schedule> doctorSchedules=doctorRepository.findScheduleByDoctorId(doctorId);
-        List<Schedule> hospitalSchedules=hospitalRepository.findScheduleByHospitalId(hospitalId);
-        List<Schedule> hospitalDoctorSchedules=new ArrayList<>();
-
-        for(Schedule currentHospitalSchedule:hospitalSchedules){
-            for(Schedule currentDoctorSchedule:doctorSchedules ){
-                if(currentHospitalSchedule.getId()==currentDoctorSchedule.getId()){
-                    hospitalDoctorSchedules.add(currentDoctorSchedule);
-                }
-            }
-        }
-
-        for(Schedule schedule:hospitalDoctorSchedules){
-            logger.info(schedule.toString());
-        }
-
-
-    }
-
-*/
 
     public StatusDTO getStatusFromHospitalAndDoctor(Long doctorId, String token) {
         Long hospitalId = sessionService.checkSession(token).getHospitalId();
         Hospital hospital = hospitalRepository.findOne(hospitalId);
         Doctor doctor = doctorRepository.findOne(doctorId);
-        Status status = hospitalDoctorRepository.findStatusByHospitalDoctor(hospital, doctor);
+        StatusDTO status = new StatusDTO(hospitalDoctorRepository.findStatusByHospitalDoctor(hospital, doctor));
         return status;
-    }
-
-    public List<Hospital> getHospitals(Long docId) {
-        Doctor doctor = doctorRepository.findOne(docId);
-        Status status = statusService.getStatusObject("Active");
-        List<Hospital> hospitals= hospitalDoctorRepository.findAllByDoctor(doctor, status);
-        return hospitals;
-    }
-
-    public List<Doctor> getDoctors(Long hospitalId) {
-        Hospital hospital=hospitalRepository.findOne(hospitalId);
-        List<Doctor> doctors=hospitalDoctorRepository.findAllByHospital(hospital);
-        return doctors;
     }
 
     public List<HospitalDTO> getHospitals(Long docId) {

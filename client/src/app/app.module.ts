@@ -27,6 +27,8 @@ import {QualificationService} from "./services/qualification.service";
 import {SpecialityService} from "./services/speciality.service";
 import {DoctorDetailsComponent} from "./doctor/doctor-details.component";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {BloodPostComponent} from "./blood/blood-post.component";
+import {BloodService} from "./services/blood.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AdminComponent,
     DoctorDetailsComponent,
     PageNotFoundComponent,
+    BloodPostComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AuthenticationService,
     ScheduleService,
     QualificationService,
-    SpecialityService
+    SpecialityService,
+    BloodService
   ],
 
   bootstrap: [AppComponent]
