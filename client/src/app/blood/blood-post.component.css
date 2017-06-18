@@ -1,0 +1,52 @@
+/* Blood */
+/* LEFT*/
+.blood .left{
+  width: 75%;
+  padding-right: 15px;
+  float: left;
+}
+
+.blood .left .col-md-3{
+  padding-right: 0;
+}
+
+.blood .left .col-md-9{
+  padding-left: 0;
+}
+
+.blood .block-title{
+  padding-bottom: 15px;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+.blood img{
+  border: 1px solid black;
+  width:100px;
+  height: 100px;
+}
+
+.blood .blood-date{
+  margin-bottom: 10px;
+}
+
+.blood .blood-description{
+  text-align: justify;
+  height: 47px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.blood .contact{
+  margin-bottom: 8px;
+}
+
+/* RIGHT*/
+.blood .right{
+  width: 25%;
+  float: left;
+  padding-left: 15px;
+}
+
+.blood .right .left-padding{
+  padding-left: 18px;
+}
