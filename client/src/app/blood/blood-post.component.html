@@ -3,7 +3,7 @@
   <div class="row blood">
     <div class="col-md-8" style="padding-left: 0">
 
-      <h2 class="block-title pull-left">Blood</h2>
+      <h2 class="block-title pull-left">Blood Posts</h2>
       <button type="button" class="btn btn-primary pull-right add-blood" data-toggle="modal" data-target="#myModal">
         Add Blood
       </button>
@@ -37,12 +37,12 @@
             </div>
     <div class="right">
       <div class="row left-padding">
-        <ng-container *ngFor="">
+        <ng-container *ngFor="let event of eventList">
         <div class="event">
-         <h4>Event Heading</h4>
-         <p>Location: nowhere</p>
-         <p>Date: 2017-12-6</p>
-         <p>Time: 8AM - 10AM</p>
+         <h4>{{event.name}}</h4>
+         <p>Location: {{event.location}}</p>
+         <p>Date: {{event.date}}</p>
+         <p>Time: {{event.time}}</p>
        </div>
       </ng-container>
     </div>
@@ -59,32 +59,40 @@
         <h4 class="modal-title" id="myModalLabel">Add Blood</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" onsubmit="">
+        <form class="form-horizontal" #addBloodpost="ngForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="blood" class="col-sm-3 control-label">Blood Group: </label>
+            <label for="bloodGroup" class="col-sm-3 control-label">Blood Group: </label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="blood" id="blood" placeholder="Blood Group...">
+              <select type="text" class="form-control" name="bloodGroup" id="bloodGroup"
+                      [(ngModel)]="blood.bloodGroup.bloodGroup" #bloodGroup="ngModel" required>
+                <ng-container *ngFor="let bloodGroup of bloodGroupList">
+                  <option value="{{bloodGroup.bloodGroup}}">{{bloodGroup.bloodGroup}}</option>
+                </ng-container>
+              </select>
             </div>
           </div>
 
           <div class="form-group">
             <label for="deadline" class="col-sm-3 control-label">Required Date: </label>
             <div class="col-sm-9">
-              <input type="date" class="form-control" name="deadline" id="deadline" placeholder="Required Date...">
+              <input type="date" class="form-control" name="deadline" id="deadline" placeholder="Required Date..."
+                     [(ngModel)]="blood.deadline" #deadline="ngModel" required>
             </div>
           </div>
 
           <div class="form-group">
             <label for="location" class="col-sm-3 control-label">Location: </label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="location" id="location" placeholder="Location...">
+              <input type="text" class="form-control" name="location" id="location" placeholder="Location..."
+                     [(ngModel)]="blood.location" #location="ngModel" required>
             </div>
           </div>
 
           <div class="form-group">
             <label for="contact" class="col-sm-3 control-label">Contact: </label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact...">
+              <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact..."
+                     [(ngModel)]="blood.contact" #contact="ngModel" required>
             </div>
           </div>
 
@@ -93,7 +101,8 @@
             <div class="col-sm-9">
               <textarea class="form-control" name="description"
                         name="description" id="description" placeholder="Description..."
-                        cols="30" rows="5"></textarea>
+                        cols="30" rows="5"
+                        [(ngModel)]="blood.post" #description="ngModel" required></textarea>
             </div>
           </div>
         </form>

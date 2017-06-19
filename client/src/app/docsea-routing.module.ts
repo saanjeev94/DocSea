@@ -14,6 +14,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {DoctorDetailsComponent} from "./doctor/doctor-details.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {BloodPostComponent} from "./blood/blood-post.component";
+import {EventComponent} from "./event/event.component";
 
 const ROUTES: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -27,6 +28,7 @@ const ROUTES: Routes = [
   {path:'update/:id', component: UpdateDoctorComponent},
   {path:'profile/:id', component: DoctorProfileComponent},
   {path:'blood-post', component: BloodPostComponent},
+  {path:'events', component: EventComponent},
   {path:'doctor-view/:doctor', component: DoctorGridView},
   {path:'hospital-update/:username', component: UpdateHospitalComponent},
   {path:'doctor-detail/:id', component: DoctorDetailsComponent},
