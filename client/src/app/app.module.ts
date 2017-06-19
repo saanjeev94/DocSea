@@ -45,7 +45,7 @@ import {BloodService} from "./services/blood.service";
     AdminComponent,
     DoctorDetailsComponent,
     PageNotFoundComponent,
-    BloodPostComponent
+    BloodPostComponent,
   ],
   imports: [
     BrowserModule,
