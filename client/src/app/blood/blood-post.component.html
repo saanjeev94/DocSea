@@ -73,59 +73,28 @@
         </div>
         <div class="row blood">
             <div class="left">
+              <ng-container *ngFor="let bloodPost of bloodPostList">
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="">
+                        <img src="../../assets/images/{{bloodPost.bloodGroup.image}}">
                     </div>
                     <div class="col-md-9">
-                        <p class="blood-date pull-left"><b>Posted : </b>2017-04-29</p>
-                        <p class="blood-date pull-right"><b>Till : </b>2017-04-12</p>
+                        <p class="blood-date pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>
+                        <p class="blood-date pull-right"><b>Till : </b>{{bloodPost.deadline}}</p>
                         <div class="clearfix"></div>
                         <p class="blood-description">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cupiditate distinctio doloribus error fuga fugit natus nihil nostrum pariatur, provident quae quam repudiandae sed, sunt temporibus unde voluptate, voluptates voluptatum.
+                          {{bloodPost.post}}
                         </p>
-                        <p class="contact"><b>Contact:</b>9849438183</p>
-                        <p class="location"><b>Location:</b>Somewhere on this earth</p>
+                        <p class="contact"><b>Contact:</b>{{bloodPost.contact}}</p>
+                        <p class="location"><b>Location:</b>{{bloodPost.location}}</p>
                     </div>
                 </div>
                 <hr>
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="images/blood.jpg">
-                    </div>
-                    <div class="col-md-9">
-                        <p class="blood-date pull-left"><b>Posted : </b>2017-04-29</p>
-                        <p class="blood-date pull-right"><b>Till : </b>2017-04-12</p>
-                        <div class="clearfix"></div>
-                        <p class="blood-description">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cupiditate distinctio doloribus error fuga fugit natus nihil nostrum pariatur, provident quae quam repudiandae sed, sunt temporibus unde voluptate, voluptates voluptatum.
-                        </p>
-                        <p class="contact"><b>Contact:</b>9849438183</p>
-                        <p class="location"><b>Location:</b>Somewhere on this earth</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="../../assets/images/blood.jpg">
-                    </div>
-                    <div class="col-md-9">
-                        <p class="blood-date pull-left"><b>Posted : </b>2017-04-29</p>
-                        <p class="blood-date pull-right"><b>Till : </b>2017-04-12</p>
-                        <div class="clearfix"></div>
-                        <p class="blood-description">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cupiditate distinctio doloribus error fuga fugit natus nihil nostrum pariatur, provident quae quam repudiandae sed, sunt temporibus unde voluptate, voluptates voluptatum.
-                        </p>
-                        <p class="contact"><b>Contact:</b>9849438183</p>
-                        <p class="location"><b>Location:</b>Somewhere on this earth</p>
-                    </div>
-                </div>
-                <hr>
-
-
+              </ng-container>
             </div>
 
             <div class="right">
+              <ng-container *ngFor="">
                 <div class="row left-padding">
                     <h4>Event Heading</h4>
                     <p>Location: nowhere</p>
@@ -133,6 +102,7 @@
                     <p>Time: 8AM - 10AM</p>
 
                 </div>
+              </ng-container>
             </div>
 
 
