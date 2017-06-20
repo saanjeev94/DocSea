@@ -19,7 +19,10 @@
               <ng-container *ngFor="let bloodPost of bloodPostList">
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="../../assets/images/{{bloodPost.bloodGroup.image}}">
+                        <span class="blood-container">
+			                    <img src="../../assets/images/blood-bg.png" class="blood-image">
+			                    <span>{{bloodPost.bloodGroup.bloodGroup}}</span>
+		                    </span>
                     </div>
                     <div class="col-md-9">
                         <p class="blood-date pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>

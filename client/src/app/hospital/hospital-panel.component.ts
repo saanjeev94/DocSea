@@ -1,5 +1,8 @@
 import {AfterViewInit, Component, OnInit} from "@angular/core";
 import {DoctorService} from "../services/doctor.service";
+import {Events} from "../model/event.model";
+import {EventService} from "../services/event.service";
+import {Router} from "@angular/router";
 
 declare var $: any;
 declare var swal:any;
@@ -13,9 +16,10 @@ declare var swal:any;
 export class HospitalPanelComponent implements OnInit, AfterViewInit{
 
   doctorList: any;
+  event:Events;
 
-  constructor(private doctorService:DoctorService){
-
+  constructor(private doctorService:DoctorService, private eventService:EventService, private router:Router){
+    this.event=new Events();
   }
 
   ngOnInit(){
@@ -41,4 +45,13 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
   ngAfterViewInit() {
     setTimeout(() => $("#hospital-panel-table").dataTable(),1500);
   }
+
+  addEvent(){
+    this.eventService.addEvent(this.event).subscribe((response)=>{
+      console.log(response);
+    });
+    this.router.navigate(['/hospital-panel']);
+  }
 }
+
+

@@ -74,8 +74,31 @@
   margin-bottom: 0;
 }
 
+/*Blood-Image*/
+.blood-container{
+  width: 100px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+
+}
+
+.blood-image{
+  height:150px;
+  width:100px;
+}
 
 
+.blood-container span{
+  font-size: 40px;
+  font-weight: bolder;
+  position: absolute;
+  bottom: 25px;
+
+}
 
 /* Blood Modal*/
 #myModal{

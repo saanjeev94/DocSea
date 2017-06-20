@@ -3,6 +3,7 @@ import {Events} from "../model/event.model";
 import {EventService} from "../services/event.service";
 import {BloodService} from "../services/blood.service";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../services/authentication.service";
 /**
  * Created by sonika on 6/18/17.
  */
@@ -16,7 +17,8 @@ export class EventComponent implements OnInit{
   eventList:any;
   bloodPostList:any;
 
-  constructor(private eventService:EventService, private bloodService:BloodService, private router:Router){
+  constructor(private eventService:EventService, private bloodService:BloodService, private router:Router,
+              private authService: AuthenticationService){
     this.event=new Events();
   }
 
@@ -29,8 +31,8 @@ export class EventComponent implements OnInit{
     });
   }
 
-  onSubmit(hospitalId:number){
-    this.eventService.addEvent(hospitalId,this.event).subscribe((response)=>{
+  onSubmit(){
+    this.eventService.addEvent(this.event).subscribe((response)=>{
       console.log(response);
     });
     this.router.navigate(['/events']);
