@@ -17,7 +17,6 @@ public class BloodGroup {
 
     private String bloodGroup;
 
-    private String image;
 
 
     public Long getId() {
@@ -36,20 +35,12 @@ public class BloodGroup {
         this.bloodGroup = bloodGroup;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     @Override
     public String toString() {
         return "BloodGroup{" +
                 "id=" + id +
                 ", bloodGroup='" + bloodGroup + '\'' +
-                ", image='" + image + '\'' +
                 '}';
     }
 }

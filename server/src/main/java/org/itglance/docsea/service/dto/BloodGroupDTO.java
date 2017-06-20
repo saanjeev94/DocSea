@@ -11,18 +11,33 @@ public class BloodGroupDTO {
 
     private String bloodGroup;
 
-    private String image;
 
     public BloodGroupDTO() {
     }
 
-    public BloodGroupDTO(Long id, String bloodGroup, String image) {
+    public BloodGroupDTO(Long id, String bloodGroup) {
         this.id = id;
         this.bloodGroup = bloodGroup;
-        this.image = image;
     }
 
     public BloodGroupDTO(BloodGroup bloodGroup) {
-        this(bloodGroup.getId(),bloodGroup.getBloodGroup(),bloodGroup.getImage());
+        this(bloodGroup.getId(),bloodGroup.getBloodGroup());
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    @Override
+    public String toString() {
+        return "BloodGroupDTO{" +
+                "id=" + id +
+                ", bloodGroup='" + bloodGroup + '\'' +
+                '}';
     }
 }
