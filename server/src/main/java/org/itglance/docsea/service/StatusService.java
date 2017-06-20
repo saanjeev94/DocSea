@@ -67,7 +67,10 @@ public class StatusService {
     }
 
     public HospitalUserDTO toggleHospitalStatus(Long userId) {
+        System.out.println("***************");
+        System.out.println(userId);
         HospitalUser hospitalUser = hospitalUserRepository.findOne(userId);
+        System.out.println(hospitalUser);
         User user = userRepository.findOne(hospitalUser.getUser().getId());
 
         Status status = new Status();

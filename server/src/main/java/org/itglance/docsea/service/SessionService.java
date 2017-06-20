@@ -74,13 +74,15 @@ public class SessionService {
     }
 
     public Session createSession(User dbUser){
-        HospitalUser hospitalUser =hospitalUserRepository.findByUser(dbUser);
+
+        HospitalUser hospitalUser =new HospitalUser();
+                hospitalUser =hospitalUserRepository.findByUser(dbUser);
         String token = UUID.randomUUID().toString();
         Session session = new Session();
         session.setToken(token);
+        session.setHospitalId(null);
         if(hospitalUser != null){
             session.setHospitalId(hospitalUser.getHospital().getId());
-
         }
         session.setUserId(dbUser.getId());
         session.setUserType(dbUser.getUserType());
