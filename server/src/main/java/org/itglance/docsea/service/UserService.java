@@ -40,8 +40,7 @@ public class UserService {
             e.printStackTrace();
         }
         if(dbUser != null){
-            HospitalUser hospitalUser =hospitalUserRepository.findByUser(dbUser);
-            Session session = sessionService.createSession(hospitalUser);
+            Session session = sessionService.createSession(dbUser);
            /* String mainToken =  session.toStringForToken();
             byte[] encode = Base64.getEncoder().encode(mainToken.getBytes());*/
             System.out.println("-----password and username matched");
