@@ -3,6 +3,8 @@ package org.itglance.docsea.service.dto;
 import org.itglance.docsea.domain.Event;
 import org.itglance.docsea.domain.Hospital;
 
+import java.util.Date;
+
 /**
  * Created by sriyanka on 6/12/17.
  */
@@ -12,15 +14,16 @@ public class EventDTO {
     private String name;
     private Hospital hospital;
     private String description;
-    private String date;
+    private Date date;
     private String time;
     private String photo;
+    private String location;
 
     public EventDTO(){
 
     }
 
-    public EventDTO(Long id, String name, Hospital hospital, String description, String date, String time, String photo) {
+    public EventDTO(Long id, String name, Hospital hospital, String description, Date date, String time, String photo,String location) {
         this.id = id;
         this.name = name;
         this.hospital = hospital;
@@ -28,10 +31,11 @@ public class EventDTO {
         this.date = date;
         this.time = time;
         this.photo = photo;
+        this.location = location;
     }
 
     public EventDTO(Event event){
-        this(event.getId(),event.getName(), event.getHospital(), event.getDescription(), event.getDate(), event.getTime(),event.getPhoto());
+        this(event.getId(),event.getName(), event.getHospital(), event.getDescription(), event.getDate(), event.getTime(),event.getPhoto(), event.getLocation());
     }
 
     public Long getId() {
@@ -50,8 +54,12 @@ public class EventDTO {
         return description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public String getTime() {
@@ -69,9 +77,10 @@ public class EventDTO {
                 ", name='" + name + '\'' +
                 ", hospital=" + hospital +
                 ", description='" + description + '\'' +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 ", time='" + time + '\'' +
                 ", photo='" + photo + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }
