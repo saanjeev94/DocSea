@@ -38,13 +38,13 @@ public class EventService {
     }
 
     public void addEvent(EventDTO eventDTO, String token){
-        //Event event1=eventRepository.isEventExist(hospitalId,eventDTO.getDate());
+        //Event event1=eventRepository.isEventExist(hospitalId,eventDTO.getDates());
         Long hospitalId = sessionService.checkSession(token).getHospitalId();
 
         Event event=new Event();
         event.setName(eventDTO.getName());
         event.setDescription(eventDTO.getDescription());
-        event.setDate(eventDTO.getDate());
+        event.setDates(eventDTO.getDate());
         event.setTime(eventDTO.getTime());
         event.setPhoto(eventDTO.getPhoto());
         event.setLocation(eventDTO.getLocation());
@@ -63,7 +63,7 @@ public class EventService {
         if(event!=null){
             event.setName(eventDTO.getName());
             event.setDescription(eventDTO.getDescription());
-            event.setDate(eventDTO.getDate());
+            event.setDates(eventDTO.getDate());
             event.setTime(eventDTO.getTime());
             event.setPhoto(eventDTO.getPhoto());
             event.setLocation(eventDTO.getLocation());

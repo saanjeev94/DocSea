@@ -3,6 +3,7 @@ package org.itglance.docsea.service.dto;
 import org.itglance.docsea.domain.Event;
 import org.itglance.docsea.domain.Hospital;
 
+import java.sql.Clob;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ public class EventDTO {
     private Long id;
     private String name;
     private Hospital hospital;
-    private String description;
+    private Clob description;
     private Date date;
     private String time;
     private String photo;
@@ -23,7 +24,7 @@ public class EventDTO {
 
     }
 
-    public EventDTO(Long id, String name, Hospital hospital, String description, Date date, String time, String photo,String location) {
+    public EventDTO(Long id, String name, Hospital hospital, Clob description, Date date, String time, String photo,String location) {
         this.id = id;
         this.name = name;
         this.hospital = hospital;
@@ -35,7 +36,7 @@ public class EventDTO {
     }
 
     public EventDTO(Event event){
-        this(event.getId(),event.getName(), event.getHospital(), event.getDescription(), event.getDate(), event.getTime(),event.getPhoto(), event.getLocation());
+        this(event.getId(),event.getName(), event.getHospital(), event.getDescription(), event.getDates(), event.getTime(),event.getPhoto(), event.getLocation());
     }
 
     public Long getId() {
@@ -50,7 +51,7 @@ public class EventDTO {
         return hospital;
     }
 
-    public String getDescription() {
+    public Clob getDescription() {
         return description;
     }
 

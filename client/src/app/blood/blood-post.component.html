@@ -25,8 +25,8 @@
 		                    </span>
         </div>
         <div class="col-md-9">
-          <p class="blood-date pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>
-          <p class="blood-date pull-right"><b>Till : </b>{{bloodPost.deadline}}</p>
+          <p class="blood-dates pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>
+          <p class="blood-dates pull-right"><b>Till : </b>{{bloodPost.deadline}}</p>
           <div class="clearfix"></div>
           <p class="blood-description">
             {{bloodPost.post}}
@@ -44,7 +44,7 @@
         <div class="event">
           <h4>{{event.name}}</h4>
           <p>Location: {{event.location}}</p>
-          <p>Date: {{event.date}}</p>
+          <p>Date: {{event.dates}}</p>
           <p>Time: {{event.time}}</p>
         </div>
       </ng-container>
@@ -79,7 +79,7 @@
           <div class="form-group">
             <label for="deadline" class="col-sm-3 control-label">Required Date: </label>
             <div class="col-sm-9">
-              <input type="date" class="form-control" name="deadline" id="deadline" placeholder="Required Date..."
+              <input type="dates" class="form-control" name="deadline" id="deadline" placeholder="Required Date..."
                      [(ngModel)]="blood.deadline" #deadline="ngModel" required>
             </div>
           </div>

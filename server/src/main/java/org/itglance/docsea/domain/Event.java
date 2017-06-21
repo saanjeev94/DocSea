@@ -15,7 +15,7 @@
 //    private Long id;
 //    private String eventName;
 //    private String description;
-//    private String date;
+//    private String dates;
 //    private String time;
 //    private String photo;
 //
@@ -56,12 +56,12 @@
 //        this.description = description;
 //    }
 //
-//    public String getDate() {
-//        return date;
+//    public String getDates() {
+//        return dates;
 //    }
 //
-//    public void setDate(String date) {
-//        this.date = date;
+//    public void setDates(String dates) {
+//        this.dates = dates;
 //    }
 //
 //    public String getTime() {
@@ -87,7 +87,7 @@
 //                ", eventName='" + eventName + '\'' +
 //                ", hospital=" + hospital +
 //                ", description='" + description + '\'' +
-//                ", date='" + date + '\'' +
+//                ", dates='" + dates + '\'' +
 //                ", time='" + time + '\'' +
 //                ", photo='" + photo + '\'' +
 //                '}';
@@ -96,10 +96,8 @@
 //=======
 package org.itglance.docsea.domain;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.sql.Clob;
 import java.util.Date;
 
 /**
@@ -118,8 +116,10 @@ public class Event {
     @ManyToOne
     private Hospital hospital;
 
-    private String description;
-    private Date date;
+//    @Column(length = 1000)
+    private Clob description;
+
+    private Date dates;
     private String time;
     private String photo;
     private String location;
@@ -144,22 +144,22 @@ public class Event {
         this.hospital = hospital;
     }
 
-    public String getDescription() {
+    public Clob getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Clob description) {
         this.description = description;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-    public Date getDate() {
-        return date;
+    public Date getDates() {
+        return dates;
     }
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDates(Date dates) {
+        this.dates = dates;
     }
 
     public String getTime() {
@@ -188,12 +188,12 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" +
+        return "Event{"+
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", hospital=" + hospital +
                 ", description='" + description + '\'' +
-                ", date=" + date +
+                ", dates=" + dates +
                 ", time='" + time + '\'' +
                 ", photo='" + photo + '\'' +
                 ", location='" + location + '\'' +
