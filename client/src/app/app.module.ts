@@ -31,6 +31,7 @@ import {BloodPostComponent} from "./blood/blood-post.component";
 import {BloodService} from "./services/blood.service";
 import {EventComponent} from "./event/event.component";
 import {EventService} from "./services/event.service";
+import {BloodGroupService} from "./services/blood-group.service";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {EventService} from "./services/event.service";
     QualificationService,
     SpecialityService,
     BloodService,
-    EventService
+    EventService,
+    BloodGroupService
   ],
 
   bootstrap: [AppComponent]

@@ -96,6 +96,8 @@
 //=======
 package org.itglance.docsea.domain;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;

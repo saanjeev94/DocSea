@@ -16,37 +16,37 @@
     </div>
   </div>
   <div class="left">
-              <ng-container *ngFor="let bloodPost of bloodPostList">
-                <div class="row">
-                    <div class="col-md-2">
+    <ng-container *ngFor="let bloodPost of bloodPostList">
+      <div class="row">
+        <div class="col-md-2">
                         <span class="blood-container">
 			                    <img src="../../assets/images/blood-bg.png" class="blood-image">
 			                    <span>{{bloodPost.bloodGroup.bloodGroup}}</span>
 		                    </span>
-                    </div>
-                    <div class="col-md-9">
-                        <p class="blood-date pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>
-                        <p class="blood-date pull-right"><b>Till : </b>{{bloodPost.deadline}}</p>
-                        <div class="clearfix"></div>
-                        <p class="blood-description">
-                          {{bloodPost.post}}
-                        </p>
-                        <p class="contact"><b>Contact:</b>{{bloodPost.contact}}</p>
-                        <p class="location"><b>Location:</b>{{bloodPost.location}}</p>
-                    </div>
-                </div>
-                <hr>
-              </ng-container>
-            </div>
-    <div class="right">
-      <div class="row left-padding">
-        <ng-container *ngFor="let event of eventList">
+        </div>
+        <div class="col-md-9">
+          <p class="blood-date pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>
+          <p class="blood-date pull-right"><b>Till : </b>{{bloodPost.deadline}}</p>
+          <div class="clearfix"></div>
+          <p class="blood-description">
+            {{bloodPost.post}}
+          </p>
+          <p class="contact"><b>Contact:</b>{{bloodPost.contact}}</p>
+          <p class="location"><b>Location:</b>{{bloodPost.location}}</p>
+        </div>
+      </div>
+      <hr>
+    </ng-container>
+  </div>
+  <div class="right">
+    <div class="row left-padding">
+      <ng-container *ngFor="let event of eventList">
         <div class="event">
-         <h4>{{event.name}}</h4>
-         <p>Location: {{event.location}}</p>
-         <p>Date: {{event.date}}</p>
-         <p>Time: {{event.time}}</p>
-       </div>
+          <h4>{{event.name}}</h4>
+          <p>Location: {{event.location}}</p>
+          <p>Date: {{event.date}}</p>
+          <p>Time: {{event.time}}</p>
+        </div>
       </ng-container>
     </div>
   </div> <!-- /.right -->
@@ -58,7 +58,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Add Blood</h4>
       </div>
       <div class="modal-body">

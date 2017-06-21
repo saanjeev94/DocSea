@@ -1,5 +1,7 @@
 package org.itglance.docsea.domain;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 /**
  * Created by sanjib on 6/18/17.
  */
+
 @Entity
 public class BloodGroup {
 
