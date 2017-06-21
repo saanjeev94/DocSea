@@ -1,61 +1,121 @@
-<button type="button" class="btn btn-primary pull-right add-blood" data-toggle="modal" data-target="#myEventModal">
-  Add Event
-</button>
+<div class="container fix-nav-padding">
+  <div class="fix-nav-padding"></div>
+  <div class="row blood">
+    <div class="col-md-8" style="padding-left: 0">
+      <h2 class="block-title pull-left">Events</h2>
+      <button type="button" class="btn btn-primary pull-right add-blood" data-toggle="modal" data-target="#myEventModal">
+        Add Event
+      </button>
+      <div class="blood-border-buttom clearfix"></div>
+    </div>
+    <div class="col-md-offset-1 col-md-3">
+      <h2 class="block-title">Blood Posts</h2>
+      <div class="blood-border-buttom"></div>
+    </div>
+  </div>
+  <div class="left">
+    <ng-container *ngFor="let event of eventList">
+      <div class="row">
+        <div class="col-md-2">
+          <h3>{{event.hospital.name}}</h3>
+        </div>
+        <div class="col-md-9">
+          <p class="blood-date pull-left"><b>Date : </b>{{event.date}}</p>
+          <p class="blood-date pull-right"><b>Time : </b>{{event.time}}</p>
+          <div class="clearfix"></div>
+          <p class="blood-description">
+            {{event.description}}
+          </p>
+          <p class="contact"><b>Contact : </b>{{event.hospital.contact.contactNumber1}}</p>
+          <p class="location"><b>Location : </b>{{event.location}}</p>
+        </div>
+      </div>
+      <hr>
+    </ng-container>
+  </div>
+  <div class="right">
+    <div class="row left-padding">
+      <ng-container *ngFor="let bloodPost of bloodPostList">
+        <div class="event">
+          <h4>{{bloodPost.bloodGroup.image}}</h4>
+          <p>Location: {{bloodPost.location}}</p>
+          <p>Required Date: {{bloodPost.deadline}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div> <!-- /.right -->
+</div><!-- /.container -->
 
-<!-- Add Event Modal -->
+<!-- Eventsvent Modal -->
 <div class="modal fade" id="myEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Blood</h4>
+        <h4 class="modal-title" id="myModalLabel">Add Event</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" #addEvent="ngForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="event" class="col-sm-3 control-label">Event Title: </label>
+            <label for="name" class="col-sm-3 control-label">Event Title: </label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="event" id="event" placeholder="Event Title...">
+              <input type="text" class="form-control" name="name" id="name" placeholder="Event Title..."
+                     [(ngModel)]="event.name" #name="ngModel" required>
+              <div *ngIf="name.errors && name.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!name.errors.required">Event Name is required</span>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="dates" class="col-sm-3 control-label">Date: </label>
             <div class="col-sm-9">
-              <input type="date" class="form-control" name="dates" id="dates" placeholder="Event Date...">
+              <input type="date" class="form-control" name="dates" id="dates" placeholder="Event Date..."
+                     [(ngModel)]="event.dates" #dates="ngModel" required>
+              <div *ngIf="dates.errors && dates.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!dates.errors.required">Date is required</span>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="location" class="col-sm-3 control-label">Location: </label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="location" id="location" placeholder="Event Location...">
+              <input type="text" class="form-control" name="location" id="location" placeholder="Event Location..."
+                     [(ngModel)]="event.location" #location="ngModel" required>
+              <div *ngIf="location.errors && location.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!location.errors.required">Location is required</span>
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="contact" class="col-sm-3 control-label">Contact: </label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact...">
-            </div>
-          </div>
+          <!--<div class="form-group">-->
+            <!--<label for="contact" class="col-sm-3 control-label">Contact: </label>-->
+            <!--<div class="col-sm-9">-->
+              <!--<input type="text" class="form-control" name="contact" id="contact" placeholder="Contact...">-->
+            <!--</div>-->
+          <!--</div>-->
 
           <div class="form-group">
             <label for="description" class="col-sm-3 control-label">Description: </label>
             <div class="col-sm-9">
               <textarea class="form-control" name="description"
                         name="description" id="description" placeholder="Description..."
-                        cols="30" rows="5"></textarea>
+                        cols="30" rows="5"
+                        [(ngModel)]="event.description" #description="ngModel" required>
+              </textarea>
+              <div *ngIf="description.errors && description.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!description.errors.required">Description is required</span>
+              </div>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Post</button>
+        <button type="button" class="btn btn-success"
+                [disabled]="!addEvent.valid">Post</button>
       </div>
     </div>
   </div>
 </div>
-
-

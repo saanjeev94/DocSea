@@ -96,8 +96,11 @@
 //=======
 package org.itglance.docsea.domain;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by sriyanka on 6/12/17.
@@ -116,9 +119,10 @@ public class Event {
     private Hospital hospital;
 
     private String description;
-    private String date;
+    private Date date;
     private String time;
     private String photo;
+    private String location;
 
     public Long getId() {
         return id;
@@ -148,11 +152,13 @@ public class Event {
         this.description = description;
     }
 
-    public String getDate() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Date getDate() {
         return date;
     }
-
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -172,6 +178,14 @@ public class Event {
         this.photo = photo;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
@@ -179,9 +193,10 @@ public class Event {
                 ", name='" + name + '\'' +
                 ", hospital=" + hospital +
                 ", description='" + description + '\'' +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 ", time='" + time + '\'' +
                 ", photo='" + photo + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

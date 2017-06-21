@@ -3,10 +3,8 @@
  */
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Injectable} from "@angular/core";
-import {Doctor} from "../model/doctor.model";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {HospitalDoctor} from "../model/hospital-doctor.model";
 
 @Injectable()
 export class DoctorService{

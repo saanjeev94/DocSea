@@ -1,10 +1,12 @@
 package org.itglance.docsea.service;
 
+import org.itglance.docsea.domain.BloodGroup;
 import org.itglance.docsea.domain.BloodPost;
 import org.itglance.docsea.domain.Contact;
 import org.itglance.docsea.repository.BloodPostRepository;
 import org.itglance.docsea.repository.ContactRepository;
 import org.itglance.docsea.service.dto.BloodPostDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ import java.util.Date;
 @Service
 @Transactional
 public class BloodPostService {
+
+    @Autowired
+    BloodGroupService bloodGroupService;
 
     private final BloodPostRepository bloodPostRepository;
     private final ContactRepository contactRepository;
@@ -50,21 +55,17 @@ public class BloodPostService {
 
     public void postBlood(BloodPostDTO bloodPostDTO) {
         BloodPost bloodPost = new BloodPost();
-        bloodPost.setBloodGroup(bloodPostDTO.getBloodGroup());
         bloodPost.setDeadline(bloodPostDTO.getDeadline());
         bloodPost.setPost(bloodPostDTO.getPost());
         bloodPost.setPostDate(d);
         bloodPost.setDeadline(bloodPostDTO.getDeadline());
+        bloodPost.setContact(bloodPostDTO.getContact());
+        bloodPost.setLocation(bloodPostDTO.getLocation());
 
-        Contact contact = new Contact();
-        contact.setWebsite(bloodPostDTO.getContact().getWebsite());
-        contact.setContactNumber1(bloodPostDTO.getContact().getContactNumber1());
-        contact.setContactNumber2(bloodPostDTO.getContact().getContactNumber2());
-        contact.setEmailId(bloodPostDTO.getContact().getEmailId());
-        contact.setFax(bloodPostDTO.getContact().getFax());
+        BloodGroup bloodGroup=new BloodGroup();
+        bloodGroup = bloodGroupService.getBloodGroup(bloodPostDTO.getBloodGroup().getBloodGroup());
+        bloodPost.setBloodGroup(bloodGroup);
 
-        contactRepository.save(contact);
-        bloodPost.setContact(contact);
         bloodPostRepository.save(bloodPost);
 
 

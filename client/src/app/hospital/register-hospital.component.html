@@ -170,7 +170,7 @@
               <input type="text" class="form-control"
                      id="contactNumber2" placeholder="Secondary Number"
                      name="contactNumber2" [(ngModel)]="hospitalUser.hospital.contact.contactNumber2" #contactNumber2="ngModel"
-                     pattern="[0-9]{10}" maxlength="10">
+                     pattern="[0-9]{9,10}" maxlength="10">
 
               <div *ngIf="contactNumber2.errors && contactNumber2.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!contactNumber2.errors.pattern">Number must be 9-10 digit only</span>

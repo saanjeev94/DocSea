@@ -1,24 +1,25 @@
 /**
  * Created by sonika on 6/17/17.
  */
-import {Contact} from "./contact.model";
+import {BloodGroup} from "./blood-group.model";
 
 export class Blood{
   public id?:number;
   public post?:string;
-  public bloodGroup?:string;
+  public bloodGroup?:BloodGroup;
   public deadline?:Date;
   public postDate?:Date;
-  public contact?:Contact;
+  public contact?:string;
+  public location?:string;
 
-
-  constructor(id?: number, post?: string, bloodGroup?: string,
-              deadline?: Date, postDate?: Date, contact?: Contact) {
+  constructor(id?: number, post?: string, bloodGroup?: BloodGroup,
+              deadline?: Date, postDate?: Date, contact?: string, location?:string) {
     this.id = id? id : null;
     this.post = post?post:null;
-    this.bloodGroup = bloodGroup?bloodGroup:null;
+    this.bloodGroup = bloodGroup?bloodGroup:new BloodGroup();
     this.deadline = deadline?deadline:null;
     this.postDate = postDate?postDate:null;
-    this.contact = contact?contact:new Contact();
+    this.contact = contact?contact:null;
+    this.location=location?location:null;
   }
 }

@@ -2,6 +2,7 @@ package org.itglance.docsea.domain;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,7 +20,8 @@ public class BloodPost {
 
     private String post;
 
-    private String bloodGroup;
+    @OneToOne
+    private BloodGroup bloodGroup;
 
     @Temporal(TemporalType.DATE)
     private Date deadline;
@@ -27,8 +29,17 @@ public class BloodPost {
     @Temporal(TemporalType.DATE)
     private Date postDate;
 
-    @OneToOne
-    private Contact contact;
+    private String contact;
+
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public Long getId() {
         return id;
@@ -44,14 +55,6 @@ public class BloodPost {
 
     public void setPost(String post) {
         this.post = post;
-    }
-
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
     }
 
     public Date getDeadline() {
@@ -70,12 +73,20 @@ public class BloodPost {
         this.postDate = postDate;
     }
 
-    public Contact getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(Contact contact) {
+    public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public BloodGroup getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(BloodGroup bloodGroup) {
+        this.bloodGroup = bloodGroup;
     }
 
     @Override
@@ -83,10 +94,11 @@ public class BloodPost {
         return "BloodPost{" +
                 "id=" + id +
                 ", post='" + post + '\'' +
-                ", bloodGroup='" + bloodGroup + '\'' +
+                ", bloodGroup=" + bloodGroup +
                 ", deadline=" + deadline +
                 ", postDate=" + postDate +
-                ", contact=" + contact +
+                ", contact='" + contact + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }
