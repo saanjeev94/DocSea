@@ -102,7 +102,12 @@
           <div class="form-group">
             <label for="blood" class="col-sm-3 control-label">Blood Group: </label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="blood" id="blood" placeholder="Blood Group...">
+              <input type="text" class="form-control" name="blood" id="blood"
+                     placeholder="Blood Group..." required>
+            </div>
+
+            <div *ngIf="blood.errors && blood.touched" class="alert alert-danger custom-label-alert">
+              <span [hidden]="!blood.errors.pattern">Number must be 9-10 digit only</span>
             </div>
           </div>
 
