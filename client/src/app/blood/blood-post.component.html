@@ -73,6 +73,9 @@
                   <option value="{{bloodGroup.bloodGroup}}">{{bloodGroup.bloodGroup}}</option>
                 </ng-container>
               </select>
+              <div *ngIf="bloodGroup.errors && bloodGroup.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!bloodGroup.errors.required">Blood Group is required</span>
+              </div>
             </div>
           </div>
 
@@ -81,6 +84,9 @@
             <div class="col-sm-9">
               <input type="dates" class="form-control" name="deadline" id="deadline" placeholder="Required Date..."
                      [(ngModel)]="blood.deadline" #deadline="ngModel" required>
+              <div *ngIf="deadline.errors && deadline.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!deadline.errors.required">Required Date is required</span>
+              </div>
             </div>
           </div>
 
@@ -89,6 +95,9 @@
             <div class="col-sm-9">
               <input type="text" class="form-control" name="location" id="location" placeholder="Location..."
                      [(ngModel)]="blood.location" #location="ngModel" required>
+              <div *ngIf="location.errors && location.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!location.errors.required">Location is required</span>
+              </div>
             </div>
           </div>
 
@@ -96,7 +105,12 @@
             <label for="contact" class="col-sm-3 control-label">Contact: </label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact..."
-                     [(ngModel)]="blood.contact" #contact="ngModel" required>
+                     [(ngModel)]="blood.contact" #contact="ngModel" required pattern="[0-9]{9,10}" maxlength="10">
+
+              <div *ngIf="contact.errors && contact.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!contact.errors.required">Number is required</span>
+                <span [hidden]="!contact.errors.pattern">Number must be 9-10 digit only</span>
+              </div>
             </div>
           </div>
 
@@ -113,7 +127,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Post</button>
+        <button type="button" class="btn btn-success"
+                [disabled]="!addBloodpost.valid">Post</button>
       </div>
     </div>
   </div>

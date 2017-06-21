@@ -3,18 +3,7 @@
   <div class="row blood">
     <div class="col-md-8" style="padding-left: 0">
       <h2 class="block-title pull-left">Events</h2>
-      <button type="button" class="btn btn-primary pull-right add-blood" data-toggle="modal" data-target="#myEventModal">
-        Add Event
-      </button>
-      <div class="blood-border-buttom clearfix"></div>
-    </div>
-    <div class="col-md-offset-1 col-md-3">
-      <h2 class="block-title">Blood Posts</h2>
-      <div class="blood-border-buttom"></div>
-    </div>
-  </div>
-  <div class="left">
-    <ng-container *ngFor="let event of eventList">
+      <div class="blood-borN="let event of eventList">
       <div class="row">
         <div class="col-md-2">
           <h3>{{event.hospital.name}}</h3>
@@ -45,63 +34,3 @@
     </div>
   </div> <!-- /.right -->
 </div><!-- /.container -->
-
-<!-- Eventsvent Modal -->
-<div class="modal fade" id="myEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Blood</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" #addEvent="ngForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">Event Title: </label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="name" id="name" placeholder="Event Title..."
-                     [(ngModel)]="event.name" #name="ngModel" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="dates" class="col-sm-3 control-label">Date: </label>
-            <div class="col-sm-9">
-              <input type="dates" class="form-control" name="dates" id="dates" placeholder="Event Date..."
-                     [(ngModel)]="event.dates" #dates="ngModel" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="location" class="col-sm-3 control-label">Location: </label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="location" id="location" placeholder="Event Location..."
-                     [(ngModel)]="event.location" #location="ngModel" required>
-            </div>
-          </div>
-
-          <!--<div class="form-group">-->
-            <!--<label for="contact" class="col-sm-3 control-label">Contact: </label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<input type="text" class="form-control" name="contact" id="contact" placeholder="Contact...">-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <div class="form-group">
-            <label for="description" class="col-sm-3 control-label">Description: </label>
-            <div class="col-sm-9">
-              <textarea class="form-control" name="description"
-                        name="description" id="description" placeholder="Description..."
-                        cols="30" rows="5"
-                        [(ngModel)]="event.description" #description="ngModel" required></textarea>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Post</button>
-      </div>
-    </div>
-  </div>
-</div>

@@ -74,23 +74,29 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Blood</h4>
+        <h4 class="modal-title" id="myModalLabel">Add Event</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" #addEvent="ngForm" (ngSubmit)="addEvent()">
+        <form class="form-horizontal" #addEvent="ngForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Event Title: </label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="name" id="name" placeholder="Event Title..."
                      [(ngModel)]="event.name" #name="ngModel" required>
+              <div *ngIf="name.errors && name.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!name.errors.required">Event Name is required</span>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="dates" class="col-sm-3 control-label">Date: </label>
             <div class="col-sm-9">
-              <input type="dates" class="form-control" name="dates" id="dates" placeholder="Event Date..."
+              <input type="date" class="form-control" name="dates" id="dates" placeholder="Event Date..."
                      [(ngModel)]="event.dates" #dates="ngModel" required>
+              <div *ngIf="dates.errors && dates.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!dates.errors.required">Date is required</span>
+              </div>
             </div>
           </div>
 
@@ -99,6 +105,9 @@
             <div class="col-sm-9">
               <input type="text" class="form-control" name="location" id="location" placeholder="Event Location..."
                      [(ngModel)]="event.location" #location="ngModel" required>
+              <div *ngIf="location.errors && location.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!location.errors.required">Location is required</span>
+              </div>
             </div>
           </div>
 
@@ -115,14 +124,19 @@
               <textarea class="form-control" name="description"
                         name="description" id="description" placeholder="Description..."
                         cols="30" rows="5"
-                        [(ngModel)]="event.description" #description="ngModel" required></textarea>
+                        [(ngModel)]="event.description" #description="ngModel" required>
+              </textarea>
+              <div *ngIf="description.errors && description.touched" class="alert alert-danger custom-label-alert">
+                <span [hidden]="!description.errors.required">Description is required</span>
+              </div>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Post</button>
+        <button type="button" class="btn btn-success"
+                [disabled]="!addEvent.valid">Post</button>
       </div>
     </div>
   </div>

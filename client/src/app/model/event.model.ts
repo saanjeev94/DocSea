@@ -8,19 +8,19 @@ export class Events{
   public name?:string;
   public hospital?:Hospital;
   public description?:string;
-  public date?:Date;
+  public dates?:Date;
   public time?:string;
   public photo?:string;
   public location?:string;
 
 
   constructor(id?: number, name?: string, hospital?: Hospital, description?: string,
-              date?: Date, time?: string, photo?: string, location?: string) {
+              dates?: Date, time?: string, photo?: string, location?: string) {
     this.id = id?id:null;
     this.name = name?name:null;
     this.hospital = hospital?hospital:new Hospital();
     this.description = description?description:null;
-    this.date = date?date:null;
+    this.dates = dates?dates:null;
     this.time = time?time:null;
     this.photo = photo?photo:null;
     this.location=location?location:null;
