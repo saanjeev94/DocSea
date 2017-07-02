@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by sanjib on 6/12/17.
@@ -39,18 +41,28 @@ public class BloodPostService {
     SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
     Date d = dateFormatter.parse(dateFormatter.format(new Date() ));
 
-    public Page<BloodPost> getAllBlood(Pageable pageable) throws ParseException {
-        Page<BloodPost> bloodPosts = bloodPostRepository.findValideBlood(d, pageable);
-       /* List<BloodPostDTO> bloodPostDTOS = new ArrayList<>();
+//    public Page<BloodPost> getAllBlood(Pageable pageable) throws ParseException {
+//        Page<BloodPost> bloodPosts = bloodPostRepository.findValideBlood(d, pageable);
+//       /* List<BloodPostDTO> bloodPostDTOS = new ArrayList<>();
+//
+//        for(BloodPost b: bloodPosts){
+//
+//            if(b.getDeadline().after(d) || b.getDeadline().equals(d))
+//                bloodPostDTOS.add(new BloodPostDTO(b));
+//        }
+//        System.out.println(bloodPostDTOS.toString());*/
+//        System.out.println(bloodPosts.toString());
+//        return bloodPosts;
+//    }
 
-        for(BloodPost b: bloodPosts){
-
-            if(b.getDeadline().after(d) || b.getDeadline().equals(d))
-                bloodPostDTOS.add(new BloodPostDTO(b));
+    public List<BloodPost> getAllBlood(){
+        List<BloodPost> bloodPostDTOS=new ArrayList<>();
+        List<BloodPost> bloodPosts=bloodPostRepository.findAll();
+        for(BloodPost bloodPost: bloodPosts){
+            if(bloodPost.getDeadline().after(d) || bloodPost.getDeadline().equals(d))
+                bloodPostDTOS.add(bloodPost);
         }
-        System.out.println(bloodPostDTOS.toString());*/
-        System.out.println(bloodPosts.toString());
-        return bloodPosts;
+        return bloodPostDTOS;
     }
 
     public void postBlood(BloodPostDTO bloodPostDTO) {

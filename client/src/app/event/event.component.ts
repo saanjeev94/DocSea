@@ -31,13 +31,4 @@ export class EventComponent implements OnInit{
     });
   }
 
-  onSubmit(){
-    this.eventService.addEvent(this.event).subscribe((response)=>{
-      console.log(response);
-    });
-    this.router.navigate(['/events']);
-  }
-
-
-
 }

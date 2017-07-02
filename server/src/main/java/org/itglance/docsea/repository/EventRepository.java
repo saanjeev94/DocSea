@@ -19,7 +19,7 @@ public interface EventRepository extends JpaRepository<Event,Long> {
     public Event findById(Long id);
 
     @Query("SELECT e FROM Event e WHERE e.hospital.id=:id AND e.dates=:dates AND e.name=:name AND e.time=:time" )
-    public Event isEventExist(@Param("id") Long id, @Param ("date") Date dates, @Param("name") String name, @Param("time") String time);
+    public Event isEventExist(@Param("id") Long id, @Param ("dates") Date dates, @Param("name") String name, @Param("time") String time);
 
     @Query("SELECT e FROM Event  e WHERE e.dates >= :d")
    public List<Event> findAllValidEvent(@Param("d") Date d);

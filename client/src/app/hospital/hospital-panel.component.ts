@@ -46,11 +46,12 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
     setTimeout(() => $("#hospital-panel-table").dataTable(),1500);
   }
 
-  addEvent(){
+  onSubmit(){
+    console.log("inside submit function");
     this.eventService.addEvent(this.event).subscribe((response)=>{
       console.log(response);
     });
-    this.router.navigate(['/hospital-panel']);
+    this.router.navigate(['/events']);
   }
 }
 

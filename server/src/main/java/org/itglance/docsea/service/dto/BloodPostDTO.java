@@ -4,7 +4,7 @@ import org.itglance.docsea.domain.BloodGroup;
 import org.itglance.docsea.domain.BloodPost;
 import org.itglance.docsea.domain.Contact;
 
-import java.sql.Clob;
+
 import java.util.Date;
 
 /**
@@ -14,7 +14,7 @@ public class BloodPostDTO {
 
     private Long id;
 
-    private Clob post;
+    private String post;
 
     private BloodGroup bloodGroup;
 
@@ -29,7 +29,7 @@ public class BloodPostDTO {
     public BloodPostDTO() {
     }
 
-    public BloodPostDTO(Long id, Clob post, BloodGroup bloodGroup, Date deadline, Date postDate, String contact, String location) {
+    public BloodPostDTO(Long id, String post, BloodGroup bloodGroup, Date deadline, Date postDate, String contact, String location) {
         this.id = id;
         this.post = post;
         this.bloodGroup = bloodGroup;
@@ -47,7 +47,7 @@ public class BloodPostDTO {
         return id;
     }
 
-    public Clob getPost() {
+    public String getPost() {
         return post;
     }
 

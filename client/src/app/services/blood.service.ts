@@ -6,16 +6,20 @@ import {Http} from "@angular/http";
 import {Blood} from "../model/blood.model";
 @Injectable()
 export class BloodService{
-  public bloodUrl='http://localhost:9999/api/bloodPost'
+  private bloodUrl="http://localhost:9999/api/bloodPost";
   constructor(private http:Http){
 
   }
 
-  addBloodPost(blood:Blood){
-    return this.http.post(this.bloodUrl,blood).map(res=>res.json);
+  addBloodPost(blood){
+    return this.http.post(this.bloodUrl,blood);
   }
 
   getBloodPost(){
-    return this.http.get(this.bloodUrl).map(res=>res.json);
+    return this.http.get(this.bloodUrl).map(res=>
+      res.json()
+      // console.log("********************************************************");
+      // console.log(res.);
+    );
   }
 }

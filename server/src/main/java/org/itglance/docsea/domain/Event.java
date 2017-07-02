@@ -96,8 +96,9 @@
 //=======
 package org.itglance.docsea.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
-import java.sql.Clob;
 import java.util.Date;
 
 /**
@@ -116,8 +117,8 @@ public class Event {
     @ManyToOne
     private Hospital hospital;
 
-//    @Column(length = 1000)
-    private Clob description;
+    @Type(type = "text")
+    private String description;
 
     private Date dates;
     private String time;
@@ -144,20 +145,22 @@ public class Event {
         this.hospital = hospital;
     }
 
-    public Clob getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Clob description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
+
     public Date getDates() {
         return dates;
     }
+
     public void setDates(Date dates) {
         this.dates = dates;
     }

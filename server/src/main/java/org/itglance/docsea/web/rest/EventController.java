@@ -1,7 +1,6 @@
 package org.itglance.docsea.web.rest;
 
 import org.itglance.docsea.domain.Event;
-import org.itglance.docsea.repository.EventRepository;
 import org.itglance.docsea.service.EventService;
 import org.itglance.docsea.service.dto.EventDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +35,13 @@ public class EventController {
 
     //    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     @PostMapping
-    public ResponseEntity<?> addEvents(@RequestBody EventDTO eventDTO
-                                        ,@RequestHeader String Authorization) throws ParseException {
+    public ResponseEntity<?> addEvents(@RequestBody EventDTO eventDTO,
+                                       @RequestHeader String Authorization) throws ParseException {
         System.out.println("***********************************************************88");
         System.out.println(eventDTO.toString());
-        if (!(eventService.isEventExist(Authorization, eventDTO.getDate(), eventDTO.getName(), eventDTO.getTime()))) {
+        if (!(eventService.isEventExist(Authorization, eventDTO.getDates(), eventDTO.getName(), eventDTO.getTime()))) {
 
-            if(eventDTO.getDate().before(d)){
+            if(eventDTO.getDates().before(d)){
                return new ResponseEntity<String>("Invalid date", HttpStatus.BAD_REQUEST);
             }
             eventService.addEvent(eventDTO, Authorization);
@@ -57,7 +56,7 @@ public class EventController {
     public ResponseEntity<?> listAllEvents() {
         List<Event> list = eventService.getAllValidEvents();
         if (list.isEmpty()) {
-            return new ResponseEntity<String>("There is no events",HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>("There are no events",HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Event>>(list, HttpStatus.OK);
     }
@@ -85,7 +84,7 @@ public class EventController {
 
     @PutMapping
     public ResponseEntity<?> updateEvent( @RequestBody EventDTO eventDTO) {
-        if(eventDTO.getDate().before(d)){
+        if(eventDTO.getDates().before(d)){
             return new ResponseEntity<String>("Invalid date",HttpStatus.BAD_REQUEST);
         }
         if (eventService.updateHospital(eventDTO)){

@@ -15,31 +15,34 @@
       <div class="blood-border-buttom"></div>
     </div>
   </div>
+  <div class="col-md-8">
   <div class="left">
     <ng-container *ngFor="let bloodPost of bloodPostList">
-      <div class="row">
-        <div class="col-md-2">
-                        <span class="blood-container">
-			                    <img src="../../assets/images/blood-bg.png" class="blood-image">
-			                    <span>{{bloodPost.bloodGroup.bloodGroup}}</span>
-		                    </span>
-        </div>
-        <div class="col-md-9">
-          <p class="blood-dates pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>
-          <p class="blood-dates pull-right"><b>Till : </b>{{bloodPost.deadline}}</p>
-          <div class="clearfix"></div>
-          <p class="blood-description">
-            {{bloodPost.post}}
-          </p>
-          <p class="contact"><b>Contact:</b>{{bloodPost.contact}}</p>
-          <p class="location"><b>Location:</b>{{bloodPost.location}}</p>
-        </div>
-      </div>
-      <hr>
+        <section class="row">
+          <div class="col-md-2">
+            <span class="blood-container">
+              <img src="../../assets/images/blood-bg.png" class="blood-image">
+              <span>{{bloodPost.bloodGroup.bloodGroup}}</span>
+            </span>
+          </div>
+          <div class="col-md-9">
+            <p class="blood-dates pull-left"><b>Posted : </b>{{bloodPost.postDate}}</p>
+            <p class="blood-dates pull-right"><b>Till : </b>{{bloodPost.deadline}}</p>
+            <div class="clearfix"></div>
+            <p class="blood-description">
+              {{bloodPost.post}}
+            </p>
+            <p class="contact"><b>Contact:</b>{{bloodPost.contact}}</p>
+            <p class="location"><b>Location:</b>{{bloodPost.location}}</p>
+          </div>
+        </section>
+        <hr>
     </ng-container>
   </div>
-  <div class="right">
-    <div class="row left-padding">
+  </div>
+
+    <div class="row left-padding col-md-offset-1 col-md-3">
+      <div class="right">
       <ng-container *ngFor="let event of eventList">
         <div class="event">
           <h4>{{event.name}}</h4>
@@ -47,9 +50,10 @@
           <p>Date: {{event.dates}}</p>
           <p>Time: {{event.time}}</p>
         </div>
+        <hr>
       </ng-container>
-    </div>
-  </div> <!-- /.right -->
+      </div>
+    </div> <!-- /.right -->
 </div><!-- /.container -->
 
 
@@ -82,7 +86,7 @@
           <div class="form-group">
             <label for="deadline" class="col-sm-3 control-label">Required Date: </label>
             <div class="col-sm-9">
-              <input type="dates" class="form-control" name="deadline" id="deadline" placeholder="Required Date..."
+              <input type="date" class="form-control" name="deadline" id="deadline" placeholder="Required Date..."
                      [(ngModel)]="blood.deadline" #deadline="ngModel" required>
               <div *ngIf="deadline.errors && deadline.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!deadline.errors.required">Required Date is required</span>
@@ -123,12 +127,13 @@
                         [(ngModel)]="blood.post" #description="ngModel" required></textarea>
             </div>
           </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-success" value="Post"
+                    [disabled]="!addBloodpost.valid"/>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success"
-                [disabled]="!addBloodpost.valid">Post</button>
       </div>
     </div>
   </div>

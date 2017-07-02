@@ -44,7 +44,7 @@ public class EventService {
         Event event=new Event();
         event.setName(eventDTO.getName());
         event.setDescription(eventDTO.getDescription());
-        event.setDates(eventDTO.getDate());
+        event.setDates(eventDTO.getDates());
         event.setTime(eventDTO.getTime());
         event.setPhoto(eventDTO.getPhoto());
         event.setLocation(eventDTO.getLocation());
@@ -63,7 +63,7 @@ public class EventService {
         if(event!=null){
             event.setName(eventDTO.getName());
             event.setDescription(eventDTO.getDescription());
-            event.setDates(eventDTO.getDate());
+            event.setDates(eventDTO.getDates());
             event.setTime(eventDTO.getTime());
             event.setPhoto(eventDTO.getPhoto());
             event.setLocation(eventDTO.getLocation());
@@ -76,9 +76,9 @@ public class EventService {
 
     }
 
-    public boolean isEventExist(String token, Date date, String name, String time){
+    public boolean isEventExist(String token, Date dates, String name, String time){
         Long id = sessionService.checkSession(token).getHospitalId();
-        Event event= eventRepository.isEventExist(id, date, name, time);
+        Event event= eventRepository.isEventExist(id, dates, name, time);
         if(event!=null){
             return true;
         }

@@ -3,33 +3,47 @@
   <div class="row blood">
     <div class="col-md-8" style="padding-left: 0">
       <h2 class="block-title pull-left">Events</h2>
-      <div class="blood-borN="let event of eventList">
-      <div class="row">
-        <div class="col-md-2">
-          <h3>{{event.hospital.name}}</h3>
-        </div>
-        <div class="col-md-9">
-          <p class="blood-dates pull-left"><b>Date : </b>{{event.dates}}</p>
-          <p class="blood-dates pull-right"><b>Time : </b>{{event.time}}</p>
-          <div class="clearfix"></div>
-          <p class="blood-description">
-            {{event.description}}
-          </p>
-          <p class="contact"><b>Contact : </b>{{event.hospital.contact.contactNumber1}}</p>
-          <p class="location"><b>Location : </b>{{event.location}}</p>
-        </div>
-      </div>
-      <hr>
+      <div class="blood-border-buttom clearfix"></div>
+    </div>
+    <div class="col-md-offset-1 col-md-3">
+      <h2 class="block-title">Blood Posts</h2>
+      <div class="blood-border-buttom"></div>
+    </div>
+  </div>
+  <div class="col-md-8">
+  <div class="left">
+    <ng-container *ngFor="let event of eventList">
+        <section class="row">
+          <div class="col-md-2 text-center">
+            <h3>{{event.hospital.name}}</h3>
+          </div>
+          <div class="col-md-9">
+            <p class="blood-dates pull-left"><b>Date : </b>{{event.dates}}</p>
+            <p class="blood-dates pull-right"><b>Time : </b>{{event.time}}</p>
+            <div class="clearfix"></div>
+            <p class="blood-description">
+              {{event.description}}
+            </p>
+            <p class="contact"><b>Contact : </b>{{event.hospital.contact.contactNumber1}}</p>
+            <p class="location"><b>Location : </b>{{event.location}}</p>
+          </div>
+        </section>
+        <hr>
     </ng-container>
   </div>
-  <div class="right">
-    <div class="row left-padding">
+  </div>
+  <div class="row left-padding col-md-offset-1 col-md-3">
+    <div class="right text-center">
       <ng-container *ngFor="let bloodPost of bloodPostList">
-        <div class="event">
-          <h4>{{bloodPost.bloodGroup.image}}</h4>
+        <div class="event center-block">
+          <span class="blood-container center-block">
+              <img src="../../assets/images/blood-bg.png" class="blood-image">
+              <span>{{bloodPost.bloodGroup.bloodGroup}}</span>
+          </span>
           <p>Location: {{bloodPost.location}}</p>
           <p>Required Date: {{bloodPost.deadline}}</p>
         </div>
+        <hr>
       </ng-container>
     </div>
   </div> <!-- /.right -->

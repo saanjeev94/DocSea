@@ -7,14 +7,14 @@ export class Events{
   public id?:number;
   public name?:string;
   public hospital?:Hospital;
-  public description?:string;
+  public description?:any;
   public dates?:Date;
   public time?:string;
   public photo?:string;
   public location?:string;
 
 
-  constructor(id?: number, name?: string, hospital?: Hospital, description?: string,
+  constructor(id?: number, name?: string, hospital?: Hospital, description?: any,
               dates?: Date, time?: string, photo?: string, location?: string) {
     this.id = id?id:null;
     this.name = name?name:null;

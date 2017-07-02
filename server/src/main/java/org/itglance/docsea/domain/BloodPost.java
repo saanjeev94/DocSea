@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
-import java.sql.Clob;
 import java.util.Date;
 
 /**
@@ -19,8 +18,8 @@ public class BloodPost {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @Column(length = 1000)
-    private Clob post;
+    @Type(type = "text")
+    private String post;
 
     @OneToOne
     private BloodGroup bloodGroup;
@@ -51,11 +50,11 @@ public class BloodPost {
         this.id = id;
     }
 
-    public Clob getPost() {
+    public String getPost() {
         return post;
     }
 
-    public void setPost(Clob post) {
+    public void setPost(String post) {
         this.post = post;
     }
 

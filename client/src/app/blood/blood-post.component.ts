@@ -15,8 +15,8 @@ import {BloodGroupService} from "../services/blood-group.service";
 })
 export class BloodPostComponent implements OnInit{
   blood:Blood;
-  bloodPostList:any;
-  eventList:any;
+  bloodPostList:Blood[]=[];
+  eventList:Event[]=[];
   bloodGroupList:any;
 
   constructor(private bloodService:BloodService, private eventService:EventService,
@@ -25,6 +25,22 @@ export class BloodPostComponent implements OnInit{
   }
 
   ngOnInit(){
+    this.loadData();
+  }
+
+  onSubmit(){
+    console.log(this.blood);
+    this.bloodService.addBloodPost(this.blood).subscribe((response)=>{
+      this.onSuccess(response)
+    }, (err)=>{console.log(err)});
+  }
+
+  onSuccess(res){
+  this.loadData();
+  this.router.navigate(['/blood-post']);
+  }
+
+  loadData(){
     this.bloodGroupService.getBloodGroup().subscribe((response)=>{
       this.bloodGroupList=response;
     });
@@ -33,14 +49,7 @@ export class BloodPostComponent implements OnInit{
     });
     this.eventService.getEvents().subscribe((response)=>{
       this.eventList=response;
+      console.log("event response",this.eventList);
     });
-
-  }
-
-  onSubmit(){
-    this.bloodService.addBloodPost(this.blood).subscribe((response)=>{
-      console.log(response);
-    });
-    this.router.navigate(['/blood-post']);
   }
 }
