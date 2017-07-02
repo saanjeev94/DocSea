@@ -120,7 +120,9 @@ public class Event {
     @Type(type = "text")
     private String description;
 
+    @Temporal(TemporalType.DATE)
     private Date dates;
+
     private String time;
     private String photo;
     private String location;

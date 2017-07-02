@@ -3,6 +3,7 @@ import {DoctorService} from "../services/doctor.service";
 import {Events} from "../model/event.model";
 import {EventService} from "../services/event.service";
 import {Router} from "@angular/router";
+import {BloodService} from "../services/blood.service";
 
 declare var $: any;
 declare var swal:any;
@@ -17,8 +18,12 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
 
   doctorList: any;
   event:Events;
+  eventList:any;
+  bloodPostList:any;
+  element:any;
 
-  constructor(private doctorService:DoctorService, private eventService:EventService, private router:Router){
+  constructor(private doctorService:DoctorService, private eventService:EventService,
+              private router:Router, private bloodService:BloodService){
     this.event=new Events();
   }
 
@@ -50,8 +55,25 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
     console.log("inside submit function");
     this.eventService.addEvent(this.event).subscribe((response)=>{
       console.log(response);
+      $('#myEventModal').modal('hide');
+    },(error)=>{
+      console.log(error);
+      if (!(error.status === 200)) {
+        swal(
+          'Oops...',
+          error._body,
+          'error'
+        )
+      }
     });
-    this.router.navigate(['/events']);
+    this.eventService.getEvents().subscribe((response)=>{
+      this.eventList=response;
+    });
+    this.bloodService.getBloodPost().subscribe((response)=>{
+      this.bloodPostList=response;
+    });
+
+    this.router.navigate(['/hospital-panel']);
   }
 }
 

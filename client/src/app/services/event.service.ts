@@ -23,6 +23,6 @@ export class EventService{
   }
 
   getEvents(){
-    return this.http.get(this.eventUrl).map(res=>res.json());
+    return this.http.get(this.eventUrl).map(res=>res.json().data);
   }
 }

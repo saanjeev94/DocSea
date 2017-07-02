@@ -7,6 +7,7 @@ import {BloodService} from "../services/blood.service";
 import {Router} from "@angular/router";
 import {EventService} from "../services/event.service";
 import {BloodGroupService} from "../services/blood-group.service";
+declare var $: any;
 
 @Component({
   selector: "docsea-blood-post",
@@ -31,13 +32,14 @@ export class BloodPostComponent implements OnInit{
   onSubmit(){
     console.log(this.blood);
     this.bloodService.addBloodPost(this.blood).subscribe((response)=>{
-      this.onSuccess(response)
+      this.onSuccess(response);
     }, (err)=>{console.log(err)});
   }
 
   onSuccess(res){
-  this.loadData();
-  this.router.navigate(['/blood-post']);
+    $('#myModal').modal('hide');
+    this.loadData();
+    this.router.navigate(['/blood-post']);
   }
 
   loadData(){
