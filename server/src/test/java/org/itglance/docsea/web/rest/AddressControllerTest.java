@@ -23,14 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-//@WebMvcTest(AddressController.class)
-/*@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
-@WebAppConfiguration*/
+
 public class AddressControllerTest {
     @Autowired
     private WebApplicationContext ctx;
-
 
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
@@ -38,7 +34,7 @@ public class AddressControllerTest {
 
     private MockMvc mockMvc;
 
-    private HttpMessageConverter mappingJackson2HttpMessageConverter;
+//    private HttpMessageConverter mappingJackson2HttpMessageConverter;
 
     @Before
     public void setUp(){
