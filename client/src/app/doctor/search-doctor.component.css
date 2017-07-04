@@ -6,6 +6,10 @@
   padding: 0 !important;
 }
 
+.no-margin-buttom{
+  margin:0;
+}
+
 #doctor-search input[type="text"]{
   border-radius: 19px;
   width: 90%;
@@ -49,8 +53,38 @@
 
 #background{
   background: url("../../assets/images/background.jpg");
-  padding-bottom: 268px;
-  /*padding-bottom: 258px;*/
+  height: 92.3vh;
   margin-top: -20px;
-  padding-top: 45px;
+  overflow: hidden;
+  /*padding-bottom: 268px;*/
+  /*padding-bottom: 258px;*/
+  /*padding-top: 45px;*/
 }
+
+
+
+/*Blood*/
+.outer-blood{
+  color: #fff;
+  width: 170px;
+  margin: 35px 0 0 10px;
+}
+
+.blood-container{
+  width: 100px;
+}
+
+.blood-container span{
+  font-size: 40px;
+  font-weight: bolder;
+  position: absolute;
+  bottom: 25px;
+}
+
+.blood-image{
+  height:120px;
+  width:120px;
+}
+
+
+

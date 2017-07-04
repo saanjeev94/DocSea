@@ -25,8 +25,9 @@
 }
 
 .navbar ul li:hover a{
-  color: #F4F4F4;
-  font-size: 16px;
+  color: #FFF;
+  text-decoration: underline;
+  /*font-size: 16px;*/
 }
 
 .navbar li.active{
