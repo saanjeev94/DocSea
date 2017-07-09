@@ -76,6 +76,14 @@
                 <ng-container *ngFor="let bloodGroup of bloodGroupList">
                   <option value="{{bloodGroup.bloodGroup}}">{{bloodGroup.bloodGroup}}</option>
                 </ng-container>
+                <!--<option value="A+">A+</option>-->
+                <!--<option value="A-">A-</option>-->
+                <!--<option value="B+">B+</option>-->
+                <!--<option value="B-">B-</option>-->
+                <!--<option value="AB+">AB+</option>-->
+                <!--<option value="AB-">AB-</option>-->
+                <!--<option value="O+">O+</option>-->
+                <!--<option value="">O-</option>-->
               </select>
               <div *ngIf="bloodGroup.errors && bloodGroup.touched" class="alert alert-danger custom-label-alert">
                 <span [hidden]="!bloodGroup.errors.required">Blood Group is required</span>

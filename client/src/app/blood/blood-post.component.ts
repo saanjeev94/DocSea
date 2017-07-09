@@ -45,6 +45,7 @@ export class BloodPostComponent implements OnInit{
   loadData(){
     this.bloodGroupService.getBloodGroup().subscribe((response)=>{
       this.bloodGroupList=response;
+      console.log(this.bloodGroupList);
     });
     this.bloodService.getBloodPost().subscribe((response)=>{
       this.bloodPostList=response;

@@ -64,27 +64,39 @@
 
 
 /*Blood*/
+.recent-blood-post{
+  padding-left: 15px;
+}
+
 .outer-blood{
   color: #fff;
   width: 170px;
-  margin: 35px 0 0 10px;
+  margin: 35px 0 90px 10px;
 }
 
 .blood-container{
   width: 100px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
 }
 
 .blood-container span{
   font-size: 40px;
   font-weight: bolder;
   position: absolute;
-  bottom: 25px;
+  bottom: 95px;
 }
 
 .blood-image{
   height:120px;
   width:120px;
 }
+
+
 
 
 

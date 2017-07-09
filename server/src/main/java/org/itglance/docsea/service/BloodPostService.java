@@ -57,7 +57,7 @@ public class BloodPostService {
 
     public List<BloodPost> getAllBlood(){
         List<BloodPost> bloodPostDTOS=new ArrayList<>();
-        List<BloodPost> bloodPosts=bloodPostRepository.findAll();
+        List<BloodPost> bloodPosts=bloodPostRepository.getBloodIndescending();
         for(BloodPost bloodPost: bloodPosts){
             if(bloodPost.getDeadline().after(d) || bloodPost.getDeadline().equals(d))
                 bloodPostDTOS.add(bloodPost);
@@ -81,5 +81,16 @@ public class BloodPostService {
         bloodPostRepository.save(bloodPost);
 
 
+    }
+
+    public List<BloodPost> getAllBlood3() {
+
+        List<BloodPost> bloodPostDTOS=new ArrayList<>();
+        List<BloodPost> bloodPosts=bloodPostRepository.getBloodIndescending3();
+        for(BloodPost bloodPost: bloodPosts){
+            if(bloodPost.getDeadline().after(d) || bloodPost.getDeadline().equals(d))
+                bloodPostDTOS.add(bloodPost);
+        }
+        return bloodPostDTOS;
     }
 }

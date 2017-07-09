@@ -18,8 +18,6 @@ export class BloodService{
   getBloodPost(){
     return this.http.get(this.bloodUrl).map(res=>
       res.json()
-      // console.log("********************************************************");
-      // console.log(res.);
     );
   }
 }

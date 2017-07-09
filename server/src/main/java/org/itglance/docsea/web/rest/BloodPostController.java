@@ -64,4 +64,15 @@ public class BloodPostController {
         return new ResponseEntity<List<BloodPost>>(bloodPostDTOS,HttpStatus.OK) ;
 
     }
+
+    @GetMapping(value = "bloodpost3")
+    public ResponseEntity<?> getBloodPost3() {
+        List<BloodPost> bloodPostDTOS=bloodPostService.getAllBlood3();
+//        if(bloodPostDTOS == null){
+//            return new ResponseEntity<String>("their are no blood posts",HttpStatus.NO_CONTENT);
+//        }
+        System.out.println(bloodPostDTOS);
+        return new ResponseEntity<List<BloodPost>>(bloodPostDTOS,HttpStatus.OK) ;
+
+    }
 }
