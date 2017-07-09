@@ -2,6 +2,7 @@ package org.itglance.docsea.web.rest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.itglance.docsea.domain.BloodGroup;
 import org.itglance.docsea.domain.BloodPost;
 import org.itglance.docsea.domain.Contact;
 import org.itglance.docsea.repository.BloodPostRepository;
@@ -41,6 +42,8 @@ public class BloodPostControllerTest {
 
     @Autowired
     private WebApplicationContext ctx;
+    @Autowired
+    private
 
 
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
@@ -64,10 +67,13 @@ public class BloodPostControllerTest {
         contact.setContactNumber1("TEST");
         contact.setContactNumber2("123");
 
-        bloodPost.setContact(contact);
         bloodPost.setDeadline(new Date("2017/12/12"));
         bloodPost.setPost("emergency blood need");
-        bloodPost.setBloodGroup("TEST");
+
+        BloodGroup bloodGroup = new BloodGroup();
+        bloodGroup.setBloodGroup("A+");
+
+        bloodPost.setBloodGroup();
 
         System.out.println("***********************");
         mockMvc.perform(post("/api/bloodPost").accept(MediaType.APPLICATION_JSON)

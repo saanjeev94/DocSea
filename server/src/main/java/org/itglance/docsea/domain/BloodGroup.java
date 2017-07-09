@@ -20,8 +20,6 @@ public class BloodGroup {
 
     private String bloodGroup;
 
-
-
     public Long getId() {
         return id;
     }

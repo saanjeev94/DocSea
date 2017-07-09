@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by sanjib on 6/12/17.
@@ -20,4 +21,8 @@ public interface BloodPostRepository extends JpaRepository <BloodPost,Long>{
     Page<BloodPost> findValideBlood( @Param("date") Date date, Pageable page );
 
     public BloodPost findByBloodGroup(String group);
+
+
+    @Query("SELECT b FROM BloodPost b ORDER BY b.postDate desc ")
+    public List<BloodPost> getBloodIndescending();
 }
