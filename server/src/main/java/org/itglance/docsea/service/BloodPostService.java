@@ -76,7 +76,12 @@ public class BloodPostService {
 
         BloodGroup bloodGroup=new BloodGroup();
         bloodGroup = bloodGroupService.getBloodGroup(bloodPostDTO.getBloodGroup().getBloodGroup());
+        System.out.println("****************this is blood group");
+        System.out.println(bloodGroup.toString());
+        System.out.println("****************this is blood group");
+
         bloodPost.setBloodGroup(bloodGroup);
+
 
         bloodPostRepository.save(bloodPost);
 

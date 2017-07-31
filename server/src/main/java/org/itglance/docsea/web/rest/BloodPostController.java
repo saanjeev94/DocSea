@@ -34,6 +34,11 @@ public class BloodPostController {
 
     @PostMapping
     public ResponseEntity<?> postBlood(@RequestBody BloodPostDTO bloodPostDTO) throws ParseException {
+
+        System.out.println("----------------this is blood post********");
+        System.out.println(bloodPostDTO.toString());
+        System.out.println("----------------this is blood post********");
+
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
         Date d = dateFormatter.parse(dateFormatter.format(new Date() ));
         if(bloodPostDTO.getDeadline().before(d)){

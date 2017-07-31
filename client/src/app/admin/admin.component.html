@@ -29,7 +29,7 @@
             <td class="text-center text-capitalize">{{ hosp.hospital.contact.contactNumber1}}</td>
             <td class="text-center text-capitalize">
               <ng-container *ngIf="hosp.user.status.status === 'ACTIVE'; else inactive">
-              <button class="btn btn-sm btn-success custom-button" (click)="toggleStatus(hosp.user.id)">{{ hosp.user.status.status }}</button>
+              <button class="btn btn-sm btn-success custom-button" (click)="toggleStatus(hosp.id)">{{ hosp.user.status.status }}</button>
               </ng-container>
 
               <ng-template #inactive>

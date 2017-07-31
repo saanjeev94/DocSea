@@ -6,7 +6,7 @@ import {Events} from "../model/event.model";
  */
 @Injectable()
 export class EventService{
-  public eventUrl='http://localhost:9999/api/events';
+  public eventUrl='http://localhost:8080/api/events';
   private headers:Headers;
   token = localStorage.getItem('currentUser');
 
@@ -19,10 +19,10 @@ export class EventService{
 
   addEvent(event:Events){
     const options = new RequestOptions({headers:this.headers});
-    return this.http.post(this.eventUrl,event,options).map(res=>res.json());
+    return this.http.post(this.eventUrl,event,options).map(res=>res.toString());
   }
 
   getEvents(){
-    return this.http.get(this.eventUrl).map(res=>res.json().data);
+    return this.http.get(this.eventUrl).map(res=>res.json());
   }
 }

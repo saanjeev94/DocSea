@@ -37,7 +37,7 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
         this.doctorList = data;
       },
       response=>{
-        if (!(response.status === 200)) {
+        if (!(response.status === 200 || response.status === 500)) {
           swal(
             'Oops...',
             response._body,
@@ -53,18 +53,23 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
 
   onSubmit(){
     console.log("inside submit function");
-    this.eventService.addEvent(this.event).subscribe((response)=>{
-      console.log(response);
-      $('#myEventModal').modal('hide');
-    },(error)=>{
-      console.log(error);
-      if (!(error.status === 200)) {
+    this.eventService.addEvent(this.event).subscribe(response=>{
+       $('#myEventModal').modal('hide');
+    },(response)=>{
+        console.log(response);
+        if(!(response.status == 200)){
         swal(
           'Oops...',
-          error._body,
+          response._body,
           'error'
         )
-      }
+        }else{
+          swal(
+            'Sucessful',
+            response._body,
+            'success'
+          )
+        }
     });
     this.eventService.getEvents().subscribe((response)=>{
       this.eventList=response;
@@ -75,6 +80,10 @@ export class HospitalPanelComponent implements OnInit, AfterViewInit{
 
     this.router.navigate(['/hospital-panel']);
   }
+
+ /* getDoctorStatus(id: number){
+    this.
+  }*/
 }
 
 

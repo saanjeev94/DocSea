@@ -72,6 +72,8 @@ public class DoctorController {
             if(doctorService.isDoctorExist(doctorDTO, hospitalId)){
                 return new ResponseEntity("Doctor already exists (You have already inserted doctor)", HttpStatus.CONFLICT);
             }
+            System.out.println("****************--*********************");
+            System.out.println(doctorDTO);
             doctorService.addDoctor(doctorDTO, Authorization);
         }catch (JsonParseException e1) {
             e1.printStackTrace();

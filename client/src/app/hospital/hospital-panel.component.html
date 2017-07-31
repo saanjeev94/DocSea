@@ -41,6 +41,18 @@
             <td class="text-capitalize">{{doclist.speciality.name}}</td>
             <td class="text-capitalize">{{doclist.contact.contactNumber1}}</td>
             <td class="text-center text-capitalize">
+
+
+             <!-- <ng-container *ngIf="doclist.status.status === 'ACTIVE'; else inactive">
+                <button class="btn btn-sm btn-success custom-button" (click)="toggleStatus(hosp.id)">{{ hosp.user.status.status }}</button>
+              </ng-container>
+
+              <ng-template #inactive>
+                <button class="btn btn-sm btn-danger" (click)="toggleStatus(hosp.id)">{{ hosp.user.status.status }}</button>
+              </ng-template>-->
+
+
+
               <a href="" class="btn btn-sm btn-success">Active</a>
             </td>
             <td class="text-center text-capitalize">

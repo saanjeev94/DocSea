@@ -42,6 +42,9 @@ public class HospitalDoctorController {
     public ResponseEntity<?> getHospitalDoctors(@RequestHeader String Authorization){
         Long hospitalId=sessionService.checkSession(Authorization).getHospitalId();
         List<DoctorDTO> doctors=hospitalDoctorService.getDoctors(hospitalId);
+        if(doctors == null){
+            return new ResponseEntity<String>("There is no doctor registered in your hospital",HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<List<DoctorDTO>>(doctors,HttpStatus.OK);
     }
 }

@@ -21,7 +21,7 @@ public class BloodPost {
     @Type(type = "text")
     private String post;
 
-    @OneToOne
+    @ManyToOne
     private BloodGroup bloodGroup;
 
     @Temporal(TemporalType.DATE)

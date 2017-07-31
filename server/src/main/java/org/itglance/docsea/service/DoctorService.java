@@ -45,10 +45,12 @@ public class DoctorService {
     StatusService statusService;
 
 
+
+
     public DoctorService(DoctorRepository doctorRepository, SpecialityRepository specialityRepository
             , ContactRepository contactRepository, ScheduleRepository scheduleRepository
             , HospitalDoctorRepository hospitalDoctorRepository, HospitalRepository hospitalRepository
-            , SessionRepository sessionRepository, QualificationRepository qualificationRepository) {
+            , QualificationRepository qualificationRepository, SessionRepository sessionRepository) {
         this.doctorRepository = doctorRepository;
         this.specialityRepository = specialityRepository;
         this.contactRepository = contactRepository;
@@ -58,6 +60,7 @@ public class DoctorService {
         this.hospitalRepository = hospitalRepository;
         this.qualificationRepository=qualificationRepository;
     }
+
 
     public void addDoctor(DoctorDTO doctorDTO, String token) {
         Doctor doctor = new Doctor();
@@ -96,6 +99,7 @@ public class DoctorService {
             doctor.setDetails(doctorDTO.getDetails());
 
             doctorRepository.save(doctor);
+            System.out.println("--------------doctor added----------------");
 
             HospitalDoctor hospitalDoctor = new HospitalDoctor();
 
@@ -173,7 +177,8 @@ public class DoctorService {
     public String renamePhoto(MultipartFile file) {
 //        final String UPLOADED_FOLDER = "F:\\docsea\\docsea\\client\\src\\assets\\images\\";
 //        final String UPLOADED_FOLDER = "F:\\college\\Project\\DocSea\\client\\src\\assets\\images\\";
-        final String UPLOADED_FOLDER = "media\\mahesh\\Local Disk\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
+//        final String UPLOADED_FOLDER = "media\\mahesh\\Local Disk\\mahesh\\workspace\\docsea\\client\\src\\assets\\images\\";
+        final String UPLOADED_FOLDER = "/media/sanjib/Work station/f/projects/DocSea/client/src/assets/images/";
 //        final String UPLOADED_FOLDER = "F:\\projects\\DocSea\\client\\src\\assets\\images\\";
         int random = (int) (Math.random() * 50000 + 1);
         String fileName = file.getOriginalFilename();
@@ -184,6 +189,7 @@ public class DoctorService {
             byte[] bytes = file.getBytes();
             Path path = Paths.get(UPLOADED_FOLDER + newFileName);
             Files.write(path, bytes);
+            System.out.println("***********Profile uploaded************");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -32,6 +32,7 @@ export class BloodPostComponent implements OnInit{
   onSubmit(){
     console.log(this.blood);
     this.bloodService.addBloodPost(this.blood).subscribe((response)=>{
+      console.log(response);
       this.onSuccess(response);
     }, (err)=>{console.log(err)});
   }

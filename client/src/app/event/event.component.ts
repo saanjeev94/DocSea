@@ -25,6 +25,7 @@ export class EventComponent implements OnInit{
   ngOnInit(){
     this.eventService.getEvents().subscribe((response)=>{
       this.eventList=response;
+      console.log(this.eventList);
     });
     this.bloodService.getBloodPost().subscribe((response)=>{
       this.bloodPostList=response;

@@ -26,21 +26,23 @@ export class SearchDoctorComponent implements OnInit{
   }
 
   search(term: string): void {
-    this.doctorService.search(term)
-    .subscribe(
-      result => {
-        this.hospitalDoctorList = result;
-      },
-      error=>{
-        if (!(error.status === 200)) {
-          swal(
-            'Oops...',
-            error._body,
-            'error'
-          )
-        }
-      }
-    );
+    if(term.length != 0) {
+      this.doctorService.search(term)
+        .subscribe(
+          result => {
+            this.hospitalDoctorList = result;
+          },
+          error => {
+            if (!(error.status === 200)) {
+              swal(
+                'Oops...',
+                error._body,
+                'error'
+              )
+            }
+          }
+        );
+    }
   }
 
   doctorDetails(doctor: string): void{

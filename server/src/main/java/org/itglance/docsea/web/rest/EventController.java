@@ -35,11 +35,14 @@ public class EventController {
 
     //    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     @PostMapping
-    public ResponseEntity<?> addEvents(@RequestBody EventDTO eventDTO,
+    public ResponseEntity<String> addEvents(@RequestBody EventDTO eventDTO,
                                        @RequestHeader String Authorization) throws ParseException {
-        System.out.println("***********************************************************88");
-        System.out.println(eventDTO.toString());
         if (!(eventService.isEventExist(Authorization, eventDTO.getDates(), eventDTO.getName(), eventDTO.getTime()))) {
+
+
+            System.out.println("**************this is event dto*******************");
+            System.out.println(eventDTO.toString());
+            System.out.println("**************this is event dto*******************");
 
             if(eventDTO.getDates().before(d)){
                return new ResponseEntity<String>("Invalid date", HttpStatus.BAD_REQUEST);

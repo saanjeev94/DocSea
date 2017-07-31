@@ -6,7 +6,7 @@ import {Http} from "@angular/http";
 import {Blood} from "../model/blood.model";
 @Injectable()
 export class BloodService{
-  private bloodUrl="http://localhost:9999/api/bloodPost";
+  private bloodUrl="http://localhost:8080/api/bloodPost";
   constructor(private http:Http){
 
   }
